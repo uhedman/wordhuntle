@@ -5,39 +5,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>wordhuntle</p>
-        <nav className="App-nav">
-          <a
-            className="App-link"
-            href="https://example.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Sun/Moon
-          </a>
-          <a
-            className="App-link"
-            href="https://example.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Share
-          </a>
-          <a
-            className="App-link"
-            href="https://example.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            History
-          </a>
-          <a
-            className="App-link"
-            href="https://example.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Info
-          </a>
+        <nav>
+          <ul className="App-links">
+            <li><a href="https://example.com" target="_blank" rel="noopener noreferrer">Sun/Moon</a></li>
+            <li><a href="https://example.com" target="_blank" rel="noopener noreferrer">Share</a></li>
+            <li><a href="https://example.com" target="_blank" rel="noopener noreferrer">History</a></li>
+            <li><a href="https://example.com" target="_blank" rel="noopener noreferrer">Info</a></li>
+          </ul>
         </nav>
       </header>
       <div className="App-body"></div>
