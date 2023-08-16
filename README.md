@@ -68,7 +68,3 @@ Access the app by opening your browser and navigating to `http://localhost:3000`
 ## License
 
 This project is for personal learning purposes and is not intended for commercial use. No license is provided for this project.
-
----
-
-Feel free to adapt and modify this template as needed to accurately reflect your project's objectives and your personal learning journey. Enjoy your exploration of React and web development!
