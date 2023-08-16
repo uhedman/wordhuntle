@@ -1,5 +1,3 @@
-Absolutely, learning by creating clones of existing websites can be a valuable way to gain practical experience and improve your skills. Here's a modified README template that reflects your intention to learn React and page creation:
-
 # WordHuntle Clone - React Learning Project
 
 ![WordHuntle Clone Banner](path_to_banner_image.png)
