@@ -3,14 +3,15 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #0a0a23;
+  height: 5vh;
+  font-family: "Source Serif 4", sans-serif;
+}
+
+.App-body {
+  background-color: #1b1b32;
+  height: 95vh;
+  
 }
 
 .App-link {
