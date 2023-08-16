@@ -6,12 +6,24 @@
   background-color: #0a0a23;
   height: 5vh;
   font-family: "Source Serif 4", sans-serif;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+.App-nav {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
 }
 
 .App-body {
   background-color: #1b1b32;
   height: 95vh;
-  
 }
 
 .App-link {
