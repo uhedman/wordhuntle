@@ -15,6 +15,9 @@ This project is a personal endeavor to enhance React skills and gain hands-on ex
 - Basic score tracking.
 - Simplified user interface inspired by the original WordHuntle design.
 
+## About the dictionary used
+This project uses a dictionary created in https://github.com/JorgeDuenasLerin/diccionario-espanol-txt, which extracts from the RAE (Real Academia Española) all the words archived.
+
 ## Getting Started
 
 Follow these instructions to set up the project on your local machine and start your React learning journey.
