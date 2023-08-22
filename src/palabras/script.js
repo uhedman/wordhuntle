@@ -43,7 +43,7 @@ function getWords(data) {
           break;
         }
         last = casillas.pop();
-        way = searchTuple(casillas, [casillas[casillas.length - 1][0] - last[0], casillas[casillas.length - 1][1] - last[1]])
+        way = searchTuple(casillas, [last[0] - casillas[casillas.length - 1][0], last[1] - casillas[casillas.length - 1][1]]) + 1;
         casillas[0] = casillas[0].slice(0, casillas[0].length - 1);
         warm_start = false;
       }
