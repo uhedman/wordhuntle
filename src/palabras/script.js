@@ -15,9 +15,9 @@ const ways = [[-1, -1], [-1, 0], [-1, 1],
               [1 , -1], [1 , 0], [1 , 1]];
 
 function searchTuple(list, t) {
-  for (const tuple in list) {
-    if (list[tuple][0] == t[0] && list[tuple][1] == t[1]) {
-      return tuple; // Se encontró la tupla con elementos a y b
+  for (let index = 0; index < list.length; index++) {
+    if (list[index][0] == t[0] && list[index][1] == t[1]) {
+      return index; // Se encontró la tupla con elementos a y b
     }
   }
   return -1; // No se encontró la tupla con elementos a y b
@@ -43,7 +43,10 @@ function getWords(data) {
           break;
         }
         last = casillas.pop();
-        way = searchTuple(casillas, [last[0] - casillas[casillas.length - 1][0], last[1] - casillas[casillas.length - 1][1]]) + 1;
+        i = casillas[casillas.length - 1][0];
+        j = casillas[casillas.length - 1][1];
+        way = searchTuple(ways, [last[0] - i, last[1] - j]) + 1;
+        // console.log(way);
         casillas[0] = casillas[0].slice(0, casillas[0].length - 1);
         warm_start = false;
       }
@@ -54,6 +57,7 @@ function getWords(data) {
         k = i + ways[way][0];
         l = j + ways[way][1];
         if (k >= 0 && l >= 0 && k < 4 && l < 4 && searchTuple(casillas, [k, l]) < 0) {
+          console.log(k, l);
           break;
         }
         else {
