@@ -1,7 +1,7 @@
 const fs = require('fs');  // Requiere el módulo de sistema de archivos
 const { get } = require('http');
 
-const archivo = 'test.txt';  // Nombre del archivo diccionario
+const archivo = 'data.txt';  // Nombre del archivo diccionario
 
 const grid = [['a', 'b', 'c', 'd'],
               ['h', 'e', 'j', 'e'],
