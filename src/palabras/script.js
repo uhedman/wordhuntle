@@ -1,7 +1,7 @@
 const fs = require('fs');  // Requiere el módulo de sistema de archivos
 const { get } = require('http');
 
-const archivo = 'data.txt';  // Nombre del archivo diccionario
+const archivo = 'data-sin-enie.txt';  // Nombre del archivo diccionario
 
 const grid = [['a', 'b', 'c', 'd'],
               ['h', 'e', 'j', 'e'],
@@ -96,7 +96,7 @@ function getWords(data) {
         casillas.push([k, l]);
         casillas[0] += grid[k][l];
 
-        if (casillas[0].length > 1 && data.indexOf(casillas[0]) >= 0) {
+        if (casillas[0].length > 3 && data.indexOf(casillas[0]) >= 0) {
           words.push(casillas[0]);
         }
       }
