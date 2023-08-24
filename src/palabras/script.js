@@ -38,6 +38,21 @@ function searchPrefix(words, prefix) {
   return false; // No se encontró ninguna palabra con el prefijo
 }
 
+function searchWord(words, w) {
+  let a = 0, b = words.length - 1, c;
+  while (a <= b) {
+    c = Math.floor((a + b) / 2);
+    if (words[c] == w) {
+      return true; // Se encontró una palabra con el prefijo
+    } else if (words[c] > w) {
+      b = c-1;
+    } else {
+      a = c+1;
+    }
+  }
+  return false; // No se encontró ninguna palabra con el prefijo
+}
+
 function getWords(data) {
   let words = [];
 
@@ -50,7 +65,6 @@ function getWords(data) {
 
     let warm_start = false, way, k, l, last;
     while (true) {
-      // console.log(casillas);
       // warm_start significa continuar desde el valor guardado
       if (warm_start) {
         // Se analizaron todos los caminos, pasar a la siguiente casilla
@@ -61,7 +75,6 @@ function getWords(data) {
         i = casillas[casillas.length - 1][0];
         j = casillas[casillas.length - 1][1];
         way = searchTuple(ways, [last[0] - i, last[1] - j]) + 1;
-        // console.log(way);
         casillas[0] = casillas[0].slice(0, casillas[0].length - 1);
         warm_start = false;
       }
@@ -81,11 +94,9 @@ function getWords(data) {
         }
         // No existen palabras con ese prefijo
         if (!searchPrefix(data, casillas[0] + grid[k][l])) {
-          // console.log(casillas[0] + grid[k][l]);
           continue;
         }
         break;
-        // checkear que se puedan construir palabras con las letras adyacentes
       }
       
       // Si ninguna casilla pudo continuar una palabra
@@ -96,11 +107,12 @@ function getWords(data) {
       else {
         i = k;
         j = l;
-        // console.log(k, l);
         casillas.push([k, l]);
         casillas[0] += grid[k][l];
 
-        if (casillas[0].length > 3 && data.indexOf(casillas[0]) >= 0) {
+        if (casillas[0].length > 3 && // Palabra suficientemente larga
+            searchWord(data, casillas[0]) && // Presente en el diccionario
+            words.indexOf(casillas[0]) < 0) { // Todavia no se guardo
           words.push(casillas[0]);
         }
       }
