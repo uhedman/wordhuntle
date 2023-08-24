@@ -24,11 +24,15 @@ function searchTuple(list, t) {
 }
 
 function searchPrefix(words, prefix) {
-  for (const word of words) {
-    if (word.startsWith(prefix)) {
+  let a = 0, b = words.length - 1, c;
+  while (a <= b) {
+    c = Math.floor((a + b) / 2);
+    if (words[c].startsWith(prefix)) {
       return true; // Se encontró una palabra con el prefijo
-    } else if (word > prefix) {
-      return false; // Ya pasamos de las palabras que podrían tener el prefijo
+    } else if (words[c] > prefix) {
+      b = c-1;
+    } else {
+      a = c+1;
     }
   }
   return false; // No se encontró ninguna palabra con el prefijo
