@@ -1,58 +1,63 @@
-const fs = require('fs');  // Requiere el módulo de sistema de archivos
-const { get } = require('http');
+const fs = require('fs');
 
-const archivo = 'data-sin-enie.txt';  // Nombre del archivo diccionario
+// Nombre del archivo diccionario
+const archivo = 'data-sin-enie.txt';
 
 const grid = [['a', 'b', 'c', 'd'],
               ['h', 'e', 'j', 'e'],
               ['i', 'o', 'a', 'f'],
               ['p', 'o', 'n', 'g']]
-// Palabras escondidas: ABEJA, ABEJON, HIPO, DEJAN, EJE, ...
 
 // Direcciones a las casillas adyacentes
 const ways = [[-1, -1], [-1, 0], [-1, 1],
               [0 , -1],          [0 , 1],
               [1 , -1], [1 , 0], [1 , 1]];
 
+// Buscar una tupla en una lista
 function searchTuple(list, t) {
   for (let index = 0; index < list.length; index++) {
     if (list[index][0] == t[0] && list[index][1] == t[1]) {
-      return index; // Se encontró la tupla con elementos a y b
+      return index;
     }
   }
-  return -1; // No se encontró la tupla con elementos a y b
+  return -1;
 }
 
+// Buscar una palabra que contenga un prefijo
+// usando busqueda binaria
 function searchPrefix(words, prefix) {
   let a = 0, b = words.length - 1, c;
   while (a <= b) {
     c = Math.floor((a + b) / 2);
     if (words[c].startsWith(prefix)) {
-      return true; // Se encontró una palabra con el prefijo
+      return true;
     } else if (words[c] > prefix) {
       b = c-1;
     } else {
       a = c+1;
     }
   }
-  return false; // No se encontró ninguna palabra con el prefijo
+  return false; 
 }
 
+// Buscar una palabra usando busqueda binaria
 function searchWord(words, w) {
   let a = 0, b = words.length - 1, c;
   while (a <= b) {
     c = Math.floor((a + b) / 2);
     if (words[c] == w) {
-      return true; // Se encontró una palabra con el prefijo
+      return true;
     } else if (words[c] > w) {
       b = c-1;
     } else {
       a = c+1;
     }
   }
-  return false; // No se encontró ninguna palabra con el prefijo
+  return false;
 }
 
+// Busca las palabras que pertenecen a data
+// y estan escondidas en la grilla
 function getWords(data) {
   let words = [];
 
@@ -103,8 +108,7 @@ function getWords(data) {
       if (way == 8) {
         // Llamar a backtracking
         warm_start = true;
-      }
-      else {
+      } else {
         i = k;
         j = l;
         casillas.push([k, l]);
