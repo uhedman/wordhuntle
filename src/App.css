@@ -21,12 +21,14 @@
 .App-header { 
   background-color: #0a0a23;
   grid-area: HEADER;
-  font-family: "Source Serif 4", sans-serif;
-  padding: 10px;
+  font-family: "Source Serif 4";
+  padding: 15px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   color: white;
+  font-size: xx-large;
+  font-weight: 700;
 }
 
 .App-game {  
