@@ -65,7 +65,15 @@ p {
 .App-links {
   list-style: none;
 }
+
 .App-links li {
   display: inline-block;
   padding: 0 20px;
+}
+
+.App-button {
+  border: none; 
+  background: none; 
+  cursor: pointer;
+  color: white;
 }
