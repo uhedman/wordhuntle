@@ -2,8 +2,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .App {  
@@ -16,6 +14,8 @@
   grid-template-areas:
     "HEADER HEADER HEADER"
     ". GAME .";
+  height: 100vh;
+  width: 100vw;
 }
 
 .App-header { 
@@ -25,7 +25,7 @@
   padding: 10px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   color: white;
 }
 
@@ -58,12 +58,14 @@
   background-color:darkslategray;
 }
 
-.App-links {
-  list-style: none;
-  display: flex;
+p {
+  margin-right: auto;
 }
 
+.App-links {
+  list-style: none;
+}
 .App-links li {
-  /* padding: 0px 20px; */
-  text-align: center;
+  display: inline-block;
+  padding: 0 20px;
 }
