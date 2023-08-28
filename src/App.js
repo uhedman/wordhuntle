@@ -1,5 +1,5 @@
 import './App.css';
-import { FaRegSun, FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
+import { FaSun, FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
         <p>wordhuntle</p>
         <nav>
           <ul className="App-links">
-            <li><button className='App-button'><FaRegSun /></button></li>
+            <li><button className='App-button'><FaSun /></button></li>
             <li><button className='App-button'><FaShareAlt /></button></li>
             <li><button className='App-button'><FaRegClock /></button></li>
             <li><button className='App-button'><FaInfoCircle /></button></li>

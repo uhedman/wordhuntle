@@ -79,3 +79,7 @@ p {
   cursor: pointer;
   color: white;
 }
+
+.App-button svg{
+  font-size: x-large;
+}
