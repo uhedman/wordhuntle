@@ -4,15 +4,64 @@
   padding: 0;
 }
 
-.App-header {
+.App {  
+  background-color: #1b1b32;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.1fr 2fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "HEADER HEADER HEADER"
+    ". GAME .";
+  height: 100vh;
+  width: 100vw;
+}
+
+.App-header { 
   background-color: #0a0a23;
-  height: 5vh;
-  font-family: "Source Serif 4", sans-serif;
-  padding: 10px;
+  grid-area: HEADER;
+  font-family: "Source Serif 4";
+  padding: 15px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   color: white;
+  font-size: xx-large;
+  font-weight: 700;
+}
+
+.App-game {  
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.3fr 0.3fr 2.4fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "POINTS"
+    "WORD"
+    "GRID";
+  grid-area: GAME;
+  padding: 20px;
+}
+
+.App-points { 
+  grid-area: POINTS; 
+  background-color: blueviolet;
+}
+
+.App-word { 
+  grid-area: WORD; 
+  background-color: darkslateblue;
+}
+
+.App-grid { 
+  grid-area: GRID; 
+  background-color:darkslategray;
+}
+
+p {
+  margin-right: auto;
 }
 
 .App-links {
@@ -21,10 +70,16 @@
 
 .App-links li {
   display: inline-block;
-  padding: 0px 20px;
+  padding: 0 20px;
 }
 
-.App-body {
-  background-color: #1b1b32;
-  height: 95vh;
+.App-button {
+  border: none; 
+  background: none; 
+  cursor: pointer;
+  color: white;
+}
+
+.App-button svg{
+  font-size: x-large;
 }
