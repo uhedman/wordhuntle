@@ -1,4 +1,5 @@
 import { FaSun, FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
+import { Button } from './Button';
 export {Header}
 
 function Header() {
@@ -14,13 +15,6 @@ function Header() {
     fontSize: 'xx-large',
     fontWeight: 700,
   }
-  
-  const buttonStyles = {
-    border: 'none',
-    background: 'none',
-    cursor: 'pointer',
-    color: 'white'
-  }
 
   const liStyles = {
     display: 'inline-block',
@@ -32,10 +26,10 @@ function Header() {
       <p style={{marginRight: 'auto'}}>wordhuntle</p>
       <nav>
         <ul style={{listStyle: 'none'}}>
-          <li style={liStyles}><button style={buttonStyles}><FaSun style={{fontSize: 'x-large'}}/></button></li>
-          <li style={liStyles}><button style={buttonStyles}><FaShareAlt style={{fontSize: 'x-large'}}/></button></li>
-          <li style={liStyles}><button style={buttonStyles}><FaRegClock style={{fontSize: 'x-large'}}/></button></li>
-          <li style={liStyles}><button style={buttonStyles}><FaInfoCircle style={{fontSize: 'x-large'}}/></button></li>
+          <li style={liStyles}><Button icon={<FaSun style={{fontSize: 'x-large'}}/>} /></li>
+          <li style={liStyles}><Button icon={<FaShareAlt style={{fontSize: 'x-large'}}/>} /></li>
+          <li style={liStyles}><Button icon={<FaRegClock style={{fontSize: 'x-large'}}/>} /></li>
+          <li style={liStyles}><Button icon={<FaInfoCircle style={{fontSize: 'x-large'}}/>} /></li>
         </ul>
       </nav>
     </div>
