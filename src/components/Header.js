@@ -1,5 +1,6 @@
-import { FaSun, FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
+import { FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
 import { Button } from './Button';
+import { Theme } from './Theme';
 export {Header}
 
 function Header() {
@@ -21,12 +22,19 @@ function Header() {
     padding: '0 20px'
   }
 
+  const buttonStyles = {
+    border: 'none',
+    background: 'none',
+    cursor: 'pointer',
+    color: 'white'
+  }
+
   return (
     <div style={headerStyles}>
       <p style={{marginRight: 'auto'}}>wordhuntle</p>
       <nav>
         <ul style={{listStyle: 'none'}}>
-          <li style={liStyles}><Button icon={<FaSun style={{fontSize: 'x-large'}}/>} /></li>
+          <li style={liStyles}><Button icon={<Theme buttonStyles={buttonStyles} iconStyles={{fontSize: 'x-large'}}/>} /></li>
           <li style={liStyles}><Button icon={<FaShareAlt style={{fontSize: 'x-large'}}/>} /></li>
           <li style={liStyles}><Button icon={<FaRegClock style={{fontSize: 'x-large'}}/>} /></li>
           <li style={liStyles}><Button icon={<FaInfoCircle style={{fontSize: 'x-large'}}/>} /></li>
