@@ -34,7 +34,7 @@ function Header() {
       <p style={{marginRight: 'auto'}}>wordhuntle</p>
       <nav>
         <ul style={{listStyle: 'none'}}>
-          <li style={liStyles}><Button icon={<Theme buttonStyles={buttonStyles} iconStyles={{fontSize: 'x-large'}}/>} /></li>
+          <li style={liStyles}><Theme buttonStyles={buttonStyles} iconStyles={{fontSize: 'x-large'}}/></li>
           <li style={liStyles}><Button icon={<FaShareAlt style={{fontSize: 'x-large'}}/>} /></li>
           <li style={liStyles}><Button icon={<FaRegClock style={{fontSize: 'x-large'}}/>} /></li>
           <li style={liStyles}><Button icon={<FaInfoCircle style={{fontSize: 'x-large'}}/>} /></li>
