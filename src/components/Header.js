@@ -38,6 +38,7 @@ class Header extends React.Component {
           <li style={liStyles}><Theme 
                                   buttonStyles={buttonStyles} 
                                   iconStyles={{fontSize: 'x-large'}}
+                                  changeTheme={this.props.changeTheme}
                                   /></li>
           <li style={liStyles}><Button icon={<FaShareAlt style={{fontSize: 'x-large'}}/>} /></li>
           <li style={liStyles}><Button icon={<FaRegClock style={{fontSize: 'x-large'}}/>} /></li>
