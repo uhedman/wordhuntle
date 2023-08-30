@@ -8,14 +8,16 @@ class App extends React.Component {
     super(props);
     this.state = {
       color: '#f5f6f7',
-      backgroundColor: '#1b1b32'
+      backgroundColor: '#1b1b32',
+      headerColor: '#0a0a23'
     }
     this.changeTheme = this.changeTheme.bind(this);
   }
   changeTheme() {
     this.setState(state => ({
       color: state.backgroundColor,
-      backgroundColor: state.color
+      backgroundColor: state.color,
+      headerColor: '#0a0a23' === state.headerColor ? 'white': '#0a0a23'
     }));
   }
   render () {
@@ -36,7 +38,7 @@ class App extends React.Component {
     }
     return (
       <div style={appStyles}>
-        <Header changeTheme={this.changeTheme} color={this.state.color}/>
+        <Header changeTheme={this.changeTheme} state={this.state}/>
         <Game />
       </div>
     );

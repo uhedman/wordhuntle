@@ -6,7 +6,7 @@ import React from 'react';
 class Header extends React.Component {
   render () {
     const headerStyles = {
-      backgroundColor: '#0a0a23',
+      backgroundColor: this.props.state.headerColor,
       gridArea: 'HEADER',
       fontFamily: "'Source Serif 4', sans serif",
       padding: 15,
@@ -27,12 +27,12 @@ class Header extends React.Component {
       border: 'none',
       background: 'none',
       cursor: 'pointer',
-      color: this.props.color
+      color: this.props.state.color
     }
     
     return (
       <div style={headerStyles}>
-      <p style={{marginRight: 'auto', color: this.props.color}}>wordhuntle</p>
+      <p style={{marginRight: 'auto', color: this.props.state.color}}>wordhuntle</p>
       <nav>
         <ul style={{listStyle: 'none'}}>
           <li style={liStyles}><Theme 
