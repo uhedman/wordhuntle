@@ -1,6 +1,6 @@
 # WordHuntle Clone - React Learning Project
 
-![WordHuntle Clone Banner](path_to_banner_image.png)
+![WordHuntle Clone Banner](./public/banner.png)
 
 A personal project aimed at learning React and practicing web page creation by cloning the [WordHuntle](https://www.wordhuntle.com) website.
 
