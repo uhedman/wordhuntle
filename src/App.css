@@ -33,7 +33,7 @@
   color: #f5f6f7;
 }
 
-.dark header, button {
+.dark header, .dark button {
   background-color: #0a0a23;
   color: #f5f6f7;
 }
@@ -43,9 +43,19 @@
   color: #0a0a23;
 }
 
-.light header, svg {
+.light header, .light button {
   background-color: #0a0a23;
   color: #f5f6f7;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+svg {
+  font-size: x-large;
 }
 
 li {
