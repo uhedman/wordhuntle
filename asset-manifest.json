@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-gh-pages/static/css/main.75aea2ef.css",
-    "main.js": "/react-gh-pages/static/js/main.3c21fe7b.js",
-    "static/js/787.28cb0dcd.chunk.js": "/react-gh-pages/static/js/787.28cb0dcd.chunk.js",
-    "index.html": "/react-gh-pages/index.html",
-    "main.75aea2ef.css.map": "/react-gh-pages/static/css/main.75aea2ef.css.map",
-    "main.3c21fe7b.js.map": "/react-gh-pages/static/js/main.3c21fe7b.js.map",
-    "787.28cb0dcd.chunk.js.map": "/react-gh-pages/static/js/787.28cb0dcd.chunk.js.map"
+    "main.css": "/wordhuntle/static/css/main.75aea2ef.css",
+    "main.js": "/wordhuntle/static/js/main.d4b935e1.js",
+    "static/js/787.28cb0dcd.chunk.js": "/wordhuntle/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/wordhuntle/index.html",
+    "main.75aea2ef.css.map": "/wordhuntle/static/css/main.75aea2ef.css.map",
+    "main.d4b935e1.js.map": "/wordhuntle/static/js/main.d4b935e1.js.map",
+    "787.28cb0dcd.chunk.js.map": "/wordhuntle/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.75aea2ef.css",
-    "static/js/main.3c21fe7b.js"
+    "static/js/main.d4b935e1.js"
   ]
 }
