@@ -7,23 +7,17 @@ class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      color: '#f5f6f7',
-      backgroundColor: '#1b1b32',
-      headerColor: '#0a0a23'
+      theme: 'dark'
     }
     this.changeTheme = this.changeTheme.bind(this);
   }
   changeTheme() {
     this.setState(state => ({
-      color: state.backgroundColor,
-      backgroundColor: state.color,
-      headerColor: '#0a0a23' === state.headerColor ? 'white': '#0a0a23'
+      theme: state.theme === 'dark' ? 'light' : 'dark'
     }));
   }
   render () {
     let appStyles = {
-      color : this.state.color,
-      backgroundColor: this.state.backgroundColor,
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr',
       gridTemplateRows: '0.1fr 2fr',
@@ -36,9 +30,13 @@ class App extends React.Component {
       height: '100vh',
       width: '100vw',
     }
+
     return (
-      <div style={appStyles}>
-        <Header changeTheme={this.changeTheme} state={this.state}/>
+      <div style={appStyles} className={this.state.theme}>
+        <Header 
+          changeTheme={this.changeTheme} 
+          theme={this.state.theme}
+          className={this.state.theme}/>
         <Game />
       </div>
     );

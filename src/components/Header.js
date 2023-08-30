@@ -6,14 +6,12 @@ import React from 'react';
 class Header extends React.Component {
   render () {
     const headerStyles = {
-      backgroundColor: this.props.state.headerColor,
       gridArea: 'HEADER',
       fontFamily: "'Source Serif 4', sans serif",
       padding: 15,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      color: 'white',
       fontSize: 'xx-large',
       fontWeight: 700,
     }
@@ -27,34 +25,37 @@ class Header extends React.Component {
       border: 'none',
       background: 'none',
       cursor: 'pointer',
-      color: this.props.state.color
     }
     
     return (
-      <div style={headerStyles}>
-      <p style={{marginRight: 'auto', color: this.props.state.color}}>wordhuntle</p>
-      <nav>
-        <ul style={{listStyle: 'none'}}>
-          <li style={liStyles}><Theme 
-                                  buttonStyles={buttonStyles} 
-                                  iconStyles={{fontSize: 'x-large'}}
-                                  changeTheme={this.props.changeTheme}
-                                  /></li>
-          <li style={liStyles}><Button 
-                                  buttonStyles={buttonStyles} 
-                                  icon={<FaShareAlt style={{fontSize: 'x-large'}}/>} 
-                                  /></li>
-          <li style={liStyles}><Button 
-                                  buttonStyles={buttonStyles} 
-                                  icon={<FaRegClock style={{fontSize: 'x-large'}}/>} 
-                                  /></li>
-          <li style={liStyles}><Button 
-                                  buttonStyles={buttonStyles} 
-                                  icon={<FaInfoCircle style={{fontSize: 'x-large'}}/>} 
-                                  /></li>
-        </ul>
-      </nav>
-    </div>
+      <header style={headerStyles} className={this.props.theme}>
+        <p style={{marginRight: 'auto', className: this.props.theme}}>wordhuntle</p>
+        <nav>
+          <ul style={{listStyle: 'none'}}>
+            <li style={liStyles}><Theme 
+                                    buttonStyles={buttonStyles} 
+                                    iconStyles={{fontSize: 'x-large'}}
+                                    changeTheme={this.props.changeTheme}
+                                    theme={this.props.theme}
+                                    /></li>
+            <li style={liStyles}><Button 
+                                    buttonStyles={buttonStyles} 
+                                    theme={this.props.theme}
+                                    icon={<FaShareAlt style={{fontSize: 'x-large'}}/>} 
+                                    /></li>
+            <li style={liStyles}><Button 
+                                    buttonStyles={buttonStyles} 
+                                    theme={this.props.theme}
+                                    icon={<FaRegClock style={{fontSize: 'x-large'}}/>} 
+                                    /></li>
+            <li style={liStyles}><Button 
+                                    buttonStyles={buttonStyles}
+                                    theme={this.props.theme}
+                                    icon={<FaInfoCircle style={{fontSize: 'x-large'}}/>} 
+                                    /></li>
+          </ul>
+        </nav>
+      </header>
     )
   }
 }

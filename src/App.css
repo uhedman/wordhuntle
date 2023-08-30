@@ -3,3 +3,23 @@
   margin: 0;
   padding: 0;
 }
+
+.dark {
+  background-color: #1b1b32;
+  color: #f5f6f7;
+}
+
+.dark header, button {
+  background-color: #0a0a23;
+  color: #f5f6f7;
+}
+
+.light {
+  background-color: #f5f6f7;
+  color: #0a0a23;
+}
+
+.light header, svg {
+  background-color: #0a0a23;
+  color: #f5f6f7;
+}
