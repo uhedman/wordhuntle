@@ -1,43 +1,36 @@
-import { FaSun, FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
-export {Header}
+import { FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
+import { Button } from './Button';
+import { Theme } from './Theme';
+import React from 'react';
 
-function Header() {
-  const headerStyles = {
-    backgroundColor: '#0a0a23',
-    gridArea: 'HEADER',
-    fontFamily: "'Source Serif 4', sans serif",
-    padding: 15,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    color: 'white',
-    fontSize: 'xx-large',
-    fontWeight: 700,
+class Header extends React.Component {
+  render () {
+    return (
+      <header id='Header' className={this.props.theme}>
+        <p style={{marginRight: 'auto', className: this.props.theme}}>wordhuntle</p>
+        <nav>
+          <ul style={{listStyle: 'none'}}>
+            <li><Theme 
+                  changeTheme={this.props.changeTheme}
+                  theme={this.props.theme}
+                /></li>
+            <li><Button 
+                  theme={this.props.theme}
+                  icon={<FaShareAlt />} 
+                /></li>
+            <li><Button 
+                  theme={this.props.theme}
+                  icon={<FaRegClock />} 
+                /></li>
+            <li><Button 
+                  theme={this.props.theme}
+                  icon={<FaInfoCircle />} 
+                /></li>
+          </ul>
+        </nav>
+      </header>
+    )
   }
-  
-  const buttonStyles = {
-    border: 'none',
-    background: 'none',
-    cursor: 'pointer',
-    color: 'white'
-  }
-
-  const liStyles = {
-    display: 'inline-block',
-    padding: '0 20px'
-  }
-
-  return (
-    <div style={headerStyles}>
-      <p style={{marginRight: 'auto'}}>wordhuntle</p>
-      <nav>
-        <ul style={{listStyle: 'none'}}>
-          <li style={liStyles}><button style={buttonStyles}><FaSun style={{fontSize: 'x-large'}}/></button></li>
-          <li style={liStyles}><button style={buttonStyles}><FaShareAlt style={{fontSize: 'x-large'}}/></button></li>
-          <li style={liStyles}><button style={buttonStyles}><FaRegClock style={{fontSize: 'x-large'}}/></button></li>
-          <li style={liStyles}><button style={buttonStyles}><FaInfoCircle style={{fontSize: 'x-large'}}/></button></li>
-        </ul>
-      </nav>
-    </div>
-  )
 }
+
+export {Header}

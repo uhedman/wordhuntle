@@ -4,16 +4,61 @@
   padding: 0;
 }
 
-.App {  
-  background-color: #1b1b32;
+#App {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 0.1fr 2fr;
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    "HEADER HEADER HEADER"
-    ". GAME .";
+  "HEADER HEADER HEADER"
+  ". GAME .";
   height: 100vh;
   width: 100vw;
+}
+
+#Header {
+  grid-area: HEADER;
+  font-family: 'Source Serif 4', sans-serif;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: xx-large;
+  font-weight: 700;
+}
+
+.dark {
+  background-color: #1b1b32;
+  color: #f5f6f7;
+}
+
+.dark header, .dark button {
+  background-color: #0a0a23;
+  color: #f5f6f7;
+}
+
+.light {
+  background-color: #f5f6f7;
+  color: #0a0a23;
+}
+
+.light header, .light button {
+  background-color: #0a0a23;
+  color: #f5f6f7;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+svg {
+  font-size: x-large;
+}
+
+li {
+  display: inline-block;
+  padding: 0 10px;
 }
