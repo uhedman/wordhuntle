@@ -17,6 +17,17 @@
   width: 100vw;
 }
 
+#Header {
+  grid-area: HEADER;
+  font-family: 'Source Serif 4', sans-serif;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: xx-large;
+  font-weight: 700;
+}
+
 .dark {
   background-color: #1b1b32;
   color: #f5f6f7;

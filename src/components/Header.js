@@ -4,18 +4,7 @@ import { Theme } from './Theme';
 import React from 'react';
 
 class Header extends React.Component {
-  render () {
-    const headerStyles = {
-      gridArea: 'HEADER',
-      fontFamily: "'Source Serif 4', sans serif",
-      padding: 15,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      fontSize: 'xx-large',
-      fontWeight: 700,
-    }
-    
+  render () {    
     const liStyles = {
       display: 'inline-block',
       padding: '0 20px'
@@ -28,7 +17,7 @@ class Header extends React.Component {
     }
     
     return (
-      <header style={headerStyles} className={this.props.theme}>
+      <header id='Header' className={this.props.theme}>
         <p style={{marginRight: 'auto', className: this.props.theme}}>wordhuntle</p>
         <nav>
           <ul style={{listStyle: 'none'}}>
