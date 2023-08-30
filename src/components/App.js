@@ -13,10 +13,10 @@ class App extends React.Component {
     this.changeTheme = this.changeTheme.bind(this);
   }
   changeTheme() {
-    this.setState({
-      color: '#1b1b32',
-      backgroundColor: '#f5f6f7'
-    });
+    this.setState(state => ({
+      color: state.backgroundColor,
+      backgroundColor: state.color
+    }));
   }
   render () {
     let appStyles = {
