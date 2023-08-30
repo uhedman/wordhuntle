@@ -47,3 +47,8 @@
   background-color: #0a0a23;
   color: #f5f6f7;
 }
+
+li {
+  display: inline-block;
+  padding: 0 20px;
+}

@@ -4,12 +4,7 @@ import { Theme } from './Theme';
 import React from 'react';
 
 class Header extends React.Component {
-  render () {    
-    const liStyles = {
-      display: 'inline-block',
-      padding: '0 20px'
-    }
-    
+  render () {
     const buttonStyles = {
       border: 'none',
       background: 'none',
@@ -21,27 +16,27 @@ class Header extends React.Component {
         <p style={{marginRight: 'auto', className: this.props.theme}}>wordhuntle</p>
         <nav>
           <ul style={{listStyle: 'none'}}>
-            <li style={liStyles}><Theme 
-                                    buttonStyles={buttonStyles} 
-                                    iconStyles={{fontSize: 'x-large'}}
-                                    changeTheme={this.props.changeTheme}
-                                    theme={this.props.theme}
-                                    /></li>
-            <li style={liStyles}><Button 
-                                    buttonStyles={buttonStyles} 
-                                    theme={this.props.theme}
-                                    icon={<FaShareAlt style={{fontSize: 'x-large'}}/>} 
-                                    /></li>
-            <li style={liStyles}><Button 
-                                    buttonStyles={buttonStyles} 
-                                    theme={this.props.theme}
-                                    icon={<FaRegClock style={{fontSize: 'x-large'}}/>} 
-                                    /></li>
-            <li style={liStyles}><Button 
-                                    buttonStyles={buttonStyles}
-                                    theme={this.props.theme}
-                                    icon={<FaInfoCircle style={{fontSize: 'x-large'}}/>} 
-                                    /></li>
+            <li><Theme 
+                  buttonStyles={buttonStyles} 
+                  iconStyles={{fontSize: 'x-large'}}
+                  changeTheme={this.props.changeTheme}
+                  theme={this.props.theme}
+                /></li>
+            <li><Button 
+                  buttonStyles={buttonStyles} 
+                  theme={this.props.theme}
+                  icon={<FaShareAlt style={{fontSize: 'x-large'}}/>} 
+                /></li>
+            <li><Button 
+                  buttonStyles={buttonStyles} 
+                  theme={this.props.theme}
+                  icon={<FaRegClock style={{fontSize: 'x-large'}}/>} 
+                /></li>
+            <li><Button 
+                  buttonStyles={buttonStyles}
+                  theme={this.props.theme}
+                  icon={<FaInfoCircle style={{fontSize: 'x-large'}}/>} 
+                /></li>
           </ul>
         </nav>
       </header>
