@@ -36,7 +36,7 @@ class App extends React.Component {
     }
     return (
       <div style={appStyles}>
-        <Header changeTheme={this.changeTheme}/>
+        <Header changeTheme={this.changeTheme} color={this.state.color}/>
         <Game />
       </div>
     );

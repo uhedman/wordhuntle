@@ -27,12 +27,12 @@ class Header extends React.Component {
       border: 'none',
       background: 'none',
       cursor: 'pointer',
-      color: 'white'
+      color: this.props.color
     }
     
     return (
       <div style={headerStyles}>
-      <p style={{marginRight: 'auto'}}>wordhuntle</p>
+      <p style={{marginRight: 'auto', color: this.props.color}}>wordhuntle</p>
       <nav>
         <ul style={{listStyle: 'none'}}>
           <li style={liStyles}><Theme 
@@ -40,9 +40,18 @@ class Header extends React.Component {
                                   iconStyles={{fontSize: 'x-large'}}
                                   changeTheme={this.props.changeTheme}
                                   /></li>
-          <li style={liStyles}><Button icon={<FaShareAlt style={{fontSize: 'x-large'}}/>} /></li>
-          <li style={liStyles}><Button icon={<FaRegClock style={{fontSize: 'x-large'}}/>} /></li>
-          <li style={liStyles}><Button icon={<FaInfoCircle style={{fontSize: 'x-large'}}/>} /></li>
+          <li style={liStyles}><Button 
+                                  buttonStyles={buttonStyles} 
+                                  icon={<FaShareAlt style={{fontSize: 'x-large'}}/>} 
+                                  /></li>
+          <li style={liStyles}><Button 
+                                  buttonStyles={buttonStyles} 
+                                  icon={<FaRegClock style={{fontSize: 'x-large'}}/>} 
+                                  /></li>
+          <li style={liStyles}><Button 
+                                  buttonStyles={buttonStyles} 
+                                  icon={<FaInfoCircle style={{fontSize: 'x-large'}}/>} 
+                                  /></li>
         </ul>
       </nav>
     </div>
