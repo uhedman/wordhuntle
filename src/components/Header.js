@@ -1,6 +1,7 @@
-import { FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
+import { FaShareAlt, FaRegClock } from 'react-icons/fa';
 import { Button } from './Button';
 import { Theme } from './Theme';
+import { Info } from './Info';
 import React from 'react';
 
 class Header extends React.Component {
@@ -22,9 +23,9 @@ class Header extends React.Component {
                   theme={this.props.theme}
                   icon={<FaRegClock />} 
                 /></li>
-            <li><Button 
+            <li><Info 
+                  setMenu={this.props.setMenu}
                   theme={this.props.theme}
-                  icon={<FaInfoCircle />} 
                 /></li>
           </ul>
         </nav>
