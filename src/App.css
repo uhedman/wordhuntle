@@ -65,11 +65,13 @@ li {
 
 .dropdown {
   position:fixed;
-  top: 50%;
+  top: 60%;
   left: 50%;
+  width: 35%;
+  height: 80%;
   transform: translate(-50%, -50%);
   background-color: red;
   padding: 20px;
-  border: 1px solid #ccc;
+  border-radius: 5px 5px 0px 0px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
