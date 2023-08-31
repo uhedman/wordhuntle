@@ -1,7 +1,7 @@
-import { FaShareAlt, FaRegClock } from 'react-icons/fa';
-import { Button } from './Button';
 import { Theme } from './Theme';
 import { Info } from './Info';
+import { Share } from './Share';
+import { History } from './History';
 import React from 'react';
 
 class Header extends React.Component {
@@ -15,13 +15,13 @@ class Header extends React.Component {
                   changeTheme={this.props.changeTheme}
                   theme={this.props.theme}
                 /></li>
-            <li><Button 
+            <li><Share 
+                  setMenu={this.props.setMenu}
                   theme={this.props.theme}
-                  icon={<FaShareAlt />} 
                 /></li>
-            <li><Button 
+            <li><History 
+                  setMenu={this.props.setMenu}
                   theme={this.props.theme}
-                  icon={<FaRegClock />} 
                 /></li>
             <li><Info 
                   setMenu={this.props.setMenu}
