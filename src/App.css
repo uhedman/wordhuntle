@@ -55,13 +55,16 @@
 #Grid {
   grid-area: GRID;
   background-color: darkslategray;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  aspect-ratio: 1;
 }
 
 .dark {
   background-color: #1b1b32;
   color: #f5f6f7;
 }
-
 
 .light {
   background-color: #f5f6f7;
@@ -96,6 +99,15 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.tile {
+  background-color: #ccc;
+  padding-bottom: 25%;
+  text-align: center;
+  border-radius: 10px;
+  border: #1b1b32;
+}
+
 
 header {
   background-color: #0a0a23;
