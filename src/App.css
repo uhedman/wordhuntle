@@ -28,6 +28,20 @@
   font-weight: 700;
 }
 
+#Game {
+  display: 'grid';
+  grid-template-columns: '1fr';
+  grid-template-rows: '0.3fr 0.3fr 2.4fr';
+  gap: '0px 0px';
+  grid-auto-flow: 'row';
+  grid-template-areas:
+    "POINTS"
+    "WORD"
+    "GRID";
+  grid-area: 'GAME';
+  padding: '20px';
+}
+
 .dark {
   background-color: #1b1b32;
   color: #f5f6f7;
