@@ -7,7 +7,7 @@ import { History } from './History';
 class Header extends React.Component {
   render () {
     return (
-      <nav id='Header'>
+      <nav>
         <p style={{marginRight: 'auto'}}>wordhuntle</p>
         <Theme 
           changeTheme={this.props.changeTheme}

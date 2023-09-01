@@ -18,7 +18,7 @@
   width: 100vw;
 }
 
-#Header {
+nav {
   grid-area: HEADER;
   padding: 15px;
   display: flex;
