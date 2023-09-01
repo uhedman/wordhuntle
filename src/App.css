@@ -23,9 +23,11 @@
   padding: 15px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   font-size: xx-large;
   font-weight: 700;
+  flex-direction: row;
+  background-color: #0a0a23;
+  color: #f5f6f7;
 }
 
 #Game {
@@ -119,9 +121,8 @@
   border: 4px solid #ccc;
 }
 
-header {
-  background-color: #0a0a23;
-  color: #f5f6f7;
+nav > button {
+  padding: 0 10px;
 }
 
 button {
@@ -135,7 +136,3 @@ svg {
   font-size: x-large;
 }
 
-li {
-  display: inline-block;
-  padding: 0 10px;
-}
