@@ -29,17 +29,22 @@
 }
 
 #Game {
-  display: 'grid';
-  grid-template-columns: '1fr';
-  grid-template-rows: '0.3fr 0.3fr 2.4fr';
-  gap: '0px 0px';
-  grid-auto-flow: 'row';
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.3fr 0.3fr 2.4fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
   grid-template-areas:
     "POINTS"
     "WORD"
     "GRID";
-  grid-area: 'GAME';
-  padding: '20px';
+  grid-area: GAME;
+  padding: 20px;
+}
+
+#Points {
+  grid-area: POINTS;
+  background-color: blueviolet;
 }
 
 .dark {

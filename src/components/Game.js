@@ -1,12 +1,6 @@
 export {Game}
 
 function Game() {
-
-  const pointsStyles = {
-    gridArea: 'POINTS',
-    backgroundColor: 'blueviolet'
-  }
-
   const wordStyles = {
     gridArea: 'WORD',
     backgroundColor: 'darkslateblue'
@@ -19,7 +13,7 @@ function Game() {
 
   return (
     <div id="Game">
-      <div style={pointsStyles}>Here will be the points and words guessed</div>
+      <div id="Points">Here will be the points and words guessed</div>
       <div style={wordStyles}>Here will be the word construction</div>
       <div style={gridStyles}>Here will be the grid of letters</div>
     </div>
