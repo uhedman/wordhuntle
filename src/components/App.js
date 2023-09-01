@@ -25,7 +25,7 @@ class App extends React.Component {
 
   setMenu(data) {
     this.setState(state => ({
-      menu: !state.menu,
+      menu: true,
       menuData: data
     }));
   }
