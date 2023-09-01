@@ -54,7 +54,6 @@
 
 #Grid {
   grid-area: GRID;
-  background-color: darkslategray;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
@@ -107,7 +106,6 @@
   border-radius: 10px;
   border: #1b1b32;
 }
-
 
 header {
   background-color: #0a0a23;
