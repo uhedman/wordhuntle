@@ -49,7 +49,9 @@
 
 #Word {
   grid-area: WORD;
-  background-color: darkslateblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #Grid {
