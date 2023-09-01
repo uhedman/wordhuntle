@@ -33,7 +33,7 @@
   color: #f5f6f7;
 }
 
-.dark header, .dark button {
+.dark header {
   background-color: #0a0a23;
   color: #f5f6f7;
 }
@@ -43,7 +43,7 @@
   color: #0a0a23;
 }
 
-.light header, .light button {
+.light header {
   background-color: #0a0a23;
   color: #f5f6f7;
 }
@@ -52,6 +52,7 @@ button {
   border: none;
   background: none;
   cursor: pointer;
+  color: #f5f6f7;
 }
 
 svg {
@@ -74,4 +75,9 @@ li {
   padding: 20px;
   border-radius: 5px 5px 0px 0px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-container {
+  display: flex;
+  justify-content: flex-end;
 }

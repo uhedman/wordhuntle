@@ -14,6 +14,7 @@ class App extends React.Component {
     }
     this.changeTheme = this.changeTheme.bind(this);
     this.setMenu = this.setMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
   }
 
   changeTheme() {
@@ -29,16 +30,26 @@ class App extends React.Component {
     }));
   }
 
+  closeMenu(data) {
+    this.setState(state => ({
+      menu: false
+    }));
+  }
+
   render () {
     return (
       <div id='App' className={this.state.theme}>
         <Header 
           changeTheme={this.changeTheme}
-          setMenu={this.setMenu} 
+          setMenu={this.setMenu}  
           theme={this.state.theme}
           className={this.state.theme}/>
         <Game />
-        {this.state.menu && <Dropdown data={this.state.menuData}/>}
+        {this.state.menu && <Dropdown 
+          closeMenu={this.closeMenu}
+          data={this.state.menuData}
+          theme={this.state.theme}
+          />}
       </div>
     );
   }
