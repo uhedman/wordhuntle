@@ -4,7 +4,7 @@ import { Info } from './Info';
 import { Share } from './Share';
 import { History } from './History';
 
-class Header extends React.Component {
+class NavBar extends React.Component {
   render () {
     return (
       <nav>
@@ -30,4 +30,4 @@ class Header extends React.Component {
   }
 }
 
-export {Header}
+export { NavBar }

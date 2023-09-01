@@ -1,5 +1,5 @@
 import '../App.css';
-import { Header } from './Header'
+import { NavBar } from './NavBar'
 import { Game } from './Game'
 import { Dropdown } from './Dropdown'
 import React from 'react';
@@ -39,7 +39,7 @@ class App extends React.Component {
   render () {
     return (
       <div id='App' className={this.state.theme}>
-        <Header 
+        <NavBar 
           changeTheme={this.changeTheme}
           setMenu={this.setMenu}  
           theme={this.state.theme}
