@@ -100,9 +100,13 @@
 }
 
 .tile {
-  padding-bottom: 25%;
-  text-align: center;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  font-weight: 600;
+  font-family: 'Source serif 4', sans-serif;
 }
 
 .tile.dark {
