@@ -30,8 +30,8 @@ class App extends React.Component {
     }));
   }
 
-  closeMenu(data) {
-    this.setState(state => ({
+  closeMenu() {
+    this.setState(({
       menu: false
     }));
   }
@@ -45,11 +45,16 @@ class App extends React.Component {
           theme={this.state.theme}
           className={this.state.theme}/>
         <Game />
-        {this.state.menu && <Dropdown 
-          closeMenu={this.closeMenu}
-          data={this.state.menuData}
-          theme={this.state.theme}
-          />}
+        {this.state.menu && 
+        <>
+          <div className="overlay" onClick={this.closeMenu}></div>
+          <Dropdown 
+            closeMenu={this.closeMenu}
+            data={this.state.menuData}
+            theme={this.state.theme}
+          />
+        </>
+          }
       </div>
     );
   }

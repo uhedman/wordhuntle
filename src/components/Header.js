@@ -7,7 +7,7 @@ import React from 'react';
 class Header extends React.Component {
   render () {
     return (
-      <header id='Header' className={this.props.theme}>
+      <header id='Header'>
         <p style={{marginRight: 'auto', className: this.props.theme}}>wordhuntle</p>
         <nav>
           <ul style={{listStyle: 'none'}}>

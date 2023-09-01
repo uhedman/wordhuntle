@@ -6,7 +6,7 @@
 
 #App {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1.1fr 1fr 1.1fr;
   grid-template-rows: 0.1fr 2fr;
   gap: 0px 0px;
   grid-auto-flow: row;
@@ -33,17 +33,22 @@
   color: #f5f6f7;
 }
 
-.dark header {
-  background-color: #0a0a23;
-  color: #f5f6f7;
-}
-
 .light {
   background-color: #f5f6f7;
   color: #0a0a23;
 }
 
-.light header {
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1000; 
+}
+
+header {
   background-color: #0a0a23;
   color: #f5f6f7;
 }
@@ -65,16 +70,16 @@ li {
 }
 
 .dropdown {
-  position:fixed;
-  top: 60%;
+  position: fixed;
+  top: 53%;
   left: 50%;
-  width: 35%;
-  height: 80%;
+  width: 31%;
+  height: 95%;
   transform: translate(-50%, -50%);
-  background-color: red;
   padding: 20px;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000; 
 }
 
 .close-container {
