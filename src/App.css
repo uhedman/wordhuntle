@@ -23,9 +23,6 @@
   padding: 15px;
   display: flex;
   align-items: center;
-  font-size: xx-large;
-  font-weight: 700;
-  flex-direction: row;
   background-color: #0a0a23;
   color: #f5f6f7;
 }
@@ -123,6 +120,11 @@
 
 nav > button {
   padding: 0 10px;
+}
+
+nav > p {
+  font-size: xx-large;
+  font-weight: 700;
 }
 
 button {
