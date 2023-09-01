@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/wordhuntle/static/css/main.75aea2ef.css",
-    "main.js": "/wordhuntle/static/js/main.d4b935e1.js",
+    "main.css": "/wordhuntle/static/css/main.9dc76206.css",
+    "main.js": "/wordhuntle/static/js/main.2188370a.js",
     "static/js/787.28cb0dcd.chunk.js": "/wordhuntle/static/js/787.28cb0dcd.chunk.js",
     "index.html": "/wordhuntle/index.html",
-    "main.75aea2ef.css.map": "/wordhuntle/static/css/main.75aea2ef.css.map",
-    "main.d4b935e1.js.map": "/wordhuntle/static/js/main.d4b935e1.js.map",
+    "main.9dc76206.css.map": "/wordhuntle/static/css/main.9dc76206.css.map",
+    "main.2188370a.js.map": "/wordhuntle/static/js/main.2188370a.js.map",
     "787.28cb0dcd.chunk.js.map": "/wordhuntle/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.75aea2ef.css",
-    "static/js/main.d4b935e1.js"
+    "static/css/main.9dc76206.css",
+    "static/js/main.2188370a.js"
   ]
 }
