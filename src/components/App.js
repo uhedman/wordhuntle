@@ -54,7 +54,7 @@ class App extends React.Component {
             theme={this.state.theme}
           />
         </>
-          }
+        }
       </div>
     );
   }
