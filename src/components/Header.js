@@ -1,8 +1,8 @@
+import React from 'react';
 import { Theme } from './Theme';
 import { Info } from './Info';
 import { Share } from './Share';
 import { History } from './History';
-import React from 'react';
 
 class Header extends React.Component {
   render () {

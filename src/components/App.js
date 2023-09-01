@@ -1,7 +1,7 @@
 import '../App.css';
-import {Header} from './Header'
-import {Game} from './Game'
-import {Dropdown} from './Dropdown'
+import { Header } from './Header'
+import { Game } from './Game'
+import { Dropdown } from './Dropdown'
 import React from 'react';
 
 class App extends React.Component {
@@ -44,7 +44,7 @@ class App extends React.Component {
           setMenu={this.setMenu}  
           theme={this.state.theme}
           className={this.state.theme}/>
-        <Game />
+        <Game theme={this.state.theme}/>
         {this.state.menu && 
         <>
           <div className="overlay" onClick={this.closeMenu}></div>
