@@ -8,6 +8,7 @@ class Game extends React.Component {
       word: ''
     }
     this.write = this.write.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   write(letter) {
@@ -16,10 +17,21 @@ class Game extends React.Component {
     }));
   }
 
+  delete() {
+    this.setState({
+      word: ''
+    });
+  }
+
   render () {
     let grid = ['A', 'B', 'C', 'D', 'H', 'E', 'J', 'E', 'I', 'O', 'A', 'F', 'P', 'O', 'N', 'G'];
     let tiles = grid.map(letter => 
-      <Tile write={this.write} theme={this.props.theme} letter={letter}/>
+      <Tile 
+        write={this.write} 
+        delete={this.delete} 
+        theme={this.props.theme} 
+        letter={letter}
+      />
     );
     
     return (

@@ -4,7 +4,8 @@ class Tile extends React.Component {
     render() {
         return (
             <button 
-                onClick={() => this.props.write(this.props.letter)}
+                onMouseDown={() => this.props.write(this.props.letter)}
+                onMouseUp={this.props.delete}
                 className={"tile " + this.props.theme}
             >
                 {this.props.letter}
