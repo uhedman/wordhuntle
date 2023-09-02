@@ -6,30 +6,39 @@ class Game extends React.Component {
     super(props);
     this.state = {
       word: '',
-      drag: false
+      drag: false,
+      list: []
     }
     this.start = this.start.bind(this);
     this.write = this.write.bind(this);
     this.delete = this.delete.bind(this);
   }
 
-  start(letter) {
+  start(letter, func) {
     this.setState({
       word: letter,
-      drag: true
+      drag: true,
+      list: [func]
     });
   }
 
-  write(letter) {
+  write(letter, func) {
     this.setState(state => 
-      state.drag ? {word: state.word + letter} : {}
-    )
+      state.drag ? {
+        word: state.word + letter,
+        list: [...state.list, func],
+      } : {}
+    );
   }
 
   delete() {
-    this.setState({
-      word: '',
-      drag: false
+    this.setState(state => {
+      state.list.map((func) => func());
+      return {
+        word: '',
+        drag: false,
+        list: [],
+      };
     });
   }
 
@@ -39,14 +48,14 @@ class Game extends React.Component {
       <Tile 
         start={this.start} 
         write={this.write} 
-        delete={this.delete} 
+        drag={this.state.drag}
         theme={this.props.theme} 
         letter={letter}
       />
     );
     
     return (
-      <div id="Game">
+      <div id="Game" onMouseUp={this.delete}>
         <div id="Points">Here will be the points and words guessed</div>
         <div id="Word">{this.state.word}</div>
         <div id="Grid">
