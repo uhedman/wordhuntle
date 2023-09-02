@@ -23,7 +23,6 @@ class Tile extends React.Component {
     onMouseEnter() {
         if (this.props.drag) {
             this.setState((state) => {
-                console.log(state)
                 if (!state.selected) {
                     this.props.write(this.props.letter, this.delete);
                     return { selected: true };
