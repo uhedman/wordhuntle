@@ -1,41 +1,60 @@
-export {Game}
+import React from 'react';
+import { Tile } from "./Tile"
 
-function Game() {
-  const gameStyles = {
-    display: 'grid',
-    gridTemplateColumns: '1fr',
-    gridTemplateRows: '0.3fr 0.3fr 2.4fr',
-    gap: '0px 0px',
-    gridAutoFlow: 'row',
-    gridTemplateAreas:`
-      "POINTS"
-      "WORD"
-      "GRID"
-    `,
-    gridArea: 'GAME',
-    padding: '20px',
+class Game extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      word: '',
+      drag: false
+    }
+    this.start = this.start.bind(this);
+    this.write = this.write.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
-  const pointsStyles = {
-    gridArea: 'POINTS',
-    backgroundColor: 'blueviolet'
+  start(letter) {
+    this.setState({
+      word: letter,
+      drag: true
+    });
   }
 
-  const wordStyles = {
-    gridArea: 'WORD',
-    backgroundColor: 'darkslateblue'
+  write(letter) {
+    this.setState(state => 
+      state.drag ? {word: state.word + letter} : {}
+    )
   }
 
-  const gridStyles = {
-    gridArea: 'GRID',
-    backgroundColor: 'darkslategray'
+  delete() {
+    this.setState({
+      word: '',
+      drag: false
+    });
   }
 
-  return (
-    <div style={gameStyles}>
-      <div style={pointsStyles}>Here will be the points and words guessed</div>
-      <div style={wordStyles}>Here will be the word construction</div>
-      <div style={gridStyles}>Here will be the grid of letters</div>
-    </div>
-  )
+  render () {
+    let grid = ['A', 'B', 'C', 'D', 'H', 'E', 'J', 'E', 'I', 'O', 'A', 'F', 'P', 'O', 'N', 'G'];
+    let tiles = grid.map(letter => 
+      <Tile 
+        start={this.start} 
+        write={this.write} 
+        delete={this.delete} 
+        theme={this.props.theme} 
+        letter={letter}
+      />
+    );
+    
+    return (
+      <div id="Game">
+        <div id="Points">Here will be the points and words guessed</div>
+        <div id="Word">{this.state.word}</div>
+        <div id="Grid">
+          {tiles}
+        </div>
+      </div>
+    )
+  }
 }
+
+export {Game}

@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Source Serif 4', sans-serif;
 }
 
 #App {
@@ -11,28 +12,59 @@
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-  "HEADER HEADER HEADER"
+  "NAVBAR NAVBAR NAVBAR"
   ". GAME .";
   height: 100vh;
   width: 100vw;
 }
 
-#Header {
-  grid-area: HEADER;
-  font-family: 'Source Serif 4', sans-serif;
+nav {
+  grid-area: NAVBAR;
   padding: 15px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  font-size: xx-large;
-  font-weight: 700;
+  background-color: #0a0a23;
+  color: #f5f6f7;
+}
+
+#Game {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.3fr 0.3fr 2.4fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "POINTS"
+    "WORD"
+    "GRID";
+  grid-area: GAME;
+  padding: 20px;
+}
+
+#Points {
+  grid-area: POINTS;
+  background-color: blueviolet;
+}
+
+#Word {
+  grid-area: WORD;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#Grid {
+  grid-area: GRID;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  aspect-ratio: 1;
 }
 
 .dark {
   background-color: #1b1b32;
   color: #f5f6f7;
 }
-
 
 .light {
   background-color: #f5f6f7;
@@ -68,9 +100,31 @@
   justify-content: flex-end;
 }
 
-header {
-  background-color: #0a0a23;
-  color: #f5f6f7;
+.tile {
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  font-weight: 600;
+  font-family: 'Source serif 4', sans-serif;
+}
+
+.tile.dark {
+  border: 4px solid #0a0a23;
+}
+
+.tile.light {
+  border: 4px solid #ccc;
+}
+
+nav > button {
+  padding: 0 10px;
+}
+
+nav > p {
+  font-size: xx-large;
+  font-weight: 700;
 }
 
 button {
@@ -84,7 +138,3 @@ svg {
   font-size: x-large;
 }
 
-li {
-  display: inline-block;
-  padding: 0 10px;
-}

@@ -1,7 +1,7 @@
 import '../App.css';
-import {Header} from './Header'
-import {Game} from './Game'
-import {Dropdown} from './Dropdown'
+import { NavBar } from './NavBar'
+import { Game } from './Game'
+import { Dropdown } from './Dropdown'
 import React from 'react';
 
 class App extends React.Component {
@@ -25,7 +25,7 @@ class App extends React.Component {
 
   setMenu(data) {
     this.setState(state => ({
-      menu: !state.menu,
+      menu: true,
       menuData: data
     }));
   }
@@ -39,12 +39,12 @@ class App extends React.Component {
   render () {
     return (
       <div id='App' className={this.state.theme}>
-        <Header 
+        <NavBar 
           changeTheme={this.changeTheme}
           setMenu={this.setMenu}  
           theme={this.state.theme}
           className={this.state.theme}/>
-        <Game />
+        <Game theme={this.state.theme}/>
         {this.state.menu && 
         <>
           <div className="overlay" onClick={this.closeMenu}></div>
@@ -54,7 +54,7 @@ class App extends React.Component {
             theme={this.state.theme}
           />
         </>
-          }
+        }
       </div>
     );
   }
