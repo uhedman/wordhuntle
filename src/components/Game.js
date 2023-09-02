@@ -5,21 +5,31 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      word: ''
+      word: '',
+      drag: false
     }
+    this.start = this.start.bind(this);
     this.write = this.write.bind(this);
     this.delete = this.delete.bind(this);
   }
 
+  start(letter) {
+    this.setState({
+      word: letter,
+      drag: true
+    });
+  }
+
   write(letter) {
-    this.setState(state => ({
-      word: state.word + letter
-    }));
+    this.setState(state => 
+      state.drag ? {word: state.word + letter} : {}
+    )
   }
 
   delete() {
     this.setState({
-      word: ''
+      word: '',
+      drag: false
     });
   }
 
@@ -27,6 +37,7 @@ class Game extends React.Component {
     let grid = ['A', 'B', 'C', 'D', 'H', 'E', 'J', 'E', 'I', 'O', 'A', 'F', 'P', 'O', 'N', 'G'];
     let tiles = grid.map(letter => 
       <Tile 
+        start={this.start} 
         write={this.write} 
         delete={this.delete} 
         theme={this.props.theme} 
