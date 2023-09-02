@@ -17,30 +17,17 @@ class Game extends React.Component {
   }
 
   render () {
+    let grid = ['A', 'B', 'C', 'D', 'H', 'E', 'J', 'E', 'I', 'O', 'A', 'F', 'P', 'O', 'N', 'G'];
+    let tiles = grid.map(letter => 
+      <Tile write={this.write} theme={this.props.theme} letter={letter}/>
+    );
+    
     return (
       <div id="Game">
         <div id="Points">Here will be the points and words guessed</div>
         <div id="Word">{this.state.word}</div>
         <div id="Grid">
-          <Tile write={this.write} theme={this.props.theme}/>
-          <Tile write={this.write} theme={this.props.theme}/>
-          <Tile write={this.write} theme={this.props.theme}/>
-          <Tile write={this.write} theme={this.props.theme}/>
-          
-          <Tile write={this.write} theme={this.props.theme}/>
-          <Tile write={this.write} theme={this.props.theme}/>
-          <Tile write={this.write} theme={this.props.theme}/>
-          <Tile write={this.write} theme={this.props.theme}/>
-
-          <Tile write={this.write} theme={this.props.theme}/>
-          <Tile write={this.write} theme={this.props.theme}/>
-          <Tile write={this.write} theme={this.props.theme}/>
-          <Tile write={this.write} theme={this.props.theme}/>
-
-          <Tile write={this.write} theme={this.props.theme}/>
-          <Tile write={this.write} theme={this.props.theme}/>
-          <Tile write={this.write} theme={this.props.theme}/>
-          <Tile write={this.write} theme={this.props.theme}/>
+          {tiles}
         </div>
       </div>
     )

@@ -4,10 +4,10 @@ class Tile extends React.Component {
     render() {
         return (
             <button 
-                onClick={() => this.props.write('A')}
+                onClick={() => this.props.write(this.props.letter)}
                 className={"tile " + this.props.theme}
             >
-                A
+                {this.props.letter}
             </button>
         );
     }
