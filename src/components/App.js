@@ -44,7 +44,7 @@ class App extends React.Component {
           setMenu={this.setMenu}  
           theme={this.state.theme}
           className={this.state.theme}/>
-        <Game theme={this.state.theme}/>
+        <Game theme={this.state.theme} setMenu={this.setMenu}/>
         {this.state.menu && 
         <>
           <div className="overlay" onClick={this.closeMenu}></div>

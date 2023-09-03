@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tile } from "./Tile"
+import { Words } from "./Words"
 import { script } from "../palabras/script"
 
 class Game extends React.Component {
@@ -61,7 +62,14 @@ class Game extends React.Component {
     
     return (
       <div id="Game" onMouseUp={this.delete}>
-        <div id="Points">Here will be the points and words guessed</div>
+        <div id="Points">
+          <div>
+            <p>Points</p>
+            <p>Words guessed</p>
+            <Words setMenu={this.props.setMenu}>See words guessed</Words>
+          </div>
+          <div>Points bar</div>
+        </div>
         <div id="Word">{this.state.word}</div>
         <div id="Grid">
           {tiles}
