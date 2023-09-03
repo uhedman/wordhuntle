@@ -25,9 +25,8 @@ class Tile extends React.Component {
             this.setState((state) => {
                 if (!state.selected) {
                     this.props.write(this.props.letter, this.delete);
-                    return { selected: true };
                 }
-                return null;
+                return { selected: true };
             });
         }
     }
