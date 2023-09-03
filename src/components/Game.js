@@ -21,10 +21,10 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    let secretWords = script([['A', 'B', 'C', 'D'],
-                              ['H', 'E', 'J', 'E'],
-                              ['I', 'O', 'A', 'F'], 
-                              ['P', 'O', 'N', 'G']]);
+    let secretWords = script([['a', 'b', 'c', 'd'],
+                              ['h', 'e', 'j', 'e'],
+                              ['i', 'o', 'a', 'f'], 
+                              ['p', 'o', 'n', 'g']]);
     let total = secretWords ? secretWords.length : 0;
 
     this.setState({ 
