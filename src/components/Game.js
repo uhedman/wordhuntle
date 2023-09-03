@@ -10,14 +10,27 @@ class Game extends React.Component {
       word: '',
       drag: false,
       list: [],
-      secretWords: script([['A', 'B', 'C', 'D'],
-                           ['H', 'E', 'J', 'E'],
-                           ['I', 'O', 'A', 'F'], 
-                           ['P', 'O', 'N', 'G']])
+      points: 0,
+      found: [],
+      secretWords: [],
+      total: 0
     }
     this.start = this.start.bind(this);
     this.write = this.write.bind(this);
     this.delete = this.delete.bind(this);
+  }
+
+  componentDidMount() {
+    let secretWords = script([['A', 'B', 'C', 'D'],
+                              ['H', 'E', 'J', 'E'],
+                              ['I', 'O', 'A', 'F'], 
+                              ['P', 'O', 'N', 'G']]);
+    let total = secretWords ? secretWords.length : 0;
+
+    this.setState({ 
+      secretWords: secretWords || ["undefined"], 
+      total
+    }); 
   }
 
   start(letter, func) {
@@ -63,12 +76,15 @@ class Game extends React.Component {
     return (
       <div id="Game" onMouseUp={this.delete}>
         <div id="Points">
-          <div>
-            <p>Points</p>
-            <p>Words guessed</p>
-            <Words setMenu={this.props.setMenu}>See words guessed</Words>
+          <div className='points'>
+            <h1 style={{marginRight: 'auto'}}>{this.state.points} pts</h1>
+            <p>{this.state.found.length} words</p>
+            <Words setMenu={this.props.setMenu}
+                   found={this.state.found}
+                   total={this.state.total}
+                   secretWords={this.state.secretWords}></Words>
           </div>
-          <div>Points bar</div>
+          <div>Here will be the points bar</div>
         </div>
         <div id="Word">{this.state.word}</div>
         <div id="Grid">
