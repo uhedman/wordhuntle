@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tile } from "./Tile"
+import { script } from "../palabras/script"
 
 class Game extends React.Component {
   constructor(props) {
@@ -7,7 +8,11 @@ class Game extends React.Component {
     this.state = {
       word: '',
       drag: false,
-      list: []
+      list: [],
+      secretWords: script([['A', 'B', 'C', 'D'],
+                           ['H', 'E', 'J', 'E'],
+                           ['I', 'O', 'A', 'F'], 
+                           ['P', 'O', 'N', 'G']])
     }
     this.start = this.start.bind(this);
     this.write = this.write.bind(this);
@@ -26,7 +31,7 @@ class Game extends React.Component {
     this.setState(state => 
       state.drag ? {
         word: state.word + letter,
-        list: [...state.list, func],
+        list: [...state.list, func]
       } : {}
     );
   }
@@ -37,7 +42,7 @@ class Game extends React.Component {
       return {
         word: '',
         drag: false,
-        list: [],
+        list: []
       };
     });
   }

@@ -1,12 +1,4 @@
-const fs = require('fs');
-
-// Nombre del archivo diccionario
-const archivo = 'data-sin-enie.txt';
-
-const grid = [['a', 'b', 'c', 'd'],
-              ['h', 'e', 'j', 'e'],
-              ['i', 'o', 'a', 'f'],
-              ['p', 'o', 'n', 'g']]
+import raw from "./data-sin-enie.txt"
 
 // Direcciones a las casillas adyacentes
 const ways = [[-1, -1], [-1, 0], [-1, 1],
@@ -16,7 +8,7 @@ const ways = [[-1, -1], [-1, 0], [-1, 1],
 // Buscar una tupla en una lista
 function searchTuple(list, t) {
   for (let index = 0; index < list.length; index++) {
-    if (list[index][0] == t[0] && list[index][1] == t[1]) {
+    if (list[index][0] === t[0] && list[index][1] === t[1]) {
       return index;
     }
   }
@@ -45,7 +37,7 @@ function searchWord(words, w) {
   let a = 0, b = words.length - 1, c;
   while (a <= b) {
     c = Math.floor((a + b) / 2);
-    if (words[c] == w) {
+    if (words[c] === w) {
       return true;
     } else if (words[c] > w) {
       b = c-1;
@@ -58,7 +50,7 @@ function searchWord(words, w) {
 
 // Busca las palabras que pertenecen a data
 // y estan escondidas en la grilla
-function getWords(data) {
+function getWords(data, grid) {
   let words = [];
 
   // Se itera para cada casilla de la grilla
@@ -105,7 +97,7 @@ function getWords(data) {
       }
       
       // Si ninguna casilla pudo continuar una palabra
-      if (way == 8) {
+      if (way === 8) {
         // Llamar a backtracking
         warm_start = true;
       } else {
@@ -126,12 +118,13 @@ function getWords(data) {
 }
 
 // Lee el contenido del diccionario
-fs.readFile(archivo, 'utf-8', (error, data) => {
-  if (error) {
-    console.error('Error al leer el archivo:', error);
-    return;
-  }
+function script(grid) {
+  fetch(raw)
+  .then(r => r.text())
+  .then(text => {
+    let lineas = text.split('\n');
+    return getWords(lineas, grid);
+  });
+}
 
-  lineas = data.split('\n');  // Guardamos las palabras en un arreglo
-  console.log(getWords(lineas));
-});
+export {script}
