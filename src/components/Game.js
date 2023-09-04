@@ -69,7 +69,7 @@ class Game extends React.Component {
 	}
 
 	render () {
-		let grid = ['A', 'B', 'C', 'D', 'H', 'E', 'J', 'E', 'I', 'O', 'A', 'F', 'P', 'O', 'N', 'G'];
+		let grid = ['a', 'b', 'c', 'd', 'h', 'e', 'j', 'e', 'i', 'o', 'a', 'f', 'p', 'o', 'n', 'g'];
 		let tiles = grid.map(letter => 
 			<Tile 
 				start={this.start} 
