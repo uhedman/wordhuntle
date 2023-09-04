@@ -31,9 +31,9 @@ class App extends React.Component {
   }
 
   closeMenu() {
-    this.setState(({
+    this.setState({
       menu: false
-    }));
+    });
   }
 
   render () {
