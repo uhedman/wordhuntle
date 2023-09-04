@@ -122,12 +122,28 @@ nav {
   align-items: center;
 }
 
-.points > button{
-  margin-left: 5px;
+.points > button {
+  margin-left: 10px;
+}
+
+.share {
+  margin-top: 20px;
+  background-color: #0a0a23;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: large;
+}
+
+.copy {
+  margin-top: 10px;
+  background-color: #0a0a23;
+  padding: 5px 15px;
+  font-size: x-large;
+  border-radius: 5px;
 }
 
 nav > button {
-  padding: 0 10px;
+  margin: 0 10px;
 }
 
 nav > p {
