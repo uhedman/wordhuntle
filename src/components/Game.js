@@ -21,16 +21,22 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    let secretWords = script([['a', 'b', 'c', 'd'],
-                              ['h', 'e', 'j', 'e'],
-                              ['i', 'o', 'a', 'f'], 
-                              ['p', 'o', 'n', 'g']]);
-    let total = secretWords ? secretWords.length : 0;
+    let grid = [['a', 'b', 'c', 'd'],
+                ['h', 'e', 'j', 'e'],
+                ['i', 'o', 'a', 'f'], 
+                ['p', 'o', 'n', 'g']];
 
-    this.setState({ 
-      secretWords: secretWords || ["undefined"], 
-      total
-    }); 
+    script(grid)
+    .then((words) => {
+      let total = words.length;
+      this.setState({ 
+        secretWords: words, 
+        total
+      }); 
+    })
+    .catch((error) => {
+      console.error('Script error:', error);
+    });    
   }
 
   start(letter, func) {

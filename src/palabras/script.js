@@ -119,7 +119,7 @@ function getWords(data, grid) {
 
 // Lee el contenido del diccionario
 function script(grid) {
-  fetch(raw)
+  return fetch(raw)
   .then(r => r.text())
   .then(text => {
     let lineas = text.split('\n');
