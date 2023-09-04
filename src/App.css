@@ -43,7 +43,6 @@ nav {
 
 #Points {
   grid-area: POINTS;
-  background-color: blueviolet;
 }
 
 #Word {
@@ -116,6 +115,15 @@ nav {
 
 .tile.light {
   border: 4px solid #ccc;
+}
+
+.points {
+  display: flex;
+  align-items: center;
+}
+
+.points > button{
+  margin-left: 5px;
 }
 
 nav > button {
