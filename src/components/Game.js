@@ -48,13 +48,11 @@ class Game extends React.Component {
   }
 
   write(letter, func) {
-    this.setState(state => 
-      state.drag ? {
-        word: state.word + letter,
-        list: [...state.list, func]
-      } : {}
-    );
-  }
+    this.setState((prevState) => ({
+      word: prevState.word + letter,
+      list: [...prevState.list, func],
+    }));
+  }  
 
   delete() {
     this.setState(state => {
