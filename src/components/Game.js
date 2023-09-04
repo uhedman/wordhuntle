@@ -62,7 +62,10 @@ class Game extends React.Component {
       return {
         word: '',
         drag: false,
-        list: []
+        list: [],
+        found: state.word in state.secretWords ? 
+               state.found + [state.word] :
+               state.found
       };
     });
   }
