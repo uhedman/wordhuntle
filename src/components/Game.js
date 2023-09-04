@@ -61,7 +61,7 @@ class Game extends React.Component {
         word: '',
         drag: false,
         list: [],
-        found: state.word in state.secretWords ? 
+        found: state.secretWords.includes(state.word) ? 
                state.found + [state.word] :
                state.found
       };
