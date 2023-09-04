@@ -48,8 +48,13 @@ nav {
 #Word {
   grid-area: WORD;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
+}
+
+#Word > p {
+  font-size: 3rem;
 }
 
 #Grid {
@@ -104,26 +109,37 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: xx-large;
-  font-weight: 600;
+  font-size: 3.3rem;
+  font-weight: 700;
   font-family: 'Source serif 4', sans-serif;
+  aspect-ratio: 1;
 }
 
 .tile.dark {
-  border: 4px solid #0a0a23;
+  border: 7px solid #0a0a23;
 }
 
 .tile.light {
-  border: 4px solid #ccc;
+  border: 7px solid #ccc;
 }
 
 .points {
   display: flex;
-  align-items: center;
+  align-items: baseline;
+  justify-content: flex-end;
 }
 
 .points > button {
   margin-left: 10px;
+}
+
+.points > h1 {
+  margin-right: auto;
+  font-size: 3rem;
+}
+
+.points > p {
+  font-size: 2rem;
 }
 
 .share {
