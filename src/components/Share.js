@@ -3,13 +3,20 @@ import { FaShareAlt } from 'react-icons/fa';
 
 class Share extends React.Component {
 	render () {
+		const fechaActual = new Date();
+
+		const dia = fechaActual.getDate();
+		const mes = fechaActual.toLocaleString('default', { month: 'long' }); // Obtiene el mes en formato largo (por ejemplo, "enero")
+		const anio = fechaActual.getFullYear();
+
 		let menu = (
 			<div>
-				<h1>Share results</h1>
-				<div>
-					<p>wordhuntle - Aug 31, 2023</p>
-					<p>Level 0/8 — 0 points — 0 words</p>
+				<h1>Comparte tus resultados</h1>
+				<div className='share'>
+					<p>wordhuntle - {`${dia} ${mes} ${anio}`}</p>
+					<p>Nivel {this.props.level}/8 — {this.props.points} puntos — {this.props.found} palabras</p>
 				</div>
+				<button className='copy'>Copiar</button>
 			</div>
 		)
 
