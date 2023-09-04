@@ -24,10 +24,10 @@ class App extends React.Component {
   }
 
   setMenu(data) {
-    this.setState(state => ({
+    this.setState({
       menu: true,
       menuData: data
-    }));
+    });
   }
 
   closeMenu() {
