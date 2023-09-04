@@ -84,7 +84,7 @@ class Game extends React.Component {
 			<div id="Game" onMouseUp={this.delete}>
 				<div id="Points">
 					<div className='points'>
-						<h1 style={{marginRight: 'auto'}}>{this.state.points} pts</h1>
+						<h1>{this.state.points} pts</h1>
 						<p>{this.state.found.length} words</p>
 						<Words setMenu={this.props.setMenu}
 									 found={this.state.found}
@@ -93,7 +93,7 @@ class Game extends React.Component {
 					</div>
 					<div>Here will be the points bar</div>
 				</div>
-				<div id="Word">{this.state.word.toUpperCase()}</div>
+				<div id="Word"><p>{this.state.word.toUpperCase()}</p></div>
 				<div id="Grid">
 					{tiles}
 				</div>
