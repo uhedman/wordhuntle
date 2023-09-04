@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaInfoCircle } from 'react-icons/fa';
+import gif from '../how-to-play.gif';
 
 class Info extends React.Component {
 	render () {
@@ -7,7 +8,7 @@ class Info extends React.Component {
 			<div>
 				<h1>How to play</h1>
 				<p>Use your mouse or finger to connect letters together on the grid to make words.</p>
-				<img alt='How to play'></img>
+				<img src={gif} alt='How to play' width='300px'></img>
 				<ul>
 					<li>You can connect any two adjacent letters, including diagonally</li>
 					<li>You cannot use the same grid cell more than once in a word</li>
