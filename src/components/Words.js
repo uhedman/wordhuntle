@@ -4,13 +4,10 @@ import { FaEye } from 'react-icons/fa';
 class Words extends React.Component {
   render () {
     let found = this.props.found.map((word) => <p>{word}</p>);
-    let secret = this.props.secretWords.map((word) => <p>{word}</p>);
     let menu = (
       <div>
         <h1>Found words ({this.props.found.length}/{this.props.total})</h1>
         {found}
-        <h1>Secret Words</h1>
-        {secret}
       </div>
     );
 

@@ -88,7 +88,7 @@ class Game extends React.Component {
             <Words setMenu={this.props.setMenu}
                    found={this.state.found}
                    total={this.state.total}
-                   secretWords={this.state.secretWords}></Words>
+            ></Words>
           </div>
           <div>Here will be the points bar</div>
         </div>
