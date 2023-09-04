@@ -93,7 +93,7 @@ class Game extends React.Component {
 					</div>
 					<div>Here will be the points bar</div>
 				</div>
-				<div id="Word">{this.state.word}</div>
+				<div id="Word">{this.state.word.toUpperCase()}</div>
 				<div id="Grid">
 					{tiles}
 				</div>
