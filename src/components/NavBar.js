@@ -5,7 +5,7 @@ import History from './History';
 import { FaSun, FaMoon, FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
 
 class NavBar extends React.Component {
-	render () {
+	render() {
 		return (
 			<nav>
 				<p>wordhuntle</p>

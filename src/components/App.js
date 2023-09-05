@@ -34,7 +34,7 @@ class App extends React.Component {
 		});
 	}
 
-	render () {
+	render() {
 		return (
 			<div id='App' className={this.state.theme}>
 				<NavBar 

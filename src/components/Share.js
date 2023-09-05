@@ -26,7 +26,7 @@ class Share extends React.Component {
 		})
 	}
 
-	render () {
+	render() {
 		const fechaActual = new Date();
 
 		const dia = fechaActual.getDate();

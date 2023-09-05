@@ -2,7 +2,7 @@ import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 class Dropdown extends React.Component {
-	render () {
+	render() {
 		return (
 			<div className={"dropdown " + this.props.theme}>
 				<div className='close-container'>

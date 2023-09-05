@@ -2,7 +2,7 @@ import React from 'react';
 import gif from '../how-to-play.gif';
 
 class Info extends React.Component {
-	render () {
+	render() {
 		return (
 			<div className='Info'>
 				<h1>Cómo jugar</h1>

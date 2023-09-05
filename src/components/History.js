@@ -1,7 +1,7 @@
 import React from 'react';
 
 class History extends React.Component {
-	render () {
+	render() {
 		return (
 			<div className='History'>
 				<h1>Palabras de ayer</h1>
