@@ -1,15 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class Share extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			text: "Copiar"
-		}
-		this.copy = this.copy.bind(this);
-	}
+function Share(props) {
+	const [text, setText] = useState("Copiar");
 
-	copy() {
+	function copy() {
 		const shareDiv = document.querySelector('.share');
 		const textoACopiar = shareDiv.textContent;
 
@@ -21,29 +15,25 @@ class Share extends React.Component {
 		document.execCommand('copy');
 		document.body.removeChild(elementoTemporal);
 
-		this.setState({
-			text: "Copiado!"
-		})
+		setText("Copiado!");
 	}
 
-	render() {
-		const fechaActual = new Date();
+	const fechaActual = new Date();
 
-		const dia = fechaActual.getDate();
-		const mes = fechaActual.toLocaleString('default', { month: 'long' });
-		const anio = fechaActual.getFullYear();
+	const dia = fechaActual.getDate();
+	const mes = fechaActual.toLocaleString('default', { month: 'long' });
+	const anio = fechaActual.getFullYear();
 
-		return (
-			<div>
-				<h1>Comparte tus resultados</h1>
-				<div className='share'>
-					<p>wordhuntle - {`${dia} de ${mes} de ${anio}`} </p>
-					<p>Nivel {this.props.level}/8 — {this.props.points} puntos — {this.props.found} palabras</p>
-				</div>
-				<button className='copy' onClick={this.copy}>{this.state.text}</button>
+	return (
+		<div>
+			<h1>Comparte tus resultados</h1>
+			<div className='share'>
+				<p>wordhuntle - {`${dia} de ${mes} de ${anio}`} </p>
+				<p>Nivel {props.level}/8 — {props.points} puntos — {props.found} palabras</p>
 			</div>
-		)
-	}
+			<button className='copy' onClick={copy}>{text}</button>
+		</div>
+	)
 }
 
 export default Share;

@@ -2,64 +2,48 @@ import '../App.css';
 import NavBar from './NavBar'
 import Game from './Game'
 import Dropdown from './Dropdown'
-import React from 'react';
+import React, { useState } from 'react';
 
-class App extends React.Component {
-	constructor (props) {
-		super(props);
-		this.state = {
-			theme: 'dark',
-			menuData: undefined
-		}
-		this.changeTheme = this.changeTheme.bind(this);
-		this.setMenu = this.setMenu.bind(this);
-		this.closeMenu = this.closeMenu.bind(this);
+function App() {
+	const [theme, setTheme] = useState('dark');
+	const [menuData, setMenuData] = useState(undefined);
+
+	function changeTheme() {
+		setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
 	}
 
-	changeTheme() {
-		this.setState(state => ({
-			theme: state.theme === 'dark' ? 'light' : 'dark'
-		}));
+	function setMenu(data) {
+		setMenuData(data);
 	}
 
-	setMenu(data) {
-		this.setState({
-			menuData: data
-		});
+	function closeMenu() {
+		setMenuData(undefined);
 	}
 
-	closeMenu() {
-		this.setState({
-			menuData: undefined
-		});
-	}
-
-	render() {
-		return (
-			<div id='App' className={this.state.theme}>
-				<NavBar 
-					changeTheme={this.changeTheme}
-					setMenu={this.setMenu}  
-					theme={this.state.theme}
-					className={this.state.theme}
+	return (
+		<div id='App' className={theme}>
+			<NavBar 
+				changeTheme={changeTheme}
+				setMenu={setMenu}  
+				theme={theme}
+				className={theme}
+			/>
+			<Game 
+				theme={theme} 
+				setMenu={setMenu}
+			/>
+			{menuData !== undefined && 
+			<>
+				<div className="overlay" onClick={closeMenu} />
+				<Dropdown 
+					closeMenu={closeMenu}
+					data={menuData}
+					theme={theme}
 				/>
-				<Game 
-					theme={this.state.theme} 
-					setMenu={this.setMenu}
-				/>
-				{this.state.menuData !== undefined && 
-				<>
-					<div className="overlay" onClick={this.closeMenu} />
-					<Dropdown 
-						closeMenu={this.closeMenu}
-						data={this.state.menuData}
-						theme={this.state.theme}
-					/>
-				</>
-				}
-			</div>
-		);
-	}
+			</>
+			}
+		</div>
+	);
 }
 
 export default App;

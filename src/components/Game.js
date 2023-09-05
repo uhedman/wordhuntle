@@ -1,27 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Tile from "./Tile"
 import Words from "./Words"
 import { script } from "../palabras/script"
 import { FaEye } from "react-icons/fa"
 
-class Game extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			word: '',
-			drag: false,
-			list: [],
-			points: 0,
-			found: [],
-			secretWords: [],
-			total: 0
-		}
-		this.start = this.start.bind(this);
-		this.write = this.write.bind(this);
-		this.delete = this.delete.bind(this);
-	}
+function Game(props) {
+	const [state, setState] = useState({
+		word: '',
+		drag: false,
+		list: [],
+		points: 0,
+		found: [],
+		secretWords: [],
+		total: 0
+	})
 
-	componentDidMount() {
+	useEffect (() => {
 		const grid = [['a', 'b', 'c', 'd'],
 									['h', 'e', 'j', 'e'],
 									['i', 'o', 'a', 'f'], 
@@ -30,32 +24,35 @@ class Game extends React.Component {
 		script(grid)
 		.then(words => {
 			let total = words.length;
-			this.setState({ 
+			setState(prevState => ({
+				...prevState,
 				secretWords: words, 
 				total
-			}); 
+			})); 
 		})
 		.catch(error => {
 			console.error('Script error:', error);
 		});    
-	}
+	});
 
-	start(letter, func) {
-		this.setState({
+	function start(letter, func) {
+		setState(prevState => ({
+			...prevState,
 			word: letter,
 			drag: true,
 			list: [func]
-		});
-	}
-
-	write(letter, func) {
-		this.setState(prevState => ({
-			word: prevState.word + letter,
-			list: [...prevState.list, func],
 		}));
 	}
 
-	puntuation(length) {
+	function write(letter, func) {
+		setState(prevState => ({
+			...prevState,
+			word: prevState.word + letter,
+			list: [...prevState.list, func]
+		}));
+	}
+
+	function puntuation(length) {
 		if (length === 4) {
 			return 1;
 		}
@@ -64,21 +61,22 @@ class Game extends React.Component {
 		}
 	}
 
-	delete() {
-		this.setState(state => {
-			state.list.map(func => func());
+	function deselect() {
+		setState(prevState => {
+			prevState.list.map(func => func());
 
 			let points, found;
-			if (state.secretWords.includes(state.word) && !state.found.includes(state.word)) {
-				found = [...state.found, state.word];
-				points = state.points + this.puntuation(state.word.length);
+			if (prevState.secretWords.includes(prevState.word) && !prevState.found.includes(state.word)) {
+				found = [...prevState.found, prevState.word];
+				points = prevState.points + puntuation(prevState.word.length);
 			}
 			else {
-				found = state.found;
-				points = state.points;
+				found = prevState.found;
+				points = prevState.points;
 			}
 
 			return {
+				...prevState,
 				word: '',
 				drag: false,
 				list: [],
@@ -88,39 +86,37 @@ class Game extends React.Component {
 		});
 	}
 
-	render() {
-		let grid = ['a', 'b', 'c', 'd', 'h', 'e', 'j', 'e', 'i', 'o', 'a', 'f', 'p', 'o', 'n', 'g'];
-		let tiles = grid.map(letter => 
-			<Tile 
-				start={this.start} 
-				write={this.write} 
-				drag={this.state.drag}
-				theme={this.props.theme} 
-				letter={letter}
-			/>
-		);
-		
-		return (
-			<div id="Game" onMouseUp={this.delete}>
-				<div id="Points">
-					<div className='points'>
-						<h1>{this.state.points} pts</h1>
-						<p>{this.state.found.length} {this.state.found.length === 1 ? 'palabra' : 'palabras'}</p>
-						<button onClick={() => this.props.setMenu(<Words found={this.state.found} total={this.state.total}/>)}>
-							<FaEye />
-						</button>
-					</div>
-					<div>Here will be the points bar</div>
+	let grid = ['a', 'b', 'c', 'd', 'h', 'e', 'j', 'e', 'i', 'o', 'a', 'f', 'p', 'o', 'n', 'g'];
+	let tiles = grid.map(letter => 
+		<Tile 
+			start={start} 
+			write={write} 
+			drag={state.drag}
+			theme={props.theme} 
+			letter={letter}
+		/>
+	);
+
+	return (
+		<div id="Game" onMouseUp={deselect}>
+			<div id="Points">
+				<div className='points'>
+					<h1>{state.points} pts</h1>
+					<p>{state.found.length} {state.found.length === 1 ? 'palabra' : 'palabras'}</p>
+					<button onClick={() => props.setMenu(<Words found={state.found} total={state.total}/>)}>
+						<FaEye />
+					</button>
 				</div>
-				<div id="Word">
-					<p>{this.state.word.toUpperCase()}</p>
-				</div>
-				<div id="Grid">
-					{tiles}
-				</div>
+				<div>Here will be the points bar</div>
 			</div>
-		)
-	}
+			<div id="Word">
+				<p>{state.word.toUpperCase()}</p>
+			</div>
+			<div id="Grid">
+				{tiles}
+			</div>
+		</div>
+	)
 }
 
 export default Game;

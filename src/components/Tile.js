@@ -1,55 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class Tile extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			selected: false
-		}
-		this.onMouseDown = this.onMouseDown.bind(this);
-		this.onMouseEnter = this.onMouseEnter.bind(this);
-		this.delete = this.delete.bind(this);
-	}
+function Tile(props) {
+	const [selected, setSelected] = useState(false);
 
-	onMouseDown() {
-		this.setState(state => {
-			if (!state.selected) {
-				this.props.start(this.props.letter, this.delete);
+	function onMouseDown() {
+		setSelected(prevSelected => {
+			if (!prevSelected) {
+				props.start(props.letter, deselect);
 			}
-			return { selected: true };
+			return true;
 		});
 	}
 
-	onMouseEnter() {
-		if (this.props.drag) {
-			this.setState(state => {
-				if (!state.selected) {
-					this.props.write(this.props.letter, this.delete);
+	function onMouseEnter() {
+		if (props.drag) {
+			setSelected(prevSelected => {
+				if (!prevSelected) {
+					props.write(props.letter, deselect);
 				}
-				return { selected: true };
+				return true;
 			});
 		}
 	}
 
-	delete() {
-		this.setState({
-			selected: false
-		});
+	function deselect() {
+		setSelected(false);
 	}
 
-	render() {
-		return (
-			<button 
-				onMouseDown={this.onMouseDown}
-				onMouseEnter={this.onMouseEnter}
-				className={this.state.selected 
-					         ? "tile selected " + this.props.theme
-									 : "tile " + this.props.theme}
-			>
-				{this.props.letter.toUpperCase()}
-			</button>
-		);
-	}
+	return (
+		<button 
+			onMouseDown={onMouseDown}
+			onMouseEnter={onMouseEnter}
+			className={selected 
+									? "tile selected " + props.theme
+									: "tile " + props.theme}
+		>
+			{props.letter.toUpperCase()}
+		</button>
+	);
 }
 
 export default Tile;
