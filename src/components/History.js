@@ -1,9 +1,8 @@
 import React from 'react';
-import { FaRegClock } from 'react-icons/fa';
 
 class History extends React.Component {
 	render () {
-		let menu = (
+		return (
 			<div className='History'>
 				<h1>Palabras de ayer</h1>
 				<p>Las palabras que encontraste están resaltadas</p>
@@ -12,12 +11,6 @@ class History extends React.Component {
 				<p>ipsum</p>
 				<p>dolor</p>
 			</div>
-		)
-
-		return (
-			<button onClick={() => this.props.setMenu(menu)}>
-				<FaRegClock />
-			</button>
 		)
 	}
 }

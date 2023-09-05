@@ -1,10 +1,9 @@
 import React from 'react';
-import { FaInfoCircle } from 'react-icons/fa';
 import gif from '../how-to-play.gif';
 
 class Info extends React.Component {
 	render () {
-		let menu = (
+		return (
 			<div className='Info'>
 				<h1>Cómo jugar</h1>
 				<p>Usá el ratón o el dedo para conectar las letras en la grilla para formar palabras.</p>
@@ -33,12 +32,6 @@ class Info extends React.Component {
 				<h1>Más</h1>
 				<p>Wordhuntle se reinicia todos los días a las 8pm EST. Volvé cada día para jugar un tablero nuevo!</p>
 			</div>
-		)
-
-		return (
-			<button onClick={() => this.props.setMenu(menu)}>
-				<FaInfoCircle />
-			</button>
 		)
 	}
 }

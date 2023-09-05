@@ -1,30 +1,26 @@
 import React from 'react';
-import Theme from './Theme';
 import Info from './Info';
 import Share from './Share';
 import History from './History';
+import { FaSun, FaMoon, FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
 
 class NavBar extends React.Component {
 	render () {
 		return (
 			<nav>
 				<p>wordhuntle</p>
-				<Theme 
-					changeTheme={this.props.changeTheme}
-					theme={this.props.theme}
-				/>
-				<Share 
-					setMenu={this.props.setMenu}
-					theme={this.props.theme}
-				/>
-				<History 
-					setMenu={this.props.setMenu}
-					theme={this.props.theme}
-				/>
-				<Info 
-					setMenu={this.props.setMenu}
-					theme={this.props.theme}
-				/>
+				<button onClick={this.props.changeTheme}>
+					{this.props.theme === 'dark' ? <FaSun /> : <FaMoon />}
+				</button>
+				<button onClick={() => this.props.setMenu(<Share />)}>
+					<FaShareAlt />
+				</button>
+				<button onClick={() => this.props.setMenu(<History />)}>
+					<FaRegClock />
+				</button>
+				<button onClick={() => this.props.setMenu(<Info />)}>
+					<FaInfoCircle />
+				</button>
 			</nav>
 		)
 	}
