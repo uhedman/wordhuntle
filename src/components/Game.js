@@ -85,7 +85,7 @@ class Game extends React.Component {
 				<div id="Points">
 					<div className='points'>
 						<h1>{this.state.points} pts</h1>
-						<p>{this.state.found.length} words</p>
+						<p>{this.state.found.length} palabras</p>
 						<Words setMenu={this.props.setMenu}
 									 found={this.state.found}
 									 total={this.state.total}

@@ -6,7 +6,7 @@ class Words extends React.Component {
 		let found = this.props.found.map((word) => <p>{word}</p>);
 		let menu = (
 			<div>
-				<h1>Found words ({this.props.found.length}/{this.props.total})</h1>
+				<h1>Palabras encontradas ({this.props.found.length}/{this.props.total})</h1>
 				{found}
 			</div>
 		);
