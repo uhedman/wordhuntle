@@ -6,32 +6,30 @@ class Info extends React.Component {
 	render () {
 		let menu = (
 			<div>
-				<h1>How to play</h1>
-				<p>Use your mouse or finger to connect letters together on the grid to make words.</p>
-				<img src={gif} alt='How to play' width='300px'></img>
+				<h1>Cómo jugar</h1>
+				<p>Usá el ratón o el dedo para conectar las letras en la grilla para formar palabras.</p>
+				<img src={gif} alt='Cómo jugar' width='300px'></img>
 				<ul>
-					<li>You can connect any two adjacent letters, including diagonally</li>
-					<li>You cannot use the same grid cell more than once in a word</li>
-					<li>Your line CAN cross over itself</li>
-					<li>Your word must be at least 4 letters long</li>
+					<li>Podés conectar cualquier par de letras adyacentes, incluso diagonalmente</li>
+					<li>No podés usar la misma casilla más de una vez por palabra</li>
+					<li>Tu línea PUEDE cruzarse a sí misma</li>
+					<li>Tu palabra tiene que tener al menos 4 letras</li>
 				</ul>
-				<h1>Scoring</h1>
-				<p>When you make a word, you will receive points depending on how long your word is:
-
-					 4 letters: 1 point
-					 5 letters: 4 points
-					 6 letters: 6 points
-					 7 letters: 8 points
-					 8 letters: 10 points
-					 9 letters: 12 points
-					 10 letters: 14 points
-					 11 letters: 16 points
-					 
-					 etc.</p>
-				<i>Tip: Every board will have a word that is at least 8 letters long. Make sure to keep an eye out for it!</i>
-				<p>Score points to increase your level. Try to reach the max level each day!</p>
-				<h1>More</h1>
-				<p>Wordhuntle is updated every day at 8pm EST. Check back in each day for a new board!</p>
+				<h1>Puntuación</h1>
+				<p>Cuando creas una palabra, recibirás puntos dependiendo de cuán larga sea:</p>
+				<span>4 letras: 1 punto</span>
+				<span>5 letras: 4 puntos</span>
+				<span>6 letras: 6 puntos</span>
+				<span>7 letras: 8 puntos</span>
+				<span>8 letras: 10 puntos</span>
+				<span>9 letras: 12 puntos</span>
+				<span>10 letras: 14 puntos</span>
+				<span>11 letras: 16 puntos</span>
+				<span>etc.</span>
+				<i>Consejo: Cada tablero tendrá una palabra que tiene al menos 8 letras. Recordá prestarle atención!</i>
+				<p>Consigue puntos para subir de nivel. Intentá conseguir el nivel máximo cada día!</p>
+				<h1>Más</h1>
+				<p>Wordhuntle se reinicia todos los días a las 8pm EST. Volvé cada día para jugar un tablero nuevo!</p>
 			</div>
 		)
 
