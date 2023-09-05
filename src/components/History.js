@@ -4,7 +4,7 @@ import { FaRegClock } from 'react-icons/fa';
 class History extends React.Component {
 	render () {
 		let menu = (
-			<div>
+			<div className='History'>
 				<h1>Palabras de ayer</h1>
 				<p>Las palabras que encontraste están resaltadas</p>
 				<img alt="tablero de ayer"></img>
