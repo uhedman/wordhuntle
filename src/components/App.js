@@ -9,7 +9,6 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			theme: 'dark',
-			menu: false,
 			menuData: undefined
 		}
 		this.changeTheme = this.changeTheme.bind(this);
@@ -25,14 +24,13 @@ class App extends React.Component {
 
 	setMenu(data) {
 		this.setState({
-			menu: true,
 			menuData: data
 		});
 	}
 
 	closeMenu() {
 		this.setState({
-			menu: false
+			menuData: undefined
 		});
 	}
 
@@ -49,7 +47,7 @@ class App extends React.Component {
 					theme={this.state.theme} 
 					setMenu={this.setMenu}
 				/>
-				{this.state.menu && 
+				{this.state.menuData !== undefined && 
 				<>
 					<div className="overlay" onClick={this.closeMenu} />
 					<Dropdown 
