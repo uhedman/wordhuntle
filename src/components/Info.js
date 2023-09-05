@@ -8,7 +8,7 @@ class Info extends React.Component {
 			<div className='Info'>
 				<h1>Cómo jugar</h1>
 				<p>Usá el ratón o el dedo para conectar las letras en la grilla para formar palabras.</p>
-				<img src={gif} alt='Cómo jugar' width='300px'></img>
+				<img src={gif} alt='Cómo jugar' width='300px' />
 				<ul className='help'>
 					<li>Podés conectar cualquier par de letras adyacentes, incluso diagonalmente</li>
 					<li>No podés usar la misma casilla más de una vez por palabra</li>
@@ -36,9 +36,11 @@ class Info extends React.Component {
 		)
 
 		return (
-			<button onClick={() => this.props.setMenu(menu)}><FaInfoCircle /></button>
+			<button onClick={() => this.props.setMenu(menu)}>
+				<FaInfoCircle />
+			</button>
 		)
 	}
 }
 
-export {Info};
+export default Info;

@@ -190,6 +190,7 @@ nav > button {
 nav > p {
   font-size: xx-large;
   font-weight: 800;
+  margin-right: auto;
 }
 
 button {

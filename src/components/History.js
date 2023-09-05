@@ -7,7 +7,7 @@ class History extends React.Component {
 			<div className='History'>
 				<h1>Palabras de ayer</h1>
 				<p>Las palabras que encontraste están resaltadas</p>
-				<img alt="tablero de ayer"></img>
+				<img alt="tablero de ayer" />
 				<p>lorem</p>
 				<p>ipsum</p>
 				<p>dolor</p>
@@ -15,9 +15,11 @@ class History extends React.Component {
 		)
 
 		return (
-			<button onClick={() => this.props.setMenu(menu)}><FaRegClock /></button>
+			<button onClick={() => this.props.setMenu(menu)}>
+				<FaRegClock />
+			</button>
 		)
 	}
 }
 
-export {History};
+export default History;

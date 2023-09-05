@@ -12,7 +12,7 @@ class Tile extends React.Component {
 	}
 
 	onMouseDown() {
-		this.setState((state) => {
+		this.setState(state => {
 			if (!state.selected) {
 				this.props.start(this.props.letter, this.delete);
 			}
@@ -22,7 +22,7 @@ class Tile extends React.Component {
 
 	onMouseEnter() {
 		if (this.props.drag) {
-			this.setState((state) => {
+			this.setState(state => {
 				if (!state.selected) {
 					this.props.write(this.props.letter, this.delete);
 				}
@@ -52,4 +52,4 @@ class Tile extends React.Component {
 	}
 }
 
-export {Tile}
+export default Tile;

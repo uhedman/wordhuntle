@@ -1,14 +1,14 @@
 import React from 'react';
-import { Theme } from './Theme';
-import { Info } from './Info';
-import { Share } from './Share';
-import { History } from './History';
+import Theme from './Theme';
+import Info from './Info';
+import Share from './Share';
+import History from './History';
 
 class NavBar extends React.Component {
 	render () {
 		return (
 			<nav>
-				<p style={{marginRight: 'auto'}}>wordhuntle</p>
+				<p>wordhuntle</p>
 				<Theme 
 					changeTheme={this.props.changeTheme}
 					theme={this.props.theme}
@@ -30,4 +30,4 @@ class NavBar extends React.Component {
 	}
 }
 
-export { NavBar }
+export default NavBar;

@@ -1,7 +1,7 @@
 import '../App.css';
-import { NavBar } from './NavBar'
-import { Game } from './Game'
-import { Dropdown } from './Dropdown'
+import NavBar from './NavBar'
+import Game from './Game'
+import Dropdown from './Dropdown'
 import React from 'react';
 
 class App extends React.Component {
@@ -43,11 +43,15 @@ class App extends React.Component {
 					changeTheme={this.changeTheme}
 					setMenu={this.setMenu}  
 					theme={this.state.theme}
-					className={this.state.theme}/>
-				<Game theme={this.state.theme} setMenu={this.setMenu}/>
+					className={this.state.theme}
+				/>
+				<Game 
+					theme={this.state.theme} 
+					setMenu={this.setMenu}
+				/>
 				{this.state.menu && 
 				<>
-					<div className="overlay" onClick={this.closeMenu}></div>
+					<div className="overlay" onClick={this.closeMenu} />
 					<Dropdown 
 						closeMenu={this.closeMenu}
 						data={this.state.menuData}

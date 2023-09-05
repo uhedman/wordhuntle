@@ -1,5 +1,5 @@
-import { FaSun, FaMoon } from 'react-icons/fa';
 import React from 'react';
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 class Theme extends React.Component {
 	render () {
@@ -11,4 +11,4 @@ class Theme extends React.Component {
 	}
 }
 
-export {Theme};
+export default Theme;

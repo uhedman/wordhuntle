@@ -39,9 +39,11 @@ class Share extends React.Component {
 		)
 
 		return (
-			<button onClick={() => this.props.setMenu(menu)}><FaShareAlt /></button>
+			<button onClick={() => this.props.setMenu(menu)}>
+				<FaShareAlt />
+			</button>
 		)
 	}
 }
 
-export {Share};
+export default Share;

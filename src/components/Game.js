@@ -1,6 +1,6 @@
 import React from 'react';
-import { Tile } from "./Tile"
-import { Words } from "./Words"
+import Tile from "./Tile"
+import Words from "./Words"
 import { script } from "../palabras/script"
 
 class Game extends React.Component {
@@ -21,20 +21,20 @@ class Game extends React.Component {
 	}
 
 	componentDidMount() {
-		let grid = [['a', 'b', 'c', 'd'],
-								['h', 'e', 'j', 'e'],
-								['i', 'o', 'a', 'f'], 
-								['p', 'o', 'n', 'g']];
+		const grid = [['a', 'b', 'c', 'd'],
+									['h', 'e', 'j', 'e'],
+									['i', 'o', 'a', 'f'], 
+									['p', 'o', 'n', 'g']];
 
 		script(grid)
-		.then((words) => {
+		.then(words => {
 			let total = words.length;
 			this.setState({ 
 				secretWords: words, 
 				total
 			}); 
 		})
-		.catch((error) => {
+		.catch(error => {
 			console.error('Script error:', error);
 		});    
 	}
@@ -48,7 +48,7 @@ class Game extends React.Component {
 	}
 
 	write(letter, func) {
-		this.setState((prevState) => ({
+		this.setState(prevState => ({
 			word: prevState.word + letter,
 			list: [...prevState.list, func],
 		}));
@@ -56,7 +56,7 @@ class Game extends React.Component {
 
 	delete() {
 		this.setState(state => {
-			state.list.map((func) => func());
+			state.list.map(func => func());
 			return {
 				word: '',
 				drag: false,
@@ -86,14 +86,17 @@ class Game extends React.Component {
 					<div className='points'>
 						<h1>{this.state.points} pts</h1>
 						<p>{this.state.found.length} palabras</p>
-						<Words setMenu={this.props.setMenu}
-									 found={this.state.found}
-									 total={this.state.total}
-						></Words>
+						<Words 
+							setMenu={this.props.setMenu}
+							found={this.state.found}
+							total={this.state.total}
+						/>
 					</div>
 					<div>Here will be the points bar</div>
 				</div>
-				<div id="Word"><p>{this.state.word.toUpperCase()}</p></div>
+				<div id="Word">
+					<p>{this.state.word.toUpperCase()}</p>
+				</div>
 				<div id="Grid">
 					{tiles}
 				</div>
@@ -102,4 +105,4 @@ class Game extends React.Component {
 	}
 }
 
-export {Game}
+export default Game;
