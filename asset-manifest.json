@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/wordhuntle/static/css/main.b67e8dd5.css",
-    "main.js": "/wordhuntle/static/js/main.0a6597d6.js",
+    "main.js": "/wordhuntle/static/js/main.fa84d1ab.js",
     "static/js/787.28cb0dcd.chunk.js": "/wordhuntle/static/js/787.28cb0dcd.chunk.js",
     "static/media/data-sin-enie.txt": "/wordhuntle/static/media/data-sin-enie.4bcc406e8b2b7b4e41ab.txt",
     "static/media/how-to-play.gif": "/wordhuntle/static/media/how-to-play.65ca5fe90eeebb2f8c15.gif",
     "index.html": "/wordhuntle/index.html",
     "main.b67e8dd5.css.map": "/wordhuntle/static/css/main.b67e8dd5.css.map",
-    "main.0a6597d6.js.map": "/wordhuntle/static/js/main.0a6597d6.js.map",
+    "main.fa84d1ab.js.map": "/wordhuntle/static/js/main.fa84d1ab.js.map",
     "787.28cb0dcd.chunk.js.map": "/wordhuntle/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b67e8dd5.css",
-    "static/js/main.0a6597d6.js"
+    "static/js/main.fa84d1ab.js"
   ]
 }
