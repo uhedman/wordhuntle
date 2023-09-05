@@ -1,22 +1,14 @@
 import React from 'react';
-import { FaEye } from 'react-icons/fa';
 
-class Words extends React.Component {
-	render() {
-		let found = this.props.found.map(word => <p>{word}</p>);
-		let menu = (
-			<div>
-				<h1>Palabras encontradas ({this.props.found.length}/{this.props.total})</h1>
-				{found}
-			</div>
-		);
+function Words(props) {
+	let found = props.found.map(word => <p>{word}</p>);
 
-		return (
-			<button onClick={() => this.props.setMenu(menu)}>
-				<FaEye />
-			</button>
-		);
-	}
+	return (
+		<div>
+			<h1>Palabras encontradas ({props.found.length}/{props.total})</h1>
+			{found}
+		</div>
+	);
 }
 
 export default Words;

@@ -2,6 +2,7 @@ import React from 'react';
 import Tile from "./Tile"
 import Words from "./Words"
 import { script } from "../palabras/script"
+import { FaEye } from "react-icons/fa"
 
 class Game extends React.Component {
 	constructor(props) {
@@ -105,11 +106,9 @@ class Game extends React.Component {
 					<div className='points'>
 						<h1>{this.state.points} pts</h1>
 						<p>{this.state.found.length} {this.state.found.length === 1 ? 'palabra' : 'palabras'}</p>
-						<Words 
-							setMenu={this.props.setMenu}
-							found={this.state.found}
-							total={this.state.total}
-						/>
+						<button onClick={() => this.props.setMenu(<Words found={this.state.found} total={this.state.total}/>)}>
+							<FaEye />
+						</button>
 					</div>
 					<div>Here will be the points bar</div>
 				</div>
