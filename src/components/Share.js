@@ -10,7 +10,7 @@ class Share extends React.Component {
 	}
 
 	copy() {
-		const shareDiv = document.querySelector('.share'); // Selecciona el div con la clase 'share'
+		const shareDiv = document.querySelector('.share');
 		const textoACopiar = shareDiv.textContent;
 
 		const elementoTemporal = document.createElement('textarea');
@@ -30,7 +30,7 @@ class Share extends React.Component {
 		const fechaActual = new Date();
 
 		const dia = fechaActual.getDate();
-		const mes = fechaActual.toLocaleString('default', { month: 'long' }); // Obtiene el mes en formato largo (por ejemplo, "enero")
+		const mes = fechaActual.toLocaleString('default', { month: 'long' });
 		const anio = fechaActual.getFullYear();
 
 		return (
