@@ -2,11 +2,6 @@ import React from 'react';
 import { FaShareAlt } from 'react-icons/fa';
 
 class Share extends React.Component {
-	constructor(props) {
-		super(props);
-		this.copy = this.copy.bind(this);
-	}
-
 	copy() {
 		const shareDiv = document.querySelector('.share'); // Selecciona el div con la clase 'share'
 		const textoACopiar = shareDiv.textContent;
