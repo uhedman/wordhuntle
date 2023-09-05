@@ -52,18 +52,37 @@ class Game extends React.Component {
 			word: prevState.word + letter,
 			list: [...prevState.list, func],
 		}));
-	}  
+	}
+
+	puntuation(length) {
+		if (length === 4) {
+			return 1;
+		}
+		else {
+			return (length - 4) * 2;
+		}
+	}
 
 	delete() {
 		this.setState(state => {
 			state.list.map(func => func());
+
+			let points, found;
+			if (state.secretWords.includes(state.word) && !state.found.includes(state.word)) {
+				found = [...state.found, state.word];
+				points = state.points + this.puntuation(state.word.length);
+			}
+			else {
+				found = state.found;
+				points = state.points;
+			}
+
 			return {
 				word: '',
 				drag: false,
 				list: [],
-				found: !state.secretWords.includes(state.word) || state.found.includes(state.word)
-				       ? state.found
-							 : [...state.found, state.word]
+				found,
+				points
 			};
 		});
 	}
@@ -85,7 +104,7 @@ class Game extends React.Component {
 				<div id="Points">
 					<div className='points'>
 						<h1>{this.state.points} pts</h1>
-						<p>{this.state.found.length} palabras</p>
+						<p>{this.state.found.length} {this.state.found.length === 1 ? 'palabra' : 'palabras'}</p>
 						<Words 
 							setMenu={this.props.setMenu}
 							found={this.state.found}
