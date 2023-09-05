@@ -42,7 +42,9 @@ class Tile extends React.Component {
 			<button 
 				onMouseDown={this.onMouseDown}
 				onMouseEnter={this.onMouseEnter}
-				className={"tile " + this.props.theme}
+				className={this.state.selected 
+					         ? "tile selected " + this.props.theme
+									 : "tile " + this.props.theme}
 			>
 				{this.props.letter.toUpperCase()}
 			</button>
