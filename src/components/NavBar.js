@@ -5,19 +5,23 @@ import History from './History';
 import { FaSun, FaMoon, FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
 
 function NavBar(props) {
+	function changeTheme() {
+		props.setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+	}
+
 	return (
 		<nav>
 			<p>wordhuntle</p>
-			<button onClick={props.changeTheme}>
+			<button onClick={changeTheme}>
 				{props.theme === 'dark' ? <FaSun /> : <FaMoon />}
 			</button>
-			<button onClick={() => props.setMenu(<Share />)}>
+			<button onClick={() => props.setMenuData(<Share />)}>
 				<FaShareAlt />
 			</button>
-			<button onClick={() => props.setMenu(<History />)}>
+			<button onClick={() => props.setMenuData(<History />)}>
 				<FaRegClock />
 			</button>
-			<button onClick={() => props.setMenu(<Info />)}>
+			<button onClick={() => props.setMenuData(<Info />)}>
 				<FaInfoCircle />
 			</button>
 		</nav>

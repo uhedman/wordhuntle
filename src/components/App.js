@@ -8,35 +8,22 @@ function App() {
 	const [theme, setTheme] = useState('dark');
 	const [menuData, setMenuData] = useState(undefined);
 
-	function changeTheme() {
-		setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
-	}
-
-	function setMenu(data) {
-		setMenuData(data);
-	}
-
-	function closeMenu() {
-		setMenuData(undefined);
-	}
-
 	return (
 		<div id='App' className={theme}>
 			<NavBar 
-				changeTheme={changeTheme}
-				setMenu={setMenu}  
+				setTheme={setTheme}
+				setMenuData={setMenuData}
 				theme={theme}
-				className={theme}
 			/>
 			<Game 
 				theme={theme} 
-				setMenu={setMenu}
+				setMenuData={setMenuData}
 			/>
 			{menuData !== undefined && 
 			<>
-				<div className="overlay" onClick={closeMenu} />
+				<div className="overlay" onClick={() => setMenuData(undefined)} />
 				<Dropdown 
-					closeMenu={closeMenu}
+					setMenuData={setMenuData}
 					data={menuData}
 					theme={theme}
 				/>

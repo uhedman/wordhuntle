@@ -3,9 +3,9 @@ import { FaTimes } from 'react-icons/fa';
 
 function Dropdown(props) {
 	return (
-		<div className={"dropdown " + props.theme}>
+		<div className={`dropdown ${props.theme}`}>
 			<div className='close-container'>
-				<button onClick={props.closeMenu}>
+				<button onClick={() => props.setMenuData(undefined)}>
 					<FaTimes/>
 				</button>
 			</div>

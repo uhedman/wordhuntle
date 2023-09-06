@@ -13,7 +13,7 @@ function Game(props) {
 		found: [],
 		secretWords: [],
 		total: 0
-	})
+	});
 
 	useEffect (() => {
 		const grid = [['a', 'b', 'c', 'd'],
@@ -120,7 +120,7 @@ function Game(props) {
 				<div className='points'>
 					<h1>{state.points} pts</h1>
 					<p>{state.found.length} {state.found.length === 1 ? 'palabra' : 'palabras'}</p>
-					<button onClick={() => props.setMenu(<Words found={state.found} total={state.total}/>)}>
+					<button onClick={() => props.setMenuData(<Words found={state.found} total={state.total}/>)}>
 						<FaEye />
 					</button>
 				</div>
