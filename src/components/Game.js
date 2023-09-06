@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Tile from "./Tile"
 import Words from "./Words"
-import { script } from "../palabras/script"
+import { getWords } from "../palabras/script"
 import { FaEye } from "react-icons/fa"
 
 function Game(props) {
@@ -21,19 +21,14 @@ function Game(props) {
 									['i', 'o', 'a', 'f'], 
 									['p', 'o', 'n', 'g']];
 
-		script(grid)
-		.then(words => {
-			let total = words.length;
-			setState(prevState => ({
-				...prevState,
-				secretWords: words, 
-				total
-			})); 
-		})
-		.catch(error => {
-			console.error('Script error:', error);
-		});    
-	});
+		const words = getWords(grid);
+
+		setState(prevState => ({
+			...prevState,
+			secretWords: words, 
+			total: words.length
+		}));  
+	}, []);
 
 	function start(letter, func) {
 		setState(prevState => ({

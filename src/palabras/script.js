@@ -1,4 +1,4 @@
-import raw from "./data-sin-enie.txt"
+import data from "./data.js"
 
 // Direcciones a las casillas adyacentes
 const ways = [[-1, -1], [-1, 0], [-1, 1],
@@ -50,7 +50,7 @@ function searchWord(words, w) {
 
 // Busca las palabras que pertenecen a data
 // y estan escondidas en la grilla
-function getWords(data, grid) {
+function getWords(grid) {
 	let words = [];
 
 	// Se itera para cada casilla de la grilla
@@ -117,14 +117,4 @@ function getWords(data, grid) {
 	return words;
 }
 
-// Lee el contenido del diccionario
-function script(grid) {
-	return fetch(raw)
-	.then(r => r.text())
-	.then(text => {
-		let lineas = text.split('\n');
-		return getWords(lineas, grid);
-	});
-}
-
-export {script}
+export {getWords}
