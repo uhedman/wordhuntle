@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function Share(props) {
-	const [text, setText] = useState("Copiar");
+	const [copied, setCopied] = useState(false);
 
 	function copy() {
 		const shareDiv = document.querySelector('.share');
@@ -15,7 +15,7 @@ function Share(props) {
 		document.execCommand('copy');
 		document.body.removeChild(elementoTemporal);
 
-		setText("Copiado!");
+		setCopied(true);
 	}
 
 	const fechaActual = new Date();
@@ -28,10 +28,10 @@ function Share(props) {
 		<div>
 			<h1>Comparte tus resultados</h1>
 			<div className='share'>
-				<p>wordhuntle - {`${dia} de ${mes} de ${anio}`} </p>
+				<p>wordhuntle - {dia} de {mes} de {anio}</p>
 				<p>Nivel {props.level}/8 — {props.points} puntos — {props.found} palabras</p>
 			</div>
-			<button className='copy' onClick={copy}>{text}</button>
+			<button className='copy' onClick={copy}>{copied ? "Copiado!" : "Copiar"}</button>
 		</div>
 	)
 }
