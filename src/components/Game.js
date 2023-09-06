@@ -56,24 +56,24 @@ function Game(props) {
 		}
 	}
 
-	function insert(sortedArray, newValue) {
+	function insert(arr, newString) {
 		let low = 0;
-		let high = sortedArray.length - 1;
-		const newArray = [...sortedArray];
+		let high = arr.length - 1;
+		const newArray = [...arr];
 	
 		while (low <= high) {
 			const mid = Math.floor((low + high) / 2);
 	
-			if (newValue === sortedArray[mid]) {
+			if (newString === arr[mid]) {
 				return newArray;
-			} else if (newValue < sortedArray[mid]) {
+			} else if (newString < arr[mid]) {
 				high = mid - 1;
 			} else {
 				low = mid + 1;
 			}
 		}
 	
-		newArray.splice(low, 0, newValue);
+		newArray.splice(low, 0, newString);
 		return newArray;
 	}
 
