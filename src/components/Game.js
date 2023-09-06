@@ -56,13 +56,34 @@ function Game(props) {
 		}
 	}
 
+	function insert(sortedArray, newValue) {
+		let low = 0;
+		let high = sortedArray.length - 1;
+		const newArray = [...sortedArray];
+	
+		while (low <= high) {
+			const mid = Math.floor((low + high) / 2);
+	
+			if (newValue === sortedArray[mid]) {
+				return newArray;
+			} else if (newValue < sortedArray[mid]) {
+				high = mid - 1;
+			} else {
+				low = mid + 1;
+			}
+		}
+	
+		newArray.splice(low, 0, newValue);
+		return newArray;
+	}
+
 	function deselect() {
 		setState(prevState => {
 			prevState.list.map(func => func());
 
 			let points, found;
 			if (prevState.secretWords.includes(prevState.word) && !prevState.found.includes(state.word)) {
-				found = [...prevState.found, prevState.word];
+				found = insert(prevState.found, prevState.word);
 				points = prevState.points + puntuation(prevState.word.length);
 			}
 			else {
