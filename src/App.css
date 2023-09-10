@@ -109,7 +109,8 @@ html {
   position: fixed;
   top: 53%;
   left: 50%;
-  width: 31%;
+  width: 100%;
+  max-width: 60vh;
   height: 95%;
   transform: translate(-50%, -50%);
   padding: 1rem;
