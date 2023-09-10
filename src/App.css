@@ -171,6 +171,7 @@ nav {
 .share {
   margin-top: 20px;
   background-color: #0a0a23;
+  color: #f5f6f7;
   padding: 10px;
   border-radius: 5px;
   font-size: large;
@@ -179,6 +180,7 @@ nav {
 .copy {
   margin-top: 10px;
   background-color: #0a0a23;
+  color: #f5f6f7;
   padding: 5px 15px;
   font-size: x-large;
   border-radius: 5px;
