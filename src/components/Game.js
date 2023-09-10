@@ -8,11 +8,11 @@ function Game(props) {
 	const [state, setState] = useState({
 		word: '',
 		drag: false,
-		list: [],
 		points: 0,
 		found: [],
 		secretWords: [],
-		total: 0
+		total: 0,
+		tiles: Array.from({ length: 16 }, () => false)
 	});
 
 	useEffect (() => {
@@ -30,21 +30,29 @@ function Game(props) {
 		}));  
 	}, []);
 
-	function start(letter, func) {
+	function start(letter, id) {
 		setState(prevState => ({
 			...prevState,
 			word: letter,
 			drag: true,
-			list: [func]
+			tiles: prevState.tiles.map((item, index) => index === id ? true : item)
 		}));
 	}
 
-	function write(letter, func) {
-		setState(prevState => ({
-			...prevState,
-			word: prevState.word + letter,
-			list: [...prevState.list, func]
-		}));
+	function write(letter, id) {
+		console.log("enter")
+		setState(prevState => {
+			if (prevState.drag && !state.tiles[id]) {
+				return {
+					...prevState,
+					word: prevState.word + letter,
+					tiles: prevState.tiles.map((item, index) => index === id ? true : item)
+				};
+			}
+			else {
+				return prevState;		
+			}
+		});
 	}
 
 	function puntuation(length) {
@@ -79,8 +87,6 @@ function Game(props) {
 
 	function deselect() {
 		setState(prevState => {
-			prevState.list.map(func => func());
-
 			let points, found;
 			if (prevState.secretWords.includes(prevState.word) && !prevState.found.includes(state.word)) {
 				found = insert(prevState.found, prevState.word);
@@ -95,9 +101,9 @@ function Game(props) {
 				...prevState,
 				word: '',
 				drag: false,
-				list: [],
 				found,
-				points
+				points,
+				tiles: tiles.map(item => false)
 			};
 		});
 	}
@@ -106,6 +112,8 @@ function Game(props) {
 	let tiles = grid.map((letter, index) => 
 		<Tile
 			key={index}
+			id={index}
+			selected={state.tiles[index]}
 			start={start} 
 			write={write} 
 			drag={state.drag}
@@ -115,7 +123,7 @@ function Game(props) {
 	);
 
 	return (
-		<div id="Game" onMouseUp={deselect}>
+		<div id="Game" onMouseUp={deselect} onTouchEnd={deselect}>
 			<div id="Points">
 				<div className='points'>
 					<h1>{state.points} pts</h1>

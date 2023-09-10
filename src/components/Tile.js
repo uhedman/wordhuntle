@@ -1,39 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function Tile(props) {
-	const [selected, setSelected] = useState(false);
-
-	function onMouseDown() {
-		setSelected(prevSelected => {
-			if (!prevSelected) {
-				props.start(props.letter, deselect);
-			}
-			return true;
-		});
-	}
-
-	function onMouseEnter() {
-		if (props.drag) {
-			setSelected(prevSelected => {
-				if (!prevSelected) {
-					props.write(props.letter, deselect);
-				}
-				return true;
-			});
-		}
-	}
-
-	function deselect() {
-		setSelected(false);
+	function handlePointerDown (e) {
+		e.target.releasePointerCapture(e.pointerId); // Important!
+		props.start(props.letter, props.id);
 	}
 
 	return (
 		<button 
-			onMouseDown={onMouseDown}
-			onMouseEnter={onMouseEnter}
-			className={selected 
-									? "tile selected " + props.theme
-									: "tile " + props.theme}
+			onPointerDown={handlePointerDown}
+			onPointerEnter={() => props.write(props.letter, props.id)}
+			className={`tile ${props.theme} ${ props.selected ? " selected" : ""}`}
 		>
 			{props.letter.toUpperCase()}
 		</button>
