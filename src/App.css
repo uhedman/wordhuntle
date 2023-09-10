@@ -94,6 +94,11 @@ nav {
   overflow: auto;
 }
 
+.History h1,
+.History p {
+  margin-top: 1rem;
+}
+
 .Info {
   display: flex;
   flex-direction: column;
