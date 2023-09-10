@@ -20,11 +20,10 @@ function Game(props) {
 	}));
 
 	useEffect (() => {
-		const grid = [['a', 'b', 'c', 'd'],
-									['h', 'e', 'j', 'e'],
-									['i', 'o', 'a', 'f'], 
-									['p', 'o', 'n', 'g']];
-
+		const grid = [['f', 'g', 'h', 'e'],
+									['k', 'l', 'i', 'j'],
+									['p', 'o', 'n', 'm'], 
+									['d', 'c', 'b', 'a']];
 		const words = getWords(grid);
 
 		setState(prevState => ({
