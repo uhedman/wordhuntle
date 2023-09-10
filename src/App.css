@@ -10,46 +10,40 @@ html {
   touch-action: none;
 }
 
-/* Mobile Devices (Portrait) */
-@media (max-width: 767px) {
-  /* Your CSS styles for mobile devices in portrait mode */
+/* Mobile Devices */
+@media (max-width: 480px) {
   body {
-    font-size: 16px; /* Recommended font size for body text on mobile */
+    font-size: 16px;
   }
 }
 
-/* Mobile Devices (Landscape) */
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* Your CSS styles for mobile devices in landscape mode and smaller tablets */
+/* Ipads, tablets */
+@media (min-width: 481px) and (max-width: 768px) {
   body {
-    font-size: 18px; /* Adjust font size for landscape mode if needed */
+    font-size: 18px;
   }
 }
 
-/* Tablets */
-@media (min-width: 1024px) and (max-width: 1199px) {
-  /* Your CSS styles for larger tablets */
+/* Small screens, laptops */
+@media (min-width: 769) and (max-width: 1024px) {
   body {
-    font-size: 20px; /* Recommended font size for tablets */
+    font-size: 20px; 
   }
 }
 
-/* Desktops */
+/* Desktops, large screens */
+@media (min-width: 1024) and (max-width: 1200px) {
+  body {
+    font-size: 22px; 
+  }
+}
+
+/* Extra large screens, TV */
 @media (min-width: 1200px) {
-  /* Your CSS styles for standard desktop and laptop screens */
   body {
-    font-size: 18px; /* Recommended font size for desktop */
+    font-size: 24px; 
   }
 }
-
-/* Large Desktops */
-@media (min-width: 1600px) {
-  /* Your CSS styles for large desktop screens with high resolutions */
-  body {
-    font-size: 20px; /* Recommended font size for large desktops */
-  }
-}
-
 
 #App {
   height: 100vh;
@@ -62,12 +56,8 @@ html {
 #Game {
   width: 100%;
   max-width: 60vh;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 0.3fr 0.3fr 2.4fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 #Points {
@@ -86,14 +76,13 @@ html {
 
 #Word > p {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 #Grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template: auto auto / repeat(4, 1fr);
   grid-gap: 0.5rem;
-  aspect-ratio: 1;
 }
 
 .dark {
@@ -123,42 +112,47 @@ html {
   width: 31%;
   height: 95%;
   transform: translate(-50%, -50%);
-  padding: 20px;
+  padding: 1rem;
   border-radius: 0.5rem 0.5rem 0 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
   z-index: 1000;
   overflow: auto;
 }
 
-.History h1,
-.History p {
+.dropdown h1 {
+  margin-top: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.dropdown i,
+.dropdown p {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+}
+
+.dropdown img {
   margin-top: 1rem;
 }
 
-.Info {
-  display: flex;
-  flex-direction: column;
-}
-
-.Info h1,
-.Info p,
-.Info i,
-.Info img {
-  margin-top: 1rem;
+.found {
+  display: grid;
+  grid-template: auto auto / repeat(2, 1fr);
 }
 
 .help {
   margin-top: 1.5rem;
   padding-left: 2rem;
+  font-size: 1rem;
 }
 
 .puntuation {
   margin-top: 1rem;
   list-style: none;
+  font-size: 1rem;
 }
 
 .Info img {
-  border-radius: 10px;
+  border-radius: 0.5rem;
 }
 
 .close-container {
@@ -193,6 +187,7 @@ html {
   display: flex;
   align-items: baseline;
   justify-content: flex-end;
+  margin-top: 1rem;
 }
 
 .points > button {
@@ -201,11 +196,11 @@ html {
 
 .points > h1 {
   margin-right: auto;
-  font-size: 3rem;
+  font-size: 2.25rem;
 }
 
 .points > p {
-  font-size: 2rem;
+  font-size: 1.25rem;
   font-weight: 400;
 }
 
@@ -215,7 +210,10 @@ html {
   color: #f5f6f7;
   padding: 0.5rem;
   border-radius: 0.25rem;
-  font-size: large;
+}
+
+.share p {
+  margin: 0;
 }
 
 .copy {
@@ -223,7 +221,6 @@ html {
   background-color: #0a0a23;
   color: #f5f6f7;
   padding: 0.25rem 0.75rem;
-  font-size: x-large;
   border-radius: 0.25rem;
 }
 
@@ -232,9 +229,13 @@ nav > button {
 }
 
 nav > p {
-  font-size: xx-large;
+  font-size: 1.25rem;
   font-weight: 800;
   margin-right: auto;
+}
+
+button > svg {
+  font-size: 1rem;
 }
 
 nav {
@@ -251,8 +252,4 @@ button {
   background: none;
   cursor: pointer;
   color: inherit;
-}
-
-svg {
-  font-size: x-large;
 }

@@ -6,7 +6,7 @@ function Words(props) {
 	return (
 		<div>
 			<h1>Palabras encontradas ({props.found.length}/{props.total})</h1>
-			{found}
+			{found && <div className='found'>{found}</div>}
 		</div>
 	);
 }
