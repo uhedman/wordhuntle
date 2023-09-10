@@ -40,8 +40,9 @@ function Game(props) {
 	}
 
 	function write(letter, id) {
+		console.log("enter")
 		setState(prevState => {
-			if (prevState.drag) {
+			if (prevState.drag && !state.tiles[id]) {
 				return {
 					...prevState,
 					word: prevState.word + letter,
@@ -122,7 +123,7 @@ function Game(props) {
 	);
 
 	return (
-		<div id="Game" onMouseUp={deselect}>
+		<div id="Game" onMouseUp={deselect} onTouchEnd={deselect}>
 			<div id="Points">
 				<div className='points'>
 					<h1>{state.points} pts</h1>
