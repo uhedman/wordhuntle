@@ -48,11 +48,25 @@ function Game(props) {
 			if (!prevState.drag) {
 				return prevState;
 			}
+			
 			let x = Math.floor(id / 4);
 			let y = id % 4;
 			const { tiles, order, word } = prevState;
-			let [a, b] = order[order.length - 1];
+			let l = order.length;
+			let [a, b] = order[l - 1];
 			
+			if (l >= 2) {
+				let [c, d] = order[l - 2];
+				if (x === c && y === d) {
+					return {
+						...prevState,
+						word: word.slice(0, -1),
+						tiles: tiles.map((item, index) => index === a * 4 + b ? false : item),
+						order: order.slice(0, -1)
+					}
+				}
+			}
+
 			if (!state.tiles[id] &&
 				Math.abs(x - a) <= 1 &&
 				Math.abs(y - b) <= 1) {
