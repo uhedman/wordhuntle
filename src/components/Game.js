@@ -40,7 +40,6 @@ function Game(props) {
 	}
 
 	function write(letter, id) {
-		console.log("enter")
 		setState(prevState => {
 			if (prevState.drag && !state.tiles[id]) {
 				return {
