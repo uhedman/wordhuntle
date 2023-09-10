@@ -12,7 +12,8 @@ function Game(props) {
 		found: [],
 		secretWords: [],
 		total: 0,
-		tiles: Array.from({ length: 16 }, () => false)
+		tiles: Array.from({ length: 16 }, () => false),
+		order: []
 	});
 
 	useEffect (() => {
@@ -31,21 +32,35 @@ function Game(props) {
 	}, []);
 
 	function start(letter, id) {
+		let x = Math.floor(id / 4);
+		let y = id % 4;
 		setState(prevState => ({
 			...prevState,
 			word: letter,
 			drag: true,
-			tiles: prevState.tiles.map((item, index) => index === id ? true : item)
+			tiles: prevState.tiles.map((item, index) => index === id ? true : item),
+			order: [[x, y]]
 		}));
 	}
 
 	function write(letter, id) {
 		setState(prevState => {
-			if (prevState.drag && !state.tiles[id]) {
+			if (!prevState.drag) {
+				return prevState;
+			}
+			let x = Math.floor(id / 4);
+			let y = id % 4;
+			const { tiles, order, word } = prevState;
+			let [a, b] = order[order.length - 1];
+			
+			if (!state.tiles[id] &&
+				Math.abs(x - a) <= 1 &&
+				Math.abs(y - b) <= 1) {
 				return {
 					...prevState,
-					word: prevState.word + letter,
-					tiles: prevState.tiles.map((item, index) => index === id ? true : item)
+					word: word + letter,
+					tiles: tiles.map((item, index) => index === id ? true : item),
+					order: [...order, [x, y]]
 				};
 			}
 			else {
@@ -102,7 +117,8 @@ function Game(props) {
 				drag: false,
 				found,
 				points,
-				tiles: tiles.map(item => false)
+				tiles: tiles.map(() => false),
+				order: []
 			};
 		});
 	}

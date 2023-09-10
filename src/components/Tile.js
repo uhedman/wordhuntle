@@ -10,7 +10,7 @@ function Tile(props) {
 		<button 
 			onPointerDown={handlePointerDown}
 			onPointerEnter={() => props.write(props.letter, props.id)}
-			className={`tile ${props.theme} ${ props.selected ? " selected" : ""}`}
+			className={`tile ${props.theme}${ props.selected ? " selected" : ""}`}
 		>
 			{props.letter.toUpperCase()}
 		</button>
