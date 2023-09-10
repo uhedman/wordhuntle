@@ -8,8 +8,8 @@ function Game(props) {
 	const [state, setState] = useState({
 		word: '',
 		drag: false,
-		points: 0,
-		found: [],
+		points: JSON.parse(localStorage.getItem("points")) || 0,
+		found: JSON.parse(localStorage.getItem("found")) || [],
 		secretWords: [],
 		total: 0,
 		tiles: Array.from({ length: 16 }, () => false),
@@ -30,6 +30,11 @@ function Game(props) {
 			total: words.length
 		}));  
 	}, []);
+
+	useEffect (() => {
+		localStorage.setItem("found", JSON.stringify(state.found));
+		localStorage.setItem("points", JSON.stringify(state.points));
+	}, [state.found, state.points]);
 
 	function start(letter, id) {
 		let x = Math.floor(id / 4);
