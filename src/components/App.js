@@ -2,11 +2,20 @@ import '../App.css';
 import NavBar from './NavBar'
 import Game from './Game'
 import Modal from './Modal'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {
 	const [theme, setTheme] = useState('dark');
 	const [menuData, setMenuData] = useState(undefined);
+	const [storage, setStorage] = useState(() => ({
+		points: JSON.parse(localStorage.getItem("points")) || 0,
+		found: JSON.parse(localStorage.getItem("found")) || [],
+	}));
+
+	useEffect (() => {
+		localStorage.setItem("found", JSON.stringify(storage.found));
+		localStorage.setItem("points", JSON.stringify(storage.points));
+	}, [storage.found, storage.points]);
 
 	return (
 		<div id='App' className={theme}>
@@ -14,10 +23,13 @@ function App() {
 				setTheme={setTheme}
 				setMenuData={setMenuData}
 				theme={theme}
+				storage={storage}
 			/>
 			<Game 
 				theme={theme} 
 				setMenuData={setMenuData}
+				storage={storage}
+				setStorage={setStorage}
 			/>
 			{menuData !== undefined && 
 			<>

@@ -29,7 +29,7 @@ function Share(props) {
 			<h1>Comparte tus resultados</h1>
 			<div className='share'>
 				<p>wordhuntle - {dia} de {mes} de {anio}</p>
-				<p>Nivel {props.level}/8 — {props.points} puntos — {props.found} palabras</p>
+				<p>Nivel {props.level}/8 — {props.storage.points} puntos — {props.storage.found.length} palabras</p>
 			</div>
 			<button className='copy' onClick={copy}>{copied ? "Copiado!" : "Copiar"}</button>
 		</div>

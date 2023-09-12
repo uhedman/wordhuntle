@@ -14,11 +14,6 @@ function Game(props) {
 		order: []
 	});
 
-	const [storage, setStorage] = useState(() => ({
-		points: JSON.parse(localStorage.getItem("points")) || 0,
-		found: JSON.parse(localStorage.getItem("found")) || [],
-	}));
-
 	useEffect (() => {
 		const grid = [['f', 'g', 'h', 'e'],
 									['k', 'l', 'i', 'j'],
@@ -32,11 +27,6 @@ function Game(props) {
 			total: words.length
 		}));  
 	}, []);
-
-	useEffect (() => {
-		localStorage.setItem("found", JSON.stringify(storage.found));
-		localStorage.setItem("points", JSON.stringify(storage.points));
-	}, [storage.found, storage.points]);
 
 	function start(letter, id) {
 		let x = Math.floor(id / 4);
@@ -132,7 +122,7 @@ function Game(props) {
 				order: []
 			};
 		});
-		setStorage(prevStorage => {
+		props.setStorage(prevStorage => {
 			if (state.secretWords.includes(word) && !prevStorage.found.includes(word)) {
 				return {
 					found: insert(prevStorage.found, word),
@@ -163,9 +153,9 @@ function Game(props) {
 		<div id="Game" onMouseUp={deselect} onTouchEnd={deselect}>
 			<div id="Points">
 				<div className='points'>
-					<h1>{storage.points} pts</h1>
-					<p>{storage.found.length} {storage.found.length === 1 ? 'palabra' : 'palabras'}</p>
-					<button onClick={() => props.setMenuData(<Words found={storage.found} total={state.total}/>)}>
+					<h1>{props.storage.points} pts</h1>
+					<p>{props.storage.found.length} {props.storage.found.length === 1 ? 'palabra' : 'palabras'}</p>
+					<button onClick={() => props.setMenuData(<Words found={props.storage.found} total={state.total}/>)}>
 						<FaEye />
 					</button>
 				</div>

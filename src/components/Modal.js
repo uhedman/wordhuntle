@@ -1,19 +1,19 @@
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 
-function Dropdown(props) {
+function Modal(props) {
 	return (
-		<div className={`dropdown ${props.theme}`}>
+		<div className={`modal ${props.theme}`}>
 			<div className='close-container'>
 				<button onClick={() => props.setMenuData(undefined)}>
 					<FaTimes/>
 				</button>
 			</div>
-			<div className='dropdown-data'>
+			<div className='modal-data'>
 				{props.data}
 			</div>
 		</div>
 	)
 }
 
-export default Dropdown;
+export default Modal;

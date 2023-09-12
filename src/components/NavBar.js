@@ -15,7 +15,7 @@ function NavBar(props) {
 			<button onClick={changeTheme}>
 				{props.theme === 'dark' ? <FaSun /> : <FaMoon />}
 			</button>
-			<button onClick={() => props.setMenuData(<Share />)}>
+			<button onClick={() => props.setMenuData(<Share storage={props.storage}/>)}>
 				<FaShareAlt />
 			</button>
 			<button onClick={() => props.setMenuData(<History />)}>
