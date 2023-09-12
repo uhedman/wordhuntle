@@ -1,7 +1,7 @@
 import '../App.css';
 import NavBar from './NavBar'
 import Game from './Game'
-import Dropdown from './Dropdown'
+import Modal from './Modal'
 import React, { useState } from 'react';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
 			{menuData !== undefined && 
 			<>
 				<div className="overlay" onClick={() => setMenuData(undefined)} />
-				<Dropdown 
+				<Modal 
 					setMenuData={setMenuData}
 					data={menuData}
 					theme={theme}

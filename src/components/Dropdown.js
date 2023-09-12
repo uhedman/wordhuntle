@@ -9,7 +9,9 @@ function Dropdown(props) {
 					<FaTimes/>
 				</button>
 			</div>
-			{props.data}
+			<div className='dropdown-data'>
+				{props.data}
+			</div>
 		</div>
 	)
 }
