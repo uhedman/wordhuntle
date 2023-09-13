@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Words(props) {
-	let found = props.found.map(word => <p>{word}</p>);
+	let found = props.found.map(word => <p key={word}>{word}</p>);
 
 	return (
 		<div>
