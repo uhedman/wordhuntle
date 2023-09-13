@@ -120,7 +120,7 @@ html {
   top: 100%;
   left: 50%;
   width: 100%;
-  max-width: 60vh;
+  max-width: min(60vh, 90vw);
   height: 90vh;
   transform: translateX(-50%);
   padding: 1rem;
