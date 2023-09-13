@@ -7,7 +7,6 @@ html {
   margin: 0;
   padding: 0;
   font-family: 'Source Serif 4', sans-serif;
-  touch-action: none;
 }
 
 /* Mobile Devices */
@@ -59,6 +58,7 @@ html {
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
+  touch-action: none;
 }
 
 #Points {
