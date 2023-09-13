@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getWords } from '../palabras/script'
 
 function History(props) {
+	let [secretWords, setSecretWords] = useState([]);
+
+	useEffect(() => {
+		let grid = [['a', 'b', 'c', 'd'],
+		 						['h', 'e', 'j', 'e'],
+								['i', 'o', 'a', 'f'],
+								['p', 'o', 'n', 'g']];
+		setSecretWords(getWords(grid));
+	}, []);
+
 	let grid = ['a', 'b', 'c', 'd', 'h', 'e', 'j', 'e', 'i', 'o', 'a', 'f', 'p', 'o', 'n', 'g'];
 	let tiles = grid.map((letter, index) => 
 		<button key={index} className={`tile small ${props.theme}`}>
@@ -10,14 +21,16 @@ function History(props) {
 
 	return (
 		<div className='History'>
-			<h1>Palabras de ayer</h1>
-			<p>Las palabras que encontraste están resaltadas</p>
+			<div>
+				<h1>Palabras de ayer</h1>
+				<p>Las palabras que encontraste están resaltadas</p>
+			</div>
 			<div className='history-grid'>
 				{tiles}
 			</div>
-			<p>lorem</p>
-			<p>ipsum</p>
-			<p>dolor</p>
+			<ul className='history-words'>
+				{secretWords.map(word => <p key={word}>{word}</p>)}
+			</ul>
 		</div>
 	)
 }
