@@ -85,7 +85,7 @@ function Game(props) {
 			return 1;
 		}
 		else {
-			return (length - 4) * 2;
+			return (length - 3) * 2;
 		}
 	}
 
