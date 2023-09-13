@@ -3,10 +3,10 @@ import React from 'react';
 function History(props) {
 	let grid = ['a', 'b', 'c', 'd', 'h', 'e', 'j', 'e', 'i', 'o', 'a', 'f', 'p', 'o', 'n', 'g'];
 	let tiles = grid.map((letter, index) => 
-	<button key={index} className={`tile small ${props.theme}`}>
-		{letter.toUpperCase()}
-	</button>
-);
+		<button key={index} className={`tile small ${props.theme}`}>
+			{letter.toUpperCase()}
+		</button>
+	);
 
 	return (
 		<div className='History'>
