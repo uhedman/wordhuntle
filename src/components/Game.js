@@ -111,9 +111,8 @@ function Game(props) {
 	}
 
 	function deselect() {
-		let word;
+		let word = state.word;
 		setState(prevState => {
-			word = prevState.word;
 			return {
 				...prevState,
 				word: '',
