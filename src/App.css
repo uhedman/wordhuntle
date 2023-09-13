@@ -58,6 +58,7 @@ html {
   max-width: 60vh;
   display: flex;
   flex-direction: column;
+  padding: 0 1rem;
 }
 
 #Points {
