@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Tile from "./Tile"
 import Words from "./Words"
-import Grid from "./Grid"
 import { getWords } from "../palabras/script"
 import { getGrid } from "../palabras/grid"
 import { FaEye } from "react-icons/fa"
@@ -9,52 +8,35 @@ import { FaEye } from "react-icons/fa"
 function Game(props) {
 	const grid = getGrid(10);
 
-	const tiles = grid.flat().map((letter, index) => 
-		<Tile
-		key={index}
-		id={index}
-		selected={false}
-		start={start} 
-		write={write} 
-		drag={false}
-		theme={props.theme} 
-		letter={letter}
-		/>
-	);
-
 	const [state, setState] = useState({
 		word: '',
 		drag: false,
 		secretWords: [],
 		total: 0,
 		tiles: Array.from({ length: 16 }, () => false),
-		tilesComponents: tiles,
-		order: [],
-		grid
+		order: []
 	});
+
+	const tiles = grid.flat().map((letter, index) => 
+		<Tile
+		key={index}
+		id={index}
+		selected={state.tiles[index]}
+		start={start} 
+		write={write} 
+		drag={state.drag}
+		theme={props.theme} 
+		letter={letter}
+		/>
+	);
 
 	useEffect (() => {
 		const words = getWords(grid);
-
-		const tiles = grid.flat().map((letter, index) => 
-			<Tile
-			key={index}
-			id={index}
-			selected={state.tiles[index]}
-			start={start} 
-			write={write} 
-			drag={state.drag}
-			theme={props.theme} 
-			letter={letter}
-			/>
-		);
 		
 		setState(prevState => ({
 			...prevState,
 			secretWords: words, 
 			total: words.length,
-			grid: [],
-			tilesComponents: tiles
 		}));
 	}, []);
 
@@ -179,7 +161,9 @@ function Game(props) {
 			<div id="Word">
 				<p>{state.word.toUpperCase()}</p>
 			</div>
-			<Grid tiles={state.tilesComponents}/>
+			<div id="Grid">
+				{tiles}
+			</div>
 		</div>
 	)
 }

@@ -15,6 +15,8 @@ function hash(number) {
 function getGrid(day) {
   let secretWord = data[hash(day) % data.length];
   let grid = [['','','',''],['','','',''],['','','',''],['','','','']];
+
+  
   
   return grid;
 }
