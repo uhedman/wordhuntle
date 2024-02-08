@@ -1,31 +1,61 @@
 import React, { useEffect, useState } from 'react';
 import Tile from "./Tile"
 import Words from "./Words"
+import Grid from "./Grid"
 import { getWords } from "../palabras/script"
+import { getGrid } from "../palabras/grid"
 import { FaEye } from "react-icons/fa"
 
 function Game(props) {
+	const grid = getGrid(10);
+
+	const tiles = grid.flat().map((letter, index) => 
+		<Tile
+		key={index}
+		id={index}
+		selected={false}
+		start={start} 
+		write={write} 
+		drag={false}
+		theme={props.theme} 
+		letter={letter}
+		/>
+	);
+
 	const [state, setState] = useState({
 		word: '',
 		drag: false,
 		secretWords: [],
 		total: 0,
 		tiles: Array.from({ length: 16 }, () => false),
-		order: []
+		tilesComponents: tiles,
+		order: [],
+		grid
 	});
 
 	useEffect (() => {
-		const grid = [['f', 'g', 'h', 'e'],
-									['k', 'l', 'i', 'j'],
-									['p', 'o', 'n', 'm'], 
-									['d', 'c', 'b', 'a']];
 		const words = getWords(grid);
 
+		const tiles = grid.flat().map((letter, index) => 
+			<Tile
+			key={index}
+			id={index}
+			selected={state.tiles[index]}
+			start={start} 
+			write={write} 
+			drag={state.drag}
+			theme={props.theme} 
+			letter={letter}
+			/>
+		);
+		
 		setState(prevState => ({
 			...prevState,
 			secretWords: words, 
-			total: words.length
-		}));  
+			total: words.length,
+			grid: [],
+			tilesComponents: tiles
+		}));
 	}, []);
 
 	function start(letter, id) {
@@ -117,7 +147,7 @@ function Game(props) {
 				...prevState,
 				word: '',
 				drag: false,
-				tiles: tiles.map(() => false),
+				tiles: Array.from({ length: 16 }, () => false),
 				order: []
 			};
 		});
@@ -134,20 +164,6 @@ function Game(props) {
 		});
 	}
 
-	let grid = ['f', 'g', 'h', 'e', 'k', 'l', 'i', 'j', 'p', 'o', 'n', 'm', 'd', 'c', 'b', 'a'];
-	let tiles = grid.map((letter, index) => 
-		<Tile
-			key={index}
-			id={index}
-			selected={state.tiles[index]}
-			start={start} 
-			write={write} 
-			drag={state.drag}
-			theme={props.theme} 
-			letter={letter}
-		/>
-	);
-
 	return (
 		<div id="Game" onMouseUp={deselect} onTouchEnd={deselect}>
 			<div id="Points">
@@ -163,9 +179,7 @@ function Game(props) {
 			<div id="Word">
 				<p>{state.word.toUpperCase()}</p>
 			</div>
-			<div id="Grid">
-				{tiles}
-			</div>
+			<Grid tiles={state.tilesComponents}/>
 		</div>
 	)
 }
