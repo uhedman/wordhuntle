@@ -21,20 +21,33 @@ function getGrid(day) {
     return seed;
   }
 
+  function prngElement(array) {
+    let index = prng() % array.length;
+    let removedElement = array.splice(index, 1)[0]; 
+
+    return removedElement; 
+  }
+
   let secretWord = data[seed % data.length];
   let grid = [['', '', '', ''], ['', '', '', ''], ['', '', '', ''], ['', '', '', '']];
 
-  let backtrackWays = [];
+  let backtrackSquares = [];
   let [currentX, currentY] = [prng() % 4, prng() % 4];
+  grid[currentX][currentY] = secretWord[0];
   let usedPositions = [[currentX, currentY]];
   let backtrack = false;
 
   for (let i = 1; i < secretWord.length; ) {
     let possibleSquares = [];
-    for (let i = 0; i < 8; i++) {
-      let [squareX, squareY] = [ways[i][0] + currentX, ways[i][1] + currentY];
-      if (!(squareX < 0 || squareX > 3 || squareY < 0 || squareY > 3 || grid[squareX][squareY] !== ''))
-        possibleSquares.push([squareX, squareY]);
+    if (backtrack) {
+      possibleSquares = backtrackSquares.pop();
+    }
+    else {
+      for (let i = 0; i < 8; i++) {
+        let [squareX, squareY] = [ways[i][0] + currentX, ways[i][1] + currentY];
+        if (!(squareX < 0 || squareX > 3 || squareY < 0 || squareY > 3 || grid[squareX][squareY] !== ''))
+          possibleSquares.push([squareX, squareY]);
+      }
     }
 
     if (possibleSquares.length === 0) {
@@ -45,7 +58,8 @@ function getGrid(day) {
       continue;
     }
 
-    [currentX, currentY] = possibleSquares.shift();
+    [currentX, currentY] = prngElement(possibleSquares);
+    backtrackSquares.push(possibleSquares);
     usedPositions.push([currentX, currentY]);
     grid[currentX][currentY] = secretWord[i];
     backtrack = false;

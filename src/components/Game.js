@@ -6,7 +6,7 @@ import { getGrid } from "../palabras/grid"
 import { FaEye } from "react-icons/fa"
 
 function Game(props) {
-	const grid = getGrid(10);
+	const grid = getGrid(10); // executes every time the component changes, fix
 
 	const [state, setState] = useState({
 		word: '',
