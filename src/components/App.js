@@ -10,7 +10,23 @@ function App() {
 	const [storage, setStorage] = useState(() => ({
 		points: JSON.parse(localStorage.getItem("points")) || 0,
 		found: JSON.parse(localStorage.getItem("found")) || [],
+		dayCode: JSON.parse(localStorage.getItem("dayCode")) || 0
 	}));
+	const [dayCode] = useState(() => {
+		const date = new Date();
+		const dayOfYear = (date.getMonth() * 31) + date.getDate();
+
+		if (storage.dayCode !== dayOfYear) {
+			localStorage.clear();
+			localStorage.setItem("dayCode", JSON.stringify(dayOfYear));
+			setStorage(prevStorage => ({
+				...prevStorage,
+				dayCode: dayOfYear
+			}));
+		}
+	
+		return dayOfYear;
+	});
 
 	useEffect (() => {
 		localStorage.setItem("found", JSON.stringify(storage.found));
@@ -24,12 +40,14 @@ function App() {
 				setMenuData={setMenuData}
 				theme={theme}
 				storage={storage}
+				dayCode={dayCode}
 			/>
 			<Game 
 				theme={theme} 
 				setMenuData={setMenuData}
 				storage={storage}
 				setStorage={setStorage}
+				dayCode={dayCode}
 			/>
 			{menuData !== undefined && 
 			<>

@@ -6,18 +6,17 @@ import { getGrid } from "../palabras/grid"
 import { FaEye } from "react-icons/fa"
 
 function Game(props) {
-	const grid = getGrid(10); // executes every time the component changes, fix
-
 	const [state, setState] = useState({
 		word: '',
 		drag: false,
 		secretWords: [],
 		total: 0,
 		tiles: Array.from({ length: 16 }, () => false),
-		order: []
+		order: [],
+		grid: []
 	});
 
-	const tiles = grid.flat().map((letter, index) => 
+	const tiles = state.grid.flat().map((letter, index) => 
 		<Tile
 		key={index}
 		id={index}
@@ -30,15 +29,26 @@ function Game(props) {
 		/>
 	);
 
-	useEffect (() => {
-		const words = getWords(grid);
+	useEffect(() => {
+		const grid = getGrid(props.dayCode); 
 		
 		setState(prevState => ({
 			...prevState,
-			secretWords: words, 
-			total: words.length,
+			grid
 		}));
-	}, []);
+	}, [props.dayCode]);
+
+	useEffect (() => {
+		if (state.grid.length > 0) {
+			const words = getWords(state.grid);
+			
+			setState(prevState => ({
+				...prevState,
+				secretWords: words, 
+				total: words.length
+			}));
+		}
+	}, [state.grid]);
 
 	function start(letter, id) {
 		let x = Math.floor(id / 4);
