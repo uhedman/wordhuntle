@@ -20,7 +20,8 @@ function App() {
 			localStorage.clear();
 			localStorage.setItem("dayCode", JSON.stringify(dayOfYear));
 			setStorage(prevStorage => ({
-				...prevStorage,
+				points: 0,
+				found: [],
 				dayCode: dayOfYear
 			}));
 		}
@@ -40,7 +41,6 @@ function App() {
 				setMenuData={setMenuData}
 				theme={theme}
 				storage={storage}
-				dayCode={dayCode}
 			/>
 			<Game 
 				theme={theme} 

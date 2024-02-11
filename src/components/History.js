@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { getWords } from '../palabras/script'
+import { getGrid } from '../palabras/grid';
 
 function History(props) {
-	let [secretWords, setSecretWords] = useState([]);
+	const [secretWords, setSecretWords] = useState([]);
+	const [lastGrid, setLastGrid] = useState([]);
 
 	useEffect(() => {
-		let grid = [['a', 'b', 'c', 'd'],
-		 						['h', 'e', 'j', 'e'],
-								['i', 'o', 'a', 'f'],
-								['p', 'o', 'n', 'g']];
-		setSecretWords(getWords(grid));
-	}, []);
+		const grid = getGrid(props.dayCode); 
+		setLastGrid(grid);
+	}, [props.dayCode]);
 
-	let grid = ['a', 'b', 'c', 'd', 'h', 'e', 'j', 'e', 'i', 'o', 'a', 'f', 'p', 'o', 'n', 'g'];
-	let tiles = grid.map((letter, index) => 
+	useEffect (() => {
+		if (lastGrid.length > 0) {
+			const words = getWords(lastGrid);
+			
+			setSecretWords(words);
+		}
+	}, [lastGrid]);
+
+	const lastTiles = lastGrid.flat().map((letter, index) => 
 		<button key={index} className={`tile small ${props.theme}`}>
 			{letter.toUpperCase()}
 		</button>
@@ -26,7 +32,7 @@ function History(props) {
 				<p>Las palabras que encontraste están resaltadas</p>
 			</div>
 			<div className='history-grid'>
-				{tiles}
+				{lastTiles}
 			</div>
 			<ul className='history-words'>
 				{secretWords.map(word => <p key={word}>{word}</p>)}
