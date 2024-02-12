@@ -12,6 +12,7 @@ function NavBar(props) {
 	return (
 		<nav>
 			<p>wordhuntle</p>
+			<p><a href='https://wordhuntle.com'>juego original</a></p>
 			<button onClick={changeTheme}>
 				{props.theme === 'dark' ? <FaSun /> : <FaMoon />}
 			</button>
