@@ -13,7 +13,7 @@ function History(props) {
 
 	useEffect (() => {
 		if (lastGrid.length > 0) {
-			const words = getWords(lastGrid);
+			const words = getWords(lastGrid).sort();
 			
 			setSecretWords(words);
 		}

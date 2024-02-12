@@ -10,7 +10,8 @@ function App() {
 	const [storage, setStorage] = useState(() => ({
 		points: JSON.parse(localStorage.getItem("points")) || 0,
 		found: JSON.parse(localStorage.getItem("found")) || [],
-		dayCode: JSON.parse(localStorage.getItem("dayCode")) || 0
+		dayCode: JSON.parse(localStorage.getItem("dayCode")) || 0,
+		lastFound: JSON.parse(localStorage.getItem("lastFound")) || [],
 	}));
 	const [dayCode] = useState(() => {
 		const date = new Date();
@@ -22,7 +23,8 @@ function App() {
 			setStorage(prevStorage => ({
 				points: 0,
 				found: [],
-				dayCode: dayOfYear
+				dayCode: dayOfYear,
+				lastFound: prevStorage.found // it has to be yesterday's
 			}));
 		}
 	
