@@ -10,25 +10,36 @@ function App() {
 	const [storage, setStorage] = useState(() => ({
 		points: JSON.parse(localStorage.getItem("points")) || 0,
 		found: JSON.parse(localStorage.getItem("found")) || [],
-		dayCode: JSON.parse(localStorage.getItem("dayCode")) || 0,
-		lastFound: JSON.parse(localStorage.getItem("lastFound")) || [],
+		todayCode: JSON.parse(localStorage.getItem("todayCode")) || 0
 	}));
-	const [dayCode] = useState(() => {
-		const date = new Date();
-		const dayOfYear = (date.getMonth() * 31) + date.getDate();
+	const [todayCode] = useState(() => {
+		const todayCode = Math.floor(Date.now() / 86400000);
 
-		if (storage.dayCode !== dayOfYear) {
+		if (storage.todayCode !== todayCode) {
 			localStorage.clear();
-			localStorage.setItem("dayCode", JSON.stringify(dayOfYear));
-			setStorage(prevStorage => ({
-				points: 0,
-				found: [],
-				dayCode: dayOfYear,
-				lastFound: prevStorage.found // it has to be yesterday's
-			}));
+			localStorage.setItem("todayCode", JSON.stringify(todayCode));
+			if (storage.dayCode === todayCode - 1) {
+				setStorage(prevStorage => {
+					localStorage.setItem("lastFound", JSON.stringify(prevStorage.found));
+					return {
+						points: 0,
+						found: [],
+						dayCode: todayCode
+					}
+				});
+			} else {
+				setStorage(() => {
+					localStorage.setItem("lastFound", JSON.stringify([]));
+					return {
+						points: 0,
+						found: [],
+						dayCode: todayCode
+					}
+				});
+			}
 		}
 	
-		return dayOfYear;
+		return todayCode;
 	});
 
 	useEffect (() => {
@@ -43,13 +54,14 @@ function App() {
 				setMenuData={setMenuData}
 				theme={theme}
 				storage={storage}
+				todayCode={todayCode}
 			/>
 			<Game 
 				theme={theme} 
 				setMenuData={setMenuData}
 				storage={storage}
 				setStorage={setStorage}
-				dayCode={dayCode}
+				todayCode={todayCode}
 			/>
 			{menuData !== undefined && 
 			<>

@@ -18,7 +18,7 @@ function NavBar(props) {
 			<button onClick={() => props.setMenuData(<Share storage={props.storage}/>)}>
 				<FaShareAlt />
 			</button>
-			<button onClick={() => props.setMenuData(<History theme={props.theme}/>)}>
+			<button onClick={() => props.setMenuData(<History theme={props.theme} todayCode={props.todayCode}/>)}>
 				<FaRegClock />
 			</button>
 			<button onClick={() => props.setMenuData(<Info />)}>

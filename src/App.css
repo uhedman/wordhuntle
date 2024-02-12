@@ -254,7 +254,7 @@ html {
   display: grid;
   grid-template: auto auto / repeat(4, 1fr);
   grid-gap: 0.5rem;
-  width: 50%;
+  width: 70%;
 }
 
 .history-words {

@@ -30,13 +30,13 @@ function Game(props) {
 	);
 
 	useEffect(() => {
-		const grid = getGrid(props.dayCode); 
+		const grid = getGrid(props.todayCode); 
 		
 		setState(prevState => ({
 			...prevState,
 			grid
 		}));
-	}, [props.dayCode]);
+	}, [props.todayCode]);
 
 	useEffect (() => {
 		if (state.grid.length > 0) {
