@@ -18,7 +18,7 @@ function App() {
 		if (storage.todayCode !== todayCode) {
 			localStorage.clear();
 			localStorage.setItem("todayCode", JSON.stringify(todayCode));
-			if (storage.dayCode === todayCode - 1) {
+			if (storage.todayCode === todayCode - 1) {
 				setStorage(prevStorage => {
 					localStorage.setItem("lastFound", JSON.stringify(prevStorage.found));
 					return {
