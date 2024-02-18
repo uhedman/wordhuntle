@@ -10,7 +10,7 @@ function NavBar(props) {
 	}
 
 	return (
-		<nav>
+		<nav className={props.theme}>
 			<p>wordhuntle</p>
 			<p><a href='https://wordhuntle.com'>juego original</a></p>
 			<button onClick={changeTheme}>

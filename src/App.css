@@ -1,3 +1,10 @@
+:root {
+  --dark-1: #0c0c22;
+  --dark-2: #00001a;
+  --light-1: #aaa6ca;
+  --light-2: #fefefe;
+}
+
 html {
   box-sizing: border-box;
 }
@@ -87,13 +94,21 @@ html {
 }
 
 .dark {
-  background-color: #1b1b32;
-  color: #f5f6f7;
+  background-color: var(--dark-1);
+  color: var(--light-1);
+}
+
+.dark nav {
+  background-color: var(--dark-2);
+}
+
+.light nav {
+  background-color: var(--light-2);
 }
 
 .light {
-  background-color: #f5f6f7;
-  color: #0a0a23;
+  background-color: var(--light-1);
+  color: var(--dark-2);
 }
 
 .overlay {
@@ -192,7 +207,7 @@ html {
 }
 
 .tile.dark {
-  border: 0.25rem solid #0a0a23;
+  border: 0.25rem solid #606097;
 }
 
 .tile.light {
@@ -231,7 +246,7 @@ html {
 
 .share {
   margin-top: 1rem;
-  background-color: #0a0a23;
+  background-color: var(--dark-2);
   color: #f5f6f7;
   padding: 0.5rem;
   border-radius: 0.25rem;
@@ -243,8 +258,8 @@ html {
 
 .copy {
   margin-top: 1rem;
-  background-color: #0a0a23;
-  color: #f5f6f7;
+  background-color: var(--dark-2);
+  color: var(--light-1);
   padding: 0.25rem 0.75rem;
   border-radius: 0.25rem;
 }
@@ -289,8 +304,6 @@ nav {
   padding: 0.75rem;
   display: flex;
   align-items: center;
-  background-color: #0a0a23;
-  color: #f5f6f7;
 }
 
 button {
