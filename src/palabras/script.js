@@ -6,7 +6,7 @@ const ways = [[-1, -1], [-1, 0], [-1, 1],
 							[1 , -1], [1 , 0], [1 , 1]];
 
 // Buscar una tupla en una lista
-function searchTuple(list, t) {
+const searchTuple = (list, t) => {
 	for (let index = 0; index < list.length; index++) {
 		if (list[index][0] === t[0] && list[index][1] === t[1]) {
 			return index;
@@ -17,7 +17,7 @@ function searchTuple(list, t) {
 
 // Buscar una palabra que contenga un prefijo
 // usando busqueda binaria
-function searchPrefix(words, prefix) {
+const searchPrefix = (words, prefix) => {
 	let a = 0, b = words.length - 1, c;
 	while (a <= b) {
 		c = Math.floor((a + b) / 2);
@@ -33,7 +33,7 @@ function searchPrefix(words, prefix) {
 }
 
 // Buscar una palabra usando busqueda binaria
-function searchWord(words, w) {
+const searchWord = (words, w) => {
 	let a = 0, b = words.length - 1, c;
 	while (a <= b) {
 		c = Math.floor((a + b) / 2);
@@ -50,7 +50,7 @@ function searchWord(words, w) {
 
 // Busca las palabras que pertenecen a data
 // y estan escondidas en la grilla
-function getWords(grid) {
+const getWords = (grid) => {
 	let words = [];
 
 	// Se itera para cada casilla de la grilla

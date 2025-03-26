@@ -1,19 +1,30 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { start, write } from '../redux/slices/gameSlice';
+import { Button } from 'react-bootstrap';
 
-function Tile(props) {
-	function handlePointerDown (e) {
+const Tile = (props) => {
+	const { id, letter } = props;
+	const selected = useSelector(state => state.game.tiles[id]);
+	const theme = useSelector(state => state.storage.theme);
+	const dispatch = useDispatch();
+	
+	const handlePointerDown = (e) => {
 		e.target.releasePointerCapture(e.pointerId); // Important!
-		props.start(props.letter, props.id);
+		dispatch(start({ id, letter }));
 	}
 
 	return (
-		<button 
-			onPointerDown={handlePointerDown}
-			onPointerEnter={() => props.write(props.letter, props.id)}
-			className={`tile ${props.theme}${ props.selected ? " selected" : ""}`}
-		>
-			{props.letter.toUpperCase()}
-		</button>
+		<div className='ratio ratio-1x1'>
+			<Button 
+				variant={theme}
+				onPointerDown={handlePointerDown}
+				onPointerEnter={() => dispatch(write({ id, letter }))}
+				className={`fs-1 fw-bold border border-5 ${selected ? 'bg-primary' : ''}`}
+			>
+				{letter.toUpperCase()}
+			</Button>
+		</div>
 	);
 }
 

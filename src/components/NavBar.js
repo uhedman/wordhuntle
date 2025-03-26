@@ -1,32 +1,51 @@
 import React from 'react';
-import Info from './Info';
-import Share from './Share';
-import History from './History';
 import { FaSun, FaMoon, FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { openModal } from '../redux/slices/modalSlice';
+import { toggleTheme } from '../redux/slices/storageSlice';
+import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 
-function NavBar(props) {
-	function changeTheme() {
-		props.setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
-	}
+const NavBarComponent = () => {
+  const theme = useSelector(state => state.storage.theme);
+  const dispatch = useDispatch();
 
-	return (
-		<nav className={props.theme}>
-			<p>wordhuntle</p>
-			<p><a href='https://wordhuntle.com'>juego original</a></p>
-			<button onClick={changeTheme}>
-				{props.theme === 'dark' ? <FaSun /> : <FaMoon />}
-			</button>
-			<button onClick={() => props.setMenuData(<Share storage={props.storage}/>)}>
-				<FaShareAlt />
-			</button>
-			<button onClick={() => props.setMenuData(<History theme={props.theme} todayCode={props.todayCode}/>)}>
-				<FaRegClock />
-			</button>
-			<button onClick={() => props.setMenuData(<Info />)}>
-				<FaInfoCircle />
-			</button>
-		</nav>
-	)
-}
+  return (
+    <Navbar className='w-100 bg-body-tertiary transition'>
+      <Container fluid>
+        <Navbar.Brand className='fs-2 fw-bold' href='https://www.wordhuntle.com'>wordhuntle</Navbar.Brand>
+        <Nav className='fs-2'>
+          <Button 
+            variant='tertiary'
+            className='nav-link bg-transparent' 
+            onClick={() => dispatch(toggleTheme())}
+          >
+            {theme === 'dark' ? <FaSun /> : <FaMoon />}
+          </Button>
+          <Button
+            variant='tertiary'
+            className='nav-link bg-transparent'
+            onClick={() => dispatch(openModal('share'))}
+          >
+            <FaShareAlt />
+          </Button>
+          <Button
+            variant='tertiary'
+            className='nav-link bg-transparent'
+            onClick={() => dispatch(openModal('history'))}
+          >
+            <FaRegClock />
+          </Button>
+          <Button
+            variant='tertiary'
+            className='nav-link bg-transparent'
+            onClick={() => dispatch(openModal('info'))}
+          >
+            <FaInfoCircle />
+          </Button>
+        </Nav>
+      </Container>
+    </Navbar>
+  );
+};
 
-export default NavBar;
+export default NavBarComponent;

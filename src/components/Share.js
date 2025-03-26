@@ -1,39 +1,35 @@
 import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
-function Share(props) {
+const Share = () => {
 	const [copied, setCopied] = useState(false);
+	const { found, points, theme} = useSelector(state => state.storage);
+	const level = useSelector(state => state.level);
 
-	function copy() {
-		const shareDiv = document.querySelector('.share');
-		const textoACopiar = shareDiv.textContent;
+	const copy = async () => {
+		const shareDiv = document.querySelector('#share');
+		const text = shareDiv.textContent;
 
-		const elementoTemporal = document.createElement('textarea');
-		elementoTemporal.value = textoACopiar;
-		document.body.appendChild(elementoTemporal);
-		elementoTemporal.select();
-		elementoTemporal.setSelectionRange(0, 99999); // Para dispositivos móviles
-		document.execCommand('copy');
-		document.body.removeChild(elementoTemporal);
+		await navigator.clipboard.writeText(text);
 
 		setCopied(true);
 	}
 
-	const fechaActual = new Date();
-
-	const dia = fechaActual.getDate();
-	const mes = fechaActual.toLocaleString('default', { month: 'long' });
-	const anio = fechaActual.getFullYear();
+	const date = new Date();
+	const day = date.getDate();
+	const month = date.toLocaleString('default', { month: 'long' });
+	const year = date.getFullYear();
 
 	return (
-		<div>
-			<h1>Comparte tus resultados</h1>
-			<div className='share'>
-				<p>wordhuntle - {dia} de {mes} de {anio}</p>
-				<p>Nivel {props.level}/8 — {props.storage.points} puntos — {props.storage.found.length} palabras</p>
+		<div className='d-flex flex-column gap-1'>
+			<div id='share' className='dark rounded p-2'>
+				<p className='m-0'>wordhuntle - {day} de {month} de {year}</p>
+				<p className='m-0'>Nivel {level}/8 — {points} puntos — {found.length} palabras</p>
 			</div>
-			<button className='copy' onClick={copy}>{copied ? "Copiado!" : "Copiar"}</button>
+			<Button variant={theme} onClick={copy}>{copied ? "Copiado!" : "Copiar"}</Button>
 		</div>
-	)
+	);
 }
 
 export default Share;

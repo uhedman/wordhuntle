@@ -1,19 +1,36 @@
 import React from 'react';
-import { FaTimes } from 'react-icons/fa';
+import Share from './Share';
+import History from './History';
+import Info from './Info';
+import Words from './Words'
+import { Modal } from "react-bootstrap";
+import { useDispatch, useSelector } from 'react-redux';
+import { closeModal } from '../redux/slices/modalSlice';
 
-function Modal(props) {
+const ModalComponent = () => {
+	const storageFound = useSelector(state => state.storage.found);
+	const total = useSelector(state => state.game.total);
+	const {	isOpen, content } = useSelector(state => state.modal);
+	const dispatch = useDispatch();
+
+	const options = {
+		'': { title: '', component: ''},
+		'share': { title: 'Comparte tus resultados', component: <Share />},
+		'history': { title: 'Palabras de ayer', component: <History />},
+		'info': { title: 'Cómo jugar', component: <Info />},
+		'words': { title: `Palabras encontradas (${storageFound.length}/${total})`, component: <Words />}
+	}
+
 	return (
-		<div className={`modal ${props.theme}`}>
-			<div className='close-container'>
-				<button onClick={() => props.setMenuData(undefined)}>
-					<FaTimes/>
-				</button>
-			</div>
-			<div className='modal-data'>
-				{props.data}
-			</div>
-		</div>
-	)
+    <Modal show={isOpen} onHide={() => dispatch(closeModal())}>
+      <Modal.Header closeButton>
+        <Modal.Title>{options[content].title}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+				{options[content].component}
+			</Modal.Body>
+    </Modal>
+  );
 }
 
-export default Modal;
+export default ModalComponent;

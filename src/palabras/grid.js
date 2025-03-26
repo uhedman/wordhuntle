@@ -5,23 +5,23 @@ const ways = [[-1, -1], [-1, 0], [-1, 1],
 							[0 , -1],          [0 , 1],
 							[1 , -1], [1 , 0], [1 , 1]];
 
-function hash(number) {
+const hash = (number) => {
   number = ((number >> 16) ^ number) * 0x45d9f3b;
   number = ((number >> 16) ^ number) * 0x45d9f3b;
   number = (number >> 16) ^ number;
   return number;
 }
 
-function getGrid(day) {
+const getGrid = (day) => {
   let seed = hash(day);
   // Pseudo Random Number Generator
-  function prng() {
+  const prng= () => {
     // Simple PRNG implementation
     seed = (seed * 9301 + 49297) % 233280;
     return seed;
   }
 
-  function prngElement(array) {
+  const prngElement = (array) => {
     let index = prng() % array.length;
     let removedElement = array.splice(index, 1)[0]; 
 

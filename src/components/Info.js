@@ -1,13 +1,12 @@
 import React from 'react';
 import gif from '../how-to-play.gif';
 
-function Info() {
+const Info = () => {
 	return (
-		<div className='Info'>
-			<h1>Cómo jugar</h1>
+		<div>
 			<p>Usá el ratón o el dedo para conectar las letras en la grilla para formar palabras.</p>
 			<img src={gif} alt='Cómo jugar' width='300px' />
-			<ul className='help'>
+			<ul>
 				<li>Podés conectar cualquier par de letras adyacentes, incluso diagonalmente</li>
 				<li>No podés usar la misma casilla más de una vez por palabra</li>
 				<li>Tu línea PUEDE cruzarse a sí misma</li>
@@ -15,7 +14,7 @@ function Info() {
 			</ul>
 			<h1>Puntuación</h1>
 			<p>Cuando crees una palabra, recibirás puntos dependiendo de cuán larga sea:</p>
-			<ul className='puntuation'>
+			<ul>
 				<li>4 letras: 1 punto</li>
 				<li>5 letras: 4 puntos</li>
 				<li>6 letras: 6 puntos</li>
@@ -31,7 +30,7 @@ function Info() {
 			<h1>Más</h1>
 			<p>Wordhuntle se reinicia todos los días a las 8pm EST. Volvé cada día para jugar un tablero nuevo!</p>
 		</div>
-	)
+	);
 }
 
 export default Info;
