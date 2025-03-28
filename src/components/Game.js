@@ -14,14 +14,16 @@ const Game = () => {
 	);
 
 	useEffect(() => {
-		const handlePointerUp = () => {
+		const handleEnd = () => {
 			dispatch(deselectAndStoreWord());
 		};
 
-		document.addEventListener('pointerup', handlePointerUp);
+		document.addEventListener('pointerup', handleEnd);
+		document.addEventListener('touchend', handleEnd);
 
 		return () => {
-			document.removeEventListener('pointerup', handlePointerUp);
+			document.removeEventListener('pointerup', handleEnd);
+			document.removeEventListener('touchend', handleEnd);
 		};
 	}, [dispatch]);
 
