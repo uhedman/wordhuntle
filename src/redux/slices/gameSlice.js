@@ -13,7 +13,7 @@ const gameSlice = createSlice({
 		word: '',
 		drag: false,
 		secretWords,
-		total: 0,
+		total: secretWords.length,
 		tiles: Array.from({ length: 16 }, () => false),
 		order: [],
 		grid,
