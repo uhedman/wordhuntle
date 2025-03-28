@@ -10,7 +10,8 @@ import { closeModal } from '../redux/slices/modalSlice';
 const ModalComponent = () => {
 	const storageFound = useSelector(state => state.storage.found);
 	const total = useSelector(state => state.game.total);
-	const {	isOpen, content } = useSelector(state => state.modal);
+	const isOpen = useSelector(state => state.modal.isOpen);
+	const content = useSelector(state => state.modal.content);
 	const dispatch = useDispatch();
 
 	const options = {
