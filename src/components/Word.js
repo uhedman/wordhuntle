@@ -1,12 +1,41 @@
-import React from 'react';
-import { useSelector } from "react-redux";
+import React, { useState, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deselect } from '../redux/slices/gameSlice';
 
 const Word = () => {
   const word = useSelector(state => state.game.word);
+  const [showBubble, setShowBubble] = useState(false);
+  const dispatch = useDispatch();
+
+  const specialMessages = useMemo(() => ({
+    'too short': 'bg-warning text-dark',
+    'not found': 'bg-danger text-white',
+    'found': 'bg-success text-white',
+    'already found': 'bg-info text-white'
+  }), []);
+
+  useEffect(() => {
+    if (specialMessages[word]) {
+      setShowBubble(true);
+      const timer = setTimeout(() => {
+        setShowBubble(false);
+        dispatch(deselect(''));
+      }, 3000);
+      return () => clearTimeout(timer);
+    } else {
+      setShowBubble(false);
+    }
+  }, [dispatch, specialMessages, word]);
 
   return (
-    <div className='fs-1 fw-bold text-center'>
-      <p className='m-0'>{word.toUpperCase()}&nbsp;</p>
+    <div className='p-2 fs-1 fw-bold text-center'>
+      {showBubble ? (
+        <span className={`px-2 rounded-pill ${specialMessages[word]} shake`}>
+          {word.toUpperCase()}
+        </span>
+      ) : (
+        <p className='m-0'>{word.toUpperCase()}&nbsp;</p>
+      )}
     </div>
   );
 }

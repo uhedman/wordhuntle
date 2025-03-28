@@ -20,8 +20,8 @@ const gameSlice = createSlice({
     todayCode
 	},
   reducers: {
-    deselect: (state) => {
-      return { ...state, word: '', drag: false, tiles: Array.from({ length: 16 }, () => false), order: [] };
+    deselect: (state, action) => {
+      return { ...state, word: action.payload, drag: false, tiles: Array.from({ length: 16 }, () => false), order: [] };
     },
     setGrid: (state, action) => {
       return { ...state, grid: action.payload }
@@ -85,11 +85,24 @@ const gameSlice = createSlice({
 });
 
 export const deselectAndStoreWord = () => (dispatch, getState) => {
-  const { word, secretWords } = getState().game;
-  if (secretWords.includes(word)) {
-    dispatch(addWord(word));
+  const { drag, word, secretWords } = getState().game;
+  if (!drag) {
+    return;
   }
-  dispatch(deselect()); 
+  
+  const found = getState().storage.found;
+  if (word.length < 3) {
+    dispatch(deselect('too short'));
+  } else if (secretWords.includes(word)) {
+    if (!found.includes(word)) {
+      dispatch(addWord(word));
+      dispatch(deselect('found'));
+    } else {
+      dispatch(deselect('already found'));
+    }
+  } else {
+    dispatch(deselect('not found'));
+  }
 };
 
 export const { deselect, setGrid, setWords, start, write } = gameSlice.actions;
