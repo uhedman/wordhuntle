@@ -28,7 +28,7 @@ const Game = () => {
 	}, [dispatch]);
 
 	return (
-		<div className='p-3 w-100' style={{maxWidth: '60vh'}}>
+		<div className='p-3 w-100' style={{maxWidth: '60vh', touchAction: 'none'}}>
 			<div className='container-fluid'>
 				<Points />
 				<Word />
