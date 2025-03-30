@@ -8,10 +8,10 @@ const Word = () => {
   const dispatch = useDispatch();
 
   const specialMessages = useMemo(() => ({
-    'too short': 'bg-warning text-dark',
-    'not found': 'bg-danger text-white',
-    'found': 'bg-success text-white',
-    'already found': 'bg-info text-white'
+    'too short': 'bg-warning text-dark shake',
+    'not found': 'bg-danger text-white shake',
+    'found': 'bg-success text-white showup',
+    'already found': 'bg-info text-white shake'
   }), []);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Word = () => {
   return (
     <div className='p-2 fs-1 fw-bold text-center'>
       {showBubble ? (
-        <span className={`px-2 rounded-pill ${specialMessages[word]} shake`}>
+        <span className={`px-2 rounded-pill ${specialMessages[word]}`}>
           {word.toUpperCase()}
         </span>
       ) : (

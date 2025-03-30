@@ -44,3 +44,13 @@ body {
   display: inline-block;
   animation: shake 0.5s ease-in-out;
 }
+
+@keyframes showup {
+  0% { transform: translateY(1rem); }
+  100% { transform: translateY(0); }
+}
+
+.showup {
+  display: inline-block;
+  animation: showup 0.5s ease-in-out;
+}
