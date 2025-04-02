@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { addWord } from "./storageSlice";
-import { getGrid } from "../../palabras/grid";
-import { getWords } from "../../palabras/script";
+import { createSlice } from '@reduxjs/toolkit';
+import { addWord } from './storageSlice';
+import { getGrid } from '../../palabras/grid';
+import { getWords } from '../../palabras/script';
 
 const puntuation = (length) => {
   if (length === 4) return 1;
@@ -16,7 +16,7 @@ const lastSecretWords = getWords(lastGrid).sort();
 const maxPoints = secretWords.reduce((acc, word) => acc + puntuation(word.length), 0);
 
 const gameSlice = createSlice({
-  name: "game",
+  name: 'game',
   initialState: {
 		displayText: '',
     displayShowBubble: false,
@@ -34,10 +34,29 @@ const gameSlice = createSlice({
 	},
   reducers: {
     deselect: (state, action) => {
+      if (action.payload === 'Encontrada') {
+        const lengthMessages = {
+          4: 'Bien +1',
+          5: 'Genial +4',
+          6: 'Increíble +6',
+          7: 'Fantástico +8',
+          8: 'Asombroso +10'
+        };
+    
+        return {
+          ...state,
+          displayText: lengthMessages[state.displayText.length] || '¡Excelente!' + puntuation(state.displayText.length),
+          displayClassName: 'bg-success text-white showup',
+          displayShowBubble: true,
+          drag: false,
+          tiles: Array.from({ length: 16 }, () => false),
+          order: [],
+        };
+      }
+
       const specialMessages = {
         'Muy corta': 'bg-warning text-dark shake',
         'No existe': 'bg-danger text-white shake',
-        'Found': 'bg-success text-white showup',
         'Ya encontrada': 'bg-info text-white shake'
       };
       const message = action.payload;
@@ -126,7 +145,7 @@ export const deselectAndStoreWord = () => (dispatch, getState) => {
   } else if (secretWords.includes(displayText)) {
     if (!found.includes(displayText)) {
       dispatch(addWord(displayText));
-      dispatch(deselect('Found'));
+      dispatch(deselect('Encontrada'));
     } else {
       dispatch(deselect('Ya encontrada'));
     }
