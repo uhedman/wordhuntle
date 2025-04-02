@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux';
 
 const Share = () => {
 	const [copied, setCopied] = useState(false);
-	const { found, points, theme} = useSelector(state => state.storage);
+	const found = useSelector(state => state.storage.found);
+	const points = useSelector(state => state.storage.points);
+	const theme = useSelector(state => state.storage.theme);
 	const level = useSelector(state => state.level);
 
 	const copy = async () => {
