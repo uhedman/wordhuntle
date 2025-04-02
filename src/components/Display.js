@@ -19,7 +19,7 @@ const Display = () => {
   }, [dispatch, displayShowBubble]);
 
   return (
-    <div className='p-2 fs-1 fw-bold text-center'>
+    <div className='fs-1 fw-bold text-center'>
       { displayShowBubble ? (
         <Badge className={`${displayClassName}`}>
           {displayText}
