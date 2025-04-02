@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addWord } from './storageSlice';
-import { getGrid } from '../../palabras/grid';
-import { getWords } from '../../palabras/script';
-
-const puntuation = (length) => {
-  if (length === 4) return 1;
-  else return (length - 3) * 2;
-}
+import { getGrid } from '../../utils/grid';
+import { getWords, puntuation } from '../../utils/script';
 
 const todayCode = Math.floor(Date.now() / 86400000);
 const grid = getGrid(todayCode);

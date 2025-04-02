@@ -81,4 +81,4 @@ const getGrid = (day) => {
   return grid;
 }
 
-export {getGrid}
+export { getGrid }
