@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 import { FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../redux/slices/modalSlice";
-
+import PointsBar from "./PointsBar";
 
 const Points = () => {
   const points = useSelector(state => state.storage.points);
@@ -10,7 +10,7 @@ const Points = () => {
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <div className='d-flex justify-content-between flex-column gap-3'>
       <div className='d-flex justify-content-between'>
         <span className='fs-1 fw-bold'>{points} pts</span>
         <div className='d-flex align-items-baseline'>
@@ -20,7 +20,7 @@ const Points = () => {
           </Button>
         </div>
       </div>
-      <div>Here will be the points bar</div>
+      <PointsBar />
     </div>
   );
 }

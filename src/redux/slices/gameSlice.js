@@ -3,31 +3,55 @@ import { addWord } from "./storageSlice";
 import { getGrid } from "../../palabras/grid";
 import { getWords } from "../../palabras/script";
 
+const puntuation = (length) => {
+  if (length === 4) return 1;
+  else return (length - 3) * 2;
+}
+
 const todayCode = Math.floor(Date.now() / 86400000);
 const grid = getGrid(todayCode);
+const lastGrid = getGrid(todayCode - 1);
 const secretWords = getWords(grid);
+const lastSecretWords = getWords(lastGrid);
+const maxPoints = secretWords.reduce((acc, word) => acc + puntuation(word.length), 0);
 
 const gameSlice = createSlice({
   name: "game",
   initialState: {
-		word: '',
+		displayText: '',
+    displayShowBubble: false,
+    displayClassName: '',
 		drag: false,
 		secretWords,
+    lastSecretWords,
 		total: secretWords.length,
 		tiles: Array.from({ length: 16 }, () => false),
 		order: [],
 		grid,
-    todayCode
+    lastGrid,
+    todayCode,
+    maxPoints
 	},
   reducers: {
     deselect: (state, action) => {
-      return { ...state, word: action.payload, drag: false, tiles: Array.from({ length: 16 }, () => false), order: [] };
-    },
-    setGrid: (state, action) => {
-      return { ...state, grid: action.payload }
-    },
-    setWords: (state, action) => {
-      return { ...state, secretWords: action.payload, total: action.payload.length };
+      const specialMessages = {
+        'Muy corta': 'bg-warning text-dark shake',
+        'No existe': 'bg-danger text-white shake',
+        'Found': 'bg-success text-white showup',
+        'Ya encontrada': 'bg-info text-white shake'
+      };
+      const message = action.payload;
+      const className = specialMessages[message] || '';
+      
+      return { 
+        ...state, 
+        displayText: action.payload,
+        displayClassName: className,
+        displayShowBubble: className !== '',
+        drag: false, 
+        tiles: Array.from({ length: 16 }, () => false), 
+        order: []
+      };
     },
     start: (state, action) => {
       const { letter, id } = action.payload;
@@ -36,7 +60,9 @@ const gameSlice = createSlice({
 
       return { 
         ...state, 
-        word: letter, 
+        displayText: letter, 
+        displayShowBubble: false,
+        displayClassName: '',
         drag: true, 
         tiles: state.tiles.map((el, idx) => idx === id ? true : el), 
         order: [[x, y]] 
@@ -51,7 +77,7 @@ const gameSlice = createSlice({
 
       let x = Math.floor(id / 4);
       let y = id % 4;
-      const { tiles, order, word } = state;
+      const { tiles, order, displayText } = state;
       let l = order.length;
       let [a, b] = order[l - 1];
           
@@ -60,7 +86,7 @@ const gameSlice = createSlice({
         if (x === c && y === d) {
           return {
             ...state,
-            word: word.slice(0, -1),
+            displayText: displayText.slice(0, -1),
             tiles: tiles.map((item, index) => index === a * 4 + b ? false : item),
             order: order.slice(0, -1)
           }
@@ -72,7 +98,7 @@ const gameSlice = createSlice({
         Math.abs(y - b) <= 1) {
         return {
           ...state,
-          word: word + letter,
+          displayText: displayText + letter,
           tiles: tiles.map((item, index) => index === id ? true : item),
           order: [...order, [x, y]]
         };
@@ -85,25 +111,29 @@ const gameSlice = createSlice({
 });
 
 export const deselectAndStoreWord = () => (dispatch, getState) => {
-  const { drag, word, secretWords } = getState().game;
+  const { drag, displayText, secretWords } = getState().game;
   if (!drag) {
     return;
   }
   
   const found = getState().storage.found;
-  if (word.length < 3) {
-    dispatch(deselect('too short'));
-  } else if (secretWords.includes(word)) {
-    if (!found.includes(word)) {
-      dispatch(addWord(word));
-      dispatch(deselect('found'));
+  if (displayText.length < 2) {
+    dispatch(deselect(''));
+    return;
+  }
+  if (displayText.length < 4) {
+    dispatch(deselect('Muy corta'));
+  } else if (secretWords.includes(displayText)) {
+    if (!found.includes(displayText)) {
+      dispatch(addWord(displayText));
+      dispatch(deselect('Found'));
     } else {
-      dispatch(deselect('already found'));
+      dispatch(deselect('Ya encontrada'));
     }
   } else {
-    dispatch(deselect('not found'));
+    dispatch(deselect('No existe'));
   }
 };
 
-export const { deselect, setGrid, setWords, start, write } = gameSlice.actions;
+export const { deselect, start, write } = gameSlice.actions;
 export default gameSlice.reducer;

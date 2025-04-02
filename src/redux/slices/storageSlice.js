@@ -58,15 +58,17 @@ const storageSlice = createSlice({
     nextStorage: (state, action) => {
       const todayCode = action.payload;
       
-      if (todayCode === state.todayCode - 1) {
-        localStorage.setItem('lastFound', JSON.stringify(state.found));
-      } else {
-        localStorage.setItem('lastFound', JSON.stringify([]));
-      }
       localStorage.setItem('todayCode', JSON.stringify(todayCode));
       localStorage.setItem('found', JSON.stringify([]));
       localStorage.setItem('points', JSON.stringify(0));
-      return { ...state, points: 0, found: [], todayCode };
+      
+      if (todayCode === state.todayCode + 1) {
+        localStorage.setItem('lastFound', JSON.stringify(state.found));
+        return { ...state, points: 0, found: [], lastFound: state.found, todayCode };
+      } else {
+        localStorage.setItem('lastFound', JSON.stringify([]));
+        return { ...state, points: 0, found: [], lastFound: [], todayCode };
+      }
     }
   },
 });
