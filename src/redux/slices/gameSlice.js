@@ -12,7 +12,7 @@ const todayCode = Math.floor(Date.now() / 86400000);
 const grid = getGrid(todayCode);
 const lastGrid = getGrid(todayCode - 1);
 const secretWords = getWords(grid);
-const lastSecretWords = getWords(lastGrid);
+const lastSecretWords = getWords(lastGrid).sort();
 const maxPoints = secretWords.reduce((acc, word) => acc + puntuation(word.length), 0);
 
 const gameSlice = createSlice({
