@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
 const History = () => {
-	const theme = useSelector(state => state.storage.theme);
-	const lastFound = useSelector(state => state.storage.lastFound);
-	const lastSecretWords = useSelector(state => state.game.lastSecretWords);
-	const lastGrid = useSelector(state => state.game.lastGrid);
+	const theme = useSelector(state => state.theme);
+	const lastFound = useSelector(state => state.history.lastFound);
+	const lastSecretWords = useSelector(state => state.history.lastSecretWords);
+	const lastGrid = useSelector(state => state.history.lastGrid);
 
 	return (
 		<div className='d-flex flex-column gap-3'>
@@ -27,12 +27,13 @@ const History = () => {
 			</div>
 			<ul className='d-grid' style={{gridTemplate: 'auto auto / repeat(2, 1fr)'}}>
 				{ lastSecretWords.map(word => 
-					lastFound.includes(word) ? (
-						<p key={word} className='fw-bold' style={{color: 'var(--green)'}}>{word}</p>
-					) : (
-						<p key={word}>{word}</p>
+						lastFound.includes(word) ? (
+							<p key={word} className='fw-bold' style={{color: 'var(--green)'}}>{word}</p>
+						) : (
+							<p key={word}>{word}</p>
+						)
 					)
-				)}
+				}
 			</ul>
 		</div>
 	);

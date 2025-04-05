@@ -3,7 +3,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 const Words = () => {
-	const storageFound = useSelector(state => state.storage.found);
+	const storageFound = useSelector(state => state.progress.found);
 
 	return (
 		<div className='d-grid' style={{ gridTemplate: 'auto auto / repeat(2, 1fr)' }}>

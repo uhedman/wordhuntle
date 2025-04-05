@@ -2,11 +2,11 @@ import React from 'react';
 import { FaSun, FaMoon, FaShareAlt, FaRegClock, FaInfoCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../redux/slices/modalSlice';
-import { toggleTheme } from '../redux/slices/storageSlice';
+import { toggleTheme } from '../redux/slices/themeSlice';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 
 const NavBarComponent = () => {
-  const theme = useSelector(state => state.storage.theme);
+  const theme = useSelector(state => state.theme);
   const dispatch = useDispatch();
 
   return (

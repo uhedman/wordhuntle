@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../redux/slices/modalSlice';
 
 const ModalComponent = () => {
-	const storageFound = useSelector(state => state.storage.found);
-	const total = useSelector(state => state.game.total);
+	const found = useSelector(state => state.progress.found);
+	const secretWords = useSelector(state => state.gameData.secretWords);
 	const isOpen = useSelector(state => state.modal.isOpen);
 	const content = useSelector(state => state.modal.content);
 	const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const ModalComponent = () => {
 		'share': { title: 'Comparte tus resultados', component: <Share />},
 		'history': { title: 'Palabras de ayer', component: <History />},
 		'info': { title: 'Cómo jugar', component: <Info />},
-		'words': { title: `Palabras encontradas (${storageFound.length}/${total})`, component: <Words />}
+		'words': { title: `Palabras encontradas (${found.length}/${secretWords.length})`, component: <Words />}
 	}
 
 	return (

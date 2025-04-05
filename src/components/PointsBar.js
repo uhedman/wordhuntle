@@ -3,9 +3,9 @@ import { ProgressBar } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 const PointsBar = () => {
-  const points = useSelector((state) => state.storage.points);
-  const maxPoints = useSelector((state) => state.game.maxPoints);
-  const levels = [0, 12.5, 25, 37.5, 50, 62.5, 75, 87.5, 100];
+  const level = useSelector((state) => state.progress.level);
+  const points = useSelector((state) => state.progress.points);
+  const maxPoints = useSelector((state) => state.gameData.maxPoints);
   const progress = Math.sqrt(points / maxPoints) * 100;
 
   return (
@@ -18,8 +18,22 @@ const PointsBar = () => {
           height: '100%',
         }}
       >
-        {levels.map((level, index) => {
-          if (progress < level && progress >= level - 12.5) {
+        { Array.from({ length: 9 }).map((_, index) => {
+          if (index <= level) {
+            return (
+              <div
+                key={index}
+                className='rounded-circle'
+                style={{
+                  width: '1rem',
+                  height: '1rem',
+                  backgroundColor: 'var(--blue)',
+                  border: '2px solid var(--blue)',
+                  transition: '0.5s',
+                }}
+              />
+            );
+          } else if (level === index - 1) {
             return (
               <div
                 key={index}
@@ -33,10 +47,10 @@ const PointsBar = () => {
                   transition: '0.5s'
                 }}
               >
-                {Math.ceil(((level / 100) ** 2) * maxPoints)}
+                {Math.ceil(((index / 8) ** 2) * maxPoints)}
               </div>
-            )
-          } else if (progress < level) {
+            );
+          } else {
             return (
               <div
                 key={index}
@@ -49,21 +63,7 @@ const PointsBar = () => {
                   transition: '0.5s',
                 }}
               />
-            )
-          } else {
-            return (
-              <div
-                key={index}
-                className='rounded-circle'
-                style={{
-                  width: '1rem',
-                  height: '1rem',
-                  backgroundColor: 'var(--blue)',
-                  border: '2px solid var(--blue)',
-                  transition: '0.5s',
-                }}
-              />
-            )
+            );
           }
         })}
       </div>

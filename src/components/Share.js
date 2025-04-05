@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux';
 
 const Share = () => {
 	const [copied, setCopied] = useState(false);
-	const found = useSelector(state => state.storage.found);
-	const points = useSelector(state => state.storage.points);
-	const theme = useSelector(state => state.storage.theme);
-	const level = useSelector(state => state.level);
+	const found = useSelector(state => state.progress.found);
+	const points = useSelector(state => state.progress.points);
+	const level = useSelector(state => state.progress.level);
+	const theme = useSelector(state => state.theme);
 
 	const copy = async () => {
 		const shareDiv = document.querySelector('#share');

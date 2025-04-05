@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Points from './Points';
 import Grid from './Grid';
 import { useDispatch } from 'react-redux';
-import { deselectAndStoreWord } from '../redux/slices/gameSlice';
+import { stopDrag } from '../redux/slices/dragSlice';
 import Display from './Display';
 
 const Game = () => {
@@ -10,7 +10,7 @@ const Game = () => {
 
 	useEffect(() => {
 		const handleEnd = () => {
-			dispatch(deselectAndStoreWord());
+			dispatch(stopDrag());
 		};
 
 		document.addEventListener('pointerup', handleEnd);

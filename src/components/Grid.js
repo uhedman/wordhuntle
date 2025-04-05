@@ -4,7 +4,7 @@ import Line from './Line';
 import { useSelector } from 'react-redux';
 
 const Grid = () => {
-	const grid = useSelector(state => state.game.grid);
+	const grid = useSelector(state => state.gameData.grid);
 
   return (
     <div className='d-grid gap-3' style={{ gridTemplate: 'auto auto / repeat(4, 1fr)', position: 'relative' }}>

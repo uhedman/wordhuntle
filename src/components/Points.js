@@ -5,13 +5,13 @@ import { openModal } from "../redux/slices/modalSlice";
 import PointsBar from "./PointsBar";
 
 const Points = () => {
-  const points = useSelector(state => state.storage.points);
-  const found = useSelector(state => state.storage.found);
+  const points = useSelector(state => state.progress.points);
+  const found = useSelector(state => state.progress.found);
   const dispatch = useDispatch();
 
   return (
     <div className='d-flex justify-content-between flex-column gap-3'>
-      <div className='d-flex justify-content-between'>
+      <div className='d-flex justify-content-between align-items-end'>
         <span className='fs-1 fw-bold'>{points} pts</span>
         <div className='d-flex align-items-baseline'>
           <span className='fs-3'>{found.length} {found.length === 1 ? 'palabra' : 'palabras'}</span>

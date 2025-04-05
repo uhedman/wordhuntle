@@ -1,31 +1,31 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deselect } from '../redux/slices/gameSlice';
 import { Badge } from 'react-bootstrap';
+import { clearDisplay } from '../redux/slices/displaySlice';
 
 const Display = () => {
-  const displayText = useSelector(state => state.game.displayText);
-  const displayShowBubble = useSelector(state => state.game.displayShowBubble);
-  const displayClassName = useSelector(state => state.game.displayClassName);
+  const text = useSelector(state => state.display.text);
+  const showBubble = useSelector(state => state.display.showBubble);
+  const className = useSelector(state => state.display.className);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (displayShowBubble) {
+    if (showBubble) {
       const timer = setTimeout(() => {
-        dispatch(deselect(''));
+        dispatch(clearDisplay());
       }, 1500);
       return () => clearTimeout(timer);
     }
-  }, [dispatch, displayShowBubble]);
+  }, [dispatch, showBubble]);
 
   return (
     <div className='fs-1 fw-bold text-center'>
-      { displayShowBubble ? (
-        <Badge className={`${displayClassName}`}>
-          {displayText}
+      { showBubble ? (
+        <Badge className={className}>
+          {text}
         </Badge>
       ) : (
-        <p className='m-0'>{displayText.toUpperCase()}&nbsp;</p>
+        <p className='m-0'>{text.toUpperCase()}&nbsp;</p>
       )}
     </div>
   );
