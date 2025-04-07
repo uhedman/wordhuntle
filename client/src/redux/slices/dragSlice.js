@@ -21,20 +21,19 @@ const dragSlice = createSlice({
       };
     },
     start: (state, action) => {
-      const { letter, id } = action.payload;
-      let x = Math.floor(id / 4);
-      let y = id % 4;
+      const { letter, id, pos } = action.payload;
 
       return {
         ...state,
         word: letter,
         isDragging: true,
         tiles: state.tiles.map((el, idx) => idx === id ? true : el),
-        order: [[x, y]]
+        order: [pos]
       }
     },
     back: (state, action) => {
       const id = action.payload;
+
       return {
         ...state,
         word: state.word.slice(0, -1),
@@ -44,6 +43,7 @@ const dragSlice = createSlice({
     },
     write: (state, action) => {
       const { id, letter, pos } = action.payload;
+      
       return {
         ...state,
         word: state.word + letter,
@@ -54,9 +54,15 @@ const dragSlice = createSlice({
   }
 });
 
-export const startDrag = (action) => (dispatch) => {
+export const startDrag = (action) => (dispatch, getState) => {
+  const { isDragging } = getState().drag;
+  if (isDragging) return;
+
   const { letter, id } = action;
-  dispatch(start({ letter, id }));
+  let x = Math.floor(id / 4);
+  let y = id % 4;
+
+  dispatch(start({ letter, id, pos: [x, y] }));
   dispatch(displayWord(letter));
 };
 
