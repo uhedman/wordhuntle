@@ -1,4 +1,3 @@
-import './App.css';
 import NavBarComponent from './components/NavBar'
 import Game from './components/Game'
 import ModalComponent from './components/Modal'
