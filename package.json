@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start-client": "cd client && npm start",
-    "start-server": "cd server && node index.js",
+    "start-server": "cd server && node server.js",
     "dev": "concurrently \"npm run start-server\" \"npm run start-client\""
   },
   "devDependencies": {
