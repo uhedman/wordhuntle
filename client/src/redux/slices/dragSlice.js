@@ -62,7 +62,7 @@ export const startDrag = (action) => (dispatch) => {
 
 export const stopDrag = () => (dispatch, getState) => {
   const { isDragging, word } = getState().drag;
-  const { secretWords } = getState().gameData;
+  const { words } = getState().gameData;
   const found = getState().progress.found;
 
   if (!isDragging) return;
@@ -73,7 +73,7 @@ export const stopDrag = () => (dispatch, getState) => {
     dispatch(clearDisplay());
   } else if (length < 4) {
     dispatch(displaySpecialMessage('Muy corta'));
-  } else if (secretWords.includes(word)) {
+  } else if (words.includes(word)) {
     if (found.includes(word)) {
       dispatch(displaySpecialMessage('Ya encontrada'));
     } else {
