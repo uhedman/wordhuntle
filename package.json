@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "start-client": "cd client && npm start",
-    "start-server": "cd server && node server.js",
-    "dev": "concurrently \"npm run start-server\" \"npm run start-client\""
+    "start-server": "cd server && npm start",
+    "dev-server": "cd server && npm run dev",
+    "start": "concurrently \"npm run start-server\" \"npm run start-client\"",
+    "dev": "concurrently \"npm run dev-server\" \"npm run start-client\""
   },
   "devDependencies": {
     "concurrently": "^7.6.0"
