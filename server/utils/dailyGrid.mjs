@@ -1,4 +1,4 @@
-const data = require('../data/words8.js');
+import data from '../data/words8.js';
 
 // Direcciones a las casillas adyacentes
 const ways = [[-1, -1], [-1, 0], [-1, 1],
@@ -12,7 +12,7 @@ const hash = (number) => {
   return number;
 }
 
-const getGrid = (day) => {
+export const getGrid = (day) => {
   let seed = hash(day);
   // Pseudo Random Number Generator
   const prng = () => {
@@ -80,5 +80,3 @@ const getGrid = (day) => {
 
   return grid;
 }
-
-module.exports = getGrid;

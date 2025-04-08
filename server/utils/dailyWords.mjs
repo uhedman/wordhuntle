@@ -1,4 +1,4 @@
-const data = require("../data/words.js");
+import data from "../data/words.js";
 
 // Direcciones a las casillas adyacentes
 const ways = [[-1, -1], [-1, 0], [-1, 1],
@@ -50,7 +50,7 @@ const searchWord = (words, w) => {
 
 // Busca las palabras que pertenecen a data
 // y estan escondidas en la grilla
-const getWords = (grid) => {
+export const getWords = (grid) => {
   let words = [];
 
   // Se itera para cada casilla de la grilla
@@ -116,5 +116,3 @@ const getWords = (grid) => {
   }
   return words;
 }
-
-module.exports = getWords;

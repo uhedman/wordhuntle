@@ -1,9 +1,9 @@
-const puntuation = (length) => {
+export const puntuation = (length) => {
   if (length === 4) return 1;
   else return (length - 3) * 2;
 }
 
-const insert = (arr, newString) => {
+export const insert = (arr, newString) => {
   let low = 0;
   let high = arr.length - 1;
   const newArray = [...arr];
@@ -23,5 +23,3 @@ const insert = (arr, newString) => {
   newArray.splice(low, 0, newString);
   return newArray;
 }
-
-module.exports = { puntuation, insert }

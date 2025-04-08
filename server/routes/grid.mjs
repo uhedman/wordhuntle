@@ -1,11 +1,5 @@
-const express = require("express");
-const {
-  getTodayCode,
-  getTodayGrid,
-  getTodayWords,
-  getLastGrid,
-  getLastWords
-} = require("../controllers/gridController.js");
+import express from "express";
+import { getTodayCode, getTodayGrid, getTodayWords, getLastGrid, getLastWords } from "../controllers/gridController.mjs";
 
 const router = express.Router();
 
@@ -15,4 +9,4 @@ router.get("/todayWords", getTodayWords);
 router.get("/lastGrid", getLastGrid);
 router.get("/lastWords", getLastWords);
 
-module.exports = router;
+export default router;

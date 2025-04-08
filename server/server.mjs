@@ -1,12 +1,12 @@
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./config/database');
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import connectDB from './config/database.mjs';
+import dotenv from 'dotenv';
+import gridRoutes from './routes/grid.mjs';
 
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-const gridRoutes = require('./routes/grid');
 
 app.use(cors());
 app.use(express.json());
