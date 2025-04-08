@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "homepage": "https://uhedman.github.io/wordhuntle",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.1",
     "@testing-library/jest-dom": "^5.17.0",

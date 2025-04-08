@@ -1,36 +1,47 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Button } from 'react-bootstrap';
 
 const History = () => {
-	const theme = useSelector(state => state.theme);
 	const lastFound = useSelector(state => state.history.lastFound);
 	const lastWords = useSelector(state => state.history.lastWords);
 	const lastGrid = useSelector(state => state.history.lastGrid);
 
+	const words = lastWords === null
+		? Array(16).fill(null)
+		: lastWords;
+
+	const tiles = lastGrid === null
+    ? Array(16).fill(null) 
+    : lastGrid.flat();
+
 	return (
 		<div className='d-flex flex-column gap-3'>
 			<p>Las palabras que encontraste están resaltadas</p>
-			<div className='d-grid gap-2 w-75' style={{gridTemplate: 'auto auto / repeat(4, 1fr)'}}>
-				{ lastGrid.flat().map((letter, index) => 
-					<div className='ratio ratio-1x1' key={index}>
-						<Button
-							key={index}
-							variant={theme}
-							className={`fs-1 border border-3`}
-							disabled
-						>
-							{letter.toUpperCase()}
-						</Button>
-					</div>
-				)}
+			<div className='d-grid gap-2 w-75' style={{gridTemplate: 'auto auto / repeat(4, 1fr)'}}> 
+				{ tiles.map((letter, index) => 
+					letter === null
+					? <div className='ratio ratio-1x1' key={index}> {/* TODO */}
+							<div className="placeholder-glow d-flex rounded border border-5 w-100 h-100">
+								<span className="placeholder d-flex flex-grow-1" />
+							</div>
+						</div>
+					: <div className='ratio ratio-1x1' key={index}>
+							<div className={'d-flex align-items-center justify-content-center rounded border border-5'}>
+								{letter.toUpperCase()}
+							</div>
+						</div>
+					)
+				}
 			</div>
-			<ul className='d-grid' style={{gridTemplate: 'auto auto / repeat(2, 1fr)'}}>
-				{ lastWords.map(word => 
-						lastFound.includes(word) ? (
-							<p key={word} className='fw-bold' style={{color: 'var(--green)'}}>{word}</p>
-						) : (
-							<p key={word}>{word}</p>
+			<ul className='d-grid placeholder-glow' style={{gridTemplate: 'auto auto / repeat(2, 1fr)'}}>
+				{ words.map((word, index) => 
+						word === null 
+						? (<p key={index} className='placeholder w-50'></p>)
+						: (lastFound.includes(word) ? (
+								<p key={index} className='fw-bold' style={{color: 'var(--green)'}}>{word}</p>
+							) : (
+								<p key={index}>{word}</p>
+							)
 						)
 					)
 				}

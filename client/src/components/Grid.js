@@ -6,9 +6,13 @@ import { useSelector } from 'react-redux';
 const Grid = () => {
 	const grid = useSelector(state => state.gameData.grid);
 
+  const tiles = grid === null
+    ? Array(16).fill(null) 
+    : grid.flat();
+
   return (
-    <div className='d-grid gap-3' style={{ gridTemplate: 'auto auto / repeat(4, 1fr)', position: 'relative' }}>
-		  { grid.flat().map((letter, index) => 
+    <div className='d-grid gap-3 position-relative' style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+		  { tiles.map((letter, index) => 
 		    <Tile key={index} id={index} letter={letter} />
 	    )}
       <Line />

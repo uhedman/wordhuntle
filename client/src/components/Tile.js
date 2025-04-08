@@ -14,20 +14,25 @@ const Tile = (props) => {
 
 	return (
 		<div className='ratio ratio-1x1'>
-			<div 
-				onPointerDown={handlePointerDown}
-				onPointerEnter={() => dispatch(drag({ id, letter }))}
-				className={`d-flex align-items-center justify-content-center rounded border border-5 ${selected ? 'selected' : ''}`}
-        style={{
-          borderColor: selected ? 'var(--blue) !important' : null,
-					backgroundColor: selected ? 'rgba(var(--blue-rgb), 0.2)' : null,
-					cursor: 'pointer'
-        }}
-			>
-				<span className='fs-1 fw-bold'>
-					{letter?.toUpperCase() || ''}
-				</span>
-			</div>
+			{ letter === null
+				? <div className="placeholder-glow d-flex rounded border border-5">
+						<span className="placeholder d-flex flex-grow-1" />
+					</div>
+				: <div 
+						onPointerDown={handlePointerDown}
+						onPointerEnter={() => dispatch(drag({ id, letter }))}
+						className={'d-flex align-items-center justify-content-center rounded border border-5'}
+						style={{
+							borderColor: selected ? 'var(--blue) !important' : null,
+							backgroundColor: selected ? 'rgba(var(--blue-rgb), 0.2)' : null,
+							cursor: 'pointer'
+						}}
+					>
+						<span className='fs-1 fw-bold'>
+							{letter.toUpperCase()}
+						</span>
+					</div>
+			}
 		</div>
 	);
 }
