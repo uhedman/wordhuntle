@@ -11,10 +11,12 @@ const Grid = () => {
     : grid.flat();
 
   return (
-    <div className='d-grid gap-3 position-relative' style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
-		  { tiles.map((letter, index) => 
-		    <Tile key={index} id={index} letter={letter} />
-	    )}
+    <div className='position-relative'>
+      <div className='d-grid gap-3' style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+        { tiles.map((letter, index) => 
+          <Tile key={index} id={index} letter={letter} />
+        )}
+      </div>
       <Line />
     </div>
   );

@@ -10,8 +10,7 @@ const Line = () => {
     left: 0,
     width: '100%',
     height: '100%',
-    pointerEvents: 'none',
-    mixBlendMode: 'multiply'
+    pointerEvents: 'none'
   };
 
   const calcCoord = (value) => `calc(((100% - 3rem) / 4 + 1rem) * ${value} + (100% - 3rem) / 8)`;
