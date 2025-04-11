@@ -5,9 +5,10 @@
   "scripts": {
     "start-client": "cd client && npm start",
     "start-server": "cd server && npm start",
+    "dev-client": "cd client && npm run dev",
     "dev-server": "cd server && npm run dev",
     "start": "concurrently \"npm run start-server\" \"npm run start-client\"",
-    "dev": "concurrently \"npm run dev-server\" \"npm run start-client\""
+    "dev": "concurrently \"npm run dev-server\" \"npm run dev-client\""
   },
   "devDependencies": {
     "concurrently": "^7.6.0"

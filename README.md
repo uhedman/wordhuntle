@@ -16,6 +16,7 @@ This project is a personal endeavor to enhance React skills and gain hands-on ex
 - Simplified user interface inspired by the original WordHuntle design.
 
 ## About the dictionary used
+
 This project uses a dictionary created in https://github.com/JorgeDuenasLerin/diccionario-espanol-txt, which extracts from the RAE (Real Academia Española) all the words archived.
 
 ## Getting Started
