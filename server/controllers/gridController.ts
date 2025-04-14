@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
-import { puntuation } from "../utils/aux";
-import { getGrid } from "../utils/dailyGrid";
-import { getWords } from "../utils/dailyWords";
+import { puntuation } from "../../shared/utils/aux";
+import { getGrid } from "../../shared/utils/dailyGrid";
+import { getWords } from "../../shared/utils/dailyWords";
 
 let todayCode = Math.floor(Date.now() / 86400000);
 let lastCode = todayCode - 1;
