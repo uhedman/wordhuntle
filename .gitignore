@@ -16,6 +16,8 @@ client/.next/
 
 # production
 /build
+/server/build
+/server/server.js
 
 # misc
 .DS_Store
