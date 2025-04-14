@@ -1,5 +1,4 @@
-import Image from "next/image";
-import gif from "../how-to-play.gif";
+import gif from "../assets/how-to-play.gif";
 
 const Info = () => {
   return (
@@ -8,7 +7,7 @@ const Info = () => {
         Usá el ratón o el dedo para conectar las letras en la grilla para formar
         palabras.
       </p>
-      <Image src={gif} alt="Cómo jugar" width={300} />
+      <img src={gif} alt="Cómo jugar" width={300} />
       <ul>
         <li>
           Podés conectar cualquier par de letras adyacentes, incluso

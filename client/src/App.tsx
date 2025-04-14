@@ -1,23 +1,23 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import NavBarComponent from "../components/NavBar";
-import Game from "../components/Game";
-import ModalComponent from "../components/Modal";
+import { useAppDispatch, useAppSelector } from "./hooks";
+import NavBarComponent from "./components/NavBar";
+import Game from "./components/Game";
+import ModalComponent from "./components/Modal";
 import {
   fetchLastGrid,
   fetchLastWords,
   loadHistoryStorage,
-} from "../redux/slices/historySlice";
+} from "./store/slices/historySlice";
 import {
   fetchTodayGrid,
   fetchTodayWords,
   loadGameStorage,
   setTodayCode,
-} from "../redux/slices/gameDataSlice";
+} from "./store/slices/gameDataSlice";
 import {
   resetProgress,
   loadProgressStorage,
-} from "@/redux/slices/progressSlice";
+} from "./store/slices/progressSlice";
 
 const App = () => {
   const theme = useAppSelector((state) => state.theme.value);

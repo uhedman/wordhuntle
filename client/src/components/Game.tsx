@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { stopDrag } from "../redux/slices/dragSlice";
-import { useAppDispatch } from "@/hooks";
+import { stopDrag } from "../store/slices/dragSlice";
+import { useAppDispatch } from "../hooks";
 import Display from "./Display";
 import Grid from "./Grid";
 import Points from "./Points";

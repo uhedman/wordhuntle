@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start-client": "cd client && npm start",
-    "start-server": "cd server && npm start",
+    "build-client": "cd client && npm run build",
+    "build-server": "cd server && npm run build",
+    "build": "concurrently \"npm run build-server\" \"npm run build-client\"",
     "dev-client": "cd client && npm run dev",
     "dev-server": "cd server && npm run dev",
-    "start": "concurrently \"npm run start-server\" \"npm run start-client\"",
-    "dev": "concurrently \"npm run dev-server\" \"npm run dev-client\""
+    "dev": "concurrently \"npm run dev-server\" \"npm run dev-client\"",
+    "start-client": "cd client && npm run preview",
+    "start-server": "cd server && npm start",
+    "start": "concurrently \"npm run start-server\" \"npm run start-client\""
   },
   "devDependencies": {
     "concurrently": "^7.6.0"

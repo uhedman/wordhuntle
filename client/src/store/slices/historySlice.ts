@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { Grid } from "@/types";
+import { Grid } from "../../types";
 
 interface historyState {
   lastGrid: Grid | null;

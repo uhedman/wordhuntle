@@ -1,4 +1,4 @@
-import { Grid } from "@/types";
+import { Grid } from "../../types";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 interface gameDataState {

@@ -10,10 +10,6 @@
 # testing
 /coverage
 
-# next.js
-client/.next/
-/out/
-
 # production
 /build
 /server/build

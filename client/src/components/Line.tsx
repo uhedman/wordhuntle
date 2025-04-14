@@ -1,5 +1,5 @@
-import { useAppSelector } from "@/hooks";
-import { Pos } from "@/types";
+import { useAppSelector } from "../hooks";
+import { Pos } from "../types";
 
 type LineSegmentProps = {
   p1: Pos;
