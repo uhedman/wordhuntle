@@ -1,23 +1,23 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import NavBarComponent from "../components/NavBar";
-import Game from "../components/Game";
-import ModalComponent from "../components/Modal";
+import { useAppDispatch, useAppSelector } from "./hooks";
+import NavBarComponent from "./components/NavBar";
+import Game from "./components/Game";
+import ModalComponent from "./components/Modal";
 import {
-  fetchLastGrid,
-  fetchLastWords,
+  fetchLastData,
   loadHistoryStorage,
-} from "../redux/slices/historySlice";
+} from "./store/slices/historySlice";
 import {
-  fetchTodayGrid,
-  fetchTodayWords,
+  fetchTodayData,
   loadGameStorage,
   setTodayCode,
-} from "../redux/slices/gameDataSlice";
+} from "./store/slices/gameDataSlice";
 import {
   resetProgress,
   loadProgressStorage,
-} from "@/redux/slices/progressSlice";
+} from "./store/slices/progressSlice";
+import "./App.css"
+import { getTodayCode } from "./api";
 
 const App = () => {
   const theme = useAppSelector((state) => state.theme.value);
@@ -30,18 +30,15 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`/api/todayCode`);
-        const data = await res.json();
+        const data = await getTodayCode();
         const apiCode = data.code;
         const localCode = localStorage.getItem("todayCode");
 
         if (localCode !== String(apiCode)) {
-          localStorage.setItem("todayCode", apiCode);
-          dispatch(fetchTodayGrid());
-          dispatch(fetchTodayWords());
+          localStorage.setItem("todayCode", JSON.stringify(apiCode));
+          dispatch(fetchTodayData());
           dispatch(resetProgress());
-          dispatch(fetchLastGrid());
-          dispatch(fetchLastWords());
+          dispatch(fetchLastData());
         } else {
           dispatch(loadGameStorage());
           dispatch(loadProgressStorage());

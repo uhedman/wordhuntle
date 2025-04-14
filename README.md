@@ -32,13 +32,13 @@ Follow these instructions to set up the project on your local machine and start 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/wordhuntle-clone.git
+   git clone https://github.com/uhedman/wordhuntle.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd wordhuntle-clone
+   cd wordhuntle
    ```
 
 3. Install the dependencies:

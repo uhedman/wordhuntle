@@ -1,6 +1,6 @@
 import { Modal } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { closeModal } from "../redux/slices/modalSlice";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { closeModal } from "../store/slices/modalSlice";
 import History from "./History";
 import Info from "./Info";
 import Share from "./Share";

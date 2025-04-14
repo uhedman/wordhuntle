@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { drag, startDrag } from "../redux/slices/dragSlice";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { drag, startDrag } from "../store/slices/dragSlice";
 import { PointerEventHandler } from "react";
 
 interface TileProps {

@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/hooks";
+import { useAppSelector } from "../hooks";
 
 const History = () => {
   const lastFound = useAppSelector((state) => state.history.lastFound) ?? []; // TODO

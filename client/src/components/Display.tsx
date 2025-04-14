@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Badge } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { clearDisplay } from "../redux/slices/displaySlice";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { clearDisplay } from "../store/slices/displaySlice";
 
 const Display = () => {
   const text = useAppSelector((state) => state.display.text);

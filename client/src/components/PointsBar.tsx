@@ -1,5 +1,5 @@
 import { ProgressBar } from "react-bootstrap";
-import { useAppSelector } from "@/hooks";
+import { useAppSelector } from "../hooks";
 
 const PointsBar = () => {
   const level = useAppSelector((state) => state.progress.level) || 0; // TODO

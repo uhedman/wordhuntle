@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/hooks";
+import { useAppSelector } from "../hooks";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const Words = () => {

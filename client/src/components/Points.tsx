@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import { FaEye } from "react-icons/fa";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { openModal } from "../redux/slices/modalSlice";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { openModal } from "../store/slices/modalSlice";
 import PointsBar from "./PointsBar";
 
 const Points = () => {

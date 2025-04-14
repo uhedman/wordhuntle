@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/hooks";
+import { useAppSelector } from "../hooks";
 import Tile from "./Tile";
 import Line from "./Line";
 
