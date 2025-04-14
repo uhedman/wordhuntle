@@ -1,24 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { Grid } from "../../types";
+import { Grid } from "../../../../shared/types";
+import { getLastData } from "../../api";
 
 interface historyState {
   lastGrid: Grid | null;
   lastWords: string[] | null;
   lastFound: string[] | null;
-  gridLoading: boolean; // TODO
-  gridError: string | undefined;
-  wordsLoading: boolean; // TODO
-  wordsError: string | undefined;
+  loading: boolean; // TODO
+  error: string | undefined;
 }
 
 const initialState: historyState = {
   lastGrid: null,
   lastWords: null,
   lastFound: null,
-  gridLoading: false, // TODO
-  gridError: undefined,
-  wordsLoading: false, // TODO
-  wordsError: undefined,
+  loading: false, // TODO
+  error: undefined
 };
 
 const historySlice = createSlice({
@@ -36,63 +33,30 @@ const historySlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchLastGrid.pending, (state) => {
+      .addCase(fetchLastData.pending, (state) => {
         return { ...state, gridLoading: true, gridError: undefined };
       })
-      .addCase(fetchLastGrid.fulfilled, (state, action) => {
-        localStorage.setItem("lastGrid", JSON.stringify(action.payload));
+      .addCase(fetchLastData.fulfilled, (state, action) => {
+        const { words, grid } = action.payload;
+        localStorage.setItem("words", JSON.stringify(words));
+        localStorage.setItem("lastGrid", JSON.stringify(grid));
 
-        return { ...state, gridLoading: false, lastGrid: action.payload };
+        return { ...state, gridLoading: false, lastWords: words, lastGrid: grid };
       })
-      .addCase(fetchLastGrid.rejected, (state, action) => {
+      .addCase(fetchLastData.rejected, (state, action) => {
         return {
           ...state,
           gridLoading: false,
           gridError: action.error.message,
         };
-      })
-
-      .addCase(fetchLastWords.pending, (state) => {
-        return { ...state, wordsLoading: true, wordsError: undefined };
-      })
-      .addCase(fetchLastWords.fulfilled, (state, action) => {
-        localStorage.setItem("lastWords", JSON.stringify(action.payload));
-        const lastFound = JSON.parse(localStorage.getItem("lastFound") ?? "[]");
-
-        return {
-          ...state,
-          wordsLoading: false,
-          lastWords: action.payload,
-          lastFound,
-        };
-      })
-      .addCase(fetchLastWords.rejected, (state, action) => {
-        return {
-          ...state,
-          wordsLoading: false,
-          wordsError: action.error.message,
-        };
       });
   },
 });
 
-export const fetchLastGrid = createAsyncThunk(
-  "history/fetchLastGrid",
-  async () => {
-    const res = await fetch(`/api/lastGrid`);
-    const data = await res.json();
-    return data.grid as Grid;
-  },
-);
-
-export const fetchLastWords = createAsyncThunk(
-  "history/fetchLastWords",
-  async () => {
-    const res = await fetch(`/api/lastWords`);
-    const data = await res.json();
-    return data.words.sort() as string[];
-  },
-);
+export const fetchLastData = createAsyncThunk("game/todayData", async () => {
+  const data = await getLastData();
+  return data as { grid: Grid, words: string[], maxPoints: number };
+});
 
 export const { loadHistoryStorage } = historySlice.actions;
 export default historySlice.reducer;

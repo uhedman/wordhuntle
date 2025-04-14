@@ -1,5 +1,6 @@
-import { Grid } from "../../types";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { Grid } from "../../../../shared/types";
+import { getTodayData } from "../../api";
 
 interface gameDataState {
   todayCode: number | null;
@@ -43,52 +44,30 @@ const gameDataSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTodayGrid.pending, (state) => {
+      .addCase(fetchTodayData.pending, (state) => {
         return { ...state, gridLoading: true, gridError: undefined };
       })
-      .addCase(fetchTodayGrid.fulfilled, (state, action) => {
-        localStorage.setItem("grid", JSON.stringify(action.payload));
+      .addCase(fetchTodayData.fulfilled, (state, action) => {
+        const { grid, words, maxPoints } = action.payload;
+        localStorage.setItem("grid", JSON.stringify(grid));
+        localStorage.setItem("words", JSON.stringify(words));
+        localStorage.setItem("maxPoints", JSON.stringify(maxPoints));
 
-        return { ...state, gridLoading: false, grid: action.payload };
+        return { ...state, gridLoading: false, grid, words, maxPoints };
       })
-      .addCase(fetchTodayGrid.rejected, (state, action) => {
+      .addCase(fetchTodayData.rejected, (state, action) => {
         return {
           ...state,
           gridLoading: false,
           gridError: action.error.message,
         };
-      })
-
-      .addCase(fetchTodayWords.pending, (state) => {
-        return { ...state, wordsLoading: true, wordsError: undefined };
-      })
-      .addCase(fetchTodayWords.fulfilled, (state, action) => {
-        const { words, maxPoints } = action.payload;
-        localStorage.setItem("words", JSON.stringify(words));
-        localStorage.setItem("maxPoints", JSON.stringify(maxPoints));
-
-        return { ...state, wordsLoading: false, words, maxPoints };
-      })
-      .addCase(fetchTodayWords.rejected, (state, action) => {
-        return {
-          ...state,
-          wordsLoading: false,
-          wordsError: action.error.message,
-        };
       });
   },
 });
 
-export const fetchTodayGrid = createAsyncThunk("game/todayGrid", async () => {
-  const res = await fetch("/api/todayGrid");
-  const data = await res.json();
-  return data.grid as Grid;
-});
-
-export const fetchTodayWords = createAsyncThunk("game/todayWords", async () => {
-  const res = await fetch("/api/todayWords");
-  const data = await res.json();
-  return data as { words: string[]; maxPoints: number };
+export const fetchTodayData = createAsyncThunk("game/todayData", async () => {
+  const data = await getTodayData();
+  return data as { grid: Grid, words: string[], maxPoints: number };
 });
 
 export const { setTodayCode, loadGameStorage } = gameDataSlice.actions;

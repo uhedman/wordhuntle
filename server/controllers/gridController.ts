@@ -41,18 +41,10 @@ export const getTodayCode: RequestHandler = (req, res) => {
   res.json({ code: todayCode });
 };
 
-export const getTodayGrid: RequestHandler = (req, res) => {
-  res.json({ grid: todayGrid });
+export const getTodayData: RequestHandler = (req, res) => {
+  res.json({ grid: todayGrid, words: todayWords, maxPoints });
 };
 
-export const getLastGrid: RequestHandler = (req, res) => {
-  res.json({ grid: lastGrid });
-};
-
-export const getTodayWords: RequestHandler = (req, res) => {
-  res.json({ words: todayWords, maxPoints });
-};
-
-export const getLastWords: RequestHandler = (req, res) => {
-  res.json({ words: lastWords });
+export const getLastData: RequestHandler = (req, res) => {
+  res.json({ grid: lastGrid, words: lastWords });
 };
