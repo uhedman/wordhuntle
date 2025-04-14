@@ -18,6 +18,7 @@ import {
   resetProgress,
   loadProgressStorage,
 } from "./store/slices/progressSlice";
+import "./App.css"
 
 const App = () => {
   const theme = useAppSelector((state) => state.theme.value);

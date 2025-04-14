@@ -1,0 +1,32 @@
+#App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  display: inline-block;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes showup {
+  0% { transform: translateY(1rem); }
+  100% { transform: translateY(0); }
+}
+
+.showup {
+  display: inline-block;
+  animation: showup 0.5s ease-in-out;
+}
