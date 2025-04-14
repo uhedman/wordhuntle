@@ -87,3 +87,8 @@ body {
   display: inline-block;
   animation: showup 0.5s ease-in-out;
 }
+
+.selected-tile {
+  border-color: var(--blue) !important;
+  background-color: rgba(var(--blue-rgb), 0.2);
+}

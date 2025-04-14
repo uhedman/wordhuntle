@@ -13,14 +13,14 @@ interface DragState {
   word: string;
   isDragging: boolean;
   tiles: boolean[];
-  order: [number, number][];
+  path: [number, number][];
 }
 
 const initialState: DragState = {
   word: "",
   isDragging: false,
   tiles: new Array(16).fill(false),
-  order: [],
+  path: [],
 };
 
 const dragSlice = createSlice({
@@ -33,7 +33,7 @@ const dragSlice = createSlice({
         word: "",
         isDragging: false,
         tiles: new Array(16).fill(false),
-        order: [],
+        path: [],
       };
     },
     start: (state, action: PayloadAction<Tile>) => {
@@ -44,7 +44,7 @@ const dragSlice = createSlice({
         word: letter,
         isDragging: true,
         tiles: state.tiles.map((el, idx) => (idx === id ? true : el)),
-        order: [pos],
+        path: [pos],
       };
     },
     back: (state, action: PayloadAction<number>) => {
@@ -54,7 +54,7 @@ const dragSlice = createSlice({
         ...state,
         word: state.word.slice(0, -1),
         tiles: state.tiles.map((item, index) => (index === id ? false : item)),
-        order: state.order.slice(0, -1),
+        path: state.path.slice(0, -1),
       };
     },
     write: (state, action: PayloadAction<Tile>) => {
@@ -64,7 +64,7 @@ const dragSlice = createSlice({
         ...state,
         word: state.word + letter,
         tiles: state.tiles.map((item, index) => (index === id ? true : item)),
-        order: [...state.order, pos],
+        path: [...state.path, pos],
       };
     },
   },
@@ -133,17 +133,17 @@ export const drag =
   > =>
   (dispatch, getState) => {
     const state = getState();
-    const { isDragging, tiles, order, word } = state.drag;
+    const { isDragging, tiles, path, word } = state.drag;
     if (!isDragging) return;
 
     const { letter, id } = action;
     const x = Math.floor(id / 4);
     const y = id % 4;
-    const l = order.length;
-    const [a, b] = order[l - 1];
+    const l = path.length;
+    const [a, b] = path[l - 1];
 
     if (l >= 2) {
-      const [c, d] = order[l - 2];
+      const [c, d] = path[l - 2];
       if (x === c && y === d) {
         dispatch(back(a * 4 + b));
         dispatch(displayWord(word.slice(0, -1)));

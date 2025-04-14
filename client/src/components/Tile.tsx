@@ -26,14 +26,8 @@ const Tile = ({ id, letter }: TileProps) => {
         <div
           onPointerDown={handlePointerDown}
           onPointerEnter={() => dispatch(drag({ id, letter }))}
-          className={
-            "d-flex align-items-center justify-content-center rounded border border-5"
-          }
+          className={`d-flex align-items-center justify-content-center rounded border border-5${selected ? " selected-tile" : ""}`}
           style={{
-            borderColor: selected ? "var(--blue) !important" : undefined,
-            backgroundColor: selected
-              ? "rgba(var(--blue-rgb), 0.2)"
-              : undefined,
             cursor: "pointer",
           }}
         >
