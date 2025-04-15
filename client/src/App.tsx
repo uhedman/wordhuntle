@@ -1,20 +1,13 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "./hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import NavBarComponent from "@/components/NavBar";
 import Game from "@/components/Game";
 import ModalComponent from "@/components/Modal";
-import { fetchLastData, loadHistoryStorage } from "@/store/slices/historySlice";
-import {
-  fetchTodayData,
-  loadGameStorage,
-  setTodayCode,
-} from "@/store/slices/gameDataSlice";
-import {
-  resetProgress,
-  loadProgressStorage,
-} from "@/store/slices/progressSlice";
+import { setTodayCode } from "@/store/slices/gameDataSlice";
 import "@/App.css";
 import { getTodayCode } from "@/api";
+import { newDay } from "@/store/thunks/newDay";
+import { loadStorage } from "@/store/thunks/storage";
 
 const App = () => {
   const theme = useAppSelector((state) => state.theme.value);
@@ -33,13 +26,9 @@ const App = () => {
 
         if (localCode !== String(apiCode)) {
           localStorage.setItem("todayCode", JSON.stringify(apiCode));
-          dispatch(fetchTodayData());
-          dispatch(resetProgress());
-          dispatch(fetchLastData());
+          dispatch(newDay(localCode === String(apiCode - 1)));
         } else {
-          dispatch(loadGameStorage());
-          dispatch(loadProgressStorage());
-          dispatch(loadHistoryStorage());
+          dispatch(loadStorage());
         }
 
         dispatch(setTodayCode(apiCode));

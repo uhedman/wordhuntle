@@ -24,11 +24,11 @@ const historySlice = createSlice({
   initialState,
   reducers: {
     loadHistoryStorage: (state) => {
+      const lastFound = getFromStorage<string[]>("lastFound");
       const lastGrid = getFromStorage<Grid>("lastGrid");
       const lastWords = getFromStorage<string[]>("lastWords");
-      const lastFound = getFromStorage<string[]>("lastFound");
 
-      return { ...state, lastGrid, lastWords, lastFound };
+      return { ...state, lastFound, lastGrid, lastWords, loading: false };
     },
   },
   extraReducers: (builder) => {
@@ -37,15 +37,17 @@ const historySlice = createSlice({
         return { ...state, loading: true, error: undefined };
       })
       .addCase(fetchLastData.fulfilled, (state, action) => {
-        const { words, grid } = action.payload;
-        localStorage.setItem("lastWords", JSON.stringify(words));
+        const { found, grid, words } = action.payload;
+        localStorage.setItem("lastFound", JSON.stringify(found));
         localStorage.setItem("lastGrid", JSON.stringify(grid));
+        localStorage.setItem("lastWords", JSON.stringify(words));
 
         return {
           ...state,
           loading: false,
-          lastWords: words,
+          lastFound: found,
           lastGrid: grid,
+          lastWords: words
         };
       })
       .addCase(fetchLastData.rejected, (state, action) => {
@@ -58,9 +60,9 @@ const historySlice = createSlice({
   },
 });
 
-export const fetchLastData = createAsyncThunk("game/lastData", async () => {
+export const fetchLastData = createAsyncThunk("game/lastData", async (found: string[]) => {
   const data = await getLastData();
-  return data as { grid: Grid; words: string[] };
+  return { ...data, found };
 });
 
 export const { loadHistoryStorage } = historySlice.actions;

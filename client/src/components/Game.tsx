@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { stopDrag } from "../store/slices/dragSlice";
-import { useAppDispatch } from "../hooks";
-import Display from "./Display";
-import Grid from "./Grid";
-import Points from "./Points";
+import { stopDrag } from "@/store/thunks/dragThunks";
+import { useAppDispatch } from "@/hooks";
+import Display from "@/components/Display";
+import Grid from "@/components/Grid";
+import Points from "@/components/Points";
 
 const Game = () => {
   const dispatch = useAppDispatch();

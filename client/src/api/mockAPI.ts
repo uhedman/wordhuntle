@@ -21,7 +21,7 @@ export const getTodayData = async () => {
 
 export const getLastData = async () => {
   const lastGrid = getGrid(todayCode - 1);
-  const lastWords = getWords(lastGrid);
+  const lastWords = getWords(lastGrid).sort();
 
   return { grid: lastGrid, words: lastWords };
 };
