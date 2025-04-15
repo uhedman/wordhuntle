@@ -38,12 +38,12 @@ const historySlice = createSlice({
       })
       .addCase(fetchLastData.fulfilled, (state, action) => {
         const { words, grid } = action.payload;
-        localStorage.setItem("words", JSON.stringify(words));
+        localStorage.setItem("lastWords", JSON.stringify(words));
         localStorage.setItem("lastGrid", JSON.stringify(grid));
 
         return {
           ...state,
-          gridLoading: false,
+          loading: false,
           lastWords: words,
           lastGrid: grid,
         };
@@ -51,16 +51,16 @@ const historySlice = createSlice({
       .addCase(fetchLastData.rejected, (state, action) => {
         return {
           ...state,
-          gridLoading: false,
-          gridError: action.error.message,
+          loading: false,
+          error: action.error.message,
         };
       });
   },
 });
 
-export const fetchLastData = createAsyncThunk("game/todayData", async () => {
+export const fetchLastData = createAsyncThunk("game/lastData", async () => {
   const data = await getLastData();
-  return data as { grid: Grid; words: string[]; maxPoints: number };
+  return data as { grid: Grid; words: string[] };
 });
 
 export const { loadHistoryStorage } = historySlice.actions;

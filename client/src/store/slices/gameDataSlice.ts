@@ -8,10 +8,8 @@ interface gameDataState {
   words: string[] | null;
   maxPoints: number | null;
   total: number | null;
-  gridLoading: boolean; // TODO
-  gridError: string | undefined;
-  wordsLoading: boolean; // TODO
-  wordsError: string | undefined;
+  loading: boolean; // TODO
+  error: string | undefined;
 }
 
 const initialState: gameDataState = {
@@ -20,10 +18,8 @@ const initialState: gameDataState = {
   words: null,
   maxPoints: null,
   total: null,
-  gridLoading: false, // TODO
-  gridError: undefined,
-  wordsLoading: false, // TODO
-  wordsError: undefined,
+  loading: false, // TODO
+  error: undefined,
 };
 
 const gameDataSlice = createSlice({
@@ -45,7 +41,7 @@ const gameDataSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchTodayData.pending, (state) => {
-        return { ...state, gridLoading: true, gridError: undefined };
+        return { ...state, loading: true, error: undefined };
       })
       .addCase(fetchTodayData.fulfilled, (state, action) => {
         const { grid, words, maxPoints } = action.payload;
@@ -53,13 +49,13 @@ const gameDataSlice = createSlice({
         localStorage.setItem("words", JSON.stringify(words));
         localStorage.setItem("maxPoints", JSON.stringify(maxPoints));
 
-        return { ...state, gridLoading: false, grid, words, maxPoints };
+        return { ...state, loading: false, grid, words, maxPoints };
       })
       .addCase(fetchTodayData.rejected, (state, action) => {
         return {
           ...state,
-          gridLoading: false,
-          gridError: action.error.message,
+          loading: false,
+          error: action.error.message,
         };
       });
   },
