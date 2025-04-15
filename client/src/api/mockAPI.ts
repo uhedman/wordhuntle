@@ -5,7 +5,7 @@ import { getWords } from "../../../shared/utils/dailyWords";
 const todayCode = Math.floor(Date.now() / 86400000);
 
 export const getTodayCode = async () => {
-  return { code: todayCode }
+  return { code: todayCode };
 };
 
 export const getTodayData = async () => {
@@ -25,4 +25,3 @@ export const getLastData = async () => {
 
   return { grid: lastGrid, words: lastWords };
 };
-

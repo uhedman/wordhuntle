@@ -67,7 +67,7 @@ const gameDataSlice = createSlice({
 
 export const fetchTodayData = createAsyncThunk("game/todayData", async () => {
   const data = await getTodayData();
-  return data as { grid: Grid, words: string[], maxPoints: number };
+  return data as { grid: Grid; words: string[]; maxPoints: number };
 });
 
 export const { setTodayCode, loadGameStorage } = gameDataSlice.actions;

@@ -3,10 +3,7 @@ import { useAppDispatch, useAppSelector } from "./hooks";
 import NavBarComponent from "./components/NavBar";
 import Game from "./components/Game";
 import ModalComponent from "./components/Modal";
-import {
-  fetchLastData,
-  loadHistoryStorage,
-} from "./store/slices/historySlice";
+import { fetchLastData, loadHistoryStorage } from "./store/slices/historySlice";
 import {
   fetchTodayData,
   loadGameStorage,
@@ -16,7 +13,7 @@ import {
   resetProgress,
   loadProgressStorage,
 } from "./store/slices/progressSlice";
-import "./App.css"
+import "./App.css";
 import { getTodayCode } from "./api";
 
 const App = () => {
