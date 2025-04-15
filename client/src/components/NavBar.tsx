@@ -6,9 +6,9 @@ import {
   FaRegClock,
   FaInfoCircle,
 } from "react-icons/fa";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { openModal } from "../store/slices/modalSlice";
-import { toggleTheme } from "../store/slices/themeSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { openModal } from "@/store/slices/modalSlice";
+import { toggleTheme } from "@/store/slices/themeSlice";
 
 const NavBarComponent = () => {
   const theme = useAppSelector((state) => state.theme.value);

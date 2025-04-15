@@ -1,8 +1,8 @@
 import { Button } from "react-bootstrap";
 import { FaEye } from "react-icons/fa";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { openModal } from "../store/slices/modalSlice";
-import PointsBar from "./PointsBar";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { openModal } from "@/store/slices/modalSlice";
+import PointsBar from "@/components/PointsBar";
 
 const Points = () => {
   const points = useAppSelector((state) => state.progress.points) || 0; // TODO

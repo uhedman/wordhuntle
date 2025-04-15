@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Grid } from "../../../../shared/types";
-import { getTodayData } from "../../api";
+import { Grid } from "~/shared/types";
+import { getTodayData } from "@/api";
+import { getFromStorage } from "@/utils/storage";
 
 interface gameDataState {
   todayCode: number | null;
@@ -8,10 +9,8 @@ interface gameDataState {
   words: string[] | null;
   maxPoints: number | null;
   total: number | null;
-  gridLoading: boolean; // TODO
-  gridError: string | undefined;
-  wordsLoading: boolean; // TODO
-  wordsError: string | undefined;
+  loading: boolean; // TODO
+  error: string | undefined;
 }
 
 const initialState: gameDataState = {
@@ -20,10 +19,8 @@ const initialState: gameDataState = {
   words: null,
   maxPoints: null,
   total: null,
-  gridLoading: false, // TODO
-  gridError: undefined,
-  wordsLoading: false, // TODO
-  wordsError: undefined,
+  loading: false, // TODO
+  error: undefined,
 };
 
 const gameDataSlice = createSlice({
@@ -34,10 +31,10 @@ const gameDataSlice = createSlice({
       return { ...state, todayCode: action.payload };
     },
     loadGameStorage: (state) => {
-      const grid = JSON.parse(localStorage.getItem("grid") ?? "");
-      const words = JSON.parse(localStorage.getItem("words") ?? "");
-      const maxPoints = JSON.parse(localStorage.getItem("maxPoints") ?? "");
-      const total = words.length;
+      const grid = getFromStorage<Grid>("grid");
+      const words = getFromStorage<string[]>("words");
+      const maxPoints = getFromStorage<number>("maxPoints");
+      const total = words?.length ?? null;
 
       return { ...state, grid, words, maxPoints, total };
     },
@@ -45,7 +42,7 @@ const gameDataSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchTodayData.pending, (state) => {
-        return { ...state, gridLoading: true, gridError: undefined };
+        return { ...state, loading: true, error: undefined };
       })
       .addCase(fetchTodayData.fulfilled, (state, action) => {
         const { grid, words, maxPoints } = action.payload;
@@ -53,13 +50,13 @@ const gameDataSlice = createSlice({
         localStorage.setItem("words", JSON.stringify(words));
         localStorage.setItem("maxPoints", JSON.stringify(maxPoints));
 
-        return { ...state, gridLoading: false, grid, words, maxPoints };
+        return { ...state, loading: false, grid, words, maxPoints };
       })
       .addCase(fetchTodayData.rejected, (state, action) => {
         return {
           ...state,
-          gridLoading: false,
-          gridError: action.error.message,
+          loading: false,
+          error: action.error.message,
         };
       });
   },
@@ -67,7 +64,7 @@ const gameDataSlice = createSlice({
 
 export const fetchTodayData = createAsyncThunk("game/todayData", async () => {
   const data = await getTodayData();
-  return data as { grid: Grid, words: string[], maxPoints: number };
+  return data as { grid: Grid; words: string[]; maxPoints: number };
 });
 
 export const { setTodayCode, loadGameStorage } = gameDataSlice.actions;

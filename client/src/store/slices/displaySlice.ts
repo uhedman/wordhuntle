@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { puntuation } from "../../utils/script";
+import { puntuation } from "~/shared/utils/wordUtils";
 
 interface DisplayState {
   text: string;

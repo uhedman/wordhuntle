@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ThemeState {
-  value: string;
+  value: "dark" | "light";
 }
 
 const initialState: ThemeState = {
@@ -15,6 +15,7 @@ const themeSlice = createSlice({
     toggleTheme: (state) => {
       const newTheme = state.value === "light" ? "dark" : "light";
       localStorage.setItem("theme", JSON.stringify(newTheme));
+
       return { value: newTheme };
     },
   },

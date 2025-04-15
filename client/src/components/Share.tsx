@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAppSelector } from "../hooks";
+import { useAppSelector } from "@/hooks";
 import { Button } from "react-bootstrap";
 
 const Share = () => {

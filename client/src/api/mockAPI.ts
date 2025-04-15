@@ -1,11 +1,11 @@
-import { puntuation } from "../../../shared/utils/wordUtils";
-import { getGrid } from "../../../shared/utils/dailyGrid";
-import { getWords } from "../../../shared/utils/dailyWords";
+import { puntuation } from "~/shared/utils/wordUtils";
+import { getGrid } from "~/shared/utils/dailyGrid";
+import { getWords } from "~/shared/utils/dailyWords";
 
 const todayCode = Math.floor(Date.now() / 86400000);
 
 export const getTodayCode = async () => {
-  return { code: todayCode }
+  return { code: todayCode };
 };
 
 export const getTodayData = async () => {
@@ -21,8 +21,7 @@ export const getTodayData = async () => {
 
 export const getLastData = async () => {
   const lastGrid = getGrid(todayCode - 1);
-  const lastWords = getWords(lastGrid);
+  const lastWords = getWords(lastGrid).sort();
 
   return { grid: lastGrid, words: lastWords };
 };
-
