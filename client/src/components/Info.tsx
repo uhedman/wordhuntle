@@ -1,4 +1,4 @@
-import gif from "../assets/how-to-play.gif";
+import gif from "@/assets/how-to-play.gif";
 
 const Info = () => {
   return (

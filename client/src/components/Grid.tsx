@@ -1,6 +1,6 @@
-import { useAppSelector } from "../hooks";
-import Tile from "./Tile";
-import Line from "./Line";
+import { useAppSelector } from "@/hooks";
+import Tile from "@/components/Tile";
+import Line from "@/components/Line";
 
 const Grid = () => {
   const grid = useAppSelector((state) => state.gameData.grid);

@@ -1,10 +1,10 @@
 import { Modal } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { closeModal } from "../store/slices/modalSlice";
-import History from "./History";
-import Info from "./Info";
-import Share from "./Share";
-import Words from "./Words";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { closeModal } from "@/store/slices/modalSlice";
+import History from "@/components/History";
+import Info from "@/components/Info";
+import Share from "@/components/Share";
+import Words from "@/components/Words";
 
 const ModalComponent = () => {
   const found = useAppSelector((state) => state.progress.found) || []; // TODO
