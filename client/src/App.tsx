@@ -1,20 +1,20 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
-import NavBarComponent from "./components/NavBar";
-import Game from "./components/Game";
-import ModalComponent from "./components/Modal";
-import { fetchLastData, loadHistoryStorage } from "./store/slices/historySlice";
+import NavBarComponent from "@/components/NavBar";
+import Game from "@/components/Game";
+import ModalComponent from "@/components/Modal";
+import { fetchLastData, loadHistoryStorage } from "@/store/slices/historySlice";
 import {
   fetchTodayData,
   loadGameStorage,
   setTodayCode,
-} from "./store/slices/gameDataSlice";
+} from "@/store/slices/gameDataSlice";
 import {
   resetProgress,
   loadProgressStorage,
-} from "./store/slices/progressSlice";
-import "./App.css";
-import { getTodayCode } from "./api";
+} from "@/store/slices/progressSlice";
+import "@/App.css";
+import { getTodayCode } from "@/api";
 
 const App = () => {
   const theme = useAppSelector((state) => state.theme.value);

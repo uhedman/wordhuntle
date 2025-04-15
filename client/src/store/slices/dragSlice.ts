@@ -6,8 +6,8 @@ import {
   displaySpecialMessage,
   clearDisplay,
 } from "./displaySlice";
-import { Tile } from "../../types";
-import { RootState } from "../store";
+import { Tile } from "@/types";
+import { RootState } from "@/store";
 
 interface DragState {
   word: string;

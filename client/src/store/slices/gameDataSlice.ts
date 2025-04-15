@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Grid } from "../../../../shared/types";
-import { getTodayData } from "../../api";
+import { Grid } from "~/shared/types";
+import { getTodayData } from "@/api";
 
 interface gameDataState {
   todayCode: number | null;

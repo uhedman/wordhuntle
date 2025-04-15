@@ -1,6 +1,6 @@
-import { puntuation } from "../../../shared/utils/wordUtils";
-import { getGrid } from "../../../shared/utils/dailyGrid";
-import { getWords } from "../../../shared/utils/dailyWords";
+import { puntuation } from "~/shared/utils/wordUtils";
+import { getGrid } from "~/shared/utils/dailyGrid";
+import { getWords } from "~/shared/utils/dailyWords";
 
 const todayCode = Math.floor(Date.now() / 86400000);
 

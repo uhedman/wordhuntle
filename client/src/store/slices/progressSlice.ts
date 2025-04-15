@@ -1,6 +1,6 @@
 import { createSlice, ThunkAction, PayloadAction } from "@reduxjs/toolkit";
-import { insert, puntuation } from "../../utils/script";
-import { RootState } from "../store";
+import { insert, puntuation } from "~/shared/utils/wordUtils";
+import { RootState } from "@/store";
 
 interface ProgressData {
   found: string[] | null;

@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import displayReducer from "./slices/displaySlice";
-import dragReducer from "./slices/dragSlice";
-import gameDataReducer from "./slices/gameDataSlice";
-import historyReducer from "./slices/historySlice";
-import modalReducer from "./slices/modalSlice";
-import progressReducer from "./slices/progressSlice";
-import themeReducer from "./slices/themeSlice";
+import displayReducer from "@/store/slices/displaySlice";
+import dragReducer from "@/store/slices/dragSlice";
+import gameDataReducer from "@/store/slices/gameDataSlice";
+import historyReducer from "@/store/slices/historySlice";
+import modalReducer from "@/store/slices/modalSlice";
+import progressReducer from "@/store/slices/progressSlice";
+import themeReducer from "@/store/slices/themeSlice";
 
 export const store = configureStore({
   reducer: {
