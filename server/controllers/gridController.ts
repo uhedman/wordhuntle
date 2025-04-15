@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { puntuation } from "../../shared/utils/aux";
+import { puntuation } from "../../shared/utils/wordUtils";
 import { getGrid } from "../../shared/utils/dailyGrid";
 import { getWords } from "../../shared/utils/dailyWords";
 
