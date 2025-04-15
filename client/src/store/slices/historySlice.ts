@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Grid } from "~/shared/types";
 import { getLastData } from "@/api";
+import { getFromStorage } from "@/utils/storage";
 
 interface historyState {
   lastGrid: Grid | null;
@@ -23,10 +24,9 @@ const historySlice = createSlice({
   initialState,
   reducers: {
     loadHistoryStorage: (state) => {
-      const lastGrid = JSON.parse(localStorage.getItem("lastGrid") ?? "[]"); // TODO
-      const lastWords = JSON.parse(localStorage.getItem("lastWords") ?? "[]");
-      const lastFound =
-        JSON.parse(localStorage.getItem("lastFound") ?? "[]") || [];
+      const lastGrid = getFromStorage<Grid>("lastGrid");
+      const lastWords = getFromStorage<string[]>("lastWords");
+      const lastFound = getFromStorage<string[]>("lastFound");
 
       return { ...state, lastGrid, lastWords, lastFound };
     },
@@ -34,7 +34,7 @@ const historySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchLastData.pending, (state) => {
-        return { ...state, gridLoading: true, gridError: undefined };
+        return { ...state, loading: true, error: undefined };
       })
       .addCase(fetchLastData.fulfilled, (state, action) => {
         const { words, grid } = action.payload;

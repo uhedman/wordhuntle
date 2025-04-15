@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Grid } from "~/shared/types";
 import { getTodayData } from "@/api";
+import { getFromStorage } from "@/utils/storage";
 
 interface gameDataState {
   todayCode: number | null;
@@ -30,10 +31,10 @@ const gameDataSlice = createSlice({
       return { ...state, todayCode: action.payload };
     },
     loadGameStorage: (state) => {
-      const grid = JSON.parse(localStorage.getItem("grid") ?? "");
-      const words = JSON.parse(localStorage.getItem("words") ?? "");
-      const maxPoints = JSON.parse(localStorage.getItem("maxPoints") ?? "");
-      const total = words.length;
+      const grid = getFromStorage<Grid>("grid");
+      const words = getFromStorage<string[]>("words");
+      const maxPoints = getFromStorage<number>("maxPoints");
+      const total = words?.length ?? null;
 
       return { ...state, grid, words, maxPoints, total };
     },
