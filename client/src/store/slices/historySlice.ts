@@ -47,7 +47,7 @@ const historySlice = createSlice({
           loading: false,
           lastFound: found,
           lastGrid: grid,
-          lastWords: words
+          lastWords: words,
         };
       })
       .addCase(fetchLastData.rejected, (state, action) => {
@@ -60,10 +60,13 @@ const historySlice = createSlice({
   },
 });
 
-export const fetchLastData = createAsyncThunk("game/lastData", async (found: string[]) => {
-  const data = await getLastData();
-  return { ...data, found };
-});
+export const fetchLastData = createAsyncThunk(
+  "game/lastData",
+  async (found: string[]) => {
+    const data = await getLastData();
+    return { ...data, found };
+  },
+);
 
 export const { loadHistoryStorage } = historySlice.actions;
 export default historySlice.reducer;

@@ -11,7 +11,9 @@ export const newDay =
   ): ThunkAction<void, RootState, unknown, PayloadAction<string[] | void>> =>
   (dispatch) => {
     dispatch(fetchTodayData());
-    const lastFound = isNextDay ? getFromStorage<string[]>("found") ?? [] : [];
+    const lastFound = isNextDay
+      ? (getFromStorage<string[]>("found") ?? [])
+      : [];
     dispatch(fetchLastData(lastFound));
     dispatch(resetProgress());
   };
