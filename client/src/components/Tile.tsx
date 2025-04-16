@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { drag, startDrag } from "@/store/thunks/dragThunks";
-import { PointerEventHandler } from "react";
+import { PointerEvent } from "react";
 
 interface TileProps {
   id: number;
@@ -11,8 +11,9 @@ const Tile = ({ id, letter }: TileProps) => {
   const selected = useAppSelector((state) => state.drag.tiles[id]);
   const dispatch = useAppDispatch();
 
-  const handlePointerDown: PointerEventHandler<HTMLDivElement> = (e) => {
-    e.currentTarget.releasePointerCapture(e.pointerId); // Important!
+  const handlePointerDown = (e: PointerEvent) => {
+    const target = e.target as HTMLElement;
+    target.releasePointerCapture(e.pointerId);
     dispatch(startDrag({ id, letter }));
   };
 
