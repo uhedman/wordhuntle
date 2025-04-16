@@ -1,1 +1,3 @@
-export type Tile = { letter: string; id: number; pos: [number, number] };
+import { Pos } from "~/shared/types";
+
+export type Tile = { letter: string; id: number; pos: Pos };

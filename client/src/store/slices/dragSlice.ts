@@ -1,17 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Tile } from "@/types";
+import { Pos } from "~/shared/types";
 
 interface DragState {
   word: string;
   isDragging: boolean;
   tiles: boolean[];
-  path: [number, number][];
+  path: Pos[];
 }
 
 const initialState: DragState = {
   word: "",
   isDragging: false,
-  tiles: new Array(16).fill(false),
+  tiles: Array(16).fill(false),
   path: [],
 };
 
@@ -24,7 +25,7 @@ const dragSlice = createSlice({
         ...state,
         word: "",
         isDragging: false,
-        tiles: new Array(16).fill(false),
+        tiles: Array(16).fill(false),
         path: [],
       };
     },
