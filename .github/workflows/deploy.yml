@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: client  # 👈🏻 Nos movemos a client/
+        working-directory: client
 
     steps:
       - name: Checkout repository
@@ -47,7 +47,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: client/dist  # 👈🏻 Subimos el dist correcto
+          path: client/dist
 
       - name: Deploy to GitHub Pages
         id: deployment
