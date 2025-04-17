@@ -2,14 +2,14 @@ import { useAppSelector } from "@/hooks";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const Words = () => {
-  const storageFound = useAppSelector((state) => state.progress.found) || []; // TODO
+  const found = useAppSelector((state) => state.progress.found);
 
   return (
     <div
       className="d-grid"
       style={{ gridTemplate: "auto auto / repeat(2, 1fr)" }}
     >
-      {storageFound.map((word, idx) => (
+      {found.map((word, idx) => (
         <div key={word}>
           <OverlayTrigger
             trigger="hover"

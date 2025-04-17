@@ -5,8 +5,8 @@ import { openModal } from "@/store/slices/modalSlice";
 import PointsBar from "@/components/PointsBar";
 
 const Points = () => {
-  const points = useAppSelector((state) => state.progress.points) || 0; // TODO
-  const found = useAppSelector((state) => state.progress.found) || []; // TODO
+  const points = useAppSelector((state) => state.progress.points);
+  const found = useAppSelector((state) => state.progress.found);
   const dispatch = useAppDispatch();
 
   return (

@@ -2,10 +2,10 @@ import { ProgressBar } from "react-bootstrap";
 import { useAppSelector } from "@/hooks";
 
 const PointsBar = () => {
-  const level = useAppSelector((state) => state.progress.level) || 0; // TODO
-  const points = useAppSelector((state) => state.progress.points) || 0; // TODO
+  const level = useAppSelector((state) => state.progress.level);
+  const points = useAppSelector((state) => state.progress.points);
   const maxPoints = useAppSelector((state) => state.gameData.maxPoints);
-  const progress = Math.sqrt(points / (maxPoints ?? 1)) * 100; // TODO
+  const progress = Math.sqrt(points / (maxPoints ?? 1)) * 100;
 
   return (
     <div className="position-relative w-100" style={{ height: "3rem" }}>

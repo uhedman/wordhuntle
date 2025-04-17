@@ -1,10 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Grid } from "~/shared/types";
-import { getTodayData } from "@/api";
-import { getFromStorage } from "@/utils/storage";
+import { fetchTodayData } from "@/api";
 
 interface gameDataState {
-  todayCode: number | null;
+  seed: number | null;
   grid: Grid | null;
   words: string[] | null;
   maxPoints: number | null;
@@ -14,7 +13,7 @@ interface gameDataState {
 }
 
 const initialState: gameDataState = {
-  todayCode: null,
+  seed: null,
   grid: null,
   words: null,
   maxPoints: null,
@@ -27,32 +26,21 @@ const gameDataSlice = createSlice({
   name: "gameData",
   initialState,
   reducers: {
-    setTodayCode: (state, action: PayloadAction<number>) => {
-      return { ...state, todayCode: action.payload };
-    },
-    loadGameStorage: (state) => {
-      const grid = getFromStorage<Grid>("grid");
-      const words = getFromStorage<string[]>("words");
-      const maxPoints = getFromStorage<number>("maxPoints");
-      const total = words?.length ?? null;
-
-      return { ...state, grid, words, maxPoints, total };
+    setSeed: (state, action: PayloadAction<number>) => {
+      return { ...state, seed: action.payload };
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTodayData.pending, (state) => {
+      .addCase(fetchTodayDataThunk.pending, (state) => {
         return { ...state, loading: true, error: undefined };
       })
-      .addCase(fetchTodayData.fulfilled, (state, action) => {
+      .addCase(fetchTodayDataThunk.fulfilled, (state, action) => {
         const { grid, words, maxPoints } = action.payload;
-        localStorage.setItem("grid", JSON.stringify(grid));
-        localStorage.setItem("words", JSON.stringify(words));
-        localStorage.setItem("maxPoints", JSON.stringify(maxPoints));
 
         return { ...state, loading: false, grid, words, maxPoints };
       })
-      .addCase(fetchTodayData.rejected, (state, action) => {
+      .addCase(fetchTodayDataThunk.rejected, (state, action) => {
         return {
           ...state,
           loading: false,
@@ -62,10 +50,13 @@ const gameDataSlice = createSlice({
   },
 });
 
-export const fetchTodayData = createAsyncThunk("game/todayData", async () => {
-  const data = await getTodayData();
-  return data as { grid: Grid; words: string[]; maxPoints: number };
-});
+export const fetchTodayDataThunk = createAsyncThunk(
+  "game/todayData",
+  async () => {
+    const data = await fetchTodayData();
+    return data as { grid: Grid; words: string[]; maxPoints: number };
+  },
+);
 
-export const { setTodayCode, loadGameStorage } = gameDataSlice.actions;
+export const { setSeed } = gameDataSlice.actions;
 export default gameDataSlice.reducer;

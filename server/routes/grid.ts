@@ -1,13 +1,13 @@
 import express from "express";
 import {
-  getTodayCode,
+  getSeed,
   getTodayData,
   getLastData,
 } from "../controllers/gridController";
 
 const router = express.Router();
 
-router.get("/todayCode", getTodayCode);
+router.get("/seed", getSeed);
 router.get("/todayData", getTodayData);
 router.get("/lastData", getLastData);
 
