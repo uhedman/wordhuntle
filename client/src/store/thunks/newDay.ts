@@ -1,8 +1,8 @@
 import { PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store";
-import { fetchTodayData } from "@/store/slices/gameDataSlice";
+import { fetchTodayDataThunk } from "@/store/slices/gameDataSlice";
+import { fetchLastDataThunk } from "@/store/slices/historySlice";
 import { resetProgress } from "@/store/slices/progressSlice";
-import { fetchLastData } from "@/store/slices/historySlice";
 import { getFromStorage } from "@/utils/storage";
 
 export const newDay =
@@ -10,10 +10,10 @@ export const newDay =
     isNextDay: boolean,
   ): ThunkAction<void, RootState, unknown, PayloadAction<string[] | void>> =>
   (dispatch) => {
-    dispatch(fetchTodayData());
+    dispatch(fetchTodayDataThunk());
     const lastFound = isNextDay
       ? (getFromStorage<string[]>("found") ?? [])
       : [];
-    dispatch(fetchLastData(lastFound));
+    dispatch(fetchLastDataThunk(lastFound));
     dispatch(resetProgress());
   };

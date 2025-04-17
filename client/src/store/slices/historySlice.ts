@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Grid } from "~/shared/types";
-import { getLastData } from "@/api";
+import { fetchLastData } from "@/api";
 import { getFromStorage } from "@/utils/storage";
 
 interface historyState {
@@ -33,10 +33,10 @@ const historySlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchLastData.pending, (state) => {
+      .addCase(fetchLastDataThunk.pending, (state) => {
         return { ...state, loading: true, error: undefined };
       })
-      .addCase(fetchLastData.fulfilled, (state, action) => {
+      .addCase(fetchLastDataThunk.fulfilled, (state, action) => {
         const { found, grid, words } = action.payload;
         localStorage.setItem("lastFound", JSON.stringify(found));
         localStorage.setItem("lastGrid", JSON.stringify(grid));
@@ -50,7 +50,7 @@ const historySlice = createSlice({
           lastWords: words,
         };
       })
-      .addCase(fetchLastData.rejected, (state, action) => {
+      .addCase(fetchLastDataThunk.rejected, (state, action) => {
         return {
           ...state,
           loading: false,
@@ -60,10 +60,10 @@ const historySlice = createSlice({
   },
 });
 
-export const fetchLastData = createAsyncThunk(
+export const fetchLastDataThunk = createAsyncThunk(
   "game/lastData",
   async (found: string[]) => {
-    const data = await getLastData();
+    const data = await fetchLastData();
     return { ...data, found };
   },
 );

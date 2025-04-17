@@ -3,9 +3,9 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import NavBarComponent from "@/components/NavBar";
 import Game from "@/components/Game";
 import ModalComponent from "@/components/Modal";
-import { setTodayCode } from "@/store/slices/gameDataSlice";
+import { setseed } from "@/store/slices/gameDataSlice";
 import "@/App.css";
-import { getTodayCode } from "@/api";
+import { fetchSeed } from "@/api";
 import { newDay } from "@/store/thunks/newDay";
 import { loadStorage } from "@/store/thunks/storage";
 
@@ -20,18 +20,18 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getTodayCode();
-        const apiCode = data.code;
-        const localCode = localStorage.getItem("todayCode");
+        const data = await fetchSeed();
+        const apiSeed = data.seed;
+        const localSeed = localStorage.getItem("seed");
 
-        if (localCode !== String(apiCode)) {
-          localStorage.setItem("todayCode", JSON.stringify(apiCode));
-          dispatch(newDay(localCode === String(apiCode - 1)));
+        if (localSeed !== String(apiSeed)) {
+          localStorage.setItem("seed", JSON.stringify(apiSeed));
+          dispatch(newDay(localSeed === String(apiSeed - 1)));
         } else {
           dispatch(loadStorage());
         }
 
-        dispatch(setTodayCode(apiCode));
+        dispatch(setseed(apiSeed));
       } catch (error) {
         console.error("Error al obtener el código del día:", error);
       }
