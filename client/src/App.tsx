@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import NavBarComponent from "@/components/NavBar";
+import NavBar from "@/components/NavBar";
 import Game from "@/components/Game";
-import ModalComponent from "@/components/Modal";
+import Modal from "@/components/Modal";
 import "@/App.css";
 import { fetchSeed } from "@/api";
 import { loadGame } from "./store/thunks/loadGame";
@@ -31,9 +31,9 @@ const App = () => {
 
   return (
     <div id="App">
-      <NavBarComponent />
+      <NavBar />
       <Game />
-      <ModalComponent />
+      <Modal />
     </div>
   );
 };
