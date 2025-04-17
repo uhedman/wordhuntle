@@ -16,7 +16,7 @@ export const loadGame =
   > =>
   (dispatch) => {
     const storageSeed = getFromStorage<number>("seed");
-    if (storageSeed && seed !== storageSeed) {
+    if (seed !== storageSeed) {
       if (seed - 1 === storageSeed) {
         const found = getFromStorage<string[]>("found") ?? [];
         dispatch(setLastFound(found));
