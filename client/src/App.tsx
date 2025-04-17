@@ -3,11 +3,9 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import NavBarComponent from "@/components/NavBar";
 import Game from "@/components/Game";
 import ModalComponent from "@/components/Modal";
-import { setTodayCode } from "@/store/slices/gameDataSlice";
 import "@/App.css";
-import { getTodayCode } from "@/api";
-import { newDay } from "@/store/thunks/newDay";
-import { loadStorage } from "@/store/thunks/storage";
+import { fetchSeed } from "@/api";
+import { loadGame } from "./store/thunks/loadGame";
 
 const App = () => {
   const theme = useAppSelector((state) => state.theme.value);
@@ -20,18 +18,9 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getTodayCode();
-        const apiCode = data.code;
-        const localCode = localStorage.getItem("todayCode");
-
-        if (localCode !== String(apiCode)) {
-          localStorage.setItem("todayCode", JSON.stringify(apiCode));
-          dispatch(newDay(localCode === String(apiCode - 1)));
-        } else {
-          dispatch(loadStorage());
-        }
-
-        dispatch(setTodayCode(apiCode));
+        const data = await fetchSeed();
+        const seed = data.seed;
+        dispatch(loadGame(seed));
       } catch (error) {
         console.error("Error al obtener el código del día:", error);
       }

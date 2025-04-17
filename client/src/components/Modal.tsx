@@ -7,7 +7,7 @@ import Share from "@/components/Share";
 import Words from "@/components/Words";
 
 const ModalComponent = () => {
-  const found = useAppSelector((state) => state.progress.found) || []; // TODO
+  const found = useAppSelector((state) => state.progress.found);
   const words = useAppSelector((state) => state.gameData.words);
   const isOpen = useAppSelector((state) => state.modal.isOpen);
   const content = useAppSelector((state) => state.modal.content);

@@ -1,7 +1,7 @@
 import { useAppSelector } from "@/hooks";
 
 const History = () => {
-  const lastFound = useAppSelector((state) => state.history.lastFound) ?? []; // TODO
+  const lastFound = useAppSelector((state) => state.history.lastFound);
   const lastWords = useAppSelector((state) => state.history.lastWords);
   const lastGrid = useAppSelector((state) => state.history.lastGrid);
 

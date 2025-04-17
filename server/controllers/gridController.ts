@@ -3,11 +3,11 @@ import { puntuation } from "../../shared/utils/wordUtils";
 import { getGrid } from "../../shared/utils/dailyGrid";
 import { getWords } from "../../shared/utils/dailyWords";
 
-let todayCode = Math.floor(Date.now() / 86400000);
-let lastCode = todayCode - 1;
+let seed = Math.floor(Date.now() / 86400000);
+let lastSeed = seed - 1;
 
-let todayGrid = getGrid(todayCode);
-let lastGrid = getGrid(lastCode);
+let todayGrid = getGrid(seed);
+let lastGrid = getGrid(lastSeed);
 
 let todayWords = getWords(todayGrid);
 let maxPoints = todayWords.reduce(
@@ -18,12 +18,12 @@ let lastWords = getWords(lastGrid);
 
 setInterval(() => {
   const newCode = Math.floor(Date.now() / 86400000);
-  if (newCode !== todayCode) {
-    todayCode = newCode;
-    lastCode = newCode - 1;
+  if (newCode !== seed) {
+    seed = newCode;
+    lastSeed = newCode - 1;
 
-    todayGrid = getGrid(todayCode);
-    lastGrid = getGrid(lastCode);
+    todayGrid = getGrid(seed);
+    lastGrid = getGrid(lastSeed);
 
     todayWords = getWords(todayGrid);
     lastWords = getWords(lastGrid);
@@ -33,12 +33,12 @@ setInterval(() => {
       0,
     );
 
-    console.log("Nuevo código diario:", todayCode);
+    console.log("Nuevo código diario:", seed);
   }
 }, 60 * 1000);
 
-export const getTodayCode: RequestHandler = (req, res) => {
-  res.json({ code: todayCode });
+export const getSeed: RequestHandler = (req, res) => {
+  res.json({ seed });
 };
 
 export const getTodayData: RequestHandler = (req, res) => {

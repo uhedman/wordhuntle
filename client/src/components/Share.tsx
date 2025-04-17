@@ -4,9 +4,9 @@ import { Button } from "react-bootstrap";
 
 const Share = () => {
   const [copied, setCopied] = useState(false);
-  const found = useAppSelector((state) => state.progress.found) || []; // TODO
-  const points = useAppSelector((state) => state.progress.points) || 0; // TODO
-  const level = useAppSelector((state) => state.progress.level) || 0; // TODO
+  const found = useAppSelector((state) => state.progress.found);
+  const points = useAppSelector((state) => state.progress.points);
+  const level = useAppSelector((state) => state.progress.level);
 
   const copy = async () => {
     const shareDiv = document.querySelector("#share");

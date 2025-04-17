@@ -1,14 +1,14 @@
-export const getTodayCode = async () => {
-  const res = await fetch(`/api/todayCode`);
+export const fetchSeed = async () => {
+  const res = await fetch(`/api/seed`);
   return res.json();
 };
 
-export const getTodayData = async () => {
+export const fetchTodayData = async () => {
   const res = await fetch(`/api/todayData`);
   return res.json();
 };
 
-export const getLastData = async () => {
+export const fetchLastData = async () => {
   const res = await fetch(`/api/lastData`);
   return res.json();
 };
