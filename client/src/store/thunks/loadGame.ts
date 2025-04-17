@@ -8,7 +8,12 @@ import { getFromStorage } from "@/utils/storage";
 export const loadGame =
   (
     seed: number,
-  ): ThunkAction<void, RootState, unknown, PayloadAction<string[] | number | void>> =>
+  ): ThunkAction<
+    void,
+    RootState,
+    unknown,
+    PayloadAction<string[] | number | void>
+  > =>
   (dispatch) => {
     const storageSeed = getFromStorage<number>("seed");
     if (storageSeed && seed !== storageSeed) {

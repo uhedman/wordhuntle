@@ -26,7 +26,7 @@ const historySlice = createSlice({
     setLastFound: (state, action: PayloadAction<string[]>) => {
       const lastFound = action.payload;
       return { ...state, lastFound };
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
