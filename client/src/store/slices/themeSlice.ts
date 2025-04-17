@@ -5,7 +5,7 @@ interface ThemeState {
 }
 
 const initialState: ThemeState = {
-  value: "light",
+  value: localStorage.getItem("theme") as "dark" | "light" ?? "light",
 };
 
 const themeSlice = createSlice({
