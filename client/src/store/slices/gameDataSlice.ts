@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Grid } from "~/shared/types";
 import { fetchTodayData } from "@/api";
-import { getFromStorage } from "@/utils/storage";
 
 interface gameDataState {
   seed: number | null;
@@ -27,16 +26,8 @@ const gameDataSlice = createSlice({
   name: "gameData",
   initialState,
   reducers: {
-    setseed: (state, action: PayloadAction<number>) => {
+    setSeed: (state, action: PayloadAction<number>) => {
       return { ...state, seed: action.payload };
-    },
-    loadGameStorage: (state) => {
-      const grid = getFromStorage<Grid>("grid");
-      const words = getFromStorage<string[]>("words");
-      const maxPoints = getFromStorage<number>("maxPoints");
-      const total = words?.length ?? null;
-
-      return { ...state, grid, words, maxPoints, total };
     },
   },
   extraReducers: (builder) => {
@@ -46,9 +37,6 @@ const gameDataSlice = createSlice({
       })
       .addCase(fetchTodayDataThunk.fulfilled, (state, action) => {
         const { grid, words, maxPoints } = action.payload;
-        localStorage.setItem("grid", JSON.stringify(grid));
-        localStorage.setItem("words", JSON.stringify(words));
-        localStorage.setItem("maxPoints", JSON.stringify(maxPoints));
 
         return { ...state, loading: false, grid, words, maxPoints };
       })
@@ -70,5 +58,5 @@ export const fetchTodayDataThunk = createAsyncThunk(
   },
 );
 
-export const { setseed, loadGameStorage } = gameDataSlice.actions;
+export const { setSeed } = gameDataSlice.actions;
 export default gameDataSlice.reducer;
