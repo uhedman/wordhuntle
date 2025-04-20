@@ -3,8 +3,9 @@ import {
   FaSun,
   FaMoon,
   FaShareAlt,
-  FaRegClock,
+  FaClock,
   FaInfoCircle,
+  FaUser,
 } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { openModal } from "@/store/slices/modalSlice";
@@ -43,7 +44,7 @@ const NavBarComponent = () => {
             className="nav-link bg-transparent"
             onClick={() => dispatch(openModal("history"))}
           >
-            <FaRegClock />
+            <FaClock />
           </Button>
           <Button
             variant="tertiary"
@@ -51,6 +52,13 @@ const NavBarComponent = () => {
             onClick={() => dispatch(openModal("info"))}
           >
             <FaInfoCircle />
+          </Button>
+          <Button
+            variant="tertiary"
+            className="nav-link bg-transparent"
+            onClick={() => dispatch(openModal("user"))}
+          >
+            <FaUser />
           </Button>
         </Nav>
       </Container>

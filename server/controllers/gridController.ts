@@ -1,4 +1,4 @@
-import { RequestHandler } from "express";
+import { Request, Response } from "express";
 import { puntuation } from "../../shared/utils/wordUtils";
 import { getGrid } from "../../shared/utils/dailyGrid";
 import { getWords } from "../../shared/utils/dailyWords";
@@ -37,14 +37,14 @@ setInterval(() => {
   }
 }, 60 * 1000);
 
-export const getSeed: RequestHandler = (req, res) => {
+export const getSeed = (req: Request, res: Response) => {
   res.json({ seed });
 };
 
-export const getTodayData: RequestHandler = (req, res) => {
+export const getTodayData = (req: Request, res: Response) => {
   res.json({ grid: todayGrid, words: todayWords, maxPoints });
 };
 
-export const getLastData: RequestHandler = (req, res) => {
+export const getLastData = (req: Request, res: Response) => {
   res.json({ grid: lastGrid, words: lastWords });
 };

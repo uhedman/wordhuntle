@@ -6,6 +6,7 @@ import historyReducer from "@/store/slices/historySlice";
 import modalReducer from "@/store/slices/modalSlice";
 import progressReducer from "@/store/slices/progressSlice";
 import themeReducer from "@/store/slices/themeSlice";
+import userReducer from "@/store/slices/userSlice";
 import { persistMiddleware } from "@/store/middlewares/persist";
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   modal: modalReducer,
   progress: progressReducer,
   theme: themeReducer,
+  user: userReducer,
 });
 
 export const store = configureStore({
