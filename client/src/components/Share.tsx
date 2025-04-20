@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppSelector } from "@/hooks";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 
 const Share = () => {
   const [copied, setCopied] = useState(false);
@@ -10,7 +10,7 @@ const Share = () => {
 
   const copy = async () => {
     const shareDiv = document.querySelector("#share");
-    const text = shareDiv?.textContent;
+    const text = shareDiv?.textContent; // TODO \n
 
     if (text) {
       await navigator.clipboard.writeText(text);
@@ -24,17 +24,24 @@ const Share = () => {
   const year = date.getFullYear();
 
   return (
-    <div className="d-flex flex-column gap-1">
-      <div id="share" className="dark rounded p-2">
-        <p className="m-0">
-          wordhuntle - {day} de {month} de {year}
-        </p>
-        <p className="m-0">
-          Nivel {level}/8 — {points} puntos — {found.length} palabras
-        </p>
-      </div>
-      <Button onClick={copy}>{copied ? "Copiado!" : "Copiar"}</Button>
-    </div>
+    <>
+      <Modal.Header closeButton>
+        <Modal.Title>Comparte tus resultados</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="d-flex flex-column gap-1">
+          <div id="share" className="dark rounded p-2">
+            <p className="m-0">
+              wordhuntle - {day} de {month} de {year}
+            </p>
+            <p className="m-0">
+              Nivel {level}/8 — {points} puntos — {found.length} palabras
+            </p>
+          </div>
+          <Button onClick={copy}>{copied ? "Copiado!" : "Copiar"}</Button>
+        </div>
+      </Modal.Body>
+    </>
   );
 };
 

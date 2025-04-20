@@ -7,7 +7,6 @@ interface gameDataState {
   grid: Grid | null;
   words: string[] | null;
   maxPoints: number | null;
-  total: number | null;
   loading: boolean; // TODO
   error: string | undefined;
 }
@@ -17,7 +16,6 @@ const initialState: gameDataState = {
   grid: null,
   words: null,
   maxPoints: null,
-  total: null,
   loading: false, // TODO
   error: undefined,
 };

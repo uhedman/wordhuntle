@@ -8,35 +8,26 @@ import Words from "@/components/Words";
 import { useMemo } from "react";
 
 const ModalComponent = () => {
-  const found = useAppSelector((state) => state.progress.found);
-  const words = useAppSelector((state) => state.gameData.words);
   const isOpen = useAppSelector((state) => state.modal.isOpen);
   const content = useAppSelector((state) => state.modal.content);
   const dispatch = useAppDispatch();
 
-  const options: Record<
-    string,
-    { title: string; component: React.JSX.Element }
-  > = useMemo(
+  const options: Record<string, React.JSX.Element> = useMemo(
     () => ({
-      "": { title: "", component: <></> },
-      share: { title: "Comparte tus resultados", component: <Share /> },
-      history: { title: "Palabras de ayer", component: <History /> },
-      info: { title: "Cómo jugar", component: <Info /> },
-      words: {
-        title: `Palabras encontradas (${words ? `${found.length}/${words.length}` : ""})`,
-        component: <Words />,
-      },
+      "": <></>,
+      share: <Share />,
+      history: <History />,
+      info: <Info />,
+      words: <Words />,
     }),
-    [found, words],
+    [],
   );
+
+  console.log(isOpen, content);
 
   return (
     <Modal show={isOpen} onHide={() => dispatch(closeModal())}>
-      <Modal.Header closeButton>
-        <Modal.Title>{options[content].title}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>{options[content].component}</Modal.Body>
+      {options[content]}
     </Modal>
   );
 };
