@@ -4,7 +4,6 @@ interface User {
   username: string;
 }
 
-// Estado inicial
 interface UserState {
   user: User | null;
   loading: boolean;
@@ -103,7 +102,7 @@ export const loadUser = createAsyncThunk<User, void, { rejectValue: string }>(
     } catch {
       return thunkAPI.rejectWithValue("No logueado");
     }
-  },
+  }
 );
 
 export const registerUser = createAsyncThunk<
