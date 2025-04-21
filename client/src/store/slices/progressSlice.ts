@@ -20,21 +20,24 @@ const progressSlice = createSlice({
   initialState,
   reducers: {
     resetProgress: (state) => {
-      return { ...state, level: 0, found: [], points: 0 };
+      state.level = 0;
+      state.found = [];
+      state.points = 0;
     },
     updateProgress: (
       state,
-      action: PayloadAction<{ found: string[]; level: number; points: number }>,
+      action: PayloadAction<{ found: string[]; level: number; points: number }>
     ) => {
-      const { found, level, points } = action.payload;
-      return { ...state, found, level, points };
+      state.found = action.payload.found;
+      state.level = action.payload.level;
+      state.points = action.payload.points;
     },
   },
 });
 
 export const addWord =
   (
-    word: string,
+    word: string
   ): ThunkAction<
     void,
     RootState,

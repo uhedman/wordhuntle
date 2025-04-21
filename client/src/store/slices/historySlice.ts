@@ -24,31 +24,23 @@ const historySlice = createSlice({
   initialState,
   reducers: {
     setLastFound: (state, action: PayloadAction<string[]>) => {
-      const lastFound = action.payload;
-      return { ...state, lastFound };
+      state.lastFound = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchLastDataThunk.pending, (state) => {
-        return { ...state, loading: true, error: undefined };
+        state.loading = true;
+        state.error = undefined;
       })
       .addCase(fetchLastDataThunk.fulfilled, (state, action) => {
-        const { grid, words } = action.payload;
-
-        return {
-          ...state,
-          loading: false,
-          lastGrid: grid,
-          lastWords: words,
-        };
+        state.lastGrid = action.payload.grid;
+        state.lastWords = action.payload.words;
+        state.loading = false;
       })
       .addCase(fetchLastDataThunk.rejected, (state, action) => {
-        return {
-          ...state,
-          loading: false,
-          error: action.error.message,
-        };
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });
@@ -58,7 +50,7 @@ export const fetchLastDataThunk = createAsyncThunk(
   async () => {
     const data = await fetchLastData();
     return data;
-  },
+  }
 );
 
 export const { setLastFound } = historySlice.actions;

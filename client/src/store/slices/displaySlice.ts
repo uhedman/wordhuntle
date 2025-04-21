@@ -18,12 +18,9 @@ const displaySlice = createSlice({
   initialState,
   reducers: {
     displayWord: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        text: action.payload,
-        className: "",
-        showBubble: false,
-      };
+      state.text = action.payload;
+      state.className = "";
+      state.showBubble = false;
     },
     displayFoundWord: (state, action: PayloadAction<number>) => {
       const length = action.payload;
@@ -37,12 +34,9 @@ const displaySlice = createSlice({
       const message =
         lengthMessages[length] ?? "¡Exelente! +" + puntuation(length);
 
-      return {
-        ...state,
-        text: message,
-        className: "bg-success text-white showup",
-        showBubble: true,
-      };
+      state.text = message;
+      state.className = "bg-success text-white showup";
+      state.showBubble = true;
     },
     displaySpecialMessage: (state, action: PayloadAction<string>) => {
       const message = action.payload;
@@ -52,12 +46,9 @@ const displaySlice = createSlice({
         "Ya encontrada": "bg-info text-white shake",
       };
 
-      return {
-        ...state,
-        text: message,
-        className: messageClassName[message],
-        showBubble: true,
-      };
+      state.text = message;
+      state.className = messageClassName[message];
+      state.showBubble = true;
     },
     clearDisplay: (state) => {
       return { ...state, text: "", className: "", showBubble: false };

@@ -25,25 +25,23 @@ const gameDataSlice = createSlice({
   initialState,
   reducers: {
     setSeed: (state, action: PayloadAction<number>) => {
-      return { ...state, seed: action.payload };
+      state.seed = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchTodayDataThunk.pending, (state) => {
-        return { ...state, loading: true, error: undefined };
+        state.loading = true;
+        state.error = undefined;
       })
       .addCase(fetchTodayDataThunk.fulfilled, (state, action) => {
-        const { grid, words, maxPoints } = action.payload;
-
-        return { ...state, loading: false, grid, words, maxPoints };
+        state.grid = action.payload.grid;
+        state.words = action.payload.words;
+        state.maxPoints = action.payload.maxPoints;
       })
       .addCase(fetchTodayDataThunk.rejected, (state, action) => {
-        return {
-          ...state,
-          loading: false,
-          error: action.error.message,
-        };
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });
@@ -53,7 +51,7 @@ export const fetchTodayDataThunk = createAsyncThunk(
   async () => {
     const data = await fetchTodayData();
     return data as { grid: Grid; words: string[]; maxPoints: number };
-  },
+  }
 );
 
 export const { setSeed } = gameDataSlice.actions;
