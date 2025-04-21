@@ -1,4 +1,14 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+
+interface RegisterResponse {
+  user: User;
+  message: string;
+}
+
+interface LoginResponse {
+  user: User;
+  message: string;
+}
 
 interface User {
   username: string;
@@ -20,9 +30,8 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logoutUser: (state) => {
-      state.user = null;
-      state.error = null;
+    setUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -36,6 +45,19 @@ const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.error = action.payload || "Error desconocido";
+        state.loading = false;
+      })
+
+      .addCase(logoutUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.user = null;
+        state.loading = false;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
         state.error = action.payload || "Error desconocido";
         state.loading = false;
       })
@@ -68,7 +90,7 @@ export const loginUser = createAsyncThunk<
   { rejectValue: string }
 >("user/login", async (credentials, thunkAPI) => {
   try {
-    const res = await fetch("/auth/login", {
+    const res = await fetch("/api/auth/login", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -82,23 +104,57 @@ export const loginUser = createAsyncThunk<
       return thunkAPI.rejectWithValue(errorText || "Login fallido");
     }
 
-    return await res.json();
+    const response = (await res.json()) as LoginResponse;
+
+    return response.user;
   } catch (err) {
     console.error(err);
     return thunkAPI.rejectWithValue("Error de red");
   }
 });
 
+export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
+  "user/logout",
+  async (_, thunkAPI) => {
+    try {
+      const res = await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        return thunkAPI.rejectWithValue(errorText || "Logout fallido");
+      }
+
+      return;
+    } catch (err) {
+      console.error(err);
+      return thunkAPI.rejectWithValue("Error de red");
+    }
+  }
+);
+
 export const loadUser = createAsyncThunk<User, void, { rejectValue: string }>(
   "user/loadUser",
   async (_, thunkAPI) => {
     try {
-      const res = await fetch("/auth/me", {
+      const res = await fetch("/api/auth/me", {
+        method: "GET",
         credentials: "include",
       });
 
-      if (!res.ok) throw new Error();
-      return await res.json();
+      if (!res.ok) {
+        const errorText = await res.text();
+        return thunkAPI.rejectWithValue(
+          errorText || "Login automatico fallido"
+        );
+      }
+      const response = (await res.json()) as LoginResponse;
+      return response.user;
     } catch {
       return thunkAPI.rejectWithValue("No logueado");
     }
@@ -111,7 +167,7 @@ export const registerUser = createAsyncThunk<
   { rejectValue: string }
 >("user/register", async (credentials, thunkAPI) => {
   try {
-    const res = await fetch("/auth/register", {
+    const res = await fetch("/api/auth/register", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -125,12 +181,14 @@ export const registerUser = createAsyncThunk<
       return thunkAPI.rejectWithValue(errorText || "Register fallido");
     }
 
-    return await res.json();
+    const response = (await res.json()) as RegisterResponse;
+
+    return response.user;
   } catch (err) {
     console.error(err);
     return thunkAPI.rejectWithValue("Error de red");
   }
 });
 
-export const { logoutUser } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 export default userSlice.reducer;

@@ -6,6 +6,7 @@ import Modal from "@/components/Modal";
 import "@/App.css";
 import { fetchSeed } from "@/api";
 import { loadGame } from "./store/thunks/loadGame";
+import { loadUser } from "./store/slices/userSlice";
 
 const App = () => {
   const theme = useAppSelector((state) => state.theme.value);
@@ -27,7 +28,11 @@ const App = () => {
     };
 
     fetchData();
-  }, [dispatch]);
+  }, []);
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, []);
 
   return (
     <div id="App">

@@ -1,17 +1,20 @@
 import jwt from "jsonwebtoken";
-import { RequestHandler } from "express";
+import { NextFunction, Response } from "express";
+import { AuthenticatedRequest } from "../types/auth";
 
-const secret = process.env.JWT_SECRET || ""; // TODO
+const secret = process.env.JWT_TOKEN || ""; // TODO
 
-const authMiddleware: RequestHandler = (req, res, next) => {
-  const authHeader = req.headers.authorization;
+const authMiddleware = (
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  const token = req.cookies.access_token;
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    res.status(401).json({ error: "Token no proporcionado" });
+  if (!token) {
+    res.status(401).send("Token no proporcionado");
     return;
   }
-
-  const token = authHeader.split(" ")[1];
 
   try {
     const payload = jwt.verify(token, secret) as { id: string };
