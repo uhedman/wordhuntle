@@ -22,10 +22,8 @@ const ModalComponent = () => {
       words: <Words />,
       user: <User />,
     }),
-    [],
+    []
   );
-
-  console.log(isOpen, content);
 
   return (
     <Modal show={isOpen} onHide={() => dispatch(closeModal())}>
