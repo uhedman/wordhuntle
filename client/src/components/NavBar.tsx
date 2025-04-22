@@ -1,4 +1,3 @@
-import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import {
   FaSun,
   FaMoon,
@@ -7,7 +6,9 @@ import {
   FaChartSimple,
   FaCircleInfo,
   FaCircleUser,
+  FaBars,
 } from "react-icons/fa6";
+import { Button, Container, Dropdown, Nav, Navbar } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { openModal } from "@/store/slices/modalSlice";
 import { toggleTheme } from "@/store/slices/themeSlice";
@@ -42,7 +43,9 @@ const NavBarComponent = () => {
         >
           wordhuntle
         </Navbar.Brand>
-        <Nav className="fs-2">
+
+        {/* Botones visibles en pantallas grandes */}
+        <Nav className="fs-2 d-none d-sm-flex">
           <NavBarButton onClick={() => dispatch(toggleTheme())}>
             {theme === "dark" ? <FaSun /> : <FaMoon />}
           </NavBarButton>
@@ -62,6 +65,57 @@ const NavBarComponent = () => {
             <FaCircleUser />
           </NavBarButton>
         </Nav>
+
+        <Dropdown className="d-sm-none ms-auto">
+          <Dropdown.Toggle variant="tertiary" className="fs-2">
+            <FaBars />
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu className="fs-5 dropdown-menu-end">
+            <Dropdown.Item
+              className="d-flex align-items-center gap-2"
+              onClick={() => dispatch(toggleTheme())}
+            >
+              {theme === "dark" ? <FaSun /> : <FaMoon />}
+              {theme === "dark" ? "Modo claro" : "Modo oscuro"}
+            </Dropdown.Item>
+            <Dropdown.Item
+              className="d-flex align-items-center gap-2"
+              onClick={() => dispatch(openModal("share"))}
+            >
+              <FaShareNodes />
+              Compartir
+            </Dropdown.Item>
+            <Dropdown.Item
+              className="d-flex align-items-center gap-2"
+              onClick={() => dispatch(openModal("history"))}
+            >
+              <FaClock />
+              Historial
+            </Dropdown.Item>
+            <Dropdown.Item
+              className="d-flex align-items-center gap-2"
+              onClick={() => dispatch(openModal("info"))}
+            >
+              <FaCircleInfo />
+              Info
+            </Dropdown.Item>
+            <Dropdown.Item
+              className="d-flex align-items-center gap-2"
+              onClick={() => dispatch(openModal("ranking"))}
+            >
+              <FaChartSimple />
+              Ranking
+            </Dropdown.Item>
+            <Dropdown.Item
+              className="d-flex align-items-center gap-2"
+              onClick={() => dispatch(openModal("user"))}
+            >
+              <FaCircleUser />
+              Usuario
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Container>
     </Navbar>
   );
