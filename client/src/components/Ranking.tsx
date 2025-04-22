@@ -51,7 +51,6 @@ const Ranking = () => {
       try {
         const res = await fetch("/api/score/leaderboard");
         const data = (await res.json()) as Scores;
-        console.log("Scores:", data);
         setScores(data);
       } catch (err) {
         console.error("Error al obtener scores:", err);
