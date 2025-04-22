@@ -37,7 +37,7 @@ const Login = ({ setMode }: ModeProps) => {
         validated={validated}
         onSubmit={handleSubmit}
       >
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="formUsername">
           <Form.Label>Usuario</Form.Label>
           <Form.Control
             type="text"
@@ -53,7 +53,7 @@ const Login = ({ setMode }: ModeProps) => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="formPassword">
           <Form.Label>Contraseña</Form.Label>
           <Form.Control
             type="password"
@@ -127,7 +127,7 @@ const Register = ({ setMode }: ModeProps) => {
         validated={validated}
         onSubmit={handleSubmit}
       >
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="formUsername">
           <Form.Label>Usuario</Form.Label>
           <Form.Control
             type="text"
@@ -143,7 +143,7 @@ const Register = ({ setMode }: ModeProps) => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="formPassword">
           <Form.Label>Contraseña</Form.Label>
           <Form.Control
             type="password"
@@ -162,7 +162,7 @@ const Register = ({ setMode }: ModeProps) => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="formConfirmPassword">
           <Form.Label>Confirmar contraseña</Form.Label>
           <Form.Control
             type="password"
@@ -216,7 +216,7 @@ const Profile = () => {
       <p>
         <strong>Usuario:</strong> {user?.username} {/* // TODO */}
       </p>
-      <Button variant="secondary" onClick={handleLogout}>
+      <Button variant="danger" onClick={handleLogout}>
         Cerrar sesión
       </Button>
     </>
@@ -249,6 +249,7 @@ const User = () => {
       </Modal.Header>
 
       <Modal.Body>
+        {/* TODO: agregar mensaje de error en las credenciales o servidor */}
         {mode === "accessed" && user && <Profile />}
 
         {mode === "login" && <Login setMode={setMode} />}

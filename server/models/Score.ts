@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
+import { IScore } from "../types/auth";
 
-const { Schema } = mongoose;
+const { Schema, Types } = mongoose;
 
 const scoreSchema = new Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  user: { type: Types.ObjectId, ref: "User", required: true },
   points: { type: Number, required: true },
   date: { type: Date, default: () => new Date().setHours(0, 0, 0, 0) },
 });
 
 scoreSchema.index({ user: 1, date: 1 }, { unique: true });
 
-export default mongoose.model("Score", scoreSchema);
+export default mongoose.model<IScore>("Score", scoreSchema);

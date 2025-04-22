@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth";
 import gridRoutes from "./routes/grid";
+import scoreRoutes from "./routes/score";
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/grid", gridRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/score", scoreRoutes);
 
 connectDB();
 

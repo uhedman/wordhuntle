@@ -2,14 +2,32 @@ import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import {
   FaSun,
   FaMoon,
-  FaShareAlt,
+  FaShareNodes,
   FaClock,
-  FaInfoCircle,
-  FaUser,
-} from "react-icons/fa";
+  FaChartSimple,
+  FaCircleInfo,
+  FaCircleUser,
+} from "react-icons/fa6";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { openModal } from "@/store/slices/modalSlice";
 import { toggleTheme } from "@/store/slices/themeSlice";
+
+interface NavBarButtonProps {
+  children: React.ReactNode;
+  onClick: () => void;
+}
+
+const NavBarButton = ({ children, onClick }: NavBarButtonProps) => {
+  return (
+    <Button
+      className="nav-link bg-transparent"
+      variant="tertiary"
+      onClick={onClick}
+    >
+      {children}
+    </Button>
+  );
+};
 
 const NavBarComponent = () => {
   const theme = useAppSelector((state) => state.theme.value);
@@ -25,41 +43,24 @@ const NavBarComponent = () => {
           wordhuntle
         </Navbar.Brand>
         <Nav className="fs-2">
-          <Button
-            variant="tertiary"
-            className="nav-link bg-transparent"
-            onClick={() => dispatch(toggleTheme())}
-          >
+          <NavBarButton onClick={() => dispatch(toggleTheme())}>
             {theme === "dark" ? <FaSun /> : <FaMoon />}
-          </Button>
-          <Button
-            variant="tertiary"
-            className="nav-link bg-transparent"
-            onClick={() => dispatch(openModal("share"))}
-          >
-            <FaShareAlt />
-          </Button>
-          <Button
-            variant="tertiary"
-            className="nav-link bg-transparent"
-            onClick={() => dispatch(openModal("history"))}
-          >
+          </NavBarButton>
+          <NavBarButton onClick={() => dispatch(openModal("share"))}>
+            <FaShareNodes />
+          </NavBarButton>
+          <NavBarButton onClick={() => dispatch(openModal("history"))}>
             <FaClock />
-          </Button>
-          <Button
-            variant="tertiary"
-            className="nav-link bg-transparent"
-            onClick={() => dispatch(openModal("info"))}
-          >
-            <FaInfoCircle />
-          </Button>
-          <Button
-            variant="tertiary"
-            className="nav-link bg-transparent"
-            onClick={() => dispatch(openModal("user"))}
-          >
-            <FaUser />
-          </Button>
+          </NavBarButton>
+          <NavBarButton onClick={() => dispatch(openModal("info"))}>
+            <FaCircleInfo />
+          </NavBarButton>
+          <NavBarButton onClick={() => dispatch(openModal("ranking"))}>
+            <FaChartSimple />
+          </NavBarButton>
+          <NavBarButton onClick={() => dispatch(openModal("user"))}>
+            <FaCircleUser />
+          </NavBarButton>
         </Nav>
       </Container>
     </Navbar>

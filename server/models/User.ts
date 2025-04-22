@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
-
-const { Schema } = mongoose;
+import { IUser } from "../types/auth";
 
 const userSchema = new Schema({
   username: { type: String, required: true, unique: true },
@@ -17,4 +16,4 @@ userSchema.methods.validatePassword = function (password: string) {
   return bcrypt.compare(password, this.passwordHash);
 };
 
-export default mongoose.model("User", userSchema);
+export default model<IUser>("User", userSchema);
