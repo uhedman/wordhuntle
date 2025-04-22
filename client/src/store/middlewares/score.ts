@@ -1,13 +1,14 @@
 import { Middleware } from "@reduxjs/toolkit";
 import { RootState } from "@/store";
 import { updateProgress } from "@/store/slices/progressSlice";
+import { registerUser } from "../slices/userSlice";
 
 export const scoreMiddleware: Middleware<object, RootState> =
   (store) => (next) => (action) => {
     const result = next(action);
 
     const state = store.getState();
-    if (updateProgress.match(action)) {
+    if (updateProgress.match(action) || registerUser.fulfilled.match(action)) {
       const { level, points } = state.progress;
 
       fetch("/api/score", {
