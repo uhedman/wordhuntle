@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { NextFunction, Response } from "express";
 import { AuthenticatedRequest } from "../types/auth";
 
-const secret = process.env.JWT_TOKEN || ""; // TODO
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || ""; // TODO
 
 const authMiddleware = (
   req: AuthenticatedRequest,
@@ -17,7 +17,7 @@ const authMiddleware = (
   }
 
   try {
-    const payload = jwt.verify(token, secret) as { id: string };
+    const payload = jwt.verify(token, ACCESS_TOKEN_SECRET) as { id: string };
     req.user = { id: payload.id };
     next();
   } catch (error) {

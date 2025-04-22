@@ -147,14 +147,32 @@ export const loadUser = createAsyncThunk<User, void, { rejectValue: string }>(
         credentials: "include",
       });
 
-      if (!res.ok) {
-        const errorText = await res.text();
-        return thunkAPI.rejectWithValue(
-          errorText || "Login automatico fallido"
-        );
+      if (res.ok) {
+        const data = (await res.json()) as LoginResponse;
+        return data.user;
       }
-      const response = (await res.json()) as LoginResponse;
-      return response.user;
+
+      if (res.status === 401) {
+        const refreshRes = await fetch("/api/auth/refresh", {
+          method: "POST",
+          credentials: "include",
+        });
+
+        if (refreshRes.ok) {
+          const retry = await fetch("/api/auth/me", {
+            method: "GET",
+            credentials: "include",
+          });
+
+          if (retry.ok) {
+            const data = (await retry.json()) as LoginResponse;
+            return data.user;
+          }
+        }
+      }
+
+      const errorText = await res.text();
+      return thunkAPI.rejectWithValue(errorText || "Login automático fallido");
     } catch {
       return thunkAPI.rejectWithValue("No logueado");
     }
