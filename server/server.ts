@@ -4,7 +4,7 @@ import connectDB from "./config/database";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth";
-import gridRoutes from "./routes/grid";
+import gameRoutes from "./routes/game";
 import scoreRoutes from "./routes/score";
 import wordRoutes from "./routes/word";
 
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   res.send("Backend funcionando!");
 });
 
-app.use("/api/grid", gridRoutes);
+app.use("/api/game", gameRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/score", scoreRoutes);
 app.use("/api/word", wordRoutes);

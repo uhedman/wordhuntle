@@ -1,6 +1,6 @@
 import { PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import { RootState } from "@/store";
-import { Tile } from "@/types";
+import { TileData } from "@/types";
 import { back, start, stop, write } from "@/store/slices/dragSlice";
 import {
   clearDisplay,
@@ -14,7 +14,7 @@ export const startDrag =
   (action: {
     id: number;
     letter: string;
-  }): ThunkAction<void, RootState, unknown, PayloadAction<Tile | string>> =>
+  }): ThunkAction<void, RootState, unknown, PayloadAction<TileData | string>> =>
   (dispatch, getState) => {
     const { isDragging } = getState().drag;
     if (isDragging) return;
@@ -69,7 +69,7 @@ export const drag =
     void,
     RootState,
     unknown,
-    PayloadAction<number | string | Tile>
+    PayloadAction<number | string | TileData>
   > =>
   (dispatch, getState) => {
     const state = getState();

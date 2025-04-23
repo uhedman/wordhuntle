@@ -1,17 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Grid } from "~/shared/types";
 import { fetchLastData } from "@/api";
 import { getFromStorage } from "@/utils/storage";
+import { HistoryState, LastGameData } from "@/types";
 
-interface historyState {
-  lastGrid: Grid | null;
-  lastWords: string[] | null;
-  lastFound: string[];
-  loading: boolean;
-  error: string | undefined;
-}
-
-const initialState: historyState = {
+const initialState: HistoryState = {
   lastGrid: null,
   lastWords: null,
   lastFound: getFromStorage<string[]>("lastFound") ?? [],
@@ -45,7 +37,7 @@ const historySlice = createSlice({
   },
 });
 
-export const fetchLastDataThunk = createAsyncThunk(
+export const fetchLastDataThunk = createAsyncThunk<LastGameData>(
   "game/lastData",
   async () => {
     const data = await fetchLastData();

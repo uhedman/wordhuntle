@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Tile } from "@/types";
+import { TileData } from "@/types";
 import { Pos } from "~/shared/types";
 
 interface DragState {
@@ -26,7 +26,7 @@ const dragSlice = createSlice({
       state.tiles = Array(16).fill(false);
       state.path = [];
     },
-    start: (state, action: PayloadAction<Tile>) => {
+    start: (state, action: PayloadAction<TileData>) => {
       const { id, letter, pos } = action.payload;
 
       state.word = letter;
@@ -43,7 +43,7 @@ const dragSlice = createSlice({
       );
       state.path = state.path.slice(0, -1);
     },
-    write: (state, action: PayloadAction<Tile>) => {
+    write: (state, action: PayloadAction<TileData>) => {
       const { id, letter, pos } = action.payload;
 
       state.word = state.word + letter;

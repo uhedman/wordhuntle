@@ -1,5 +1,5 @@
 import express from "express";
-import { getSeed, getTodayData, getLastData } from "../controllers/grid";
+import { getSeed, getTodayData, getLastData } from "../controllers/game";
 
 const router = express.Router();
 
