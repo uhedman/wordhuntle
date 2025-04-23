@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { stopDrag } from "@/features/game/thunks/dragThunks";
+import { stopDrag } from "@/features/drag/thunks/stopDrag";
 import { useAppDispatch } from "@/shared/hooks";
+import { useEffect } from "react";
 import Display from "@/features/game/components/Display";
 import Grid from "@/features/game/components/Grid";
 import Points from "@/features/game/components/Points";
@@ -20,7 +20,7 @@ const Game = () => {
       document.removeEventListener("pointerup", handleEnd);
       document.removeEventListener("touchend", handleEnd);
     };
-  }, [dispatch]);
+  }, []);
 
   return (
     <div

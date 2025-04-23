@@ -1,7 +1,7 @@
+import { openModal } from "@/features/modal/slices/modalSlice";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks";
 import { Button } from "react-bootstrap";
 import { FaEye } from "react-icons/fa";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks";
-import { openModal } from "@/features/modal/slices/modalSlice";
 import PointsBar from "@/features/game/components/PointsBar";
 
 const Points = () => {

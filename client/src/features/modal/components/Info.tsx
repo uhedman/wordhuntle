@@ -1,5 +1,5 @@
-import gif from "@/assets/how-to-play.gif";
 import { Modal } from "react-bootstrap";
+import gif from "@/assets/how-to-play.gif";
 
 const Info = () => {
   return (

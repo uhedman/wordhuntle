@@ -1,29 +1,8 @@
-import { useEffect, useState } from "react";
-import { Modal, Tab, Tabs, Table, Spinner } from "react-bootstrap";
-import { Period, Ranking, UserScore } from "@/features/ranking/types";
-
-const ScoreTable = ({ list }: { list: UserScore[] }) => {
-  return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Usuario</th>
-          <th>Puntaje</th>
-        </tr>
-      </thead>
-      <tbody>
-        {list.map((user, idx) => (
-          <tr key={user.username + idx}>
-            <td>{idx + 1}</td>
-            <td>{user.username}</td>
-            <td>{user.points}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
-  );
-};
+import { useState, useEffect } from "react";
+import { Modal, Spinner, Tabs, Tab } from "react-bootstrap";
+import { Period, Ranking } from "@/features/ranking/types";
+import ScoreTable from "@/features/ranking/components/ScoreTable";
+import { getLeaderboard } from "@/shared/api";
 
 const RankingComponent = () => {
   const [activeTab, setActiveTab] = useState<Period>("daily");
@@ -37,8 +16,7 @@ const RankingComponent = () => {
   useEffect(() => {
     const fetchScores = async () => {
       try {
-        const res = await fetch("/api/score/leaderboard");
-        const data = (await res.json()) as Ranking;
+        const data = await getLeaderboard();
         setScores(data);
       } catch (err) {
         console.error("Error al obtener scores:", err);

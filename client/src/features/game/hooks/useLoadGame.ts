@@ -1,15 +1,15 @@
-import { loadGame } from "@/features/game/thunks/loadGame";
-import { fetchSeed } from "@/shared/api";
+import { getSeedAPI } from "@/shared/api";
 import { useAppDispatch } from "@/shared/hooks";
 import { useEffect } from "react";
+import { loadGame } from "@/features/game/thunks/loadGame";
 
 export const useLoadGame = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       try {
-        const data = await fetchSeed();
+        const data = await getSeedAPI();
         const seed = data.seed;
         dispatch(loadGame(seed));
       } catch (error) {
@@ -17,6 +17,6 @@ export const useLoadGame = () => {
       }
     };
 
-    fetchData();
+    loadData();
   }, []);
 };

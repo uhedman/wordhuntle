@@ -1,12 +1,12 @@
-import { Middleware } from "@reduxjs/toolkit";
-import { RootState } from "@/shared/types";
 import { setSeed } from "@/features/game/slices/gameDataSlice";
 import {
   resetProgress,
   updateProgress,
-} from "@/features/game/slices/progressSlice";
-import { toggleTheme } from "@/features/theme/slices/themeSlice";
+} from "@/features/progress/slices/progressSlice";
 import { setLastFound } from "@/features/history/slices/historySlice";
+import { toggleTheme } from "@/features/theme/slices/themeSlice";
+import { Middleware } from "@reduxjs/toolkit";
+import { RootState } from "@/shared/types";
 
 export const persistMiddleware: Middleware<object, RootState> =
   (store) => (next) => (action) => {

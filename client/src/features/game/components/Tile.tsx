@@ -1,5 +1,6 @@
-import { useAppDispatch, useAppSelector } from "@/shared/hooks";
-import { drag, startDrag } from "@/features/game/thunks/dragThunks";
+import { drag } from "@/features/drag/thunks/drag";
+import { startDrag } from "@/features/drag/thunks/startDrag";
+import { useAppSelector, useAppDispatch } from "@/shared/hooks";
 import { PointerEvent } from "react";
 
 interface TileProps {

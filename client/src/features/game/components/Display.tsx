@@ -1,6 +1,6 @@
+import { useAppDispatch, useAppSelector } from "@/shared/hooks";
 import { useEffect } from "react";
 import { Badge } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks";
 import { clearDisplay } from "@/features/game/slices/displaySlice";
 
 const Display = () => {
@@ -16,7 +16,7 @@ const Display = () => {
       }, 1500);
       return () => clearTimeout(timer);
     }
-  }, [dispatch, showBubble]);
+  }, [showBubble]);
 
   return (
     <div className="fs-1 fw-bold text-center">

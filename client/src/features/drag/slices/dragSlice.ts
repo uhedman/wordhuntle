@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TileData } from "@/features/game/types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Pos } from "~/shared/types";
 
 interface DragState {

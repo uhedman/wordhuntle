@@ -1,15 +1,11 @@
-import { PayloadAction, ThunkAction } from "@reduxjs/toolkit";
+import { setLastFound } from "@/features/history/slices/historySlice";
+import { getLastData } from "@/features/history/thunks/getLastData";
 import { RootState } from "@/shared/types";
-import {
-  fetchTodayDataThunk,
-  setSeed,
-} from "@/features/game/slices/gameDataSlice";
-import {
-  fetchLastDataThunk,
-  setLastFound,
-} from "@/features/history/slices/historySlice";
-import { resetProgress } from "@/features/game/slices/progressSlice";
 import { getFromStorage } from "@/shared/utils/storage";
+import { ThunkAction, PayloadAction } from "@reduxjs/toolkit";
+import { setSeed } from "@/features/game/slices/gameDataSlice";
+import { resetProgress } from "@/features/progress/slices/progressSlice";
+import { getTodayData } from "@/features/game/thunks/getTodayData";
 
 export const loadGame =
   (
@@ -31,6 +27,6 @@ export const loadGame =
     }
 
     dispatch(setSeed(seed));
-    dispatch(fetchTodayDataThunk());
-    dispatch(fetchLastDataThunk());
+    dispatch(getTodayData());
+    dispatch(getLastData());
   };

@@ -1,17 +1,14 @@
-import {
-  FaSun,
-  FaMoon,
-  FaShareNodes,
-  FaClock,
-  FaChartSimple,
-  FaCircleInfo,
-  FaCircleUser,
-  FaBars,
-} from "react-icons/fa6";
-import { Container, Dropdown, Nav, Navbar } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks";
 import { openModal } from "@/features/modal/slices/modalSlice";
 import { toggleTheme } from "@/features/theme/slices/themeSlice";
+import { Navbar, Container, Nav, Dropdown } from "react-bootstrap";
+import { FaSun, FaMoon, FaClock, FaBars } from "react-icons/fa";
+import {
+  FaShareNodes,
+  FaCircleInfo,
+  FaChartSimple,
+  FaCircleUser,
+} from "react-icons/fa6";
+import { useAppSelector, useAppDispatch } from "@/shared/hooks";
 import NavBarButton from "@/shared/components/NavBarButton";
 
 const NavBarComponent = () => {

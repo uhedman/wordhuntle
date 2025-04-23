@@ -14,3 +14,9 @@ export interface LoginResponse {
 export interface User {
   username: string;
 }
+
+export interface ModeProps {
+  setMode: React.Dispatch<
+    React.SetStateAction<"login" | "register" | "accessed">
+  >;
+}

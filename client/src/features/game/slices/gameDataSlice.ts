@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Grid } from "~/shared/types";
-import { fetchTodayData } from "@/shared/api";
+import { getTodayData } from "@/features/game/thunks/getTodayData";
 
 interface GameDataState {
   seed: number | null;
@@ -30,29 +30,21 @@ const gameDataSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTodayDataThunk.pending, (state) => {
+      .addCase(getTodayData.pending, (state) => {
         state.loading = true;
         state.error = undefined;
       })
-      .addCase(fetchTodayDataThunk.fulfilled, (state, action) => {
+      .addCase(getTodayData.fulfilled, (state, action) => {
         state.grid = action.payload.grid;
         state.words = action.payload.words;
         state.maxPoints = action.payload.maxPoints;
       })
-      .addCase(fetchTodayDataThunk.rejected, (state, action) => {
+      .addCase(getTodayData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
   },
 });
-
-export const fetchTodayDataThunk = createAsyncThunk(
-  "game/todayData",
-  async () => {
-    const data = await fetchTodayData();
-    return data as { grid: Grid; words: string[]; maxPoints: number };
-  }
-);
 
 export const { setSeed } = gameDataSlice.actions;
 export default gameDataSlice.reducer;

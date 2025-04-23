@@ -1,13 +1,13 @@
-import { Modal } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks";
-import { closeModal } from "@/features/modal/slices/modalSlice";
-import History from "@/features/history/components/History";
-import Info from "@/features/modal/components/Info";
-import Share from "@/features/share/components/Share";
-import Words from "@/features/game/components/Words";
-import Ranking from "@/features/ranking/components/Ranking";
 import User from "@/features/auth/components/User";
+import Words from "@/features/game/components/Words";
+import History from "@/features/history/components/History";
+import Ranking from "@/features/ranking/components/Ranking";
+import Share from "@/features/share/components/Share";
+import { useAppSelector, useAppDispatch } from "@/shared/hooks";
 import { useMemo } from "react";
+import { Modal } from "react-bootstrap";
+import { closeModal } from "@/features/modal/slices/modalSlice";
+import Info from "@/features/modal/components/Info";
 
 const ModalComponent = () => {
   const isOpen = useAppSelector((state) => state.modal.isOpen);

@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { useAppSelector } from "@/shared/hooks";
-import { Button, Modal } from "react-bootstrap";
+import { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
 
 const Share = () => {
   const [copied, setCopied] = useState(false);

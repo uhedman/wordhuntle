@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/shared/hooks";
-import Tile from "@/features/game/components/Tile";
 import Line from "@/features/game/components/Line";
+import Tile from "@/features/game/components/Tile";
 
 const Grid = () => {
   const grid = useAppSelector((state) => state.gameData.grid);
