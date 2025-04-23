@@ -11,3 +11,9 @@ export interface GameData {
   words: string[];
   maxPoints: number;
 }
+
+export interface EncrypedGameData {
+  grid: Grid;
+  words: string;
+  maxPoints: number;
+}

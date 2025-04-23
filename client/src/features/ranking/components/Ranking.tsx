@@ -1,32 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Modal, Spinner, Tabs, Tab } from "react-bootstrap";
-import { Period, Ranking } from "@/features/ranking/types";
+import { Period } from "@/features/ranking/types";
 import ScoreTable from "@/features/ranking/components/ScoreTable";
-import { getLeaderboard } from "@/shared/api";
+import { useScores } from "@/features/ranking/hooks/useScores";
 
 const RankingComponent = () => {
   const [activeTab, setActiveTab] = useState<Period>("daily");
-  const [scores, setScores] = useState<Ranking>({
-    daily: [],
-    weekly: [],
-    alltime: [],
-  });
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchScores = async () => {
-      try {
-        const data = await getLeaderboard();
-        setScores(data);
-      } catch (err) {
-        console.error("Error al obtener scores:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchScores();
-  }, []);
+  const { scores, loading } = useScores();
 
   return (
     <>
@@ -34,7 +14,7 @@ const RankingComponent = () => {
         <Modal.Title>Tabla de mejores jugadores</Modal.Title>
       </Modal.Header>
 
-      <Modal.Body>
+      <Modal.Body className="ranking-modal-body">
         {loading ? (
           <Spinner animation="border" />
         ) : (
