@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth";
 import gameRoutes from "./routes/game";
 import scoreRoutes from "./routes/score";
 import wordRoutes from "./routes/word";
+import path from "path";
 
 dotenv.config();
 const app = express();
@@ -16,17 +17,18 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-app.get("/", (req, res) => {
-  res.send("Backend funcionando!");
-});
-
 app.use("/api/game", gameRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/score", scoreRoutes);
 app.use("/api/word", wordRoutes);
 
+app.use(express.static(path.join(__dirname, "../../../client/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../../client/dist/index.html"));
+});
+
 connectDB();
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

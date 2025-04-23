@@ -4,7 +4,7 @@
   "description": "Backend para Wordhuntle",
   "main": "server.ts",
   "scripts": {
-    "start": "node build/server.js",
+    "start": "node build/server/server.js",
     "dev": "nodemon server.ts",
     "build": "tsc",
     "lint": "eslint .",
