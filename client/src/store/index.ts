@@ -7,7 +7,7 @@ import modalReducer from "@/store/slices/modalSlice";
 import progressReducer from "@/store/slices/progressSlice";
 import themeReducer from "@/store/slices/themeSlice";
 import userReducer from "@/store/slices/userSlice";
-import { scoreMiddleware } from "@/store/middlewares/score";
+import { progressMiddleware } from "@/store/middlewares/progress";
 import { persistMiddleware } from "@/store/middlewares/persist";
 
 const rootReducer = combineReducers({
@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(persistMiddleware).concat(scoreMiddleware),
+    getDefaultMiddleware().concat(persistMiddleware).concat(progressMiddleware),
 });
 
 // Get the type of our store variable

@@ -10,15 +10,3 @@ export interface AuthenticatedRequest extends Request {
     id: string;
   };
 }
-
-export interface IUser extends Document {
-  username: string;
-  passwordHash: string;
-  createdAt: Date;
-}
-
-export interface IScore extends Document {
-  user: IUser;
-  points: number;
-  date: Date;
-}

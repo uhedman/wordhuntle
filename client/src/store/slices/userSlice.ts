@@ -1,4 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { Progress } from "~/shared/types";
+import { RootState } from "..";
+import { puntuation } from "~/shared/utils/wordUtils";
+import { updateProgress } from "./progressSlice";
 
 interface RegisterResponse {
   user: User;
@@ -7,6 +11,7 @@ interface RegisterResponse {
 
 interface LoginResponse {
   user: User;
+  progress?: Progress;
   message: string;
 }
 
@@ -41,7 +46,7 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.loading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -85,9 +90,9 @@ const userSlice = createSlice({
 });
 
 export const loginUser = createAsyncThunk<
-  User,
+  LoginResponse,
   { username: string; password: string },
-  { rejectValue: string }
+  { rejectValue: string; state: RootState }
 >("user/login", async (credentials, thunkAPI) => {
   try {
     const res = await fetch("/api/auth/login", {
@@ -106,7 +111,43 @@ export const loginUser = createAsyncThunk<
 
     const response = (await res.json()) as LoginResponse;
 
-    return response.user;
+    const localProgress = thunkAPI.getState().progress;
+    const backendProgress = response.progress;
+
+    const allWordsSet = new Set([
+      ...localProgress.found,
+      ...(backendProgress?.found ?? []),
+    ]);
+    const allWords = Array.from(allWordsSet);
+
+    const totalPoints = allWords.reduce(
+      (acc, word) => acc + puntuation(word.length),
+      0
+    );
+
+    const maxPoints = thunkAPI.getState().gameData.maxPoints!;
+    const level = Math.floor(Math.sqrt(totalPoints / maxPoints) * 8);
+
+    thunkAPI.dispatch(
+      updateProgress({ found: allWords, points: totalPoints, level })
+    );
+
+    const newWords = localProgress.found.filter(
+      (word) => !backendProgress?.found.includes(word)
+    );
+
+    if (newWords.length > 0) {
+      await fetch("/api/word", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ words: newWords }),
+      });
+    }
+
+    return response;
   } catch (err) {
     console.error(err);
     return thunkAPI.rejectWithValue("Error de red");

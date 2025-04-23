@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth";
 import gridRoutes from "./routes/grid";
 import scoreRoutes from "./routes/score";
+import wordRoutes from "./routes/word";
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 app.use("/api/grid", gridRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/score", scoreRoutes);
+app.use("/api/word", wordRoutes);
 
 connectDB();
 

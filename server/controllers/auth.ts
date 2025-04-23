@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import User from "../models/User";
 import { AuthBody, AuthenticatedRequest } from "../types/auth";
+import Word from "../models/Word";
+import Score from "../models/Score";
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || ""; // TODO
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || ""; // TODO
@@ -17,24 +18,31 @@ export const login = async (
 
   try {
     const user = await User.findOne({ username });
-    if (!user || !(await bcrypt.compare(password, user.passwordHash))) {
+    if (!user || !(await user.validatePassword(password))) {
       res.status(401).send("Credenciales inválidas");
       return;
     }
 
-    const accessToken = jwt.sign(
-      { id: user._id, username: user.username },
-      ACCESS_TOKEN_SECRET,
-      {
-        expiresIn: ACCESS_TOKEN_EXPIRATION,
-      }
-    );
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    const refreshToken = jwt.sign(
-      { id: user._id, username: user.username },
-      REFRESH_TOKEN_SECRET,
-      { expiresIn: REFRESH_TOKEN_EXPIRATION }
-    );
+    const score = await Score.findOne({
+      user: user._id,
+      date: today,
+    });
+
+    const words = await Word.find({
+      user: user._id,
+      date: today,
+    });
+
+    const accessToken = jwt.sign({ id: user._id }, ACCESS_TOKEN_SECRET, {
+      expiresIn: ACCESS_TOKEN_EXPIRATION,
+    });
+
+    const refreshToken = jwt.sign({ id: user._id }, REFRESH_TOKEN_SECRET, {
+      expiresIn: REFRESH_TOKEN_EXPIRATION,
+    });
 
     res
       .cookie("access_token", accessToken, {
@@ -49,7 +57,15 @@ export const login = async (
         sameSite: "strict",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
-      .json({ user: { username }, message: "Login exitoso" });
+      .json({
+        user: { username },
+        message: "Login exitoso",
+        progress: {
+          found: words.map((wordDoc) => wordDoc.word),
+          level: score?.level,
+          points: score?.points,
+        },
+      });
   } catch (err) {
     console.error("Error en login:", err);
     res.status(500).send("Error interno del servidor");
@@ -73,9 +89,27 @@ export const me = async (req: AuthenticatedRequest, res: Response) => {
       return;
     }
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const score = await Score.findOne({
+      user: user._id,
+      date: today,
+    }).select("level points -_id");
+
+    const words = await Word.find({
+      user: user._id,
+      date: today,
+    });
+
     res.json({
       message: "Usuario encontrado",
       user: { username: user.username },
+      progress: {
+        found: words,
+        level: score?.level,
+        points: score?.points,
+      },
     });
   } catch (err) {
     console.error("Error buscando el id:", err);
@@ -101,25 +135,17 @@ export const register = async (
       return;
     }
 
-    const passwordHash = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, passwordHash });
+    const newUser = new User({ username });
+    await newUser.setPassword(password);
     await newUser.save();
 
-    const accessToken = jwt.sign(
-      { id: newUser._id, username },
-      ACCESS_TOKEN_SECRET,
-      {
-        expiresIn: ACCESS_TOKEN_EXPIRATION,
-      }
-    );
+    const accessToken = jwt.sign({ id: newUser._id }, ACCESS_TOKEN_SECRET, {
+      expiresIn: ACCESS_TOKEN_EXPIRATION,
+    });
 
-    const refreshToken = jwt.sign(
-      { id: newUser._id, username },
-      REFRESH_TOKEN_SECRET,
-      {
-        expiresIn: REFRESH_TOKEN_EXPIRATION,
-      }
-    );
+    const refreshToken = jwt.sign({ id: newUser._id }, REFRESH_TOKEN_SECRET, {
+      expiresIn: REFRESH_TOKEN_EXPIRATION,
+    });
 
     res
       .cookie("access_token", accessToken, {
@@ -149,13 +175,11 @@ export const refresh = (req: Request, res: Response) => {
   }
 
   try {
-    const payload = jwt.verify(token, REFRESH_TOKEN_SECRET) as JwtPayload;
+    const payload = jwt.verify(token, REFRESH_TOKEN_SECRET) as { id: string };
 
-    const newAccessToken = jwt.sign(
-      { id: payload.id, username: payload.username },
-      ACCESS_TOKEN_SECRET,
-      { expiresIn: ACCESS_TOKEN_EXPIRATION }
-    );
+    const newAccessToken = jwt.sign({ id: payload.id }, ACCESS_TOKEN_SECRET, {
+      expiresIn: ACCESS_TOKEN_EXPIRATION,
+    });
 
     res
       .cookie("access_token", newAccessToken, {

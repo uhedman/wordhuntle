@@ -1,6 +1,13 @@
 import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
-import { IUser } from "../types/auth";
+
+export interface IUser extends Document {
+  username: string;
+  passwordHash: string;
+  createdAt: Date;
+  setPassword: (password: string) => Promise<void>;
+  validatePassword: (password: string) => Promise<boolean>;
+}
 
 const userSchema = new Schema({
   username: { type: String, required: true, unique: true },

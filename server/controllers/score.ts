@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import Score from "../models/Score";
-import { AuthenticatedRequest } from "../types/auth";
 
 function getStartOfWeek() {
   const d = new Date();
@@ -74,36 +73,5 @@ export const getLeaderboard = async (req: Request, res: Response) => {
   } catch (err) {
     console.error("Error obteniendo leaderboard:", err);
     res.status(500).json({ error: "Error obteniendo leaderboard" });
-  }
-};
-
-export const submitScore = async (req: AuthenticatedRequest, res: Response) => {
-  const userId = req.user?.id;
-  const { points } = req.body;
-
-  if (!userId || typeof points !== "number") {
-    res.status(400).json({ error: "Datos inválidos" });
-    return;
-  }
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  try {
-    const existingScore = await Score.findOne({ user: userId, date: today });
-
-    if (existingScore) {
-      if (points > existingScore.points) {
-        existingScore.points = points;
-        await existingScore.save();
-      }
-    } else {
-      await Score.create({ user: userId, date: today, points });
-    }
-
-    res.status(200).json({ message: "Puntaje guardado con éxito" });
-  } catch (error) {
-    console.error("Error al guardar puntaje:", error);
-    res.status(500).json({ error: "Error interno del servidor" });
   }
 };
