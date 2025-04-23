@@ -5,13 +5,18 @@
   "scripts": {
     "build-client": "cd client && npm run build",
     "build-server": "cd server && npm run build",
-    "build": "concurrently \"npm run build-server\" \"npm run build-client\"",
+    "build": "npm run build-server && npm run build-client",
     "dev-client": "cd client && npm run dev",
     "dev-server": "cd server && npm run dev",
     "dev": "concurrently \"npm run dev-server\" \"npm run dev-client\"",
+    "install-client": "cd client && npm install",
+    "install-server": "cd server && npm install",
+    "install-all": "npm run install-client && npm run install-server",
+    "lint-client": "cd client && npm run lint",
+    "lint-server": "cd server && npm run lint",
+    "lint": "npm run lint-server && npm run lint-client",
     "start-client": "cd client && npm run preview",
-    "start-server": "cd server && npm start",
-    "start": "concurrently \"npm run start-server\" \"npm run start-client\""
+    "start": "cd server && npm start"
   },
   "devDependencies": {
     "concurrently": "^7.6.0"

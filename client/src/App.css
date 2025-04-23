@@ -46,3 +46,7 @@
   display: inline-block;
   animation: showup 0.5s ease-in-out;
 }
+
+.dropdown-toggle::after {
+  display: none !important;
+}

@@ -1,33 +1,15 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import NavBar from "@/components/NavBar";
-import Game from "@/components/Game";
-import Modal from "@/components/Modal";
+import { useLoadUser } from "@/features/auth/hooks/useLoadUser";
+import Game from "@/features/game/components/Game";
+import { useLoadGame } from "@/features/game/hooks/useLoadGame";
+import Modal from "@/features/modal/components/Modal";
+import { useTheme } from "@/features/theme/hooks/useTheme";
+import NavBar from "@/shared/components/NavBar";
 import "@/App.css";
-import { fetchSeed } from "@/api";
-import { loadGame } from "./store/thunks/loadGame";
 
 const App = () => {
-  const theme = useAppSelector((state) => state.theme.value);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-bs-theme", theme);
-  }, [theme]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchSeed();
-        const seed = data.seed;
-        dispatch(loadGame(seed));
-      } catch (error) {
-        console.error("Error al obtener el código del día:", error);
-      }
-    };
-
-    fetchData();
-  }, [dispatch]);
+  useTheme();
+  useLoadGame();
+  useLoadUser();
 
   return (
     <div id="App">
