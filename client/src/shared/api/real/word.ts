@@ -1,5 +1,7 @@
+import { API_BASE_URL } from "@/shared/api/real";
+
 export async function postFoundWords(words: string[]) {
-  const res = await fetch("/api/word", {
+  const res = await fetch(`${API_BASE_URL}/api/word`, {
     method: "POST",
     credentials: "include",
     headers: {

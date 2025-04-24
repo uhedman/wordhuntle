@@ -1,10 +1,11 @@
 import { LoginResponse, RegisterResponse } from "@/features/auth/types";
+import { API_BASE_URL } from "@/shared/api/real";
 
 export const loginUserAPI = async (credentials: {
   username: string;
   password: string;
 }): Promise<LoginResponse> => {
-  const res = await fetch("/api/auth/login", {
+  const res = await fetch(`${API_BASE_URL}/auth/login`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -22,7 +23,7 @@ export const loginUserAPI = async (credentials: {
 };
 
 export const logoutUserAPI = async (): Promise<void> => {
-  const res = await fetch("/api/auth/logout", {
+  const res = await fetch(`${API_BASE_URL}/auth/logout`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -37,7 +38,7 @@ export const logoutUserAPI = async (): Promise<void> => {
 };
 
 export const loadUserAPI = async (): Promise<LoginResponse> => {
-  const res = await fetch("/api/auth/me", {
+  const res = await fetch(`${API_BASE_URL}/auth/me`, {
     method: "GET",
     credentials: "include",
   });
@@ -45,13 +46,13 @@ export const loadUserAPI = async (): Promise<LoginResponse> => {
   if (res.ok) return await res.json();
 
   if (res.status === 401) {
-    const refreshRes = await fetch("/api/auth/refresh", {
+    const refreshRes = await fetch(`${API_BASE_URL}/auth/refresh`, {
       method: "POST",
       credentials: "include",
     });
 
     if (refreshRes.ok) {
-      const retry = await fetch("/api/auth/me", {
+      const retry = await fetch(`${API_BASE_URL}/auth/me`, {
         method: "GET",
         credentials: "include",
       });
@@ -69,7 +70,7 @@ export const registerUserAPI = async (credentials: {
   password: string;
   confirmPassword: string;
 }) => {
-  const res = await fetch("/api/auth/register", {
+  const res = await fetch(`${API_BASE_URL}/auth/register`, {
     method: "POST",
     credentials: "include",
     headers: {
