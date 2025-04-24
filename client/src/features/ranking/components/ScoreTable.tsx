@@ -3,12 +3,7 @@ import { UserScore } from "@/features/ranking/types";
 
 const ScoreTable = ({ list }: { list: UserScore[] }) => {
   return (
-    <Table
-      striped
-      bordered
-      hover
-      style={{ wordBreak: "break-word", tableLayout: "fixed", width: "100%" }}
-    >
+    <Table striped bordered hover>
       <thead>
         <tr>
           <th style={{ width: "2rem" }}>#</th>
