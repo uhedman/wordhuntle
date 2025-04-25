@@ -1,5 +1,5 @@
-import { openModal } from "@/features/modal/slices/modalSlice";
-import { toggleTheme } from "@/features/theme/slices/themeSlice";
+import { openModal } from "@/features/modal/slice";
+import { toggleTheme } from "@/features/theme/slice";
 import { Navbar, Container, Nav, Dropdown } from "react-bootstrap";
 import { FaSun, FaMoon, FaClock, FaBars } from "react-icons/fa";
 import {

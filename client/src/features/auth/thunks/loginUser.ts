@@ -1,4 +1,4 @@
-import { updateProgress } from "@/features/progress/slices/progressSlice";
+import { updateProgress } from "@/features/progress/slice";
 import { loginUserAPI, postFoundWords } from "@/shared/api";
 import { RootState } from "@/shared/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";

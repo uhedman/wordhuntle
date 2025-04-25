@@ -2,10 +2,10 @@ import {
   clearDisplay,
   displayFoundWord,
   displaySpecialMessage,
-} from "@/features/display/slices/displaySlice";
+} from "@/features/display/slice";
 import { addWord } from "@/features/progress/thunks/addWord";
 import { RootState } from "@/shared/types";
-import { stop } from "@/features/drag/slices/dragSlice";
+import { stop } from "@/features/drag/slice";
 import { ThunkAction, PayloadAction } from "@reduxjs/toolkit";
 
 export const stopDrag =

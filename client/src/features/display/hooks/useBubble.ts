@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from "@/shared/hooks";
 import { useEffect } from "react";
-import { clearDisplay } from "@/features/display/slices/displaySlice";
+import { clearDisplay } from "@/features/display/slice";
 
 export const useBubble = () => {
   const showBubble = useAppSelector((state) => state.display.showBubble);

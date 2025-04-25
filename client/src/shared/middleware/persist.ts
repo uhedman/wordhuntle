@@ -1,10 +1,7 @@
-import { setSeed } from "@/features/game/slices/gameDataSlice";
-import {
-  resetProgress,
-  updateProgress,
-} from "@/features/progress/slices/progressSlice";
-import { setLastFound } from "@/features/history/slices/historySlice";
-import { toggleTheme } from "@/features/theme/slices/themeSlice";
+import { setSeed } from "@/features/game/slice";
+import { resetProgress, updateProgress } from "@/features/progress/slice";
+import { setLastFound } from "@/features/history/slice";
+import { toggleTheme } from "@/features/theme/slice";
 import { Middleware } from "@reduxjs/toolkit";
 import { RootState } from "@/shared/types";
 import { loginUser } from "@/features/auth/thunks/loginUser";

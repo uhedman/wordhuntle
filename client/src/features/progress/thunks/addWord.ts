@@ -3,7 +3,7 @@ import { RootState } from "@/shared/types";
 import { ThunkAction, PayloadAction } from "@reduxjs/toolkit";
 import { Progress } from "~/shared/types";
 import { insert, puntuation } from "~/shared/utils/wordUtils";
-import { updateProgress } from "@/features/progress/slices/progressSlice";
+import { updateProgress } from "@/features/progress/slice";
 
 export const addWord =
   (

@@ -1,11 +1,11 @@
-import authReducer from "@/features/auth/slices/authSlice";
-import dragReducer from "@/features/drag/slices/dragSlice";
-import displayReducer from "@/features/display/slices/displaySlice";
-import gameDataReducer from "@/features/game/slices/gameDataSlice";
-import progressReducer from "@/features/progress/slices/progressSlice";
-import historyReducer from "@/features/history/slices/historySlice";
-import modalReducer from "@/features/modal/slices/modalSlice";
-import themeReducer from "@/features/theme/slices/themeSlice";
+import authReducer from "@/features/auth/slice";
+import dragReducer from "@/features/drag/slice";
+import displayReducer from "@/features/display/slice";
+import gameReducer from "@/features/game/slice";
+import progressReducer from "@/features/progress/slice";
+import historyReducer from "@/features/history/slice";
+import modalReducer from "@/features/modal/slice";
+import themeReducer from "@/features/theme/slice";
 import { syncProgressOnRegister } from "@/features/progress/middlewares/syncProgressOnRegister";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistMiddleware } from "@/shared/middleware/persist";
@@ -14,7 +14,7 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   display: displayReducer,
   drag: dragReducer,
-  gameData: gameDataReducer,
+  game: gameReducer,
   history: historyReducer,
   modal: modalReducer,
   progress: progressReducer,

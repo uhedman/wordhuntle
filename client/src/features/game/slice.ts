@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Grid } from "~/shared/types";
 import { getTodayData } from "@/features/game/thunks/getTodayData";
 
-interface GameDataState {
+interface GameState {
   seed: number | null;
   grid: Grid | null;
   words: string[] | null;
@@ -11,7 +11,7 @@ interface GameDataState {
   error: string | undefined;
 }
 
-const initialState: GameDataState = {
+const initialState: GameState = {
   seed: null,
   grid: null,
   words: null,
@@ -20,8 +20,8 @@ const initialState: GameDataState = {
   error: undefined,
 };
 
-const gameDataSlice = createSlice({
-  name: "gameData",
+const gameSlice = createSlice({
+  name: "game",
   initialState,
   reducers: {
     setSeed: (state, action: PayloadAction<number>) => {
@@ -46,5 +46,5 @@ const gameDataSlice = createSlice({
   },
 });
 
-export const { setSeed } = gameDataSlice.actions;
-export default gameDataSlice.reducer;
+export const { setSeed } = gameSlice.actions;
+export default gameSlice.reducer;
