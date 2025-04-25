@@ -1,4 +1,4 @@
-import userReducer from "@/features/auth/slices/userSlice";
+import authReducer from "@/features/auth/slices/authSlice";
 import dragReducer from "@/features/drag/slices/dragSlice";
 import displayReducer from "@/features/game/slices/displaySlice";
 import gameDataReducer from "@/features/game/slices/gameDataSlice";
@@ -11,6 +11,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistMiddleware } from "@/shared/middleware/persist";
 
 export const rootReducer = combineReducers({
+  auth: authReducer,
   display: displayReducer,
   drag: dragReducer,
   gameData: gameDataReducer,
@@ -18,7 +19,6 @@ export const rootReducer = combineReducers({
   modal: modalReducer,
   progress: progressReducer,
   theme: themeReducer,
-  user: userReducer,
 });
 
 export const store = configureStore({

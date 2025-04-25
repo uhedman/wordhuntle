@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
-import { AuthBody, AuthenticatedRequest } from "../types/auth";
 import Word from "../models/Word";
 import Score from "../models/Score";
+import { AuthBody, AuthenticatedRequest } from "../types/auth";
+import { validateAuthInput } from "../validators/authValidator";
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || ""; // TODO
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || ""; // TODO
@@ -122,9 +123,10 @@ export const register = async (
   res: Response
 ) => {
   const { username, password } = req.body;
+  const validationError = validateAuthInput(username, password);
 
-  if (password.length < 4) {
-    res.status(400).send("Datos inválidos");
+  if (validationError) {
+    res.status(400).send(validationError);
     return;
   }
 

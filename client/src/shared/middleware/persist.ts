@@ -7,6 +7,9 @@ import { setLastFound } from "@/features/history/slices/historySlice";
 import { toggleTheme } from "@/features/theme/slices/themeSlice";
 import { Middleware } from "@reduxjs/toolkit";
 import { RootState } from "@/shared/types";
+import { loginUser } from "@/features/auth/thunks/loginUser";
+import { logoutUser } from "@/features/auth/thunks/logoutUser";
+import { registerUser } from "@/features/auth/thunks/registerUser";
 
 export const persistMiddleware: Middleware<object, RootState> =
   (store) => (next) => (action) => {
@@ -27,6 +30,14 @@ export const persistMiddleware: Middleware<object, RootState> =
     } else if (toggleTheme.match(action)) {
       const theme = state.theme.value;
       localStorage.setItem("theme", theme);
+    }
+    if (
+      loginUser.fulfilled.match(action) ||
+      logoutUser.fulfilled.match(action) ||
+      registerUser.fulfilled.match(action)
+    ) {
+      const user = state.auth.user;
+      localStorage.setItem("user", JSON.stringify(user));
     }
 
     return result;

@@ -3,9 +3,10 @@ import { useState } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import { registerUser } from "../thunks/registerUser";
 import { ModeProps } from "../types";
+import { showUsernameError, showPasswordError } from "../utils";
 
 const Register = ({ setMode }: ModeProps) => {
-  const loading = useAppSelector((state) => state.user.loading);
+  const loading = useAppSelector((state) => state.auth.loading);
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -46,10 +47,12 @@ const Register = ({ setMode }: ModeProps) => {
             disabled={loading}
             placeholder="Nombre de usuario"
             autoComplete="username"
+            minLength={3}
+            maxLength={20}
             required
           />
           <Form.Control.Feedback type="invalid">
-            Por favor, ingrese un nombre de usuario.
+            {showUsernameError(username)}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -63,12 +66,12 @@ const Register = ({ setMode }: ModeProps) => {
             placeholder="Contraseña"
             autoComplete="new-password"
             minLength={8}
+            isInvalid={validated && !passwordsMatch}
+            isValid={validated && passwordsMatch}
             required
           />
           <Form.Control.Feedback type="invalid">
-            {password.length === 0
-              ? "Por favor, ingrese una contraseña."
-              : "La contraseña debe tener al menos 8 caracteres."}
+            {showPasswordError(password, passwordsMatch)}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -82,15 +85,11 @@ const Register = ({ setMode }: ModeProps) => {
             placeholder="Confirmar contraseña"
             autoComplete="new-password"
             minLength={8}
-            required
             isInvalid={validated && !passwordsMatch}
+            required
           />
           <Form.Control.Feedback type="invalid">
-            {confirmPassword.length === 0
-              ? "Por favor, confirme su contraseña."
-              : !passwordsMatch
-              ? "Las contraseñas no coinciden."
-              : ""}
+            {showPasswordError(confirmPassword, passwordsMatch)}
           </Form.Control.Feedback>
         </Form.Group>
 

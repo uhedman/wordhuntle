@@ -4,21 +4,22 @@ import { loginUser } from "@/features/auth/thunks/loginUser";
 import { logoutUser } from "@/features/auth/thunks/logoutUser";
 import { registerUser } from "@/features/auth/thunks/registerUser";
 import { User } from "@/features/auth/types";
+import { getFromStorage } from "@/shared/utils/storage";
 
-interface UserState {
+interface AuthState {
   user: User | null;
   loading: boolean;
   error: string | null;
 }
 
-const initialState: UserState = {
-  user: null,
+const initialState: AuthState = {
+  user: getFromStorage<User>("user"),
   loading: false,
   error: null,
 };
 
-const userSlice = createSlice({
-  name: "user",
+const authSlice = createSlice({
+  name: "auth",
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<User>) => {
@@ -75,5 +76,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser } = userSlice.actions;
-export default userSlice.reducer;
+export const { setUser } = authSlice.actions;
+export default authSlice.reducer;

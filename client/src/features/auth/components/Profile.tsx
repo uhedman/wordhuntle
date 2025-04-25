@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { logoutUser } from "@/features/auth/thunks/logoutUser";
 
 const Profile = () => {
-  const user = useAppSelector((state) => state.user.user);
+  const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {

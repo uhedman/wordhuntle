@@ -6,7 +6,7 @@ import Profile from "@/features/auth/components/Profile";
 import Register from "@/features/auth/components/Register";
 
 const User = () => {
-  const user = useAppSelector((state) => state.user.user);
+  const user = useAppSelector((state) => state.auth.user);
 
   const [mode, setMode] = useState<"login" | "register" | "accessed">("login");
 

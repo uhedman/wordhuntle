@@ -3,9 +3,10 @@ import { useState } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import { loginUser } from "@/features/auth/thunks/loginUser";
 import { ModeProps } from "@/features/auth/types";
+import { showPasswordError, showUsernameError } from "../utils";
 
 const Login = ({ setMode }: ModeProps) => {
-  const loading = useAppSelector((state) => state.user.loading);
+  const loading = useAppSelector((state) => state.auth.loading);
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -41,10 +42,12 @@ const Login = ({ setMode }: ModeProps) => {
             placeholder="Nombre de usuario"
             autoComplete="usuario"
             disabled={loading}
+            minLength={3}
+            maxLength={20}
             required
           />
           <Form.Control.Feedback type="invalid">
-            Por favor, ingrese un nombre de usuario.
+            {showUsernameError(username)}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -61,9 +64,7 @@ const Login = ({ setMode }: ModeProps) => {
             required
           />
           <Form.Control.Feedback type="invalid">
-            {password.length === 0
-              ? "Por favor, ingrese una contraseña."
-              : "La contraseña debe tener al menos 8 caracteres."}
+            {showPasswordError(password)}
           </Form.Control.Feedback>
         </Form.Group>
 
