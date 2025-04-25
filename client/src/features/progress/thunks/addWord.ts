@@ -21,8 +21,10 @@ export const addWord =
 
       dispatch(updateProgress({ level, found: newFound, points: newPoints }));
 
-      postFoundWords([word]).catch((err) =>
-        console.error("Error al guardar la palabra en la API:", err)
-      );
+      if (state.auth.user !== null) {
+        postFoundWords([word]).catch((err) =>
+          console.error("Error al guardar la palabra en la API:", err)
+        );
+      }
     }
   };
