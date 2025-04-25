@@ -4,7 +4,7 @@ import { ProgressBar } from "react-bootstrap";
 const PointsBar = () => {
   const level = useAppSelector((state) => state.progress.level);
   const points = useAppSelector((state) => state.progress.points);
-  const maxPoints = useAppSelector((state) => state.gameData.maxPoints);
+  const maxPoints = useAppSelector((state) => state.game.maxPoints);
   const progress = Math.sqrt(points / (maxPoints ?? 1)) * 100;
 
   return (

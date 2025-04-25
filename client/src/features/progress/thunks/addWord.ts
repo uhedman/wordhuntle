@@ -12,7 +12,7 @@ export const addWord =
   (dispatch, getState) => {
     const state = getState();
     const { found, points } = state.progress;
-    const { maxPoints } = state.gameData;
+    const { maxPoints } = state.game;
 
     if (!found.includes(word)) {
       const newFound = insert(found, word);

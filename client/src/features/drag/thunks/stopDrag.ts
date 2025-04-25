@@ -18,7 +18,7 @@ export const stopDrag =
   (dispatch, getState) => {
     const state = getState();
     const { isDragging, word } = state.drag;
-    const { words } = state.gameData;
+    const { words } = state.game;
     const found = state.progress.found;
 
     if (!isDragging || words === null || found === null) return;

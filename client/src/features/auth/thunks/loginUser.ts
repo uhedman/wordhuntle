@@ -27,7 +27,7 @@ export const loginUser = createAsyncThunk<
       0
     );
 
-    const maxPoints = thunkAPI.getState().gameData.maxPoints!;
+    const maxPoints = thunkAPI.getState().game.maxPoints!;
     const level = Math.floor(Math.sqrt(totalPoints / maxPoints) * 8);
 
     thunkAPI.dispatch(

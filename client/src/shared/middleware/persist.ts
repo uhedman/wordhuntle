@@ -14,7 +14,7 @@ export const persistMiddleware: Middleware<object, RootState> =
 
     const state = store.getState();
     if (setSeed.match(action)) {
-      const seed = state.gameData.seed;
+      const seed = state.game.seed;
       localStorage.setItem("seed", JSON.stringify(seed));
     } else if (setLastFound.match(action)) {
       const { lastFound } = state.history;

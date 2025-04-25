@@ -1,5 +1,5 @@
-import { GameData } from "@/features/game/types";
-import { LastGameData } from "@/features/history/types";
+import { Game } from "@/features/game/types";
+import { LastGame } from "@/features/history/types";
 import { getGrid } from "~/shared/utils/dailyGrid";
 import { getWords } from "~/shared/utils/dailyWords";
 import { puntuation } from "~/shared/utils/wordUtils";
@@ -10,7 +10,7 @@ export const getSeedAPI = async () => {
   return { seed };
 };
 
-export const getTodayDataAPI = async (): Promise<GameData> => {
+export const getTodayDataAPI = async (): Promise<Game> => {
   const todayGrid = getGrid(seed);
   const todayWords = getWords(todayGrid);
   const maxPoints = todayWords.reduce(
@@ -21,7 +21,7 @@ export const getTodayDataAPI = async (): Promise<GameData> => {
   return { grid: todayGrid, words: todayWords, maxPoints };
 };
 
-export const getLastDataAPI = async (): Promise<LastGameData> => {
+export const getLastDataAPI = async (): Promise<LastGame> => {
   const lastGrid = getGrid(seed - 1);
   const lastWords = getWords(lastGrid).sort();
 

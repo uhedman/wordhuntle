@@ -3,7 +3,7 @@ import Line from "@/features/game/components/Line";
 import Tile from "@/features/game/components/Tile";
 
 const Grid = () => {
-  const grid = useAppSelector((state) => state.gameData.grid);
+  const grid = useAppSelector((state) => state.game.grid);
 
   const tiles = grid === null ? Array(16).fill(null) : grid.flat();
 

@@ -3,7 +3,7 @@ import { Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const Words = () => {
   const found = useAppSelector((state) => state.progress.found);
-  const words = useAppSelector((state) => state.gameData.words);
+  const words = useAppSelector((state) => state.game.words);
 
   return (
     <>
