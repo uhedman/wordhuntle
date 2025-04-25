@@ -2,7 +2,7 @@ import {
   clearDisplay,
   displayFoundWord,
   displaySpecialMessage,
-} from "@/features/game/slices/displaySlice";
+} from "@/features/display/slices/displaySlice";
 import { addWord } from "@/features/progress/thunks/addWord";
 import { RootState } from "@/shared/types";
 import { stop } from "@/features/drag/slices/dragSlice";

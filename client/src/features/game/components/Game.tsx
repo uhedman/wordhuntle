@@ -1,7 +1,7 @@
 import { stopDrag } from "@/features/drag/thunks/stopDrag";
 import { useAppDispatch } from "@/shared/hooks";
 import { useEffect } from "react";
-import Display from "@/features/game/components/Display";
+import Display from "@/features/display/components/Display";
 import Grid from "@/features/game/components/Grid";
 import Points from "@/features/game/components/Points";
 

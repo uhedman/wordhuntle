@@ -1,4 +1,4 @@
-import { displayWord } from "@/features/game/slices/displaySlice";
+import { displayWord } from "@/features/display/slices/displaySlice";
 import { TileData } from "@/features/game/types";
 import { RootState } from "@/shared/types";
 import { PayloadAction, ThunkAction } from "@reduxjs/toolkit";

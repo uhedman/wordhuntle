@@ -1,6 +1,6 @@
 import authReducer from "@/features/auth/slices/authSlice";
 import dragReducer from "@/features/drag/slices/dragSlice";
-import displayReducer from "@/features/game/slices/displaySlice";
+import displayReducer from "@/features/display/slices/displaySlice";
 import gameDataReducer from "@/features/game/slices/gameDataSlice";
 import progressReducer from "@/features/progress/slices/progressSlice";
 import historyReducer from "@/features/history/slices/historySlice";
