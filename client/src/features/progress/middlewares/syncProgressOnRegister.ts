@@ -8,6 +8,7 @@ export const syncProgressOnRegister: Middleware<object, RootState> =
     const result = next(action);
 
     if (registerUser.fulfilled.match(action)) {
+      // TODO user !== null
       const found = store.getState().progress.found;
 
       postFoundWords(found).catch((err) =>

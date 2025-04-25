@@ -6,7 +6,7 @@ import Share from "@/features/share/components/Share";
 import { useAppSelector, useAppDispatch } from "@/shared/hooks";
 import { useMemo } from "react";
 import { Modal } from "react-bootstrap";
-import { closeModal } from "@/features/modal/slices/modalSlice";
+import { closeModal } from "@/features/modal/slice";
 import Info from "@/features/modal/components/Info";
 
 const ModalComponent = () => {

@@ -15,8 +15,8 @@ export interface User {
   username: string;
 }
 
-export interface ModeProps {
-  setMode: React.Dispatch<
-    React.SetStateAction<"login" | "register" | "accessed">
-  >;
+export type AuthView = "login" | "register" | "authenticated";
+
+export interface AuthViewProps {
+  setAuthView: React.Dispatch<React.SetStateAction<AuthView>>;
 }

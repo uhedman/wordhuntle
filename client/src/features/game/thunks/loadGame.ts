@@ -1,10 +1,10 @@
-import { setLastFound } from "@/features/history/slices/historySlice";
+import { setLastFound } from "@/features/history/slice";
 import { getLastData } from "@/features/history/thunks/getLastData";
 import { RootState } from "@/shared/types";
 import { getFromStorage } from "@/shared/utils/storage";
 import { ThunkAction, PayloadAction } from "@reduxjs/toolkit";
-import { setSeed } from "@/features/game/slices/gameDataSlice";
-import { resetProgress } from "@/features/progress/slices/progressSlice";
+import { setSeed } from "@/features/game/slice";
+import { resetProgress } from "@/features/progress/slice";
 import { getTodayData } from "@/features/game/thunks/getTodayData";
 
 export const loadGame =

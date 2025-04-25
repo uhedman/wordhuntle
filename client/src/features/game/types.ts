@@ -6,13 +6,13 @@ export interface TileData {
   pos: Pos;
 }
 
-export interface GameData {
+export interface Game {
   grid: Grid;
   words: string[];
   maxPoints: number;
 }
 
-export interface EncrypedGameData {
+export interface EncrypedGame {
   grid: Grid;
   words: string;
   maxPoints: number;

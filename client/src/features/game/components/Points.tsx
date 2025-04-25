@@ -1,4 +1,4 @@
-import { openModal } from "@/features/modal/slices/modalSlice";
+import { openModal } from "@/features/modal/slice";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks";
 import { Button } from "react-bootstrap";
 import { FaEye } from "react-icons/fa";

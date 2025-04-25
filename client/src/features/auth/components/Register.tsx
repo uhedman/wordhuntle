@@ -1,11 +1,13 @@
 import { useAppSelector, useAppDispatch } from "@/shared/hooks";
 import { useState } from "react";
-import { Form, Button, Spinner } from "react-bootstrap";
-import { registerUser } from "../thunks/registerUser";
-import { ModeProps } from "../types";
+import { Form, Button, Spinner, Alert } from "react-bootstrap";
+import { registerUser } from "@/features/auth/thunks/registerUser";
+import { AuthViewProps } from "@/features/auth/types";
+import { showUsernameError, showPasswordError } from "@/features/auth/utils";
 
-const Register = ({ setMode }: ModeProps) => {
-  const loading = useAppSelector((state) => state.user.loading);
+const Register = ({ setAuthView }: AuthViewProps) => {
+  const loading = useAppSelector((state) => state.auth.registerLoading);
+  const error = useAppSelector((state) => state.auth.registerError);
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -46,10 +48,12 @@ const Register = ({ setMode }: ModeProps) => {
             disabled={loading}
             placeholder="Nombre de usuario"
             autoComplete="username"
+            minLength={3}
+            maxLength={20}
             required
           />
           <Form.Control.Feedback type="invalid">
-            Por favor, ingrese un nombre de usuario.
+            {showUsernameError(username)}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -63,12 +67,12 @@ const Register = ({ setMode }: ModeProps) => {
             placeholder="Contraseña"
             autoComplete="new-password"
             minLength={8}
+            isInvalid={validated && !passwordsMatch}
+            isValid={validated && passwordsMatch}
             required
           />
           <Form.Control.Feedback type="invalid">
-            {password.length === 0
-              ? "Por favor, ingrese una contraseña."
-              : "La contraseña debe tener al menos 8 caracteres."}
+            {showPasswordError(password, passwordsMatch)}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -82,15 +86,11 @@ const Register = ({ setMode }: ModeProps) => {
             placeholder="Confirmar contraseña"
             autoComplete="new-password"
             minLength={8}
-            required
             isInvalid={validated && !passwordsMatch}
+            required
           />
           <Form.Control.Feedback type="invalid">
-            {confirmPassword.length === 0
-              ? "Por favor, confirme su contraseña."
-              : !passwordsMatch
-              ? "Las contraseñas no coinciden."
-              : ""}
+            {showPasswordError(confirmPassword, passwordsMatch)}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -99,11 +99,17 @@ const Register = ({ setMode }: ModeProps) => {
         </Button>
       </Form>
 
+      {error && (
+        <Alert variant="danger" className="mt-3">
+          {error}
+        </Alert>
+      )}
+
       <div className="mt-3">
         ¿Ya tenés cuenta?{" "}
         <Button
           variant="link"
-          onClick={() => setMode("login")}
+          onClick={() => setAuthView("login")}
           disabled={loading}
         >
           Iniciar sesión

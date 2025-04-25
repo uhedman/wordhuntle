@@ -2,10 +2,10 @@ import {
   clearDisplay,
   displayFoundWord,
   displaySpecialMessage,
-} from "@/features/game/slices/displaySlice";
+} from "@/features/display/slice";
 import { addWord } from "@/features/progress/thunks/addWord";
 import { RootState } from "@/shared/types";
-import { stop } from "@/features/drag/slices/dragSlice";
+import { stop } from "@/features/drag/slice";
 import { ThunkAction, PayloadAction } from "@reduxjs/toolkit";
 
 export const stopDrag =
@@ -18,7 +18,7 @@ export const stopDrag =
   (dispatch, getState) => {
     const state = getState();
     const { isDragging, word } = state.drag;
-    const { words } = state.gameData;
+    const { words } = state.game;
     const found = state.progress.found;
 
     if (!isDragging || words === null || found === null) return;

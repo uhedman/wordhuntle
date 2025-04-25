@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
-import { AuthBody, AuthenticatedRequest } from "../types/auth";
 import Word from "../models/Word";
 import Score from "../models/Score";
+import { AuthBody, AuthenticatedRequest } from "../types/auth";
+import { validateAuthInput } from "../validators/authValidator";
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || ""; // TODO
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || ""; // TODO
@@ -48,13 +49,13 @@ export const login = async (
       .cookie("access_token", accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 60 * 60 * 1000,
       })
       .cookie("refresh_token", refreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .json({
@@ -122,9 +123,10 @@ export const register = async (
   res: Response
 ) => {
   const { username, password } = req.body;
+  const validationError = validateAuthInput(username, password);
 
-  if (password.length < 4) {
-    res.status(400).send("Datos inválidos");
+  if (validationError) {
+    res.status(400).send(validationError);
     return;
   }
 
@@ -148,16 +150,17 @@ export const register = async (
     });
 
     res
+      .status(201)
       .cookie("access_token", accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 60 * 60 * 1000,
       })
       .cookie("refresh_token", refreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .json({ message: "Usuario registrado con éxito", user: { username } });
@@ -185,7 +188,7 @@ export const refresh = (req: Request, res: Response) => {
       .cookie("access_token", newAccessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 60 * 60 * 1000,
       })
       .json({ message: "Access token renovado" });

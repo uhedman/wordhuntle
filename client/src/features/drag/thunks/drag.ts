@@ -1,8 +1,8 @@
-import { displayWord } from "@/features/game/slices/displaySlice";
+import { displayWord } from "@/features/display/slice";
 import { TileData } from "@/features/game/types";
 import { RootState } from "@/shared/types";
 import { PayloadAction, ThunkAction } from "@reduxjs/toolkit";
-import { back, write } from "@/features/drag/slices/dragSlice";
+import { back, write } from "@/features/drag/slice";
 
 export const drag =
   (action: {

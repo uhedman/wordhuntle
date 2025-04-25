@@ -3,7 +3,7 @@ import { RootState } from "@/shared/types";
 import { ThunkAction, PayloadAction } from "@reduxjs/toolkit";
 import { Progress } from "~/shared/types";
 import { insert, puntuation } from "~/shared/utils/wordUtils";
-import { updateProgress } from "@/features/progress/slices/progressSlice";
+import { updateProgress } from "@/features/progress/slice";
 
 export const addWord =
   (
@@ -12,7 +12,7 @@ export const addWord =
   (dispatch, getState) => {
     const state = getState();
     const { found, points } = state.progress;
-    const { maxPoints } = state.gameData;
+    const { maxPoints } = state.game;
 
     if (!found.includes(word)) {
       const newFound = insert(found, word);
@@ -21,8 +21,10 @@ export const addWord =
 
       dispatch(updateProgress({ level, found: newFound, points: newPoints }));
 
-      postFoundWords([word]).catch((err) =>
-        console.error("Error al guardar la palabra en la API:", err)
-      );
+      if (state.auth.user !== null) {
+        postFoundWords([word]).catch((err) =>
+          console.error("Error al guardar la palabra en la API:", err)
+        );
+      }
     }
   };

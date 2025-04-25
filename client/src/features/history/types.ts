@@ -1,3 +1,3 @@
-import { GameData } from "@/features/game/types";
+import { Game } from "@/features/game/types";
 
-export type LastGameData = Omit<GameData, "maxPoints">;
+export type LastGame = Omit<Game, "maxPoints">;
