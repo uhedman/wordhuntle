@@ -1,12 +1,13 @@
 import { useAppSelector, useAppDispatch } from "@/shared/hooks";
 import { useState } from "react";
-import { Form, Button, Spinner } from "react-bootstrap";
+import { Form, Button, Spinner, Alert } from "react-bootstrap";
 import { loginUser } from "@/features/auth/thunks/loginUser";
-import { ModeProps } from "@/features/auth/types";
+import { AuthViewProps } from "@/features/auth/types";
 import { showPasswordError, showUsernameError } from "../utils";
 
-const Login = ({ setMode }: ModeProps) => {
+const Login = ({ setAuthView }: AuthViewProps) => {
   const loading = useAppSelector((state) => state.auth.loading);
+  const error = useAppSelector((state) => state.auth.error);
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -76,11 +77,18 @@ const Login = ({ setMode }: ModeProps) => {
           )}
         </Button>
       </Form>
+
+      {error && (
+        <Alert variant="danger" className="mt-3">
+          {error}
+        </Alert>
+      )}
+
       <div>
         ¿No tenés cuenta?{" "}
         <Button
           variant="link"
-          onClick={() => setMode("register")}
+          onClick={() => setAuthView("register")}
           disabled={loading}
         >
           Registrate

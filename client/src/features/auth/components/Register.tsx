@@ -1,11 +1,11 @@
 import { useAppSelector, useAppDispatch } from "@/shared/hooks";
 import { useState } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
-import { registerUser } from "../thunks/registerUser";
-import { ModeProps } from "../types";
-import { showUsernameError, showPasswordError } from "../utils";
+import { registerUser } from "@/features/auth/thunks/registerUser";
+import { AuthViewProps } from "@/features/auth/types";
+import { showUsernameError, showPasswordError } from "@/features/auth/utils";
 
-const Register = ({ setMode }: ModeProps) => {
+const Register = ({ setAuthView }: AuthViewProps) => {
   const loading = useAppSelector((state) => state.auth.loading);
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState("");
@@ -102,7 +102,7 @@ const Register = ({ setMode }: ModeProps) => {
         ¿Ya tenés cuenta?{" "}
         <Button
           variant="link"
-          onClick={() => setMode("login")}
+          onClick={() => setAuthView("login")}
           disabled={loading}
         >
           Iniciar sesión
