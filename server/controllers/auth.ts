@@ -150,6 +150,7 @@ export const register = async (
     });
 
     res
+      .status(201)
       .cookie("access_token", accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",

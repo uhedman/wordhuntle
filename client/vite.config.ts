@@ -8,8 +8,8 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://wordhuntle.vercel.app",
-        // target: "http://localhost:5000",
+        // target: "https://wordhuntle.vercel.app",
+        target: "http://localhost:5000",
         changeOrigin: true,
       },
     },

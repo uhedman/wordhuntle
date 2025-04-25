@@ -1,12 +1,13 @@
 import { useAppSelector, useAppDispatch } from "@/shared/hooks";
 import { useState } from "react";
-import { Form, Button, Spinner } from "react-bootstrap";
+import { Form, Button, Spinner, Alert } from "react-bootstrap";
 import { registerUser } from "@/features/auth/thunks/registerUser";
 import { AuthViewProps } from "@/features/auth/types";
 import { showUsernameError, showPasswordError } from "@/features/auth/utils";
 
 const Register = ({ setAuthView }: AuthViewProps) => {
-  const loading = useAppSelector((state) => state.auth.loading);
+  const loading = useAppSelector((state) => state.auth.registerLoading);
+  const error = useAppSelector((state) => state.auth.registerError);
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -97,6 +98,12 @@ const Register = ({ setAuthView }: AuthViewProps) => {
           {loading ? <Spinner animation="border" size="sm" /> : "Registrar"}
         </Button>
       </Form>
+
+      {error && (
+        <Alert variant="danger" className="mt-3">
+          {error}
+        </Alert>
+      )}
 
       <div className="mt-3">
         ¿Ya tenés cuenta?{" "}

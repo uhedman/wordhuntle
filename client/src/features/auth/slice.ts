@@ -8,14 +8,22 @@ import { getFromStorage } from "@/shared/utils/storage";
 
 interface AuthState {
   user: User | null;
-  loading: boolean;
-  error: string | null;
+  loginLoading: boolean;
+  loginError: string | null;
+  logoutLoading: boolean;
+  logoutError: string | null;
+  registerLoading: boolean;
+  registerError: string | null;
 }
 
 const initialState: AuthState = {
   user: getFromStorage<User>("user"),
-  loading: false,
-  error: null,
+  loginLoading: false,
+  loginError: null,
+  logoutLoading: false,
+  logoutError: null,
+  registerLoading: false,
+  registerError: null,
 };
 
 const authSlice = createSlice({
@@ -29,42 +37,42 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.loginLoading = true;
+        state.loginError = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.loading = false;
+        state.loginLoading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.error = action.payload || "Error desconocido";
-        state.loading = false;
+        state.loginError = action.payload || "Error desconocido";
+        state.loginLoading = false;
       })
 
       .addCase(logoutUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.logoutLoading = true;
+        state.loginError = null;
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
-        state.loading = false;
+        state.logoutLoading = false;
       })
       .addCase(logoutUser.rejected, (state, action) => {
-        state.error = action.payload || "Error desconocido";
-        state.loading = false;
+        state.loginError = action.payload || "Error desconocido";
+        state.logoutLoading = false;
       })
 
       .addCase(registerUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.registerLoading = true;
+        state.registerError = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.loading = false;
+        state.registerLoading = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.error = action.payload || "Error desconocido";
-        state.loading = false;
+        state.registerError = action.payload || "Error desconocido";
+        state.registerLoading = false;
       })
 
       .addCase(loadUser.fulfilled, (state, action) => {

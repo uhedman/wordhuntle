@@ -6,8 +6,8 @@ import { AuthViewProps } from "@/features/auth/types";
 import { showPasswordError, showUsernameError } from "../utils";
 
 const Login = ({ setAuthView }: AuthViewProps) => {
-  const loading = useAppSelector((state) => state.auth.loading);
-  const error = useAppSelector((state) => state.auth.error);
+  const loading = useAppSelector((state) => state.auth.loginLoading);
+  const error = useAppSelector((state) => state.auth.loginError);
   const [validated, setValidated] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

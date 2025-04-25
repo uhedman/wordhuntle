@@ -27,8 +27,7 @@ export const persistMiddleware: Middleware<object, RootState> =
     } else if (toggleTheme.match(action)) {
       const theme = state.theme.value;
       localStorage.setItem("theme", theme);
-    }
-    if (
+    } else if (
       loginUser.fulfilled.match(action) ||
       logoutUser.fulfilled.match(action) ||
       registerUser.fulfilled.match(action)

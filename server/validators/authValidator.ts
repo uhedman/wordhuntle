@@ -22,5 +22,5 @@ export const validateAuthInput = (
     return "El nombre de usuario solo puede contener letras, números y guiones bajos";
   }
 
-  return null; // Todo OK
+  return null;
 };

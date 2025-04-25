@@ -1,9 +1,10 @@
 import { updateProgress } from "@/features/progress/slice";
 import { loginUserAPI, postFoundWords } from "@/shared/api";
+import { CustomError, ErrorTypes } from "@/shared/errors";
 import { RootState } from "@/shared/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { puntuation } from "~/shared/utils/wordUtils";
-import { LoginResponse } from "@/features/auth/types";
+import { LoginResponse } from "../types";
 
 export const loginUser = createAsyncThunk<
   LoginResponse,
@@ -44,7 +45,34 @@ export const loginUser = createAsyncThunk<
 
     return response;
   } catch (err) {
-    console.error(err);
-    return thunkAPI.rejectWithValue("Error de red");
+    if (err instanceof CustomError) {
+      switch (err.type) {
+        case ErrorTypes.NETWORK_ERROR:
+          return thunkAPI.rejectWithValue(
+            "No se pudo conectar con el servidor. Verificá tu conexión a internet e intentá nuevamente."
+          );
+
+        case ErrorTypes.AUTHENTICATION_ERROR:
+          return thunkAPI.rejectWithValue(
+            "Error al iniciar sesión. Verificá los datos ingresados."
+          );
+
+        case ErrorTypes.INTERNAL_SERVER_ERROR:
+          return thunkAPI.rejectWithValue(
+            "Error interno del servidor. Estamos trabajando para solucionarlo."
+          );
+
+        case ErrorTypes.UNKNOWN_ERROR:
+        default:
+          return thunkAPI.rejectWithValue(
+            err.message ||
+              "Error desconocido. Si el problema persiste, contactá al soporte."
+          );
+      }
+    }
+
+    return thunkAPI.rejectWithValue(
+      "Algo salió mal. Intentalo de nuevo más tarde."
+    );
   }
 });
