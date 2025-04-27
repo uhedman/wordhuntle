@@ -6,9 +6,6 @@ export const logoutUserAPI = async (): Promise<void> => {
     const res = await fetch(`${API_BASE_URL}/auth/logout`, {
       method: "POST",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
 
     if (res.ok) {
