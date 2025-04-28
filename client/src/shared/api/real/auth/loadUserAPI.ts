@@ -3,13 +3,13 @@ import { CustomError, ErrorTypes } from "@/shared/errors";
 import { API_BASE_URL } from "@/shared/api/real";
 
 export const loadUserAPI = async (
-  refreshToken: string
+  accessToken: string
 ): Promise<LoginResponse> => {
   try {
     const res = await fetch(`${API_BASE_URL}/auth/me`, {
-      method: "POST",
+      method: "GET",
       headers: {
-        Authorization: `Bearer ${refreshToken}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
 

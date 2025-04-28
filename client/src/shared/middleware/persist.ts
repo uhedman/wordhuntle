@@ -35,8 +35,10 @@ export const persistMiddleware: Middleware<object, RootState> =
     ) {
       const { user, refreshToken } = state.auth;
       localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("refreshToken", refreshToken!);
-    } else if (logoutUser.match(action)) {
+      if (refreshToken) {
+        localStorage.setItem("refreshToken", refreshToken);
+      }
+    } else if (loadUser.rejected.match(action) || logoutUser.match(action)) {
       localStorage.removeItem("user");
       localStorage.removeItem("refreshToken");
     }

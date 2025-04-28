@@ -91,7 +91,7 @@ export const me = async (req: AuthenticatedRequest, res: Response) => {
       message: "Usuario encontrado",
       user: { username: user.username },
       progress: {
-        found: words,
+        found: words.map((wordDoc) => wordDoc.word),
         level: score?.level,
         points: score?.points,
       },
@@ -161,14 +161,9 @@ export const refresh = (req: Request, res: Response) => {
       expiresIn: ACCESS_TOKEN_EXPIRATION,
     });
 
-    const newRefreshToken = jwt.sign({ id: payload.id }, REFRESH_TOKEN_SECRET, {
-      expiresIn: REFRESH_TOKEN_EXPIRATION,
-    });
-
     res.json({
       message: "Access token renovado",
       accessToken: newAccessToken,
-      refreshToken: newRefreshToken,
     });
   } catch (err) {
     console.error("Error refrescando el token", err);
