@@ -1,15 +1,14 @@
-import { logoutUserAPI } from "@/shared/api";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { clearUser } from "@/features/auth/slice";
+import { resetProgress } from "@/features/progress/slice";
+import { AppDispatch, RootState } from "@/shared/types";
+import { PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 
-export const logoutUser = createAsyncThunk<void, void, { rejectValue: string }>(
-  "user/logout",
-  async (_, thunkAPI) => {
-    try {
-      await logoutUserAPI();
-      return;
-    } catch (err) {
-      console.error(err);
-      return thunkAPI.rejectWithValue("Error de red");
-    }
-  }
-);
+export const logoutUser: ThunkAction<
+  void,
+  RootState,
+  unknown,
+  PayloadAction<void>
+> = () => (dispatch: AppDispatch) => {
+  dispatch(clearUser());
+  dispatch(resetProgress());
+};

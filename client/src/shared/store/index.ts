@@ -6,7 +6,6 @@ import progressReducer from "@/features/progress/slice";
 import historyReducer from "@/features/history/slice";
 import modalReducer from "@/features/modal/slice";
 import themeReducer from "@/features/theme/slice";
-import { syncProgressOnRegister } from "@/features/progress/middlewares/syncProgressOnRegister";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistMiddleware } from "@/shared/middleware/persist";
 
@@ -24,7 +23,5 @@ export const rootReducer = combineReducers({
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
-      .concat(persistMiddleware)
-      .concat(syncProgressOnRegister),
+    getDefaultMiddleware().concat(persistMiddleware),
 });

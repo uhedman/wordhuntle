@@ -19,7 +19,7 @@ export const registerUserAPI = async (credentials: {
 
     if (res.ok) {
       const data = (await res.json()) as RegisterResponse;
-      return data.user;
+      return data;
     }
 
     const errorText = await res.text();

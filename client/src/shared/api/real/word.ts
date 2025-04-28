@@ -1,10 +1,10 @@
 import { API_BASE_URL } from "@/shared/api/real";
 
-export async function postFoundWords(words: string[]) {
+export async function postFoundWords(words: string[], accessToken: string) {
   const res = await fetch(`${API_BASE_URL}/word`, {
     method: "POST",
-    credentials: "include",
     headers: {
+      Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ words }),

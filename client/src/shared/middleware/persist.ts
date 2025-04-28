@@ -5,8 +5,9 @@ import { toggleTheme } from "@/features/theme/slice";
 import { Middleware } from "@reduxjs/toolkit";
 import { RootState } from "@/shared/types";
 import { loginUser } from "@/features/auth/thunks/loginUser";
-import { logoutUser } from "@/features/auth/thunks/logoutUser";
 import { registerUser } from "@/features/auth/thunks/registerUser";
+import { loadUser } from "@/features/auth/thunks/loadUser";
+import { clearUser } from "@/features/auth/slice";
 
 export const persistMiddleware: Middleware<object, RootState> =
   (store) => (next) => (action) => {
@@ -17,7 +18,7 @@ export const persistMiddleware: Middleware<object, RootState> =
       const seed = state.game.seed;
       localStorage.setItem("seed", JSON.stringify(seed));
     } else if (setLastFound.match(action)) {
-      const { lastFound } = state.history;
+      const lastFound = state.history.lastFound;
       localStorage.setItem("lastFound", JSON.stringify(lastFound));
     } else if (resetProgress.match(action) || updateProgress.match(action)) {
       const { found, level, points } = state.progress;
@@ -29,11 +30,17 @@ export const persistMiddleware: Middleware<object, RootState> =
       localStorage.setItem("theme", theme);
     } else if (
       loginUser.fulfilled.match(action) ||
-      logoutUser.fulfilled.match(action) ||
+      loadUser.fulfilled.match(action) ||
       registerUser.fulfilled.match(action)
     ) {
-      const user = state.auth.user;
+      const { user, refreshToken } = state.auth;
       localStorage.setItem("user", JSON.stringify(user));
+      if (refreshToken) {
+        localStorage.setItem("refreshToken", refreshToken);
+      }
+    } else if (loadUser.rejected.match(action) || clearUser.match(action)) {
+      localStorage.removeItem("user");
+      localStorage.removeItem("refreshToken");
     }
 
     return result;

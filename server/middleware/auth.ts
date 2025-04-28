@@ -2,17 +2,24 @@ import jwt from "jsonwebtoken";
 import { NextFunction, Response } from "express";
 import { AuthenticatedRequest } from "../types/auth";
 
-const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || ""; // TODO
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET!;
 
 const authMiddleware = (
   req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.cookies.access_token;
+  const authHeader = req.headers["authorization"];
 
-  if (!token) {
+  if (!authHeader) {
     res.status(401).send("Token no proporcionado");
+    return;
+  }
+
+  const [scheme, token] = authHeader.split(" ");
+
+  if (scheme !== "Bearer" || !token) {
+    res.status(401).json({ message: "Invalid authorization format" });
     return;
   }
 
