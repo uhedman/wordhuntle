@@ -20,7 +20,7 @@ export const syncProgress = createAsyncThunk<
 
   const allFoundWords = Array.from(
     new Set([...localFoundWords, ...backendFoundWords])
-  );
+  ).sort();
 
   const totalPoints = allFoundWords.reduce(
     (acc, word) => acc + puntuation(word.length),
