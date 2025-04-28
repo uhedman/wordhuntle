@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth";
 import gameRoutes from "./routes/game";
 import scoreRoutes from "./routes/score";
@@ -15,11 +14,9 @@ app.get("/", (req, res) => {
 app.use(
   cors({
     origin: "https://uhedman.github.io",
-    credentials: true,
   })
 );
 app.use(express.json());
-app.use(cookieParser());
 
 app.use("/api/game", gameRoutes);
 app.use("/api/auth", authRoutes);

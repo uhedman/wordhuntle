@@ -1,13 +1,13 @@
 import { updateProgress } from "@/features/progress/slice";
 import { loginUserAPI, postFoundWords } from "@/shared/api";
-import { CustomError, ErrorTypes } from "@/shared/errors";
+import { CustomError } from "@/shared/errors";
 import { RootState } from "@/shared/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { puntuation } from "~/shared/utils/wordUtils";
-import { LoginResponse } from "../types";
+import { User } from "../types";
 
 export const loginUser = createAsyncThunk<
-  LoginResponse,
+  { user: User; accessToken: string; refreshToken: string },
   { username: string; password: string },
   { rejectValue: string; state: RootState }
 >("user/login", async (credentials, thunkAPI) => {
@@ -40,35 +40,17 @@ export const loginUser = createAsyncThunk<
     );
 
     if (newWords.length > 0) {
-      await postFoundWords(newWords);
+      await postFoundWords(newWords, response.accessToken);
     }
 
-    return response;
+    return {
+      user: response.user,
+      accessToken: response.accessToken,
+      refreshToken: response.refreshToken,
+    };
   } catch (err) {
     if (err instanceof CustomError) {
-      switch (err.type) {
-        case ErrorTypes.NETWORK_ERROR:
-          return thunkAPI.rejectWithValue(
-            "No se pudo conectar con el servidor. Verificá tu conexión a internet e intentá nuevamente."
-          );
-
-        case ErrorTypes.AUTHENTICATION_ERROR:
-          return thunkAPI.rejectWithValue(
-            "Error al iniciar sesión. Verificá los datos ingresados."
-          );
-
-        case ErrorTypes.INTERNAL_SERVER_ERROR:
-          return thunkAPI.rejectWithValue(
-            "Error interno del servidor. Estamos trabajando para solucionarlo."
-          );
-
-        case ErrorTypes.UNKNOWN_ERROR:
-        default:
-          return thunkAPI.rejectWithValue(
-            err.message ||
-              "Error desconocido. Si el problema persiste, contactá al soporte."
-          );
-      }
+      return thunkAPI.rejectWithValue(err.message);
     }
 
     return thunkAPI.rejectWithValue(

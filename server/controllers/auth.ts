@@ -45,39 +45,23 @@ export const login = async (
       expiresIn: REFRESH_TOKEN_EXPIRATION,
     });
 
-    res
-      .cookie("access_token", accessToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "none",
-        maxAge: 60 * 60 * 1000,
-      })
-      .cookie("refresh_token", refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "none",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-      })
-      .json({
-        user: { username },
-        message: "Login exitoso",
-        progress: {
-          found: words.map((wordDoc) => wordDoc.word),
-          level: score?.level,
-          points: score?.points,
-        },
-      });
+    res.json({
+      user: {
+        username,
+      },
+      accessToken,
+      refreshToken,
+      message: "Login exitoso",
+      progress: {
+        found: words.map((wordDoc) => wordDoc.word),
+        level: score?.level,
+        points: score?.points,
+      },
+    });
   } catch (err) {
     console.error("Error en login:", err);
     res.status(500).send("Error interno del servidor");
   }
-};
-
-export const logout = (req: AuthenticatedRequest, res: Response) => {
-  res
-    .clearCookie("access_token")
-    .clearCookie("refresh_token")
-    .json({ message: "Logout exitoso" });
 };
 
 export const me = async (req: AuthenticatedRequest, res: Response) => {
@@ -149,21 +133,14 @@ export const register = async (
       expiresIn: REFRESH_TOKEN_EXPIRATION,
     });
 
-    res
-      .status(201)
-      .cookie("access_token", accessToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "none",
-        maxAge: 60 * 60 * 1000,
-      })
-      .cookie("refresh_token", refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "none",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-      })
-      .json({ message: "Usuario registrado con éxito", user: { username } });
+    res.status(201).json({
+      message: "Usuario registrado con éxito",
+      user: {
+        username,
+      },
+      accessToken,
+      refreshToken,
+    });
   } catch (err) {
     console.error("Error en registro:", err);
     res.status(500).send("Error interno del servidor");
@@ -171,7 +148,7 @@ export const register = async (
 };
 
 export const refresh = (req: Request, res: Response) => {
-  const token = req.cookies.refresh_token;
+  const token = req.body.refreshToken;
   if (!token) {
     res.status(401).send("Refresh token no encontrado");
     return;
@@ -184,14 +161,15 @@ export const refresh = (req: Request, res: Response) => {
       expiresIn: ACCESS_TOKEN_EXPIRATION,
     });
 
-    res
-      .cookie("access_token", newAccessToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "none",
-        maxAge: 60 * 60 * 1000,
-      })
-      .json({ message: "Access token renovado" });
+    const newRefreshToken = jwt.sign({ id: payload.id }, REFRESH_TOKEN_SECRET, {
+      expiresIn: REFRESH_TOKEN_EXPIRATION,
+    });
+
+    res.json({
+      message: "Access token renovado",
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken,
+    });
   } catch (err) {
     console.error("Error refrescando el token", err);
     res.status(403).send("Refresh token inválido");

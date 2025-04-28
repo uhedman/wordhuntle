@@ -2,35 +2,30 @@ import { LoginResponse } from "@/features/auth/types";
 import { CustomError, ErrorTypes } from "@/shared/errors";
 import { API_BASE_URL } from "@/shared/api/real";
 
-export const loadUserAPI = async (): Promise<LoginResponse> => {
+export const loadUserAPI = async (
+  refreshToken: string
+): Promise<LoginResponse> => {
   try {
     const res = await fetch(`${API_BASE_URL}/auth/me`, {
-      method: "GET",
-      credentials: "include",
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
     });
 
-    if (res.ok) {
+    if (!res.ok) {
+      const errorText = await res.text();
+
+      if (res.status === 401) {
+        throw new CustomError(ErrorTypes.AUTHENTICATION_ERROR, errorText);
+      } else if (res.status === 500) {
+        throw new CustomError(ErrorTypes.INTERNAL_SERVER_ERROR, errorText);
+      } else {
+        throw new CustomError(ErrorTypes.UNKNOWN_ERROR, errorText);
+      }
+    } else {
       return await res.json();
     }
-
-    if (res.status === 401) {
-      const refreshRes = await fetch(`${API_BASE_URL}/auth/refresh`, {
-        method: "POST",
-        credentials: "include",
-      });
-
-      if (refreshRes.ok) {
-        const retry = await fetch(`${API_BASE_URL}/auth/me`, {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (retry.ok) return await retry.json();
-      }
-    }
-
-    const errorText = await res.text();
-    throw new Error(errorText || "Login automático fallido");
   } catch (error) {
     // TODO
     if (error instanceof TypeError) {

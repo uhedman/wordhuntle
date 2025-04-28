@@ -1,4 +1,4 @@
-import { LoginResponse } from "@/features/auth/types";
+import { LoginResponse, RegisterResponse } from "@/features/auth/types";
 
 export const loginUserAPI = async (credentials: {
   username: string;
@@ -9,6 +9,8 @@ export const loginUserAPI = async (credentials: {
   return {
     message: "Login exitoso",
     user: { username: credentials.username },
+    accessToken: "MOCK AccessToken",
+    refreshToken: "MOCK RefreshToken",
     progress: {
       found: ["mockword", "test"],
       points: 11,
@@ -17,16 +19,28 @@ export const loginUserAPI = async (credentials: {
   };
 };
 
-export const logoutUserAPI = async (): Promise<void> => {
-  console.log("[MOCK] logoutUserAPI");
-};
-
 export const loadUserAPI = async (): Promise<LoginResponse> => {
   console.log("[MOCK] loadUserAPI");
 
   return {
     message: "Usuario encontrado",
     user: { username: "mockUser" },
+    accessToken: "MOCK AccessToken",
+    refreshToken: "MOCK RefreshToken",
+    progress: { found: ["mockword", "test"], points: 11, level: 0 },
+  };
+};
+
+export const refreshTokenAPI = async (
+  refreshToken: string
+): Promise<LoginResponse> => {
+  console.log("Renovando el token: ", refreshToken);
+
+  return {
+    message: "Usuario encontrado",
+    user: { username: "mockUser" },
+    accessToken: "MOCK AccessToken",
+    refreshToken: "MOCK RefreshToken",
     progress: { found: ["mockword", "test"], points: 11, level: 0 },
   };
 };
@@ -35,14 +49,15 @@ export const registerUserAPI = async (credentials: {
   username: string;
   password: string;
   confirmPassword: string;
-}) => {
+}): Promise<RegisterResponse> => {
   if (credentials.password !== credentials.confirmPassword) {
     throw new Error("Las contraseñas no coinciden");
   }
 
   return {
-    id: "mock-id",
-    username: credentials.username,
-    score: 0,
+    user: { username: "mockUser" },
+    accessToken: "MOCK AccessToken",
+    refreshToken: "MOCK RefreshToken",
+    message: "Registrado correctamente",
   };
 };
