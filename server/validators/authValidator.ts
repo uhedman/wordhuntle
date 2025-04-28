@@ -18,7 +18,7 @@ export const validateAuthInput = (
     return "La contraseña debe tener al menos 8 caracteres";
   }
 
-  if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+  if (!/^[a-zA-Z0-9_\s]+$/.test(username)) {
     return "El nombre de usuario solo puede contener letras, números y guiones bajos";
   }
 
