@@ -10,7 +10,6 @@ export const registerUserAPI = async (credentials: {
   try {
     const res = await fetch(`${API_BASE_URL}/auth/register`, {
       method: "POST",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
