@@ -13,7 +13,12 @@ export const registerUser = createAsyncThunk<
   try {
     const res = await registerUserAPI(credentials);
 
-    thunkAPI.dispatch(syncProgress(undefined));
+    thunkAPI.dispatch(
+      syncProgress({
+        backendFoundWords: [],
+        accessToken: res.accessToken,
+      })
+    );
 
     return res;
   } catch (err) {

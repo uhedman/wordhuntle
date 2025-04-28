@@ -6,18 +6,17 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const syncProgress = createAsyncThunk<
   void,
-  string[] | undefined,
+  { backendFoundWords: string[] | undefined; accessToken: string },
   { state: RootState }
->("progress/sync", async (backendFoundWords, thunkAPI) => {
-  if (!backendFoundWords) {
+>("progress/sync", async ({ backendFoundWords, accessToken }, thunkAPI) => {
+  if (backendFoundWords === undefined) {
     console.error("Error al sincronizar progreso con el servidor");
     return;
   }
 
-  const { progress, game, auth } = thunkAPI.getState();
+  const { progress, game } = thunkAPI.getState();
   const { found: localFoundWords } = progress;
   const { maxPoints } = game;
-  const { accessToken } = auth;
 
   const allFoundWords = Array.from(
     new Set([...localFoundWords, ...backendFoundWords])

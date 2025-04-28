@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from "@/shared/hooks";
 import { Alert, Button } from "react-bootstrap";
-import { logoutUser } from "@/features/auth/slice";
+import { logoutUser } from "@/features/auth/thunks/logoutUser";
 
 const Profile = () => {
   const user = useAppSelector((state) => state.auth.user);

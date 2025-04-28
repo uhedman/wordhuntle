@@ -13,7 +13,7 @@ export const addWord =
     const state = getState();
     const { found, points } = state.progress;
     const { maxPoints } = state.game;
-    const { accessToken } = state.auth;
+    const { accessToken, user } = state.auth;
 
     if (!found.includes(word)) {
       const newFound = insert(found, word);
@@ -22,7 +22,7 @@ export const addWord =
 
       dispatch(updateProgress({ level, found: newFound, points: newPoints }));
 
-      if (state.auth.user !== null && accessToken) {
+      if (user !== null && accessToken) {
         postFoundWords([word], accessToken).catch((err) =>
           console.error("Error al guardar la palabra en la API:", err)
         );

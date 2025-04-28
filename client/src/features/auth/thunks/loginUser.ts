@@ -13,7 +13,12 @@ export const loginUser = createAsyncThunk<
   try {
     const res = await loginUserAPI(credentials);
 
-    thunkAPI.dispatch(syncProgress(res.progress?.found));
+    thunkAPI.dispatch(
+      syncProgress({
+        backendFoundWords: res.progress?.found,
+        accessToken: res.accessToken,
+      })
+    );
 
     return res;
   } catch (err) {

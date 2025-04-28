@@ -5,9 +5,9 @@ import { toggleTheme } from "@/features/theme/slice";
 import { Middleware } from "@reduxjs/toolkit";
 import { RootState } from "@/shared/types";
 import { loginUser } from "@/features/auth/thunks/loginUser";
-import { logoutUser } from "@/features/auth/slice";
 import { registerUser } from "@/features/auth/thunks/registerUser";
 import { loadUser } from "@/features/auth/thunks/loadUser";
+import { clearUser } from "@/features/auth/slice";
 
 export const persistMiddleware: Middleware<object, RootState> =
   (store) => (next) => (action) => {
@@ -38,7 +38,7 @@ export const persistMiddleware: Middleware<object, RootState> =
       if (refreshToken) {
         localStorage.setItem("refreshToken", refreshToken);
       }
-    } else if (loadUser.rejected.match(action) || logoutUser.match(action)) {
+    } else if (loadUser.rejected.match(action) || clearUser.match(action)) {
       localStorage.removeItem("user");
       localStorage.removeItem("refreshToken");
     }

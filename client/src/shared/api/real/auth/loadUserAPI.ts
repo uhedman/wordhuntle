@@ -5,6 +5,7 @@ import { API_BASE_URL } from "@/shared/api/real";
 export const loadUserAPI = async (
   accessToken: string
 ): Promise<LoginResponse> => {
+  // TODO change Type
   try {
     const res = await fetch(`${API_BASE_URL}/auth/me`, {
       method: "GET",

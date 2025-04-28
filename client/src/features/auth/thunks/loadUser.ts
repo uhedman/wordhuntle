@@ -21,9 +21,14 @@ export const loadUser = createAsyncThunk<
     const { accessToken } = await refreshTokenAPI(refreshToken);
     const res = await loadUserAPI(accessToken);
 
-    thunkAPI.dispatch(syncProgress(res.progress?.found));
+    thunkAPI.dispatch(
+      syncProgress({
+        backendFoundWords: res.progress?.found,
+        accessToken: accessToken,
+      })
+    );
 
-    return res;
+    return { ...res, accessToken };
   } catch (err) {
     if (err instanceof CustomError) {
       return thunkAPI.rejectWithValue(err.message);
