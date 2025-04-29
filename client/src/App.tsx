@@ -1,15 +1,13 @@
-import { useLoadUser } from "@/features/auth/hooks/useLoadUser";
 import Game from "@/features/game/components/Game";
-import { useLoadGame } from "@/features/game/hooks/useLoadGame";
 import Modal from "@/features/modal/components/Modal";
 import { useTheme } from "@/features/theme/hooks/useTheme";
 import NavBar from "@/shared/components/NavBar";
+import { useInitializeApp } from "@/shared/hooks/useInitializeApp";
 import "@/App.css";
 
 const App = () => {
   useTheme();
-  useLoadGame();
-  useLoadUser();
+  useInitializeApp();
 
   return (
     <div id="App">
