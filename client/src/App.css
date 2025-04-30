@@ -50,3 +50,9 @@
 .dropdown-toggle::after {
   display: none !important;
 }
+
+@media (hover: none) and (pointer: coarse) {
+  .tooltip {
+    display: none !important;
+  }
+}

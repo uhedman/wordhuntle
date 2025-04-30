@@ -12,22 +12,29 @@ const directions = [
   [1, 1],
 ];
 
-const hash = (number: number): number => {
+const hash = (number: number) => {
   number = ((number >> 16) ^ number) * 0x45d9f3b;
   number = ((number >> 16) ^ number) * 0x45d9f3b;
   number = (number >> 16) ^ number;
   return number;
 };
 
-const getEmptyNeighbours = (grid: Grid, [x, y]: Pos): Pos[] =>
+const getEmptyNeighbours = (grid: Grid, [x, y]: Pos) =>
   directions
     .map(([dx, dy]) => [x + dx, y + dy] as Pos)
     .filter(
       ([nx, ny]) =>
-        nx >= 0 && nx < 4 && ny >= 0 && ny < 4 && grid[nx][ny] === "",
+        nx >= 0 && nx < 4 && ny >= 0 && ny < 4 && grid[nx][ny] === ""
     );
 
-export const getGrid = (dayCode: number): Grid => {
+export const getSecretWord = (dayCode: number) => {
+  const seed = hash(dayCode);
+  return data[seed % data.length];
+};
+
+export const getGrid = (dayCode: number) => {
+  let seed = hash(dayCode);
+
   // Pseudo Random Number Generator
   const prng = () => {
     seed = (seed * 9301 + 49297) % 233280;
@@ -42,9 +49,7 @@ export const getGrid = (dayCode: number): Grid => {
     return removedElement;
   };
 
-  let seed = hash(dayCode);
-
-  let secretWord = data[seed % data.length];
+  let secretWord = getSecretWord(dayCode);
   let grid: Grid = [
     ["", "", "", ""],
     ["", "", "", ""],

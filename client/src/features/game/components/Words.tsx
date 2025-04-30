@@ -3,8 +3,10 @@ import { Modal, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const Words = () => {
   const found = useAppSelector((state) => state.progress.found);
+  const word = useAppSelector((state) => state.game.word);
   const words = useAppSelector((state) => state.game.words);
-  const dailyWord = useAppSelector((state) => state.game.dailyWord);
+
+  const isWordFound = !!word && found.includes(word);
 
   return (
     <>
@@ -15,19 +17,20 @@ const Words = () => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="mb-3">
-          <strong>Palabra del día:</strong>{" "}
-          {dailyWord && found.includes(dailyWord) ? (
+        <div className="mb-3 d-flex gap-2 align-items-center">
+          <strong>Palabra del día: </strong>
+          {word && found.includes(word) ? (
             <a
-              href={`https://dle.rae.es/${dailyWord}`}
+              href={`https://dle.rae.es/${word}`}
               target="_blank"
               rel="noopener noreferrer"
               className="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
             >
-              {dailyWord}
+              {word}
             </a>
           ) : (
             <OverlayTrigger
+              trigger="hover"
               placement="top"
               overlay={
                 <Tooltip id="tooltip-hidden-word">
@@ -35,9 +38,13 @@ const Words = () => {
                 </Tooltip>
               }
             >
-              <span className="fw-medium" style={{ letterSpacing: "0.2em" }}>
-                ▢▢▢▢▢▢▢▢
-              </span>
+              <input
+                type="text"
+                className="form-control form-control-sm d-inline-block w-auto"
+                value={(isWordFound && word) || ""}
+                disabled
+                readOnly
+              />
             </OverlayTrigger>
           )}
         </div>
