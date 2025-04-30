@@ -18,12 +18,7 @@ const NavBarComponent = () => {
   return (
     <Navbar className="w-100 bg-body-tertiary transition">
       <Container fluid>
-        <Navbar.Brand
-          className="fs-2 fw-bold"
-          href="https://www.wordhuntle.com"
-        >
-          wordhuntle
-        </Navbar.Brand>
+        <Navbar.Brand className="fs-2 fw-bold">wordhuntle</Navbar.Brand>
 
         {/* Botones visibles en pantallas grandes */}
         <Nav className="fs-2 d-none d-sm-flex">
