@@ -3,6 +3,7 @@ import { Modal } from "react-bootstrap";
 
 const History = () => {
   const lastFound = useAppSelector((state) => state.history.lastFound);
+  const lastWord = useAppSelector((state) => state.history.lastWord);
   const lastWords = useAppSelector((state) => state.history.lastWords);
   const lastGrid = useAppSelector((state) => state.history.lastGrid);
 
@@ -44,6 +45,16 @@ const History = () => {
               )
             )}
           </div>
+          <p>
+            La palabra del día de ayer fue:{" "}
+            {lastWord === null ? (
+              <span className="placeholder-glow">
+                <span className="placeholder col-4 align-middle"></span>
+              </span>
+            ) : (
+              <strong>{lastWord}</strong>
+            )}
+          </p>
           <ul
             className="d-grid placeholder-glow"
             style={{ gridTemplate: "auto auto / repeat(2, 1fr)" }}

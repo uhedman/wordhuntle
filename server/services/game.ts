@@ -1,4 +1,4 @@
-import { getGrid } from "../../shared/utils/dailyGrid";
+import { getGrid, getSecretWord } from "../../shared/utils/dailyGrid";
 import { getWords } from "../../shared/utils/dailyWords";
 import { puntuation } from "../../shared/utils/wordUtils";
 
@@ -6,13 +6,15 @@ let seed = Math.floor(Date.now() / 86400000);
 let lastSeed = seed - 1;
 
 let todayGrid = getGrid(seed);
-let lastGrid = getGrid(lastSeed);
-
+let todayWord = getSecretWord(seed);
 let todayWords = getWords(todayGrid);
 let maxPoints = todayWords.reduce(
   (acc, word) => acc + puntuation(word.length),
   0
 );
+
+let lastGrid = getGrid(lastSeed);
+let lastWord = getSecretWord(lastSeed);
 let lastWords = getWords(lastGrid).sort();
 
 setInterval(() => {
@@ -22,15 +24,16 @@ setInterval(() => {
     lastSeed = newSeed - 1;
 
     todayGrid = getGrid(seed);
-    lastGrid = getGrid(lastSeed);
-
+    todayWord = getSecretWord(seed);
     todayWords = getWords(todayGrid);
-    lastWords = getWords(lastGrid).sort();
-
     maxPoints = todayWords.reduce(
       (acc, word) => acc + puntuation(word.length),
       0
     );
+
+    lastGrid = getGrid(lastSeed);
+    lastWord = getSecretWord(lastSeed);
+    lastWords = getWords(lastGrid).sort();
 
     console.log("New daily seed:", seed);
   }
@@ -38,7 +41,16 @@ setInterval(() => {
 
 export const dailyGame = {
   getSeed: () => seed,
-  getToday: () => ({ grid: todayGrid, words: todayWords, maxPoints }),
-  getLast: () => ({ grid: lastGrid, words: lastWords }),
+  getToday: () => ({
+    grid: todayGrid,
+    word: todayWord,
+    words: todayWords,
+    maxPoints,
+  }),
+  getLast: () => ({
+    grid: lastGrid,
+    word: lastWord,
+    words: lastWords,
+  }),
   getMaxPoints: () => maxPoints,
 };

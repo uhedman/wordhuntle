@@ -5,6 +5,7 @@ import { getTodayData } from "@/features/game/thunks/getTodayData";
 interface GameState {
   seed: number | null;
   grid: Grid | null;
+  word: string | null;
   words: string[] | null;
   maxPoints: number | null;
   loading: boolean; // TODO
@@ -14,6 +15,7 @@ interface GameState {
 const initialState: GameState = {
   seed: null,
   grid: null,
+  word: null,
   words: null,
   maxPoints: null,
   loading: false, // TODO
@@ -36,6 +38,7 @@ const gameSlice = createSlice({
       })
       .addCase(getTodayData.fulfilled, (state, action) => {
         state.grid = action.payload.grid;
+        state.word = action.payload.word;
         state.words = action.payload.words;
         state.maxPoints = action.payload.maxPoints;
       })

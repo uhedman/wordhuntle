@@ -5,6 +5,7 @@ import { getLastData } from "@/features/history/thunks/getLastData";
 
 interface HistoryState {
   lastGrid: Grid | null;
+  lastWord: string | null;
   lastWords: string[] | null;
   lastFound: string[];
   loading: boolean;
@@ -13,6 +14,7 @@ interface HistoryState {
 
 const initialState: HistoryState = {
   lastGrid: null,
+  lastWord: null,
   lastWords: null,
   lastFound: getFromStorage<string[]>("lastFound") ?? [],
   loading: false, // TODO
@@ -35,6 +37,7 @@ const historySlice = createSlice({
       })
       .addCase(getLastData.fulfilled, (state, action) => {
         state.lastGrid = action.payload.grid;
+        state.lastWord = action.payload.word;
         state.lastWords = action.payload.words;
         state.loading = false;
       })

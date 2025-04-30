@@ -13,6 +13,7 @@ export const getTodayData = (req: Request, res: Response) => {
 
   res.json({
     ...today,
+    word: encrypt(today.word, seed),
     words: encryptedWords,
   });
 };

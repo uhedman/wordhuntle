@@ -6,7 +6,7 @@ function getKeyFromSeed(seed: number): CryptoJS.lib.WordArray {
   return CryptoJS.SHA256(seed + SECRET);
 }
 
-export function decrypt(encrypted: string, seed: number): string[] {
+function decryptRaw(encrypted: string, seed: number): string {
   const [ivHex, dataHex] = encrypted.split(":");
   const key = getKeyFromSeed(seed);
   const iv = CryptoJS.enc.Hex.parse(ivHex);
@@ -17,7 +17,13 @@ export function decrypt(encrypted: string, seed: number): string[] {
   });
 
   const decrypted = CryptoJS.AES.decrypt(cipherParams, key, { iv });
+  return decrypted.toString(CryptoJS.enc.Utf8);
+}
 
-  const result = decrypted.toString(CryptoJS.enc.Utf8);
-  return JSON.parse(result);
+export function decrypt(encrypted: string, seed: number): string[] {
+  return JSON.parse(decryptRaw(encrypted, seed));
+}
+
+export function decryptOne(encrypted: string, seed: number): string {
+  return decryptRaw(encrypted, seed);
 }
