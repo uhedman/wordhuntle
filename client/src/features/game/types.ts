@@ -9,11 +9,13 @@ export interface TileData {
 export interface Game {
   grid: Grid;
   words: string[];
+  dailyWord: string;
   maxPoints: number;
 }
 
 export interface EncrypedGame {
   grid: Grid;
   words: string;
+  dailyWord: string;
   maxPoints: number;
 }

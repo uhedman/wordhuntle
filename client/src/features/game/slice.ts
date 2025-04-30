@@ -6,6 +6,7 @@ interface GameState {
   seed: number | null;
   grid: Grid | null;
   words: string[] | null;
+  dailyWord: string | null;
   maxPoints: number | null;
   loading: boolean; // TODO
   error: string | undefined;
@@ -15,6 +16,7 @@ const initialState: GameState = {
   seed: null,
   grid: null,
   words: null,
+  dailyWord: null,
   maxPoints: null,
   loading: false, // TODO
   error: undefined,
@@ -37,6 +39,7 @@ const gameSlice = createSlice({
       .addCase(getTodayData.fulfilled, (state, action) => {
         state.grid = action.payload.grid;
         state.words = action.payload.words;
+        state.dailyWord = action.payload.dailyWord;
         state.maxPoints = action.payload.maxPoints;
       })
       .addCase(getTodayData.rejected, (state, action) => {
