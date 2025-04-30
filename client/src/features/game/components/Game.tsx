@@ -2,11 +2,9 @@ import Display from "@/features/display/components/Display";
 import Grid from "@/features/game/components/Grid";
 import Points from "@/features/game/components/Points";
 import { useStopDrag } from "@/features/drag/hooks/useStopDrag";
-import { useConfetti } from "@/features/game/hooks/useConfetti";
 
 const Game = () => {
   useStopDrag();
-  useConfetti();
 
   return (
     <div
