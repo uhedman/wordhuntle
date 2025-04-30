@@ -4,6 +4,7 @@ import { ThunkAction, PayloadAction } from "@reduxjs/toolkit";
 import { Progress } from "~/shared/types";
 import { insert, puntuation } from "~/shared/utils/wordUtils";
 import { updateProgress } from "@/features/progress/slice";
+import confetti from "canvas-confetti";
 
 export const addWord =
   (
@@ -19,6 +20,15 @@ export const addWord =
       const newFound = insert(found, word);
       const newPoints = points + puntuation(word.length);
       const level = Math.floor(Math.sqrt(newPoints / maxPoints!) * 8);
+
+      if (word === state.game.word) {
+        confetti({
+          particleCount: 300,
+          spread: 120,
+          startVelocity: 45,
+          origin: { y: 0.6 },
+        });
+      }
 
       dispatch(updateProgress({ level, found: newFound, points: newPoints }));
 
