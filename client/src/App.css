@@ -56,3 +56,29 @@
     display: none !important;
   }
 }
+
+/* Para el grid */
+.rotate-right {
+  animation: rotateRight 1s ease-in-out;
+}
+.rotate-left {
+  animation: rotateLeft 1s ease-in-out;
+}
+
+@keyframes rotateRight {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes rotateLeft {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-90deg);
+  }
+}

@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Grid } from "~/shared/types";
 import { getTodayData } from "@/features/game/thunks/getTodayData";
+import { Rotation } from "./types";
+import { rotateRight, rotateLeft } from "./utils";
 
 interface GameState {
   seed: number | null;
@@ -29,6 +31,14 @@ const gameSlice = createSlice({
     setSeed: (state, action: PayloadAction<number>) => {
       state.seed = action.payload;
     },
+    rotateGrid: (state, action: PayloadAction<Rotation>) => {
+      if (!state.grid) return;
+
+      state.grid =
+        action.payload === "right"
+          ? rotateRight(state.grid)
+          : rotateLeft(state.grid);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -49,5 +59,5 @@ const gameSlice = createSlice({
   },
 });
 
-export const { setSeed } = gameSlice.actions;
+export const { setSeed, rotateGrid } = gameSlice.actions;
 export default gameSlice.reducer;

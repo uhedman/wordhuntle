@@ -10,7 +10,7 @@ const Points = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="d-flex justify-content-between flex-column gap-3">
+    <div className="d-flex justify-content-between flex-column gap-1">
       <div className="d-flex justify-content-between align-items-end">
         <span className="fs-1 fw-bold">{points} pts</span>
         <div className="d-flex align-items-baseline">

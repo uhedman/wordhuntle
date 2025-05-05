@@ -2,13 +2,15 @@ import { drag } from "@/features/drag/thunks/drag";
 import { startDrag } from "@/features/drag/thunks/startDrag";
 import { useAppSelector, useAppDispatch } from "@/shared/hooks";
 import { PointerEvent } from "react";
+import { Rotation } from "@/features/game/types";
 
 interface TileProps {
   id: number;
   letter: string;
+  rotation: Rotation | null;
 }
 
-const Tile = ({ id, letter }: TileProps) => {
+const Tile = ({ id, letter, rotation }: TileProps) => {
   const selected = useAppSelector((state) => state.drag.tiles[id]);
   const dispatch = useAppDispatch();
 
@@ -28,12 +30,11 @@ const Tile = ({ id, letter }: TileProps) => {
         <div
           onPointerDown={handlePointerDown}
           onPointerEnter={() => dispatch(drag({ id, letter }))}
-          className={`d-flex align-items-center justify-content-center rounded border border-5${
-            selected ? " selected-tile" : ""
-          }`}
-          style={{
-            cursor: "pointer",
-          }}
+          className={`d-flex align-items-center justify-content-center rounded border border-5
+            ${selected ? " selected-tile" : ""}
+            ${rotation === "left" ? "rotate-right" : rotation === "right" ? "rotate-left" : ""}
+          `}
+          style={{ cursor: "pointer" }}
         >
           <span className="fs-1 fw-bold">{letter.toUpperCase()}</span>
         </div>
