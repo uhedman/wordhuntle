@@ -1,5 +1,7 @@
 import { Grid, Pos } from "~/shared/types";
 
+export type Rotation = "left" | "right";
+
 export interface TileData {
   id: number;
   letter: string;
