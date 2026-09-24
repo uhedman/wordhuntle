@@ -1,6 +1,6 @@
 const SECRET = "DPQS282CqPFwkR5lVmwoMO1AsF3CArUp";
 
-function hexStringToArrayBuffer(hexString: string): Uint8Array {
+function hexStringToArrayBuffer(hexString: string): Uint8Array<ArrayBuffer> {
 	const bytes = new Uint8Array(Math.ceil(hexString.length / 2));
 	for (let i = 0; i < bytes.length; i++) {
 		bytes[i] = parseInt(hexString.substring(i * 2, i * 2 + 2), 16);
