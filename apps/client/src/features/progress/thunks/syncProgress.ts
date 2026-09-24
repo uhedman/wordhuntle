@@ -1,7 +1,8 @@
 import { postFoundWords } from "@/shared/api";
 import { RootState } from "@/shared/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { puntuation } from "~/shared/utils/wordUtils";
+
+import { puntuation } from "@wordhuntle/core/utils/wordUtils";
 
 import { updateProgress } from "../slice";
 
@@ -42,7 +43,7 @@ export const syncProgress = createAsyncThunk<
 
 	if (backendFoundWords.length !== allFoundWords.length) {
 		const newWordsToSync = localFoundWords.filter(
-			(word) => !backendFoundWords.includes(word),
+			(word: string) => !backendFoundWords.includes(word),
 		);
 
 		if (newWordsToSync.length && accessToken) {

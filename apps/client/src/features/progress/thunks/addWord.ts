@@ -3,8 +3,9 @@ import { postFoundWords } from "@/shared/api";
 import { RootState } from "@/shared/types";
 import { PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import confetti from "canvas-confetti";
-import { Progress } from "~/shared/types";
-import { insert, puntuation } from "~/shared/utils/wordUtils";
+
+import { Progress } from "@wordhuntle/core/types";
+import { insert, puntuation } from "@wordhuntle/core/utils/wordUtils";
 
 export const addWord =
 	(

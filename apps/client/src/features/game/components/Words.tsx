@@ -54,7 +54,7 @@ const Words = () => {
 					className="d-grid"
 					style={{ gridTemplate: "auto auto / repeat(2, 1fr)" }}
 				>
-					{found.map((word, idx) => (
+					{found.map((word: string, idx: number) => (
 						<div key={word}>
 							<OverlayTrigger
 								trigger="hover"

@@ -1,5 +1,6 @@
 import { useAppSelector } from "@/shared/hooks";
-import { Pos } from "~/shared/types";
+
+import { Pos } from "@wordhuntle/core/types";
 
 type LineSegmentProps = {
 	p1: Pos;

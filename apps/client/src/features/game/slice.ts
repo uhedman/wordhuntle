@@ -1,6 +1,7 @@
 import { getTodayData } from "@/features/game/thunks/getTodayData";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Grid } from "~/shared/types";
+
+import { Grid } from "@wordhuntle/core/types";
 
 import { Rotation } from "./types";
 import { rotateLeft, rotateRight } from "./utils";

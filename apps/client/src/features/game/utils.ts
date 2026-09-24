@@ -1,4 +1,4 @@
-import { Grid } from "~/shared/types";
+import { Grid } from "@wordhuntle/core/types";
 
 export const rotateRight = (matrix: Grid): Grid => {
 	const newGrid: Grid = [

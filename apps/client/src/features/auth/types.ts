@@ -1,4 +1,4 @@
-import { Progress } from "~/shared/types";
+import { Progress } from "@wordhuntle/core/types";
 
 export interface RegisterResponse {
 	user: User;

@@ -1,6 +1,7 @@
 import { getFromStorage } from "@/shared/utils/storage";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Progress } from "~/shared/types";
+
+import { Progress } from "@wordhuntle/core/types";
 
 const initialState: Progress = {
 	found: getFromStorage<string[]>("found") ?? [],

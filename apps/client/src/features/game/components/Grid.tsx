@@ -18,7 +18,7 @@ const Grid = ({ rotation }: GridProps) => {
 				className={`d-grid gap-3 grid-anim ${rotation ? `rotate-${rotation}` : ""}`}
 				style={{ gridTemplateColumns: "repeat(4, 1fr)" }}
 			>
-				{tiles.map((letter, index) => (
+				{tiles.map((letter: string, index: number) => (
 					<Tile
 						key={index}
 						id={index}

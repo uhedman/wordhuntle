@@ -1,6 +1,7 @@
 import { TileData } from "@/features/game/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Pos } from "~/shared/types";
+
+import { Pos } from "@wordhuntle/core/types";
 
 interface DragState {
 	word: string;

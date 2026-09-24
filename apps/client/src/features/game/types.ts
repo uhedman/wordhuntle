@@ -1,4 +1,4 @@
-import { Grid, Pos } from "~/shared/types";
+import { Grid, Pos } from "@wordhuntle/core/types";
 
 export type Rotation = "left" | "right";
 

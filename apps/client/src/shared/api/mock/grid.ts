@@ -1,8 +1,9 @@
 import { Game } from "@/features/game/types";
 import { LastGame } from "@/features/history/types";
-import { getGrid, getSecretWord } from "~/shared/utils/dailyGrid";
-import { getWords } from "~/shared/utils/dailyWords";
-import { puntuation } from "~/shared/utils/wordUtils";
+
+import { getGrid, getSecretWord } from "@wordhuntle/core/utils/dailyGrid";
+import { getWords } from "@wordhuntle/core/utils/dailyWords";
+import { puntuation } from "@wordhuntle/core/utils/wordUtils";
 
 const seed = Math.floor(Date.now() / 86400000);
 
@@ -15,7 +16,7 @@ export const getTodayDataAPI = async (): Promise<Game> => {
 	const todayWord = getSecretWord(seed);
 	const todayWords = getWords(todayGrid);
 	const maxPoints = todayWords.reduce(
-		(acc, word) => acc + puntuation(word.length),
+		(acc: number, word: string) => acc + puntuation(word.length),
 		0,
 	);
 

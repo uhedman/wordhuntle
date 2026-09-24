@@ -1,7 +1,8 @@
 import { getLastData } from "@/features/history/thunks/getLastData";
 import { getFromStorage } from "@/shared/utils/storage";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Grid } from "~/shared/types";
+
+import { Grid } from "@wordhuntle/core/types";
 
 interface HistoryState {
 	lastGrid: Grid | null;
