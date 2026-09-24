@@ -1,0 +1,34 @@
+import { syncProgress } from "@/features/progress/thunks/syncProgress";
+import { loginUserAPI } from "@/shared/api";
+import { CustomError } from "@/shared/errors";
+import { RootState } from "@/shared/types";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
+import { LoginResponse } from "../types";
+
+export const loginUser = createAsyncThunk<
+	LoginResponse,
+	{ username: string; password: string },
+	{ rejectValue: string; state: RootState }
+>("user/login", async (credentials, thunkAPI) => {
+	try {
+		const res = await loginUserAPI(credentials);
+
+		thunkAPI.dispatch(
+			syncProgress({
+				backendFoundWords: res.progress?.found,
+				accessToken: res.accessToken,
+			}),
+		);
+
+		return res;
+	} catch (err) {
+		if (err instanceof CustomError) {
+			return thunkAPI.rejectWithValue(err.message);
+		}
+
+		return thunkAPI.rejectWithValue(
+			"Algo salió mal. Intentalo de nuevo más tarde.",
+		);
+	}
+});

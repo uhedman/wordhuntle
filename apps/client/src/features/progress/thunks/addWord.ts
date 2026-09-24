@@ -1,0 +1,47 @@
+import { updateProgress } from "@/features/progress/slice";
+import { postFoundWords } from "@/shared/api";
+import { RootState } from "@/shared/types";
+import { PayloadAction, ThunkAction } from "@reduxjs/toolkit";
+import confetti from "canvas-confetti";
+
+import { Progress } from "@wordhuntle/core/types";
+import { insert, puntuation } from "@wordhuntle/core/utils/wordUtils";
+
+export const addWord =
+	(
+		word: string,
+	): ThunkAction<void, RootState, unknown, PayloadAction<Progress>> =>
+	(dispatch, getState) => {
+		const state = getState();
+		const { found, points } = state.progress;
+		const { maxPoints } = state.game;
+		const { accessToken, user } = state.auth;
+
+		if (!found.includes(word)) {
+			const newFound = insert(found, word);
+			const newPoints = points + puntuation(word.length);
+			const level = Math.floor(Math.sqrt(newPoints / maxPoints!) * 8);
+
+			if (word === state.game.word) {
+				confetti({
+					particleCount: 300,
+					spread: 120,
+					startVelocity: 45,
+					origin: { y: 0.6 },
+				});
+			}
+
+			dispatch(
+				updateProgress({ level, found: newFound, points: newPoints }),
+			);
+
+			if (user !== null && accessToken) {
+				postFoundWords([word], accessToken).catch((err) =>
+					console.error(
+						"Error al guardar la palabra en la API:",
+						err,
+					),
+				);
+			}
+		}
+	};
