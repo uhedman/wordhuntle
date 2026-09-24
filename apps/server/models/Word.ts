@@ -2,8 +2,8 @@ import mongoose, { Schema, Types } from "mongoose";
 
 import { IUser } from "./User";
 
-export interface IWord extends Document {
-	user: IUser;
+export interface IWord {
+	user: Types.ObjectId | IUser;
 	word: string;
 	date: Date;
 }

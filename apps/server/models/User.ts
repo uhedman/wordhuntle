@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { Schema, model } from "mongoose";
 
-export interface IUser extends Document {
+export interface IUser {
 	username: string;
 	passwordHash: string;
 	createdAt: Date;
