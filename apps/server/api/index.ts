@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { Request, Response } from "express-serve-static-core";
+import type { Request, Response } from "express";
 
 import app from "../app";
 import connectDB from "../config/database";

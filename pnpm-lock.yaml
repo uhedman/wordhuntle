@@ -163,8 +163,6 @@ importers:
 
   packages/core: {}
 
-  packages/shared: {}
-
 packages:
 
   '@babel/code-frame@7.29.7':
