@@ -15,7 +15,7 @@ export const getTodayData = createAsyncThunk<
 
 	return {
 		...data,
-		word: decryptOne(data.word, seed!),
-		words: decrypt(data.words, seed!),
+		word: await decryptOne(data.word, seed!),
+		words: await decrypt(data.words, seed!),
 	};
 });

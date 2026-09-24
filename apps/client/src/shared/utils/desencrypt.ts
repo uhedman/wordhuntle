@@ -1,29 +1,52 @@
-import CryptoJS from "crypto-js";
-
 const SECRET = "DPQS282CqPFwkR5lVmwoMO1AsF3CArUp";
 
-function getKeyFromSeed(seed: number): CryptoJS.lib.WordArray {
-	return CryptoJS.SHA256(seed + SECRET);
+function hexStringToArrayBuffer(hexString: string): Uint8Array {
+	const bytes = new Uint8Array(Math.ceil(hexString.length / 2));
+	for (let i = 0; i < bytes.length; i++) {
+		bytes[i] = parseInt(hexString.substring(i * 2, i * 2 + 2), 16);
+	}
+	return bytes;
 }
 
-function decryptRaw(encrypted: string, seed: number): string {
+async function getKeyFromSeed(seed: number): Promise<CryptoKey> {
+	const encoder = new TextEncoder();
+	const data = encoder.encode(seed.toString() + SECRET);
+	const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+
+	return crypto.subtle.importKey(
+		"raw",
+		hashBuffer,
+		{ name: "AES-CBC" },
+		false,
+		["decrypt"]
+	);
+}
+
+async function decryptRaw(encrypted: string, seed: number): Promise<string> {
 	const [ivHex, dataHex] = encrypted.split(":");
-	const key = getKeyFromSeed(seed);
-	const iv = CryptoJS.enc.Hex.parse(ivHex);
-	const encryptedWords = CryptoJS.enc.Hex.parse(dataHex);
+	const key = await getKeyFromSeed(seed);
+	
+	const iv = hexStringToArrayBuffer(ivHex);
+	const encryptedData = hexStringToArrayBuffer(dataHex);
 
-	const cipherParams = CryptoJS.lib.CipherParams.create({
-		ciphertext: encryptedWords,
-	});
+	const decryptedBuffer = await crypto.subtle.decrypt(
+		{
+			name: "AES-CBC",
+			iv: iv,
+		},
+		key,
+		encryptedData
+	);
 
-	const decrypted = CryptoJS.AES.decrypt(cipherParams, key, { iv });
-	return decrypted.toString(CryptoJS.enc.Utf8);
+	const decoder = new TextDecoder();
+	return decoder.decode(decryptedBuffer);
 }
 
-export function decrypt(encrypted: string, seed: number): string[] {
-	return JSON.parse(decryptRaw(encrypted, seed));
+export async function decrypt(encrypted: string, seed: number): Promise<string[]> {
+	const raw = await decryptRaw(encrypted, seed);
+	return JSON.parse(raw);
 }
 
-export function decryptOne(encrypted: string, seed: number): string {
-	return decryptRaw(encrypted, seed);
+export async function decryptOne(encrypted: string, seed: number): Promise<string> {
+	return await decryptRaw(encrypted, seed);
 }
