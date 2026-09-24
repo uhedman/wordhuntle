@@ -1,0 +1,41 @@
+import { LoginResponse } from "@/features/auth/types";
+import { syncProgress } from "@/features/progress/thunks/syncProgress";
+import { loadUserAPI, refreshTokenAPI } from "@/shared/api";
+import { CustomError } from "@/shared/errors";
+import { RootState } from "@/shared/types";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
+export const loadUser = createAsyncThunk<
+	LoginResponse,
+	void,
+	{ rejectValue: string; state: RootState }
+>("user/loadUser", async (_, thunkAPI) => {
+	const state = thunkAPI.getState();
+	const refreshToken = state.auth.refreshToken;
+
+	if (!refreshToken) {
+		return thunkAPI.rejectWithValue("No se tiene un refresh token");
+	}
+
+	try {
+		const { accessToken } = await refreshTokenAPI(refreshToken);
+		const res = await loadUserAPI(accessToken);
+
+		thunkAPI.dispatch(
+			syncProgress({
+				backendFoundWords: res.progress?.found,
+				accessToken: accessToken,
+			}),
+		);
+
+		return { ...res, accessToken };
+	} catch (err) {
+		if (err instanceof CustomError) {
+			return thunkAPI.rejectWithValue(err.message);
+		}
+
+		return thunkAPI.rejectWithValue(
+			"Algo salió mal. Intentalo de nuevo más tarde.",
+		);
+	}
+});

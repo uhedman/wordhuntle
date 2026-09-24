@@ -3,22 +3,29 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build-client": "cd client && npm run build",
-    "build-server": "cd server && npm run build",
-    "build": "npm run build-server && npm run build-client",
-    "dev-client": "cd client && npm run dev",
-    "dev-server": "cd server && npm run dev",
-    "dev": "concurrently \"npm run dev-server\" \"npm run dev-client\"",
-    "install-client": "cd client && npm install",
-    "install-server": "cd server && npm install",
-    "install-all": "npm run install-client && npm run install-server",
-    "lint-client": "cd client && npm run lint",
-    "lint-server": "cd server && npm run lint",
-    "lint": "npm run lint-server && npm run lint-client",
-    "start-client": "cd client && npm run preview",
-    "start": "cd server && npm start"
+    "build:client": "pnpm --filter client build",
+    "build:server": "pnpm --filter server build",
+    "build": "pnpm -r build",
+    "dev:client": "pnpm --filter client dev",
+    "dev:server": "pnpm --filter server dev",
+    "dev": "concurrently \"pnpm run dev:server\" \"pnpm run dev:client\"",
+    "lint:client": "pnpm --filter client lint",
+    "lint:server": "pnpm --filter server lint",
+    "lint": "pnpm -r lint",
+    "typecheck:client": "pnpm --filter client tsc --noEmit",
+    "typecheck:server": "pnpm --filter server tsc --noEmit",
+    "typecheck": "pnpm -r typecheck",
+    "format:client": "pnpm --filter client format",
+    "format:server": "pnpm --filter server format",
+    "format:core": "pnpm --filter @wordhuntle/core format",
+    "format": "pnpm -r format",
+    "start:client": "pnpm --filter client preview",
+    "start:server": "pnpm --filter server start",
+    "start": "concurrently \"pnpm run start:server\" \"pnpm run start:client\""
   },
   "devDependencies": {
-    "concurrently": "^7.6.0"
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "concurrently": "^7.6.0",
+    "prettier": "^3.9.9"
   }
 }
