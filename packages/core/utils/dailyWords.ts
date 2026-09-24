@@ -59,7 +59,7 @@ const searchWord = (words: string[], w: string) => {
 
 // Get secret words from grid
 export const getWords = (grid: Grid) => {
-	let words: string[] = [];
+	const words: string[] = [];
 
 	for (let start = 0; start < 16; start++) {
 		let i = start >> 2;
