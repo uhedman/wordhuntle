@@ -2,8 +2,8 @@ import { Schema, Types, model } from "mongoose";
 
 import { IUser } from "./User";
 
-export interface IScore extends Document {
-	user: IUser;
+export interface IScore {
+	user: Types.ObjectId | IUser;
 	level: number;
 	points: number;
 	date: Date;

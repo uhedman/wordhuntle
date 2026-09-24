@@ -10,9 +10,9 @@
     "dev:client": "pnpm --filter client dev",
     "dev:server": "pnpm --filter server dev",
     "dev": "concurrently \"pnpm run dev:server\" \"pnpm run dev:client\"",
-    "lint:client": "pnpm --filter client lint",
-    "lint:server": "pnpm --filter server lint",
-    "lint": "pnpm -r lint",
+    "lint:client": "eslint apps/client",
+    "lint:server": "eslint apps/server",
+    "lint": "eslint .",
     "typecheck:client": "pnpm --filter client typecheck",
     "typecheck:server": "pnpm --filter server typecheck",
     "typecheck": "pnpm -r typecheck",
@@ -25,8 +25,14 @@
     "start": "concurrently \"pnpm run start:server\" \"pnpm run start:client\""
   },
   "devDependencies": {
+    "@eslint/js": "^9.25.0",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-    "concurrently": "^7.6.0",
-    "prettier": "^3.9.9"
+    "concurrently": "^10.0.5",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^17.12.0",
+    "prettier": "^3.9.9",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.30.1"
   }
 }

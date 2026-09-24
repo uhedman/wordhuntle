@@ -11,6 +11,11 @@ export const addWords = async (req: AuthenticatedRequest, res: Response) => {
 	const userId = req.user?.id;
 	const { words } = req.body;
 
+	if (!userId) {
+		res.status(401).send("No autorizado");
+		return;
+	}
+
 	if (!Array.isArray(words) || words.some((w) => typeof w !== "string")) {
 		res.status(400).send("Lista de palabras inválida");
 		return;

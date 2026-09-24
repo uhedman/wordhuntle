@@ -43,29 +43,29 @@ export const getGrid = (dayCode: number) => {
 
 	// Pseudo Random Number Generator Element get
 	const prngElement = <T>(array: T[]): T => {
-		let index = prng() % array.length;
-		let removedElement = array.splice(index, 1)[0];
+		const index = prng() % array.length;
+		const removedElement = array.splice(index, 1)[0];
 
 		return removedElement;
 	};
 
-	let secretWord = getSecretWord(dayCode);
-	let grid: Grid = [
+	const secretWord = getSecretWord(dayCode);
+	const grid: Grid = [
 		["", "", "", ""],
 		["", "", "", ""],
 		["", "", "", ""],
 		["", "", "", ""],
 	];
 
-	let backtrackCandidatesHistory: Pos[][] = [];
+	const backtrackCandidatesHistory: Pos[][] = [];
 	let [currentX, currentY] = [prng() % 4, prng() % 4];
 	grid[currentX][currentY] = secretWord[0];
-	let path: Pos[] = [[currentX, currentY]];
+	const path: Pos[] = [[currentX, currentY]];
 	let backtrack = false;
 
 	// Place secret word
 	for (let i = 1; i < secretWord.length;) {
-		let candidates: Pos[] = backtrack
+		const candidates: Pos[] = backtrack
 			? backtrackCandidatesHistory.pop()!
 			: getEmptyNeighbours(grid, [currentX, currentY]);
 
@@ -89,8 +89,8 @@ export const getGrid = (dayCode: number) => {
 		for (let j = 0; j < grid[i].length; j++) {
 			if (grid[i][j] === "") {
 				// Generate a random letter using PRNG
-				let randomCharCode = prng();
-				let randomLetter = String.fromCharCode(
+				const randomCharCode = prng();
+				const randomLetter = String.fromCharCode(
 					97 + (randomCharCode % 26),
 				);
 				grid[i][j] = randomLetter;
