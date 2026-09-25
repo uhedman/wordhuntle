@@ -9,8 +9,7 @@
 		"build": "vite build",
 		"lint": "eslint .",
 		"preview": "vite preview",
-		"typecheck": "tsc -b --noEmit",
-		"format": "prettier --write ."
+		"typecheck": "tsc -b --noEmit"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.7.0",

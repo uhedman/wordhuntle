@@ -8,7 +8,6 @@
 		"dev": "nodemon server.ts",
 		"build": "tsc",
 		"lint": "eslint .",
-		"format": "prettier --write .",
 		"typecheck": "tsc -b --noEmit"
 	},
 	"dependencies": {

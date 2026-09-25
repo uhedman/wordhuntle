@@ -18,14 +18,14 @@ async function getKeyFromSeed(seed: number): Promise<CryptoKey> {
 		hashBuffer,
 		{ name: "AES-CBC" },
 		false,
-		["decrypt"]
+		["decrypt"],
 	);
 }
 
 async function decryptRaw(encrypted: string, seed: number): Promise<string> {
 	const [ivHex, dataHex] = encrypted.split(":");
 	const key = await getKeyFromSeed(seed);
-	
+
 	const iv = hexStringToArrayBuffer(ivHex);
 	const encryptedData = hexStringToArrayBuffer(dataHex);
 
@@ -35,18 +35,24 @@ async function decryptRaw(encrypted: string, seed: number): Promise<string> {
 			iv: iv,
 		},
 		key,
-		encryptedData
+		encryptedData,
 	);
 
 	const decoder = new TextDecoder();
 	return decoder.decode(decryptedBuffer);
 }
 
-export async function decrypt(encrypted: string, seed: number): Promise<string[]> {
+export async function decrypt(
+	encrypted: string,
+	seed: number,
+): Promise<string[]> {
 	const raw = await decryptRaw(encrypted, seed);
 	return JSON.parse(raw);
 }
 
-export async function decryptOne(encrypted: string, seed: number): Promise<string> {
+export async function decryptOne(
+	encrypted: string,
+	seed: number,
+): Promise<string> {
 	return await decryptRaw(encrypted, seed);
 }

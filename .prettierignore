@@ -1,0 +1,18 @@
+# Build & output directories
+dist
+build
+dist-ssr
+.turbo
+
+# Dependencies & package managers
+node_modules
+pnpm-lock.yaml
+
+# Testing & coverage
+coverage
+.vitest
+
+# Cache and logs
+*.log
+.vscode
+.idea

@@ -16,10 +16,7 @@
     "typecheck:client": "pnpm --filter client typecheck",
     "typecheck:server": "pnpm --filter server typecheck",
     "typecheck": "pnpm -r typecheck",
-    "format:client": "pnpm --filter client format",
-    "format:server": "pnpm --filter server format",
-    "format:core": "pnpm --filter @wordhuntle/core format",
-    "format": "pnpm -r format",
+		"format": "prettier --write .",
     "start:client": "pnpm --filter client preview",
     "start:server": "pnpm --filter server start",
     "start": "concurrently \"pnpm run start:server\" \"pnpm run start:client\""
