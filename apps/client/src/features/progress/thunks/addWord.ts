@@ -1,5 +1,5 @@
 import { updateProgress } from "@/features/progress/slice";
-import { postFoundWords } from "@/shared/api";
+import { api } from "@/shared/api";
 import { RootState } from "@/shared/types";
 import { PayloadAction, ThunkAction } from "@reduxjs/toolkit";
 import confetti from "canvas-confetti";
@@ -36,7 +36,7 @@ export const addWord =
 			);
 
 			if (user !== null && accessToken) {
-				postFoundWords([word], accessToken).catch((err) =>
+				api.postFoundWords([word], accessToken).catch((err) =>
 					console.error(
 						"Error al guardar la palabra en la API:",
 						err,

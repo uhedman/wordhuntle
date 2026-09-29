@@ -1,4 +1,4 @@
-const SECRET = "DPQS282CqPFwkR5lVmwoMO1AsF3CArUp";
+const secret = import.meta.env.VITE_ENCRYPTION_SECRET || "ENCRYPTION_SECRET";
 
 function hexStringToArrayBuffer(hexString: string): Uint8Array<ArrayBuffer> {
 	const bytes = new Uint8Array(Math.ceil(hexString.length / 2));
@@ -10,7 +10,7 @@ function hexStringToArrayBuffer(hexString: string): Uint8Array<ArrayBuffer> {
 
 async function getKeyFromSeed(seed: number): Promise<CryptoKey> {
 	const encoder = new TextEncoder();
-	const data = encoder.encode(seed.toString() + SECRET);
+	const data = encoder.encode(seed.toString() + secret);
 	const hashBuffer = await crypto.subtle.digest("SHA-256", data);
 
 	return crypto.subtle.importKey(

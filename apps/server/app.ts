@@ -14,14 +14,21 @@ app.get("/", (req, res) => {
 
 app.use(
 	cors({
-		origin: "https://uhedman.github.io",
+		origin:
+			process.env.NODE_ENV === "production"
+				? process.env.CLIENT_URL
+				: "http://localhost:5173",
 	}),
 );
 app.use(express.json());
 
+// TODO: move to routes/index.ts
 app.use("/api/game", gameRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/score", scoreRoutes);
 app.use("/api/word", wordRoutes);
 
 export default app;
+
+// TODO: add helmet or similar security packages
+// TODO: add logging middleware

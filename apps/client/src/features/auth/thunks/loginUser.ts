@@ -1,5 +1,5 @@
 import { syncProgress } from "@/features/progress/thunks/syncProgress";
-import { loginUserAPI } from "@/shared/api";
+import { api } from "@/shared/api";
 import { CustomError } from "@/shared/errors";
 import { RootState } from "@/shared/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -12,7 +12,7 @@ export const loginUser = createAsyncThunk<
 	{ rejectValue: string; state: RootState }
 >("user/login", async (credentials, thunkAPI) => {
 	try {
-		const res = await loginUserAPI(credentials);
+		const res = await api.loginUserAPI(credentials);
 
 		thunkAPI.dispatch(
 			syncProgress({

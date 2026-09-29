@@ -1,4 +1,4 @@
-import { EncrypedGame } from "@/features/game/types";
+import { EncryptedGame } from "@/features/game/types";
 import { LastGame } from "@/features/history/types";
 import { API_BASE_URL } from "@/shared/api/real";
 
@@ -8,7 +8,7 @@ export const getSeedAPI = async (): Promise<{ seed: number }> => {
 	return res.json();
 };
 
-export const getTodayDataAPI = async (): Promise<EncrypedGame> => {
+export const getTodayDataAPI = async (): Promise<EncryptedGame> => {
 	const res = await fetch(`${API_BASE_URL}/game/todayData`);
 	if (!res.ok) throw new Error("Failed to fetch today data");
 	return res.json();

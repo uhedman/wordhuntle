@@ -1,4 +1,4 @@
-import { postFoundWords } from "@/shared/api";
+import { api } from "@/shared/api";
 import { RootState } from "@/shared/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -48,7 +48,7 @@ export const syncProgress = createAsyncThunk<
 
 		if (newWordsToSync.length && accessToken) {
 			try {
-				await postFoundWords(newWordsToSync, accessToken);
+				await api.postFoundWords(newWordsToSync, accessToken);
 			} catch (err) {
 				console.error(
 					"Error al sincronizar progreso con el servidor:",

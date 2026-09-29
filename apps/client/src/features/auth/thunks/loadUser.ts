@@ -1,6 +1,6 @@
 import { LoginResponse } from "@/features/auth/types";
 import { syncProgress } from "@/features/progress/thunks/syncProgress";
-import { loadUserAPI, refreshTokenAPI } from "@/shared/api";
+import { api } from "@/shared/api";
 import { CustomError } from "@/shared/errors";
 import { RootState } from "@/shared/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -18,8 +18,8 @@ export const loadUser = createAsyncThunk<
 	}
 
 	try {
-		const { accessToken } = await refreshTokenAPI(refreshToken);
-		const res = await loadUserAPI(accessToken);
+		const { accessToken } = await api.refreshTokenAPI(refreshToken);
+		const res = await api.loadUserAPI(accessToken);
 
 		thunkAPI.dispatch(
 			syncProgress({

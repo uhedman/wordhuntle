@@ -5,7 +5,10 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
+		"dev": "vite --mode localhost",
+		"dev:local": "vite --mode localhost",
+		"dev:online": "vite --mode online",
+		"dev:mock": "vite --mode mock",
 		"build": "vite build",
 		"lint": "eslint .",
 		"preview": "vite preview",

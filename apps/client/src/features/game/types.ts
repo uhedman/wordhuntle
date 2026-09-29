@@ -15,7 +15,7 @@ export interface Game {
 	maxPoints: number;
 }
 
-export interface EncrypedGame {
+export interface EncryptedGame {
 	grid: Grid;
 	word: string;
 	words: string;

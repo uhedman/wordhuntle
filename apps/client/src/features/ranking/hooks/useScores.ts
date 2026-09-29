@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Ranking } from "@/features/ranking/types";
-import { getLeaderboard } from "@/shared/api";
+import { api } from "@/shared/api";
 
 export const useScores = () => {
 	const [scores, setScores] = useState<Ranking>({
@@ -14,7 +14,7 @@ export const useScores = () => {
 	useEffect(() => {
 		const fetchScores = async () => {
 			try {
-				const data = await getLeaderboard();
+				const data = await api.getLeaderboard();
 				setScores(data);
 			} catch (err) {
 				console.error("Error al obtener scores:", err);
