@@ -1,9 +1,13 @@
 import express from "express";
 
-import { getLeaderboard } from "../controllers/score";
+import { createGetLeaderboardHandler } from "../controllers/score";
+import { mongooseScoreRepo } from "../repositories/mongoose/scoreRepo";
+import { createScoreService } from "../services/score";
 
 const router = express.Router();
 
-router.get("/leaderboard", getLeaderboard);
+const scoreService = createScoreService(mongooseScoreRepo);
+
+router.get("/leaderboard", createGetLeaderboardHandler(scoreService));
 
 export default router;

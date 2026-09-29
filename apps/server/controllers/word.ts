@@ -1,64 +1,24 @@
 import { Response } from "express";
 
-import { puntuation } from "@wordhuntle/core/utils/wordUtils";
-
-import Score from "../models/Score";
-import Word from "../models/Word";
-import { dailyGame } from "../services/game";
+import { WordService } from "../services/word";
 import { AuthenticatedRequest } from "../types/auth";
+import { CustomError } from "../utils/errors";
 
-export const addWords = async (req: AuthenticatedRequest, res: Response) => {
-	const userId = req.user?.id;
-	const { words } = req.body;
-
-	if (!userId) {
-		res.status(401).send("No autorizado");
-		return;
-	}
-
-	if (!Array.isArray(words) || words.some((w) => typeof w !== "string")) {
-		res.status(400).send("Lista de palabras inválida");
-		return;
-	}
-
-	try {
-		const now = new Date();
-		const today = new Date(now.setHours(0, 0, 0, 0));
-
-		const wordDocs = words.map((word) => ({
-			user: userId,
-			word,
-			date: today,
-		}));
-
-		await Word.insertMany(wordDocs);
-
-		const pointsToAdd = words.reduce(
-			(acc, word) => acc + puntuation(word.length),
-			0,
-		);
-
-		let score = await Score.findOne({ user: userId, date: today });
-		let totalPoints = pointsToAdd;
-
-		if (score) {
-			totalPoints += score.points;
-		} else {
-			score = new Score({ user: userId, date: today });
+export const createAddWordsHandler =
+	(wordService: WordService) =>
+	async (req: AuthenticatedRequest, res: Response) => {
+		try {
+			const result = await wordService.addWords(
+				req.user?.id,
+				req.body.words,
+			);
+			res.status(200).json(result);
+		} catch (err) {
+			if (err instanceof CustomError) {
+				res.status(err.statusCode).send(err.message);
+			} else {
+				console.error("Error al guardar palabras:", err);
+				res.status(500).send("Error interno del servidor");
+			}
 		}
-
-		const maxPoints = dailyGame.getMaxPoints();
-		const newLevel = Math.floor(Math.sqrt(totalPoints / maxPoints) * 8);
-
-		await Score.findOneAndUpdate(
-			{ user: userId, date: today },
-			{ points: totalPoints, level: newLevel },
-			{ upsert: true, new: true },
-		);
-
-		res.status(200).json({ message: "Palabras guardadas correctamente" });
-	} catch (err) {
-		console.error("Error al guardar palabras:", err);
-		res.status(500).send("Error interno del servidor");
-	}
-};
+	};

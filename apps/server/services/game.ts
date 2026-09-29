@@ -1,56 +1,78 @@
+import { Grid } from "@wordhuntle/core/types";
 import { getGrid, getSecretWord } from "@wordhuntle/core/utils/dailyGrid";
 import { getWords } from "@wordhuntle/core/utils/dailyWords";
 import { puntuation } from "@wordhuntle/core/utils/wordUtils";
 
-let seed = Math.floor(Date.now() / 86400000);
-let lastSeed = seed - 1;
+import { encrypt } from "../utils/encrypt";
 
-let todayGrid = getGrid(seed);
-let todayWord = getSecretWord(seed);
-let todayWords = getWords(todayGrid);
-let maxPoints = todayWords.reduce(
-	(acc: number, word: string) => acc + puntuation(word.length),
-	0,
-);
+interface TodayGameData {
+	grid: Grid;
+	word: string;
+	words: string;
+	maxPoints: number;
+}
 
-let lastGrid = getGrid(lastSeed);
-let lastWord = getSecretWord(lastSeed);
-let lastWords = getWords(lastGrid).sort();
+interface LastGameData {
+	grid: Grid;
+	word: string;
+	words: string[];
+}
 
-setInterval(() => {
-	const newSeed = Math.floor(Date.now() / 86400000);
-	if (newSeed !== seed) {
-		seed = newSeed;
-		lastSeed = newSeed - 1;
+let cachedSeed: number | null = null;
+let cachedTodayData: TodayGameData | null = null;
+let cachedLastData: LastGameData | null = null;
 
-		todayGrid = getGrid(seed);
-		todayWord = getSecretWord(seed);
-		todayWords = getWords(todayGrid);
-		maxPoints = todayWords.reduce(
-			(acc: number, word: string) => acc + puntuation(word.length),
-			0,
-		);
+function getCurrentSeed(): number {
+	return Math.floor(Date.now() / 86400000);
+}
 
-		lastGrid = getGrid(lastSeed);
-		lastWord = getSecretWord(lastSeed);
-		lastWords = getWords(lastGrid).sort();
-
-		console.log("New daily seed:", seed);
-	}
-}, 60 * 1000);
-
-export const dailyGame = {
-	getSeed: () => seed,
-	getToday: () => ({
-		grid: todayGrid,
-		word: todayWord,
-		words: todayWords,
+function calculateToday(seed: number): TodayGameData {
+	const grid = getGrid(seed);
+	const word = getSecretWord(seed);
+	const words = getWords(grid);
+	const maxPoints = words.reduce(
+		(acc: number, word: string) => acc + puntuation(word.length),
+		0,
+	);
+	return {
+		grid,
+		word: encrypt(word, seed),
+		words: encrypt(JSON.stringify(words), seed),
 		maxPoints,
-	}),
-	getLast: () => ({
-		grid: lastGrid,
-		word: lastWord,
-		words: lastWords,
-	}),
-	getMaxPoints: () => maxPoints,
+	};
+}
+
+function calculateLast(lastSeed: number): LastGameData {
+	const grid = getGrid(lastSeed);
+	const word = getSecretWord(lastSeed);
+	const words = getWords(grid).sort();
+	return { grid, word, words };
+}
+
+function updateIfStale(): void {
+	const currentSeed = getCurrentSeed();
+	if (cachedSeed !== currentSeed || !cachedTodayData || !cachedLastData) {
+		cachedSeed = currentSeed;
+		cachedTodayData = calculateToday(currentSeed);
+		cachedLastData = calculateLast(currentSeed - 1);
+	}
+}
+
+export const gameService = {
+	getSeed: (): number => {
+		updateIfStale();
+		return cachedSeed!;
+	},
+	getTodayData: () => {
+		updateIfStale();
+		return cachedTodayData!;
+	},
+	getLastData: () => {
+		updateIfStale();
+		return cachedLastData!;
+	},
+	getMaxPoints: (): number => {
+		updateIfStale();
+		return cachedTodayData!.maxPoints;
+	},
 };

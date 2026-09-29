@@ -1,10 +1,15 @@
 import express from "express";
 
-import { addWords } from "../controllers/word";
+import { createAddWordsHandler } from "../controllers/word";
 import authMiddleware from "../middleware/auth";
+import { mongooseScoreRepo } from "../repositories/mongoose/scoreRepo";
+import { mongooseWordRepo } from "../repositories/mongoose/wordRepo";
+import { createWordService } from "../services/word";
 
 const router = express.Router();
 
-router.post("/", authMiddleware, addWords);
+const wordService = createWordService(mongooseScoreRepo, mongooseWordRepo);
+
+router.post("/", authMiddleware, createAddWordsHandler(wordService));
 
 export default router;
