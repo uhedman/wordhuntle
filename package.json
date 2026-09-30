@@ -19,20 +19,29 @@
 		"typecheck:client": "pnpm --filter client typecheck",
 		"typecheck:server": "pnpm --filter server typecheck",
 		"typecheck": "pnpm -r typecheck",
+		"test:client": "pnpm --filter client test",
+		"test:server": "pnpm --filter server test",
+		"test:core": "pnpm --filter @wordhuntle/core test",
+		"test": "pnpm -r test",
+		"test:coverage:client": "pnpm --filter client test:coverage",
+		"test:coverage:server": "pnpm --filter server test:coverage",
+		"test:coverage:core": "pnpm --filter @wordhuntle/core test:coverage",
+		"test:coverage": "pnpm -r test:coverage",
 		"format": "prettier --write .",
 		"start:client": "pnpm --filter client preview",
 		"start:server": "pnpm --filter server start",
 		"start": "concurrently \"pnpm run start:server\" \"pnpm run start:client\""
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.25.0",
+		"@eslint/js": "^9.39.5",
 		"@trivago/prettier-plugin-sort-imports": "^6.0.2",
+		"@vitest/coverage-v8": "^5.0.3",
 		"concurrently": "^10.0.5",
-		"eslint": "^9.25.0",
+		"eslint": "^9.39.5",
 		"eslint-plugin-react": "^7.37.5",
 		"globals": "^17.12.0",
 		"prettier": "^3.9.9",
-		"typescript": "^5.8.3",
-		"typescript-eslint": "^8.30.1"
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.71.0"
 	}
 }

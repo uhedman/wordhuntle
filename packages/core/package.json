@@ -1,5 +1,13 @@
 {
 	"name": "@wordhuntle/core",
 	"version": "1.0.0",
-	"private": true
+	"private": true,
+	"scripts": {
+		"test": "vitest run",
+		"test:coverage": "vitest run --coverage"
+	},
+	"devDependencies": {
+		"tsx": "^4.23.15",
+		"vitest": "^5.0.3"
+	}
 }

@@ -17,7 +17,7 @@ app.use(
 		origin:
 			process.env.NODE_ENV === "production"
 				? process.env.CLIENT_URL
-				: "http://localhost:5173",
+				: `http://localhost:${process.env.CLIENT_PORT || 5173}`,
 	}),
 );
 app.use(express.json());
