@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+
 import { Grid } from "@wordhuntle/core/types";
 import { getWords } from "@wordhuntle/core/utils/dailyWords";
 
@@ -20,7 +21,11 @@ function findWordPath(grid: Grid, word: string): number[] | null {
 				const visited = new Set<number>();
 				const path: number[] = [];
 
-				const dfs = (currR: number, currC: number, idx: number): boolean => {
+				const dfs = (
+					currR: number,
+					currC: number,
+					idx: number,
+				): boolean => {
 					const tileIdx = currR * 4 + currC;
 					visited.add(tileIdx);
 					path.push(tileIdx);
@@ -90,10 +95,30 @@ test.describe("Persistence Flow", () => {
 		// Read grid and find a word
 		const letters = await page.locator(".ratio .fs-1").allInnerTexts();
 		const grid: Grid = [
-			letters.slice(0, 4).map((l) => l.toLowerCase()) as [string, string, string, string],
-			letters.slice(4, 8).map((l) => l.toLowerCase()) as [string, string, string, string],
-			letters.slice(8, 12).map((l) => l.toLowerCase()) as [string, string, string, string],
-			letters.slice(12, 16).map((l) => l.toLowerCase()) as [string, string, string, string],
+			letters.slice(0, 4).map((l) => l.toLowerCase()) as [
+				string,
+				string,
+				string,
+				string,
+			],
+			letters.slice(4, 8).map((l) => l.toLowerCase()) as [
+				string,
+				string,
+				string,
+				string,
+			],
+			letters.slice(8, 12).map((l) => l.toLowerCase()) as [
+				string,
+				string,
+				string,
+				string,
+			],
+			letters.slice(12, 16).map((l) => l.toLowerCase()) as [
+				string,
+				string,
+				string,
+				string,
+			],
 		];
 
 		const validWords = getWords(grid);
@@ -137,6 +162,8 @@ test.describe("Persistence Flow", () => {
 		await expect(modal.locator(".modal-title")).toContainText(
 			"Palabras encontradas",
 		);
-		await expect(modal.getByRole("link", { name: targetWord })).toBeVisible();
+		await expect(
+			modal.getByRole("link", { name: targetWord }),
+		).toBeVisible();
 	});
 });

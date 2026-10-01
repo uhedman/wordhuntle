@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+
 import { Grid } from "@wordhuntle/core/types";
 import { getWords } from "@wordhuntle/core/utils/dailyWords";
 
@@ -20,7 +21,11 @@ function findWordPath(grid: Grid, word: string): number[] | null {
 				const visited = new Set<number>();
 				const path: number[] = [];
 
-				const dfs = (currR: number, currC: number, idx: number): boolean => {
+				const dfs = (
+					currR: number,
+					currC: number,
+					idx: number,
+				): boolean => {
 					const tileIdx = currR * 4 + currC;
 					visited.add(tileIdx);
 					path.push(tileIdx);
@@ -101,11 +106,18 @@ test.describe("Game Flow", () => {
 		expect(box0).not.toBeNull();
 		expect(box1).not.toBeNull();
 
-		await page.mouse.move(box0!.x + box0!.width / 2, box0!.y + box0!.height / 2);
+		await page.mouse.move(
+			box0!.x + box0!.width / 2,
+			box0!.y + box0!.height / 2,
+		);
 		await page.mouse.down();
-		await page.mouse.move(box1!.x + box1!.width / 2, box1!.y + box1!.height / 2, {
-			steps: 5,
-		});
+		await page.mouse.move(
+			box1!.x + box1!.width / 2,
+			box1!.y + box1!.height / 2,
+			{
+				steps: 5,
+			},
+		);
 		await page.mouse.up();
 
 		await expect(page.getByText("Muy corta")).toBeVisible();
@@ -121,10 +133,30 @@ test.describe("Game Flow", () => {
 		expect(letters.length).toBe(16);
 
 		const grid: Grid = [
-			letters.slice(0, 4).map((l) => l.toLowerCase()) as [string, string, string, string],
-			letters.slice(4, 8).map((l) => l.toLowerCase()) as [string, string, string, string],
-			letters.slice(8, 12).map((l) => l.toLowerCase()) as [string, string, string, string],
-			letters.slice(12, 16).map((l) => l.toLowerCase()) as [string, string, string, string],
+			letters.slice(0, 4).map((l) => l.toLowerCase()) as [
+				string,
+				string,
+				string,
+				string,
+			],
+			letters.slice(4, 8).map((l) => l.toLowerCase()) as [
+				string,
+				string,
+				string,
+				string,
+			],
+			letters.slice(8, 12).map((l) => l.toLowerCase()) as [
+				string,
+				string,
+				string,
+				string,
+			],
+			letters.slice(12, 16).map((l) => l.toLowerCase()) as [
+				string,
+				string,
+				string,
+				string,
+			],
 		];
 
 		const validWords = getWords(grid);

@@ -12,14 +12,20 @@ test.describe("Auth Flow", () => {
 
 		const modal = page.locator(".modal-dialog");
 		await expect(modal).toBeVisible();
-		await expect(modal.locator(".modal-title")).toHaveText("Iniciar sesión");
+		await expect(modal.locator(".modal-title")).toHaveText(
+			"Iniciar sesión",
+		);
 
 		// Click submit without filling inputs
 		await modal.getByRole("button", { name: "Iniciar sesión" }).click();
 
 		// Error feedback should be displayed for empty inputs
-		await expect(page.getByText("Por favor, ingrese un nombre de usuario")).toBeVisible();
-		await expect(page.getByText("Por favor, ingrese una contraseña")).toBeVisible();
+		await expect(
+			page.getByText("Por favor, ingrese un nombre de usuario"),
+		).toBeVisible();
+		await expect(
+			page.getByText("Por favor, ingrese una contraseña"),
+		).toBeVisible();
 	});
 
 	test("should switch between login and register views", async ({ page }) => {
@@ -33,7 +39,9 @@ test.describe("Auth Flow", () => {
 
 		// Switch back to login
 		await modal.getByRole("button", { name: "Iniciar sesión" }).click();
-		await expect(modal.locator(".modal-title")).toHaveText("Iniciar sesión");
+		await expect(modal.locator(".modal-title")).toHaveText(
+			"Iniciar sesión",
+		);
 	});
 
 	test("should register a new user and allow logout", async ({ page }) => {
@@ -45,8 +53,12 @@ test.describe("Auth Flow", () => {
 
 		// Fill registration form
 		await modal.getByPlaceholder("Nombre de usuario").fill("nuevo_jugador");
-		await modal.getByPlaceholder("Contraseña", { exact: true }).fill("password123");
-		await modal.getByPlaceholder("Confirmar contraseña").fill("password123");
+		await modal
+			.getByPlaceholder("Contraseña", { exact: true })
+			.fill("password123");
+		await modal
+			.getByPlaceholder("Confirmar contraseña")
+			.fill("password123");
 
 		// Submit registration
 		await modal.getByRole("button", { name: "Registrar" }).click();
@@ -60,7 +72,9 @@ test.describe("Auth Flow", () => {
 		await modal.getByRole("button", { name: "Cerrar sesión" }).click();
 
 		// Navbar button returns to Iniciar sesión
-		await expect(page.locator("#navbar-content button.rounded-pill")).toHaveText("Iniciar sesión");
+		await expect(
+			page.locator("#navbar-content button.rounded-pill"),
+		).toHaveText("Iniciar sesión");
 	});
 
 	test("should log in successfully with credentials", async ({ page }) => {
