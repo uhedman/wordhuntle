@@ -42,6 +42,8 @@ jobs:
 
             - name: Build
               run: pnpm --filter client build
+              env:
+                  VITE_ENCRYPTION_SECRET: ${{ secrets.VITE_ENCRYPTION_SECRET }}
 
             - name: Setup Pages
               uses: actions/configure-pages@v4
