@@ -10,6 +10,8 @@ export default defineConfig([
 		"**/dist/**",
 		"**/build/**",
 		"**/coverage/**",
+		"**/playwright-report/**",
+		"**/test-results/**",
 	]),
 	{
 		files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
@@ -30,15 +32,6 @@ export default defineConfig([
 		languageOptions: {
 			globals: globals.browser,
 		},
-	},
-	{
-		files: ["apps/server/**/*.{js,mjs,cjs,ts}"],
-		languageOptions: {
-			globals: globals.node,
-		},
-	},
-	{
-		files: ["apps/client/**/*.{js,mjs,cjs,ts,jsx,tsx}"],
 		...pluginReact.configs.flat.recommended,
 		settings: {
 			react: {
@@ -48,6 +41,12 @@ export default defineConfig([
 		rules: {
 			...pluginReact.configs.flat.recommended.rules,
 			"react/react-in-jsx-scope": "off",
+		},
+	},
+	{
+		files: ["apps/server/**/*.{js,mjs,cjs,ts}"],
+		languageOptions: {
+			globals: globals.node,
 		},
 	},
 ]);
