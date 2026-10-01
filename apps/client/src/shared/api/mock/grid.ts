@@ -1,5 +1,6 @@
-import { Game } from "@/features/game/types";
+import { EncryptedGame } from "@/features/game/types";
 import { LastGame } from "@/features/history/types";
+import { encrypt } from "@/shared/utils/encrypt";
 
 import { getGrid, getSecretWord } from "@wordhuntle/core/utils/dailyGrid";
 import { getWords } from "@wordhuntle/core/utils/dailyWords";
@@ -11,7 +12,7 @@ export const getSeedAPI = async () => {
 	return { seed };
 };
 
-export const getTodayDataAPI = async (): Promise<Game> => {
+export const getTodayDataAPI = async (): Promise<EncryptedGame> => {
 	const todayGrid = getGrid(seed);
 	const todayWord = getSecretWord(seed);
 	const todayWords = getWords(todayGrid);
@@ -20,7 +21,12 @@ export const getTodayDataAPI = async (): Promise<Game> => {
 		0,
 	);
 
-	return { grid: todayGrid, word: todayWord, words: todayWords, maxPoints };
+	return {
+		grid: todayGrid,
+		word: await encrypt(todayWord, seed),
+		words: await encrypt(JSON.stringify(todayWords), seed),
+		maxPoints,
+	};
 };
 
 export const getLastDataAPI = async (): Promise<LastGame> => {

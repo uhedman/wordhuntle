@@ -17,7 +17,9 @@ const Tile = ({ id, letter, rotation }: TileProps) => {
 
 	const handlePointerDown = (e: PointerEvent) => {
 		const target = e.target as HTMLElement;
-		target.releasePointerCapture(e.pointerId);
+		if (target.hasPointerCapture?.(e.pointerId)) {
+			target.releasePointerCapture(e.pointerId);
+		}
 		dispatch(startDrag({ id, letter }));
 	};
 

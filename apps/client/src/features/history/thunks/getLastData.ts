@@ -1,11 +1,11 @@
 import { LastGame } from "@/features/history/types";
-import { getLastDataAPI } from "@/shared/api";
+import { api } from "@/shared/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getLastData = createAsyncThunk<LastGame>(
 	"game/lastData",
 	async () => {
-		const data = await getLastDataAPI();
+		const data = await api.getLastDataAPI();
 		return data;
 	},
 );

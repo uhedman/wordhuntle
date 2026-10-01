@@ -4,7 +4,7 @@ import { loadUser } from "@/features/auth/thunks/loadUser";
 import { loadGame } from "@/features/game/thunks/loadGame";
 
 import { useAppDispatch, useAppSelector } from ".";
-import { getSeedAPI } from "../api";
+import { api } from "../api";
 
 export const useInitializeApp = () => {
 	const dispatch = useAppDispatch();
@@ -13,7 +13,7 @@ export const useInitializeApp = () => {
 	useEffect(() => {
 		const initialize = async () => {
 			try {
-				const data = await getSeedAPI();
+				const data = await api.getSeedAPI();
 				const seed = data.seed;
 				await dispatch(loadGame(seed));
 				if (user) {

@@ -1,6 +1,6 @@
 import { RegisterResponse } from "@/features/auth/types";
 import { syncProgress } from "@/features/progress/thunks/syncProgress";
-import { registerUserAPI } from "@/shared/api";
+import { api } from "@/shared/api";
 import { CustomError } from "@/shared/errors";
 import { RootState } from "@/shared/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -11,7 +11,7 @@ export const registerUser = createAsyncThunk<
 	{ rejectValue: string; state: RootState }
 >("user/register", async (credentials, thunkAPI) => {
 	try {
-		const res = await registerUserAPI(credentials);
+		const res = await api.registerUserAPI(credentials);
 
 		thunkAPI.dispatch(
 			syncProgress({
